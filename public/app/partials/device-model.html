@@ -1,0 +1,16 @@
+<div class="row text-center">
+    <div class="col-sm-4 device-model">
+        <img ng-src="{{ image_url }}" class="center img-rounded img-responsive" />
+        <h3>{{ image_label }}</h3>
+    </div>
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="device-make swap-locations" >
+                <a ng-repeat="m in models" href="#" ng-click="selectModel($event,m,'device-size')"
+                   class="swap-location device-model-item">
+                    {{ m.model }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

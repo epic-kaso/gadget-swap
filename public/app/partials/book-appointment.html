@@ -1,0 +1,59 @@
+<div class="col-md-10 col-md-offset-1 text-justify">
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <form ng-submit="sendMail(bookappointment.email,bookappointment.phone,'successfully booked service')">
+                    <input type="hidden" ng-model="currentGadget.make" name="device-make" />
+                    <input type="hidden" ng-model="currentGadget.model.model" name="device-model" />
+                    <input type="hidden" name="device-size" ng-model="currentGadget.size.value" />
+                    <input type="hidden" ng-model="currentGadget.network.name" name="device-network" />
+                    <input type="hidden" ng-model="currentGadget.condition" name="device-condition" />
+                    <div class="form-group">
+                        <h2 ng-bind="swap_center" style="text-align: left;"></h2>
+                    </div>
+                    <div class="form-group">
+                        <input ng-model="bookappointment.email" class="form-control" name="email" placeholder="EMAIL ADDRESS" type="text"/>
+                    </div>
+
+                    <div class="form-group">
+                        <input ng-model="bookappointment.phone" class="form-control" name="phone" placeholder="PHONE (OPTIONAL)" type="text"/>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="btn btn-info btn-block" type="submit" value="Book Now"/>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-md-3 device-model hide-on-mobile">
+                <img ng-src="{{ currentGadget.image_url }}" style="height: 175px;" class="center img-rounded img-responsive" />
+            </div>
+
+            <div class="col-md-3 hide-on-mobile">
+                <div class="form-group">
+                    <label>Device</label>
+                    <span ng-bind="currentGadget.make" class="form-control-static"></span>
+                </div>
+
+                <div class="form-group">
+                <label>Model</label>
+                <span ng-bind="currentGadget.model.model" class="form-control-static"></span>
+                </div>
+
+                <div class="form-group">
+                <label>Size</label>
+                <span ng-bind="currentGadget.size.value" class="form-control-static"></span>
+                </div>
+
+                <div class="form-group">
+                <label>Network</label>
+                <span ng-bind="currentGadget.network.name" class="form-control-static"></span>
+                </div>
+
+                <div class="form-group">
+                <label>Condition</label>
+                <span ng-bind="currentGadget.condition" class="form-control-static"></span>
+                </div>
+
+            </div>
+        </div>
+</div>

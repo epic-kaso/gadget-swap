@@ -1,0 +1,53 @@
+<div class="row text-center">
+    <div class="col-sm-12">
+        <div class="row">
+            <span ng-bind="reward_message"></span>
+            <h1 ng-bind="reward_price" class="reward-box"
+                    ></h1>
+            <div class="network-reward"
+                 ng-if="currentGadget.network.name == 'Airtel Ng'"
+                    >
+                <span class="bonus-info">Additional Bonus</span>
+                <div style="max-width: 220px;margin-bottom: 10px; margin-right: auto;margin-left: auto">
+                    <div style="display: inline-block; float: left">
+                        <img ng-src="{{ currentGadget.network.logo_url }}" class="center img-rounded img-responsive" style="height: 50px" />
+                    </div>
+                    <div>
+                        <span style="font-size: 35px;">+ ₦5,000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 25px;" class="network-reward"
+                 ng-if="currentGadget.network.name != 'Airtel Ng'"
+                    >
+                <span class="bonus-info">Additional Bonus</span>
+                <div style="max-width: 300px;margin-bottom: 10px; margin-right: auto;margin-left: auto">
+                    <div>
+                        <p>You are currently on <strong>{{ currentGadget.network.name }}</strong>, port to <strong>Airtel</strong> now to enjoy this additional bonus.</p>
+                    </div>
+                    <div style="max-width: 220px; margin-left: auto;margin-right: auto">
+                        <div style="display: inline-block; float: left">
+                            <img ng-src="/app/img/airtel-ng.jpg" class="center img-rounded img-responsive" style="height: 50px" />
+                        </div>
+                        <div>
+                            <span style="font-size: 35px;">+ ₦5,000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p ng-bind="reward_disclaimer"></p>
+
+            <div  ng-if="currentGadget.network.name != 'Airtel Ng'"
+                  style="margin-top: 10px;margin-bottom: 10px;font-size: 22px;">
+                <label>
+                    I wish to Port to <strong>Airtel</strong> <checkbox ng-model="currentGadget.network.postToAirtel" ng-true-value="1" ng-false-value="0"></checkbox>
+                </label>
+            </div>
+
+            <div style="margin-bottom: 60px;">
+                <a ui-sref="swapLocation" class="btn btn-clean btn-lg">Select Swap Location <span class="glyphicon glyphicon-chevron-down"></span> </a>
+            </div>
+       </div>
+    </div>
+</div>

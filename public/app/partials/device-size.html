@@ -1,0 +1,24 @@
+<div class="row text-center">
+    <div class="col-sm-4 device-model">
+        <img ng-src="{{ image_url }}" class="center img-rounded img-responsive" />
+        <h3>{{ image_label }}</h3>
+    </div>
+
+    <div class="col-sm-8">
+        <div class="row">
+            <!--<div class="col-sm-4 device-make" ng-repeat="size in sizes">-->
+                <!--<a class="swap-location device-model-item"-->
+                   <!--ng-click="selectSize($event,size,'device-network')" >-->
+                    <!--{{ size.value }}-->
+                <!--</a>-->
+            <!--</div>-->
+            <div class="device-make swap-locations" >
+                <a ng-repeat="size in sizes" href="#"
+                   ng-click="selectSize($event,size,'device-network')"
+                   class="swap-location device-model-item">
+                    {{ size.value }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

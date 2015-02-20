@@ -1,0 +1,600 @@
+body{
+    font-family: 'Open Sans',"Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+    font-weight: 300;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+*{
+    font-family: 'Open Sans',"Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+    font-weight: 300;
+}
+
+h1,h2,h3,h4{
+    font-family: 'Open Sans',"Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+    font-weight: 300;
+}
+
+@media (min-width: 768px){
+    h1{
+        font-size: 30px;
+    }
+}
+
+input.form-control {
+    box-shadow: none;
+    border-radius: 0;
+    padding: 20px;
+    font-size: 18px;
+}
+
+input.btn.btn-info.btn-block {
+    padding: 15px 15px;
+    font-size: 22px;
+    border-radius: 0;
+}
+
+.icon {
+    background-image: url('/img/icons.png');
+    background-position-x: 0;
+    display: block;
+    height: 163px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.icon.ipad{
+    background-position-y: 0;
+    width: 130px;
+}
+.icon.others{
+    background-image: url('/img/smartphone.png');
+    background-position-y: 0;
+    width: 77px;
+    background-size: contain;
+}
+.icon.ipad_white{
+    background-image: url('/img/ipad_white_sm.png');
+    background-position-y: 0;
+    width: 150px;
+    height: 213px;
+}
+
+.icon.iphone_white{
+    background-image: url('/img/iphone_white_sm.png');
+    background-position-y: 0;
+    width: 107px;
+    height: 213px;
+}
+
+.icon.iphone {
+    background-position-y: -165px;
+    width: 77px;
+}
+
+.icon.samsung {
+    background-position-y: -495px;
+    width: 87px;
+}
+
+.icon.ipod {
+    background-position-y: -331px;
+    width: 87px;
+}
+@media (max-width: 768px){
+    .navbar{
+        min-height: 10px !important;
+    }
+    .navbar-header img.img-responsive
+    {
+        width: 200px;
+        margin-right: auto;
+        margin-left: auto;
+
+    }
+    .info-header{
+        margin-top: 10px;
+    }
+
+    .info-header .big-heading h1
+    {
+        font-size: 20px;
+    }
+    .info-header .tiny-heading h4
+    {
+        font-size: 12px;
+    }
+}
+@media (max-width: 768px){
+    .device-model {
+        width: 100% !important;
+        display: inline-block !important;
+        float: left !important;
+    }
+    a.device-model-item{
+        min-width: 50px !important;
+        float: left !important;
+    }
+
+    .device-model-item img
+    {
+        height: 50px !important;
+    }
+
+    .device-model-item h3{
+        font-size: 15px !important;
+        margin: 4px !important;
+    }
+}
+
+.device-model-item img
+{
+    height: 80px;
+}
+
+.device-model a:hover{
+    border-radius: 3px;
+    border: #e8e8e8 solid 1px;
+}
+
+.device-model a {
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+
+@media (min-width: 768px) {
+    .big-heading {
+        margin-top: 20px !important;
+        margin-bottom: 60px !important;
+    }
+}
+.big-heading {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+    .progress-item {
+        display: inline-block !important;
+        width: 13% !important;
+        text-align: center !important;
+        padding-top: 15px !important;
+        padding-bottom: 10px !important;
+    }
+}
+
+.progress-item {
+    display: none;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.progress-item a{
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: rgba(0,0,0,0.9);
+}
+
+.progress-item a.active{
+    color: #27a5d5;
+    box-shadow: none;
+}
+
+.progress-item a:hover{
+    background-color: #f2f2f2;
+}
+.progress-item:hover span.back-button {
+    background-color: white;
+}
+
+.progress-item span.back-button {
+    padding: 15px;
+    border-radius: 60px;
+}
+
+.progress-item:hover{
+    background-color: #f2f2f2;
+}
+
+.progress-item.back-button{
+    background-color: transparent;
+}
+.progress-item a span {
+    font-weight: 400;
+    font-size: 22px;
+}
+
+.progress-item span {
+    font-weight: 600;
+    font-size: 22px;
+}
+
+.progress-bar{
+    height: 5px;
+    width: 100%;
+    background-color: #27a5d5;
+    position: fixed;
+}
+
+.navbar-plain{
+    background-color: #ffffff;
+    border: none;
+}
+
+@media (min-width: 768px){
+    .navbar-plain{
+        height: 150px !important;
+    }
+}
+.device-make{
+    margin-bottom: 20px;
+}
+
+
+
+/* Have to set height explicity on ui-view
+to prevent collapsing during animation*/
+.v[ui-view]{
+    height: 265px;
+}
+
+.widget-canvas {
+    position: relative;
+}
+
+.v[ui-view].ng-enter, .v[ui-view].ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    -webkit-transition:all .5s ease-in-out;
+    -moz-transition:all .5s ease-in-out;
+    -o-transition:all .5s ease-in-out;
+    transition:all .5s ease-in-out;
+}
+
+.v[ui-view].ng-enter {
+    opacity: 0;
+    /*-webkit-transform:scale3d(0.5, 0.5, 0.5);*/
+    /*-moz-transform:scale3d(0.5, 0.5, 0.5);*/
+    /*transform:scale3d(0.5, 0.5, 0.5);*/
+}
+
+.v[ui-view].ng-enter-active {
+    opacity: 1;
+    /*-webkit-transform:scale3d(1, 1, 1);*/
+    /*-moz-transform:scale3d(1, 1, 1);*/
+    /*transform:scale3d(1, 1, 1);*/
+}
+
+.v[ui-view].ng-leave {
+    opacity: 1;
+    /*-webkit-transform:translate3d(0, 0, 0);*/
+    /*-moz-transform:translate3d(0, 0, 0);*/
+    /*transform:translate3d(0, 0, 0);*/
+}
+
+.v[ui-view].ng-leave-active {
+    opacity: 0;
+    /*-webkit-transform:translate3d(100px, 0, 0);*/
+    /*-moz-transform:translate3d(100px, 0, 0);*/
+    /*transform:translate3d(100px, 0, 0);*/
+}
+
+
+/* Have to set height explicity on ui-view
+to prevent collapsing during animation*/
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInDown {
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+}
+
+@-webkit-keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+@keyframes fadeOutUp {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+    }
+}
+
+.fadeOutUp {
+    -webkit-animation-name: fadeOutUp;
+    animation-name: fadeOutUp;
+}
+
+.reward[ui-view]{
+    height: 265px;
+}
+
+.reward[ui-view].ng-enter, .reward[ui-view].ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    -webkit-transition:all .5s ease-in-out;
+    -moz-transition:all .5s ease-in-out;
+    -o-transition:all .5s ease-in-out;
+    transition:all .5s ease-in-out;
+}
+
+.reward[ui-view].ng-enter {
+    animation-delay: 0.3s;
+    -webkit-animation-delay: 0.3s;
+    opacity: 0;
+    -webkit-animation-name: fadeInDown;
+    animation-name: fadeInDown;
+}
+
+
+.reward[ui-view].ng-leave {
+    -webkit-animation-name: fadeOutUp;
+    animation-name: fadeOutUp;
+}
+
+
+.condition .body ul {
+    list-style: none;
+    text-align: justify;
+    font-size: 15px;
+}
+
+.body {
+    display: none;
+}
+
+.condition .header {
+    text-align: justify;
+    cursor: pointer;
+}
+
+.condition .header label:hover {
+    background-color: #f2f2f2;
+}
+
+.btn-group-vertical.conditions label {
+    padding: 10px;
+    box-sizing: content-box;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 22px;
+    text-align: justify;
+}
+
+label.btn:active,label.btn:hover {
+    box-shadow: none;
+    background-color: #f2f2f2;
+}
+
+label.btn.active {
+    box-shadow: none;
+    box-sizing: content-box;
+    border: solid 1px orange;
+}
+
+@media (min-width: 768px) {
+    .info-header{
+        width: 480px !important;
+    }
+}
+
+.info-header{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35px;
+    text-align: center;
+}
+
+.center {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.swap-location {
+    display: inline-block;
+    padding: 10px;
+    margin-right: 4px;
+    margin-bottom: 8px;
+    border: solid #e8e8e8 1px;
+    transition: all 0.5s;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+@media (max-width: 768px) {
+    .swap-locations {
+        clear: both !important;
+    }
+
+    .swap-location{
+        display: block !important;
+    }
+}
+
+.swap-locations {
+    margin-top: 25px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.swap-location:hover {
+    border-color: orange;
+}
+span.seperator {
+    display: block;
+    width: 25px;
+    height: 25px;
+    content: "*";
+    border: solid #e8e8e8 1px;
+    border-radius: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+@media (min-width: 768px) {
+    a.device-model-item {
+        min-width: 150px;
+        float: left !important;
+        font-size: 20px;
+    }
+}
+
+a.device-model-item {
+    min-width: 150px;
+    font-size: 20px;
+}
+
+@media (min-width: 768px) {
+    a.device-model-item {
+        margin-right: auto;
+        margin-left: 5px;
+        float: none;
+    }
+}
+
+.conditions label.btn {
+    margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+    .device-model img {
+        height: 175px !important;
+        float: none !important;
+    }
+    .device-model h3 {
+        display: block !important;
+    }
+}
+
+.device-model img {
+    height: 80px;
+    float: left;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.device-model h3 {
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .hide-on-mobile{
+        display: none !important;
+    }
+}
+
+
+span.glyphicon.glyphicon-ok.text-success {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    border: solid 1px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.btn.btn-clean {
+    border: solid 1px;
+    padding: 20px 15px;
+    margin-top: 25px;
+}
+
+.bonus-info{
+    display: block;
+    text-align: center;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+a.swap-location h3 {
+    color: rgba(0,0,0,0.8);
+}
+
+a.swap-location p {
+    color: rgba(0,0,0,0.7);
+}
+.reward-box{
+    color: orange;
+    font-weight: 500;
+    font-size: 50px;
+}
+
+.reward-box .bonus-price{
+    color: grey;
+    font-weight: 300;
+    font-size: 40px;
+}
+
+.navbar-white{
+    background-color: white;
+    border: none;
+}

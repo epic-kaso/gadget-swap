@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: SupergeeksGadgetSwap
+        psr4_prefix: SupergeeksGadgetSwap
+        src_path: app

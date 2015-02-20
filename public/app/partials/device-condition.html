@@ -1,0 +1,48 @@
+<div class="row text-center">
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="swap-locations">
+                    <a ng-click="viewReward('device-reward',conditions[0].slug)" class="swap-location col-sm-5">
+                        <h3>{{ conditions[0].name}}</h3>
+                        <p>
+                            <ul class="list-unstyled text-left">
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Powers on and makes calls.</li>
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> No visible scratches or cracks.</li>
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> All buttons click.</li>
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Has never been repaired.</li>
+                            </ul>
+                        </p>
+                    </a>
+                    <a ng-click="viewReward('device-reward',conditions[1].slug)" class="swap-location col-sm-5">
+                        <h3>{{ conditions[1].name}}</h3>
+                        <p>
+                            <ul class="list-unstyled text-left">
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Minor scratches/cracks.</li>
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Has been repaired in any way.</li>
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Some Buttons are not functional.</li>
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Normal wear and tear.</li>
+                            </ul>
+                        </p>
+                    </a>
+                    <a ng-click="viewReward('device-reward',conditions[2].slug)" class="swap-location col-sm-5">
+                        <h3>{{ conditions[2].name}}</h3>
+                        <p>
+                            <ul class="list-unstyled text-left"><li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Does not power on or make calls.</li>
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Buttons not functional.</li>
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Serious physical damage.</li>
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Water damaged before.</li>
+                                <li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Faulty touch screen/broken LCD.</li>
+                            </ul>
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4 device-model hide-on-mobile">
+        <img ng-src="{{ image_url }}" style="height: 175px;" class="center img-rounded img-responsive" />
+        <h3>{{ image_label }}</h3>
+    </div>
+</div>

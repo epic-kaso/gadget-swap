@@ -1,0 +1,9 @@
+<div class="row text-center" style="padding-bottom: 70px;">
+    <div class="col-sm-6 col-md-3 device-model" ng-repeat="make in makes.models">
+        <a ui-sref="device-model({device_make: make.name })">
+            <img ng-src="{{ make.logo_url }}"
+                 class="img-rounded img-responsive" />
+            <h3>{{ make.name }}</h3>
+        </a>
+    </div>
+</div>

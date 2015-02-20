@@ -1,0 +1,27 @@
+<div class="text-center">
+    <div>
+        <h1>
+            <span ng-bind="reward_price" class="reward-box"></span>
+            <span ng-if="currentGadget.network.name == 'Airtel Ng' || (currentGadget.network.name != 'Airtel Ng' && currentGadget.network.postToAirtel == '1')" class="bonus-price">+ ₦5,000</span>
+        </h1>
+    </div>
+    <h4 style="font-weight: 400">Now,just choose your closest pickup location to claim your reward</h4>
+    <div class="swap-locations">
+        <a ui-sref="book-appointment({swap_center: 'Airtel Oniru Palms Shopping Mall Oniru' })" class="swap-location">
+            <h3>Airtel Store</h3>
+            <p>Palms Shopping Mall, Oniru</p>
+        </a>
+        <a ui-sref="book-appointment({swap_center: 'Airtel Store Ikeja Mall' })" class="swap-location">
+            <h3>Airtel Store</h3>
+            <p>Ikeja City Mall,Alausa</p>
+        </a>
+        <a ui-sref="book-appointment({swap_center: 'Airtel Xperience Center Sanusi Fafuwa VI' })" class="swap-location">
+            <h3>Airtel Xperience Center</h3>
+            <p>Sanusi Fafunwa, V.I</p>
+        </a>
+        <a ui-sref="book-appointment({swap_center: 'Supergeeks Xperience Center' })" class="swap-location">
+            <h3>Supergeeks Xperience Center</h3>
+            <p>1 victoria arobieke str, Admiralty Way. Lekki Phase 1</p>
+        </a>
+    </div>
+</div>

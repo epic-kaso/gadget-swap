@@ -1,0 +1,16 @@
+<div class="row text-center">
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-4 device-make" ng-repeat="color in colors">
+                <button class="btn btn-default btn-block" ng-click="selectColor(color,'device-size')" >{{ color.value }}</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-6 device-model">
+        <span class="icon" ng-class="device_make"></span>
+        <h3>{{ image_label }}</h3>
+    </div>
+
+</div>
