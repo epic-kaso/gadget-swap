@@ -11,20 +11,21 @@
 |
 */
 
-Route::get('/', 'GadgetSwapController@getClient');
-
-Route::group(['prefix' => 'resources','namespace' => 'Resources'],function(){
-    Route::resource('devices','DevicesController');
-});
+Route::get('/', 'GadgetSwapController@getIndex');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
-Route::group([],function(){
-           Route::get('/devices',['as' => 'devices','uses' => 'GadgetSwapController@getIndex']);
-           Route::post('/devices/add-maker','GadgetSwapController@postAddMake');
-           Route::post('/devices/add-network','GadgetSwapController@postAddNetwork');
-           Route::post('/devices/add-device','GadgetSwapController@postAddModel');
-           Route::delete('/devices/delete-device/{id}','GadgetSwapController@deleteGadget');
+
+Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
+    Route::get('dashboard',['as' => 'devices','uses' => 'DashboardController@getIndex']);
+});
+
+
+Route::group(['prefix' => 'resources','namespace' => 'Resources'],function(){
+    Route::resource('devices','DevicesController');
+    Route::resource('device_makers','DeviceMakerController');
+    Route::resource('networks','NetworkController');
+    Route::resource('swap_user','SwapUsersController');
 });

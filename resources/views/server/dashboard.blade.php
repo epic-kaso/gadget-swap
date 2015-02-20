@@ -191,7 +191,7 @@
 
 <script id="AddNetwork.html" type="text/ng-template">
     <div>
-        <form action="devices/add-network" method="post">
+        <form action="{{ route('resources.networks.store') }}" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token() ?>"/>
             <div class="col-md-6">
                 <div  class="form-group">
@@ -228,7 +228,7 @@
 
 <script id="AddMaker.html" type="text/ng-template">
 <div>
-    <form action="devices/add-maker" method="post">
+    <form action="{{ route('resources.device_makers.store') }}" method="post">
         <input type="hidden" name="_token" value="<?php echo csrf_token() ?>"/>
         <div class="col-md-6">
             <div  class="form-group">
@@ -271,7 +271,7 @@
 </script>
 <script id="AddDevice.html" type="text/ng-template">
     <div>
-        <form action="devices/add-device" method="post">
+        <form action="{{ route('resources.devices.store') }}" method="post">
             <input type="hidden" name="_token" value="<?php echo csrf_token() ?>"/>
             <div  class="form-group">
                 <label>Select Device Make</label>

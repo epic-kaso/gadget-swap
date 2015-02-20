@@ -2,9 +2,17 @@
 
 use SupergeeksGadgetSwap\Http\Requests;
 use SupergeeksGadgetSwap\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Input;
+use Redirect;
+use Request;
+use Response;
+use SupergeeksGadgetSwap\BaseLinePrice;
+use SupergeeksGadgetSwap\Gadget;
+use SupergeeksGadgetSwap\GadgetMaker;
+use SupergeeksGadgetSwap\Network;
 use SupergeeksGadgetSwap\Repositories\DevicesRepository;
+use SupergeeksGadgetSwap\Size;
 
 class DevicesController extends Controller {
 
@@ -44,7 +52,43 @@ class DevicesController extends Controller {
 	 */
 	public function store()
 	{
-		//
+        $data = Input::all();
+
+        if(
+            !isset($data['model']) ||
+            !isset($data['gadget_maker_id']) ||
+            !isset($data['sizes']) ||
+            !isset($data['baselines'])
+        ){
+            return Redirect::back();
+        }
+
+        $make = Gadget::create(array(
+            'model' => $data['model'],
+            'gadget_maker_id' => $data['gadget_maker_id']
+        ));
+
+        $sizes = explode(',', $data['sizes']);
+        foreach ($sizes as $size) {
+            $make->sizes()->save(new Size(array('value' => trim($size))));
+        }
+
+        $baselines = BaseLinePrice::extractBaseLinePrices($data['baselines']);
+        foreach ($baselines as $key => $value) {
+            $make->base_line_prices()->save(
+                new BaseLinePrice(
+                    array('size' => trim($key), 'value' => trim($value)
+                    )
+                )
+            );
+        }
+
+        if(isset($data['device_image_url'])){
+            $make->image_url = $data['device_image_url'];
+        }
+        $make->save();
+
+        return Redirect::action('GadgetSwapController@getIndex');
 	}
 
 	/**
@@ -88,7 +132,18 @@ class DevicesController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+
+        $g = Gadget::find($id);
+        $g->destroyEveryData();
+
+        if (Request::ajax()) {
+            return Response::json(array(
+                'status' => 'success',
+                'url' => route('GadgetSwapController@getIndex')
+            ));
+        } else {
+            return Redirect::action('GadgetSwapController@getIndex');
+        }
 	}
 
 }
