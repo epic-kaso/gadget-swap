@@ -134,7 +134,7 @@ input.btn.btn-info.btn-block {
 
 .device-model a:hover{
     border-radius: 3px;
-    border: #e8e8e8 solid 1px;
+    box-shadow: inset 1px 1px 5px 1px #e8e8e8;
 }
 
 .device-model a {
