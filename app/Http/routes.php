@@ -18,7 +18,7 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
+Route::group(['prefix'=>'admin','namespace'=>'Admin','middleware' => 'auth'],function(){
     Route::get('dashboard',['as' => 'devices','uses' => 'DashboardController@getIndex']);
 });
 

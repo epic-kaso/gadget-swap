@@ -17,6 +17,15 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+    <style>
+        input.form-control {
+            padding: 20px;
+            font-size: 18px;
+            margin-bottom: 10px;
+            border-radius: 0;
+            box-shadow: none;
+        }
+    </style>
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -28,18 +37,14 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
+				<a class="navbar-brand" href="#"></a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav">
-					<li><a href="/">Home</a></li>
-				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
 					@if (Auth::guest())
 						<li><a href="/auth/login">Login</a></li>
-						<li><a href="/auth/register">Register</a></li>
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>
