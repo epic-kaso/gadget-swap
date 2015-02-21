@@ -1,7 +1,8 @@
 /**
  * Created by Ak on 2/19/2015.
  */
-var app = angular.module("AdminApp",['ui.router','ngAnimate','ngResource','angular-loading-bar','adminApp.directives']);
+var app = angular.module("AdminApp",
+    ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngResource', 'angular-loading-bar', 'adminApp.directives', 'adminApp.services']);
 
 app.config(['$urlRouterProvider','$stateProvider',
     function($urlRouterProvider,$stateProvider){
@@ -277,16 +278,145 @@ app.config(['$urlRouterProvider','$stateProvider',
 
         $stateProvider.state('ticket.add',
             {
-                url: '/add/{step}',
-                templateUrl: function($stateParams){
-                    var step = $stateParams.step || 'step-one';
-                    return 'partials/ticket/add/'+step+'.html';
-                },
-                controller: function () {
+                url: '/add',
+                templateUrl: 'partials/ticket/add/base.html',
+                controller: function ($scope, $state) {
+                    $state.go('ticket.add.stepOne');
                 },
                 resolve:{
                     'hasHistory': function($rootScope){
                         $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.add.stepOne',
+            {
+                url: '/step-one',
+                templateUrl: 'partials/ticket/add/step-one.html',
+                controller: function ($scope, TicketServ) {
+                    $scope.createTicket = function (ticket) {
+                        TicketServ.save(ticket, function (ticket) {
+                            alert("Success");
+                            console.log(ticket);
+                        }, function (ticket) {
+                            alert("failed");
+                            console.log(ticket);
+                        });
+                    }
+                },
+                resolve: {
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.add.stepTwo',
+            {
+                url: '/step-two',
+                templateUrl: 'partials/ticket/add/step-two.html',
+                controller: function ($scope) {
+                    $scope.test = {
+                        deviceBoot: '',
+                        callUnlock: '',
+                        wirelessConnection: '',
+                        icloudConnection: ''
+                    };
+
+                    $scope.activeNextButton = false;
+
+                    $scope.$watch('test', function (newV, oldV) {
+                        console.log('test change');
+                        console.log(newV);
+
+                        var ready = checkReadinessForNextStep(newV);
+                        setViewState(ready);
+
+                    }, true);
+
+                    function checkReadinessForNextStep(obj) {
+                        var state = {ready: true};
+
+                        angular.forEach(obj, function (value, key) {
+                            if (value == 'no') {
+                                this.ready = false;
+                            }
+                        }, state);
+
+                        return state.ready;
+                    }
+
+                    function setViewState(ready) {
+                        $scope.activeNextButton = ready;
+                        if (ready) {
+                            $scope.message = "Ok, proceed.";
+                        } else {
+                            $scope.message = "Sorry, Device doesn't Qualify to Continue";
+                        }
+                    }
+                },
+                resolve: {
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.add.stepThree',
+            {
+                url: '/step-three',
+                templateUrl: 'partials/ticket/add/step-three.html',
+                controller: function ($scope, GradeDeviceServ, $state) {
+                    $scope.test = {
+                        touchScreen: {rating: '', weight: 0.625},
+                        lcdScreen: {rating: '', weight: 0.625},
+                        deviceCasing: {rating: '', weight: 0.625},
+                        deviceKeypad: {rating: '', weight: 0.25},
+                        deviceCamera: {rating: '', weight: 0.25},
+                        deviceEarPiece: {rating: '', weight: 0.125},
+                        deviceSpeaker: {rating: '', weight: 0.125},
+                        deviceEarphoneJack: {rating: '', weight: 0.125},
+                        deviceChargingPort: {rating: '', weight: 0.25}
+                    };
+
+                    $scope.$watch('test', function (newV, oldV) {
+                        console.log('test change');
+                        console.log(newV);
+                        $scope.grade = GradeDeviceServ.getGrade(newV);
+
+                    }, true);
+
+                    $scope.next = function () {
+                        $state.go('ticket.add.final', {
+                            'grade': $scope.grade
+                        });
+                    }
+                },
+                resolve: {
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.add.final',
+            {
+                url: '/final/{grade}',
+                templateUrl: 'partials/ticket/add/final.html',
+                controller: function ($scope, Grade, $state) {
+                    $scope.grade = Grade;
+                },
+                resolve: {
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    },
+                    'Grade': function ($stateParams) {
+                        return $stateParams.grade;
                     }
                 }
             }
@@ -357,39 +487,3 @@ app.run(function($http,$rootScope,CSRF_TOKEN){
 });
 
 
-app.factory('ImageFetcher',function($http,$q){
-    var searchUrl = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAJ_8QtWECvWTcrukqvfLmRWdARJ2bI2rk&cx=011505858740112002603:dap5yb7naau&q=";
-
-    return {
-        fetch: function(query){
-            var images = [];
-            var deferred = $q.defer();
-            $http.get(searchUrl+encodeURI(query)).then(function(response){
-                console.log(response.data);
-                response.data.items.forEach(function(currentValue){
-                    if(angular.isDefined(currentValue.pagemap)) {
-                        var temp = currentValue.pagemap.cse_image;//cse_thumbnail;
-                        if (angular.isDefined(temp) && angular.isArray(temp)) {
-                            temp.forEach(function (cValue) {
-                                images.push(cValue);
-//                                if (cValue.height > cValue.width) {
-//                                    images.push(cValue);
-//                                }
-                            });
-                        } else if (angular.isDefined(temp) && angular.isObject(temp)) {
-                            images.push(temp);
-                        }
-                    }
-                });
-                console.log(images);
-                deferred.resolve(images);
-            },function(response){
-                console.log(response);
-                deferred.reject(response);
-            });
-
-            return deferred.promise;
-        }
-    }
-
-});

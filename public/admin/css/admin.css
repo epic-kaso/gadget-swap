@@ -6327,6 +6327,12 @@ label,
 .checkbox label {
   font-weight: 300;
 }
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+  cursor: pointer;
+}
 .center-block {
   float: none;
   margin-left: auto;
@@ -6682,14 +6688,40 @@ ul.steps-bar {
 }
 .steps-bar li {
   display: inline-block;
-  padding: 10px 20px;
   border-right: 1px solid rgba(0, 0, 0, 0.03);
   width: 150px;
   text-align: center;
   font-size: 18px;
   margin: 0;
 }
-.steps-bar li.active {
+.steps-bar li a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: 10px 20px;
+  margin: 0;
+}
+.steps-bar li a.active {
   color: black;
-  background-color: rgba(0, 0, 0, 0.01);
+  background-color: rgba(0, 0, 0, 0.06);
+  font-weight: 400;
+  font-size: 22px;
+}
+.btn.btn-test {
+  border-radius: 0;
+}
+.btn.btn-test.active {
+  background-color: #8e44ad;
+  color: white;
+  box-shadow: none;
+}
+.btn.btn-test.btn-yes.active {
+  background-color: #2ecc71;
+  color: white;
+  box-shadow: none;
+}
+.btn.btn-test.btn-no.active {
+  background-color: #e74c3c;
+  color: white;
+  box-shadow: none;
 }

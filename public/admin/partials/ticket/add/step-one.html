@@ -1,32 +1,31 @@
-<div class="steps-nav">
-    <ul class="steps-bar">
-        <li><span>Step One</span></li>
-        <li><span>Step Two</span></li>
-        <li><span>Step Three</span></li>
-        <li><span>Finish</span></li>
-    </ul>
+<h4>User Details</h4>
+<hr/>
+<div class="form-group">
+    <input type="text" placeholder="Last Name" name="name" ng-model="ticket.customer_last_name"
+           class="form-control inmate-search-box"/>
 </div>
 
-<div>
-    <h4>User Details</h4><hr/>
-    <div class="form-group">
-        <input type="text" placeholder="Full Name" name="name" ng-model="ticket.name" class="form-control inmate-search-box"/>
-    </div>
+<div class="form-group">
+    <input type="text" placeholder="First Name" name="name" ng-model="ticket.customer_first_name"
+           class="form-control inmate-search-box"/>
+</div>
 
-    <div class="form-group">
-        <input type="text" placeholder="Email" name="email" ng-model="ticket.email" class="form-control inmate-search-box"/>
-    </div>
+<div class="form-group">
+    <input type="text" placeholder="Email" name="email" ng-model="ticket.customer_email"
+           class="form-control inmate-search-box"/>
+</div>
 
-    <div class="form-group">
-        <input type="text" placeholder="Phone Number" name="phone" ng-model="ticket.phone" class="form-control inmate-search-box"/>
-    </div>
+<div class="form-group">
+    <input type="text" placeholder="Phone Number" name="phone" ng-model="ticket.customer_phone_number"
+           class="form-control inmate-search-box"/>
+</div>
 
-    <div class="form-group">
-        <input type="text" placeholder="IMEI of Device" name="device_imei" ng-model="ticket.device_imei" class="form-control inmate-search-box"/>
-    </div>
+<div class="form-group">
+    <input type="text" placeholder="IMEI of Device" name="device_imei" ng-model="ticket.customer_device_imei"
+           class="form-control inmate-search-box"/>
+</div>
 
-    <div class="form-group">
-        <a class="btn search-btn back-btn pull-right" href=""><span class="fa fa-chevron-right"></span></a>
-    </div>
-
+<div class="form-group">
+    <button class="btn search-btn back-btn pull-right" ng-click="createTicket(ticket)"><span
+            class="fa fa-chevron-right"></span></button>
 </div>

@@ -1,7 +1,5 @@
 <?php namespace SupergeeksGadgetSwap\Http\Requests;
 
-use Auth;
-
 
 class TicketRequest extends Request {
 
@@ -12,7 +10,7 @@ class TicketRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return Auth::check();
+        return true;//Auth::check();
 	}
 
 	/**
@@ -27,7 +25,7 @@ class TicketRequest extends Request {
 			'customer_first_name' => 'required|alpha_dash',
 			'customer_email' => 'required|email',
 			'customer_phone_number' => 'required|digits:11',
-			'customer_device_imei' => 'required|digits:35',
+            'customer_device_imei' => 'required|digits:15',
 		];
 	}
 
