@@ -1,13 +1,14 @@
 <div>
-    <form action="{{ route('resources.device_makers.store') }}" method="post">
-        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>"/>
+    <form action="/resources/device_makers" method="post">
+        <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}"/>
         <div class="col-md-6">
             <div  class="form-group">
                 <input type="text" name="name" placeholder="Make" ng-blur="fetchImages(device_maker + ' logo')" ng-model="device_maker"   class="form-control"/>
             </div>
             <div class="form-group">
                 <label for="scratched-condition">Normal Condition Value (%):</label>
-                <input type="text" value="100" id="scratched-condition" name="normal_condition" placeholder="%" class="form-control">
+                <input type="text" value="100" id="normal-condition" name="normal_condition" placeholder="%"
+                       class="form-control">
             </div>
             <div class="form-group">
                 <label for="scratched-condition">Scratched Condition Value (%):</label>
@@ -26,8 +27,9 @@
                     <div class="row">
                         <div class="image-item" ng-repeat="image in images">
                             <label>
-                                <img class="img-thumbnail img-responsive" ng-src="{| image.src |}" style="height: {| image.height || '150' |}px" />
-                                <input type="radio" name="logo_url" value="{| image.src |}" />
+                                <img class="img-thumbnail img-responsive" ng-src="{{ image.src }}"
+                                     style="height: {{ image.height || '150' }}px"/>
+                                <input type="radio" name="logo_url" value="{{ image.src }}"/>
                             </label>
                         </div>
                     </div>

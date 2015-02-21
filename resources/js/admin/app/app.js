@@ -2,7 +2,7 @@
  * Created by Ak on 2/19/2015.
  */
 var app = angular.module("AdminApp",
-    ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngResource', 'angular-loading-bar', 'adminApp.directives', 'adminApp.services']);
+    ['ui.select', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'ngAnimate', 'ngResource', 'angular-loading-bar', 'adminApp.directives', 'adminApp.services']);
 
 app.config(['$urlRouterProvider','$stateProvider',
     function($urlRouterProvider,$stateProvider){
@@ -409,7 +409,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                         TicketServ.update({id: Ticket.id}, Ticket);
 
                         $state.go('ticket.add.final', {
-                            'grade': $scope.grade
+                            'id': Ticket.id
                         });
                     }
                 },
@@ -426,21 +426,66 @@ app.config(['$urlRouterProvider','$stateProvider',
 
         $stateProvider.state('ticket.add.final',
             {
-                url: '/final/{grade}',
+                url: '/final/{id}',
                 templateUrl: 'partials/ticket/add/final.html',
-                controller: function ($scope, Grade, $state) {
-                    $scope.grade = Grade;
+                controller: function ($scope, Ticket, $state) {
+                    $scope.grade = Ticket.device_grade;
+
+                    $scope.next = function () {
+                        $state.go('ticket.evaluate', {'id': Ticket.id});
+                    }
                 },
                 resolve: {
                     'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
                     },
-                    'Grade': function ($stateParams) {
-                        return $stateParams.grade;
+                    'Ticket': function (TicketServ, $state, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
                     }
                 }
             }
         );
+
+        $stateProvider.state('ticket.evaluate', {
+            url: '/evaluate/{id}',
+            templateUrl: 'partials/ticket/evaluation/evaluation.html',
+            controller: function ($scope, Networks, Ticket, DeviceBrandsServ, DevicesServ, TicketServ) {
+                $scope.networks = Networks;
+
+                $scope.clear = function () {
+                    $scope.person.selected = undefined;
+                    $scope.address.selected = undefined;
+                    $scope.country.selected = undefined;
+                };
+
+                $scope.brand = {};
+                $scope.refreshBrands = function (brand) {
+                    var params = {q: brand};
+                    DeviceBrandsServ.query({}, function (brands) {
+                        $scope.device_brands = brands;
+                    });
+                };
+
+                $scope.device = {};
+                $scope.refreshDevices = function (brand) {
+                    var params = {q: brand};
+                    DevicesServ.query({}, function (brands) {
+                        $scope.devices = brands;
+                    });
+                };
+            },
+            resolve: {
+                'hasHistory': function ($rootScope) {
+                    $rootScope.hasHistory = true;
+                },
+                'Ticket': function (TicketServ, $state, $stateParams) {
+                    return TicketServ.get({id: $stateParams.id});
+                },
+                'Networks': function (NetworksServ) {
+                    return NetworksServ.query({});
+                }
+            }
+        });
 
     $stateProvider.state('ticket.search',
         {

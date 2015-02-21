@@ -1,6 +1,6 @@
 <div>
-    <form action="{{ route('resources.networks.store') }}" method="post">
-        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>"/>
+    <form action="/resources/networks" method="post">
+        <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}"/>
         <div class="col-md-6">
             <div  class="form-group">
                 <label>Network Name</label>
@@ -19,8 +19,9 @@
                     <div class="row">
                         <div class="image-item" ng-repeat="image in images">
                             <label>
-                                <img class="img-thumbnail img-responsive" ng-src="{| image.src |}" style="height: {| image.height || '150' |}px" />
-                                <input type="radio" name="logo_url" value="{| image.src |}" />
+                                <img class="img-thumbnail img-responsive" ng-src="{{ image.src }}"
+                                     style="height: {{ image.height || '150' }}px"/>
+                                <input type="radio" name="logo_url" value="{{ image.src }}"/>
                             </label>
                         </div>
                     </div>

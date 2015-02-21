@@ -1,19 +1,12 @@
 <?php namespace SupergeeksGadgetSwap\Http\Controllers\Resources;
 
-use SupergeeksGadgetSwap\Http\Requests;
-use SupergeeksGadgetSwap\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use SupergeeksGadgetSwap\Repositories\DevicesRepository;
-use Illuminate\Support\Str;
 use Input;
 use Redirect;
 use Response;
-use SupergeeksGadgetSwap\BaseLinePrice;
-use SupergeeksGadgetSwap\Gadget;
 use SupergeeksGadgetSwap\GadgetMaker;
-use SupergeeksGadgetSwap\Network;
-use SupergeeksGadgetSwap\Size;
+use SupergeeksGadgetSwap\Http\Controllers\Controller;
+use SupergeeksGadgetSwap\Http\Requests;
+use SupergeeksGadgetSwap\Repositories\DevicesRepository;
 
 class DeviceMakerController extends Controller {
 
@@ -66,7 +59,7 @@ class DeviceMakerController extends Controller {
 
         $make->save();
 
-        return Redirect::action('GadgetSwapController@getIndex');
+        return Redirect::to(\URL::action('Admin\DashboardController@getIndex') . '#/device_brands');
 	}
 
 

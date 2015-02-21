@@ -88,7 +88,27 @@ class GadgetSwapTicketController extends Controller
      */
     public function update($id)
     {
-        //
+        $keys = [
+            'customer_first_name',
+            'customer_last_name',
+            'customer_phone_number',
+            'customer_device_imei',
+            'customer_email',
+            'device_grade'
+        ];
+        $data = Input::only(
+            $keys
+        );
+
+        $ticket = GadgetSwapTicket::find($id);
+
+        foreach ($keys as $k) {
+            $ticket->{$k} = $data[$k];
+        }
+
+        $ticket->save();
+
+        return $ticket;
     }
 
     /**

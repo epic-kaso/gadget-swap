@@ -1,16 +1,13 @@
 <?php namespace SupergeeksGadgetSwap\Http\Controllers\Resources;
 
-use SupergeeksGadgetSwap\Http\Requests;
-use SupergeeksGadgetSwap\Http\Controllers\Controller;
-use Illuminate\Support\Str;
 use Input;
 use Redirect;
 use Request;
 use Response;
 use SupergeeksGadgetSwap\BaseLinePrice;
 use SupergeeksGadgetSwap\Gadget;
-use SupergeeksGadgetSwap\GadgetMaker;
-use SupergeeksGadgetSwap\Network;
+use SupergeeksGadgetSwap\Http\Controllers\Controller;
+use SupergeeksGadgetSwap\Http\Requests;
 use SupergeeksGadgetSwap\Repositories\DevicesRepository;
 use SupergeeksGadgetSwap\Size;
 
@@ -32,7 +29,7 @@ class DevicesController extends Controller {
 	 */
 	public function index()
 	{
-		return $this->devicesRepository->getAllDeviceMakers();
+        return $this->devicesRepository->getAllDevices();
 	}
 
 	/**
@@ -88,7 +85,7 @@ class DevicesController extends Controller {
         }
         $make->save();
 
-        return Redirect::action('GadgetSwapController@getIndex');
+        return Redirect::to(\URL::action('Admin\DashboardController@getIndex') . '#/devices');
 	}
 
 	/**

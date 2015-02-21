@@ -1,5 +1,5 @@
 <div>
-    <form>
+    <form action="/resources/devices" method="post">
         <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}"/>
         <div  class="form-group">
             <label>Select Device Make</label>
@@ -55,8 +55,9 @@
                 <div class="row">
                     <div class="image-item" ng-repeat="image in images">
                         <label>
-                            <img class="img-thumbnail img-responsive" ng-src="{| image.src |}" style="height: {| image.height || '150' |}px" />
-                            <input type="radio" name="device_image_url" value="{| image.src |}" />
+                            <img class="img-thumbnail img-responsive" ng-src="{{ image.src }}"
+                                 style="height: {{ image.height || '150' }}px"/>
+                            <input type="radio" name="device_image_url" value="{{ image.src }}"/>
                         </label>
                     </div>
                 </div>

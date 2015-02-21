@@ -1,19 +1,12 @@
 <?php namespace SupergeeksGadgetSwap\Http\Controllers\Resources;
 
 
-use SupergeeksGadgetSwap\Http\Requests;
-use SupergeeksGadgetSwap\Http\Controllers\Controller;
-use Illuminate\Support\Str;
 use Input;
 use Redirect;
-use Request;
 use Response;
-use SupergeeksGadgetSwap\BaseLinePrice;
-use SupergeeksGadgetSwap\Gadget;
-use SupergeeksGadgetSwap\GadgetMaker;
+use SupergeeksGadgetSwap\Http\Controllers\Controller;
+use SupergeeksGadgetSwap\Http\Requests;
 use SupergeeksGadgetSwap\Network;
-use SupergeeksGadgetSwap\Repositories\DevicesRepository;
-use SupergeeksGadgetSwap\Size;
 
 
 class NetworkController extends Controller {
@@ -25,7 +18,7 @@ class NetworkController extends Controller {
 	 */
 	public function index()
 	{
-		//
+        return Network::all();
 	}
 
 	/**
@@ -53,8 +46,7 @@ class NetworkController extends Controller {
         }
 
         $make = Network::create($data);
-
-        return Redirect::action('GadgetSwapController@getIndex');
+        return Redirect::to(\URL::action('Admin\DashboardController@getIndex') . '#/networks');
 	}
 
 	/**

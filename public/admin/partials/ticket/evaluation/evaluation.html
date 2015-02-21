@@ -1,0 +1,51 @@
+<h4>Gadget Evaluation</h4>
+<hr/>
+<div class="form-group evaluate">
+    <label>Device Brand</label>
+    <ui-select ng-model="brand.selected"
+               theme="bootstrap"
+               reset-search-input="false">
+        <ui-select-match placeholder="Enter a Device Brand...">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="brand in device_brands track by $index"
+                           refresh="refreshBrands($select.search)"
+                           refresh-delay="0">
+            <div ng-bind-html="brand.name | highlight: $select.search"></div>
+        </ui-select-choices>
+    </ui-select>
+</div>
+
+<div class="form-group evaluate">
+    <label>Device Model</label>
+    <ui-select ng-model="device.selected"
+               theme="bootstrap"
+               reset-search-input="false">
+        <ui-select-match placeholder="Enter a Device Brand...">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="device in devices track by $index"
+                           refresh="refreshDevices($select.search)"
+                           refresh-delay="0">
+            <div ng-bind-html="device.name | highlight: $select.search"></div>
+        </ui-select-choices>
+    </ui-select>
+</div>
+
+<div class="form-group evaluate">
+    <label>Device Size</label>
+    <select class="form-control"></select>
+</div>
+
+<div class="form-group evaluate">
+    <label>Network</label>
+    <select class="form-control">
+        <option ng-repeat="network in networks">{{ network.name }}</option>
+    </select>
+</div>
+
+<div class="form-group evaluate">
+    <label>Condition</label>
+    <select class="form-control"></select>
+</div>
+
+<div class="form-group">
+    <button class="btn search-btn back-btn pull-right" ng-click="createTicket(ticket)"><span
+            class="fa fa-chevron-right"></span></button>
+</div>

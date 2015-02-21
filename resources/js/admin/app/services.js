@@ -12,6 +12,27 @@ app.factory('TicketServ', function($resource,URLServ){
     });//URLServ.getResourceUrlFor("ticket"));
 });
 
+app.factory('DeviceBrandsServ', function ($resource, URLServ) {
+    return $resource('/resources/device_makers/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+});
+
+
+app.factory('DevicesServ', function ($resource, URLServ) {
+    return $resource('/resources/devices/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+});
+
+
+app.factory('NetworksServ', function ($resource, URLServ) {
+    return $resource('/resources/networks/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+});
+
+
 app.factory('URLServ', function($rootScope){
     return {
         "getResourceUrlFor": function(name){
