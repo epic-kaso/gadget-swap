@@ -257,7 +257,6 @@ app.config(['$urlRouterProvider','$stateProvider',
             url: '/ticket',
             templateUrl:'partials/ticket/dashboard.html',
             controller: function($state){
-                $state.go('ticket.menu');
             }
         }
     );
@@ -281,7 +280,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/add',
                 templateUrl: 'partials/ticket/add/base.html',
                 controller: function ($scope, $state) {
-                    $state.go('ticket.add.stepOne');
+
                 },
                 resolve:{
                     'hasHistory': function($rootScope){
@@ -295,15 +294,19 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/step-one',
                 templateUrl: 'partials/ticket/add/step-one.html',
-                controller: function ($scope, TicketServ) {
+                controller: function ($scope, TicketServ, $state) {
                     $scope.createTicket = function (ticket) {
                         TicketServ.save(ticket, function (ticket) {
-                            alert("Success");
+                            next(ticket.id);
                             console.log(ticket);
                         }, function (ticket) {
                             alert("failed");
                             console.log(ticket);
                         });
+                    };
+
+                    function next(id) {
+                        $state.go('ticket.add.stepTwo', {'id': id});
                     }
                 },
                 resolve: {
@@ -316,16 +319,15 @@ app.config(['$urlRouterProvider','$stateProvider',
 
         $stateProvider.state('ticket.add.stepTwo',
             {
-                url: '/step-two',
+                url: '/step-two/{id}',
                 templateUrl: 'partials/ticket/add/step-two.html',
-                controller: function ($scope) {
+                controller: function ($scope, Ticket, $state) {
                     $scope.test = {
                         deviceBoot: '',
                         callUnlock: '',
                         wirelessConnection: '',
                         icloudConnection: ''
                     };
-
                     $scope.activeNextButton = false;
 
                     $scope.$watch('test', function (newV, oldV) {
@@ -336,6 +338,10 @@ app.config(['$urlRouterProvider','$stateProvider',
                         setViewState(ready);
 
                     }, true);
+
+                    $scope.next = function () {
+                        $state.go('ticket.add.stepThree', {'id': Ticket.id});
+                    };
 
                     function checkReadinessForNextStep(obj) {
                         var state = {ready: true};
@@ -361,6 +367,9 @@ app.config(['$urlRouterProvider','$stateProvider',
                 resolve: {
                     'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
+                    },
+                    'Ticket': function ($state, $stateParams) {
+                        return {id: $stateParams.id};
                     }
                 }
             }
@@ -368,9 +377,9 @@ app.config(['$urlRouterProvider','$stateProvider',
 
         $stateProvider.state('ticket.add.stepThree',
             {
-                url: '/step-three',
+                url: '/step-three/{id}',
                 templateUrl: 'partials/ticket/add/step-three.html',
-                controller: function ($scope, GradeDeviceServ, $state) {
+                controller: function ($scope, GradeDeviceServ, $state, Ticket, TicketServ) {
                     $scope.test = {
                         touchScreen: {rating: '', weight: 0.625},
                         lcdScreen: {rating: '', weight: 0.625},
@@ -387,10 +396,14 @@ app.config(['$urlRouterProvider','$stateProvider',
                         console.log('test change');
                         console.log(newV);
                         $scope.grade = GradeDeviceServ.getGrade(newV);
+                        console.log('Grade:' + $scope.grade);
 
                     }, true);
 
                     $scope.next = function () {
+                        Ticket.device_grade = $scope.grade;
+                        TicketServ.update({id: Ticket.id}, Ticket);
+
                         $state.go('ticket.add.final', {
                             'grade': $scope.grade
                         });
@@ -399,6 +412,9 @@ app.config(['$urlRouterProvider','$stateProvider',
                 resolve: {
                     'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
+                    },
+                    'Ticket': function (TicketServ, $state, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
                     }
                 }
             }

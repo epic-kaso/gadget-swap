@@ -257,7 +257,6 @@ app.config(['$urlRouterProvider','$stateProvider',
             url: '/ticket',
             templateUrl:'partials/ticket/dashboard.html',
             controller: function($state){
-                $state.go('ticket.menu');
             }
         }
     );
@@ -281,7 +280,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/add',
                 templateUrl: 'partials/ticket/add/base.html',
                 controller: function ($scope, $state) {
-                    $state.go('ticket.add.stepOne');
+
                 },
                 resolve:{
                     'hasHistory': function($rootScope){
@@ -295,15 +294,19 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/step-one',
                 templateUrl: 'partials/ticket/add/step-one.html',
-                controller: function ($scope, TicketServ) {
+                controller: function ($scope, TicketServ, $state) {
                     $scope.createTicket = function (ticket) {
                         TicketServ.save(ticket, function (ticket) {
-                            alert("Success");
+                            next(ticket.id);
                             console.log(ticket);
                         }, function (ticket) {
                             alert("failed");
                             console.log(ticket);
                         });
+                    };
+
+                    function next(id) {
+                        $state.go('ticket.add.stepTwo', {'id': id});
                     }
                 },
                 resolve: {
@@ -316,16 +319,15 @@ app.config(['$urlRouterProvider','$stateProvider',
 
         $stateProvider.state('ticket.add.stepTwo',
             {
-                url: '/step-two',
+                url: '/step-two/{id}',
                 templateUrl: 'partials/ticket/add/step-two.html',
-                controller: function ($scope) {
+                controller: function ($scope, Ticket, $state) {
                     $scope.test = {
                         deviceBoot: '',
                         callUnlock: '',
                         wirelessConnection: '',
                         icloudConnection: ''
                     };
-
                     $scope.activeNextButton = false;
 
                     $scope.$watch('test', function (newV, oldV) {
@@ -336,6 +338,10 @@ app.config(['$urlRouterProvider','$stateProvider',
                         setViewState(ready);
 
                     }, true);
+
+                    $scope.next = function () {
+                        $state.go('ticket.add.stepThree', {'id': Ticket.id});
+                    };
 
                     function checkReadinessForNextStep(obj) {
                         var state = {ready: true};
@@ -361,6 +367,9 @@ app.config(['$urlRouterProvider','$stateProvider',
                 resolve: {
                     'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
+                    },
+                    'Ticket': function ($state, $stateParams) {
+                        return {id: $stateParams.id};
                     }
                 }
             }
@@ -368,9 +377,9 @@ app.config(['$urlRouterProvider','$stateProvider',
 
         $stateProvider.state('ticket.add.stepThree',
             {
-                url: '/step-three',
+                url: '/step-three/{id}',
                 templateUrl: 'partials/ticket/add/step-three.html',
-                controller: function ($scope, GradeDeviceServ, $state) {
+                controller: function ($scope, GradeDeviceServ, $state, Ticket, TicketServ) {
                     $scope.test = {
                         touchScreen: {rating: '', weight: 0.625},
                         lcdScreen: {rating: '', weight: 0.625},
@@ -387,10 +396,14 @@ app.config(['$urlRouterProvider','$stateProvider',
                         console.log('test change');
                         console.log(newV);
                         $scope.grade = GradeDeviceServ.getGrade(newV);
+                        console.log('Grade:' + $scope.grade);
 
                     }, true);
 
                     $scope.next = function () {
+                        Ticket.device_grade = $scope.grade;
+                        TicketServ.update({id: Ticket.id}, Ticket);
+
                         $state.go('ticket.add.final', {
                             'grade': $scope.grade
                         });
@@ -399,6 +412,9 @@ app.config(['$urlRouterProvider','$stateProvider',
                 resolve: {
                     'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
+                    },
+                    'Ticket': function (TicketServ, $state, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
                     }
                 }
             }
@@ -519,7 +535,9 @@ app.directive('backButton',function(){
 var app =  angular.module('adminApp.services',[]);
 
 app.factory('TicketServ', function($resource,URLServ){
-    return $resource('/resources/ticket/:id',{id: '@id'});//URLServ.getResourceUrlFor("ticket"));
+    return $resource('/resources/ticket/:id',{id: '@id'},{
+        'update': { method:'PUT' }
+    });//URLServ.getResourceUrlFor("ticket"));
 });
 
 app.factory('URLServ', function($rootScope){
@@ -530,39 +548,39 @@ app.factory('URLServ', function($rootScope){
     }
 });
 
-app.factory('GradeDeviceServ', function($rootScope){
+app.factory('GradeDeviceServ', function ($rootScope) {
 
     var threshold = {
         'A': 8.1,
         'B': 5.85
     };
 
-    function generateGradePoint(device){
+    function generateGradePoint(device) {
         var result = {gradePoint: 0};
 
-        angular.foreach(device,function(value,key){
-            if(value.rating != ''){
+        angular.forEach(device, function (value, key) {
+            if (value.rating != '') {
                 this.gradePoint += parseInt(value.rating) * value.weight;
             }
-        },result);
+        }, result);
 
         return result.gradePoint;
     }
 
-    function generateGradeLetter(gradePoint){
+    function generateGradeLetter(gradePoint) {
         var value = parseFloat(gradePoint);
 
-        if(value >= threshold.A){
+        if (value >= threshold.A) {
             return 'A';
-        }else if(value >= threshold.B){
+        } else if (value >= threshold.B) {
             return 'B';
-        }else{
+        } else {
             return 'C';
         }
     }
 
     return {
-        "getGrade": function(device){
+        "getGrade": function (device) {
             var gradePoint = generateGradePoint(device);
             return generateGradeLetter(gradePoint);
         }
@@ -570,17 +588,17 @@ app.factory('GradeDeviceServ', function($rootScope){
 });
 
 
-app.factory('ImageFetcher',function($http,$q){
+app.factory('ImageFetcher', function ($http, $q) {
     var searchUrl = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAJ_8QtWECvWTcrukqvfLmRWdARJ2bI2rk&cx=011505858740112002603:dap5yb7naau&q=";
 
     return {
-        fetch: function(query){
+        fetch: function (query) {
             var images = [];
             var deferred = $q.defer();
-            $http.get(searchUrl+encodeURI(query)).then(function(response){
+            $http.get(searchUrl + encodeURI(query)).then(function (response) {
                 console.log(response.data);
-                response.data.items.forEach(function(currentValue){
-                    if(angular.isDefined(currentValue.pagemap)) {
+                response.data.items.forEach(function (currentValue) {
+                    if (angular.isDefined(currentValue.pagemap)) {
                         var temp = currentValue.pagemap.cse_image;//cse_thumbnail;
                         if (angular.isDefined(temp) && angular.isArray(temp)) {
                             temp.forEach(function (cValue) {
@@ -596,7 +614,7 @@ app.factory('ImageFetcher',function($http,$q){
                 });
                 console.log(images);
                 deferred.resolve(images);
-            },function(response){
+            }, function (response) {
                 console.log(response);
                 deferred.reject(response);
             });

@@ -2,10 +2,8 @@
 
 use Input;
 use SupergeeksGadgetSwap\GadgetSwapTicket;
-use SupergeeksGadgetSwap\Http\Requests;
 use SupergeeksGadgetSwap\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
+use SupergeeksGadgetSwap\Http\Requests;
 use SupergeeksGadgetSwap\Http\Requests\TicketRequest;
 
 class GadgetSwapTicketController extends Controller
@@ -61,7 +59,7 @@ class GadgetSwapTicketController extends Controller
      */
     public function show($id)
     {
-        //
+        return GadgetSwapTicket::find($id);
     }
 
     /**

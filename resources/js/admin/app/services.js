@@ -7,7 +7,9 @@
 var app =  angular.module('adminApp.services',[]);
 
 app.factory('TicketServ', function($resource,URLServ){
-    return $resource('/resources/ticket/:id',{id: '@id'});//URLServ.getResourceUrlFor("ticket"));
+    return $resource('/resources/ticket/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
 });
 
 app.factory('URLServ', function($rootScope){
@@ -28,7 +30,7 @@ app.factory('GradeDeviceServ', function ($rootScope) {
     function generateGradePoint(device) {
         var result = {gradePoint: 0};
 
-        angular.foreach(device, function (value, key) {
+        angular.forEach(device, function (value, key) {
             if (value.rating != '') {
                 this.gradePoint += parseInt(value.rating) * value.weight;
             }
