@@ -31,14 +31,14 @@
 <div class="form-group evaluate">
     <label>Device Size</label>
     <select class="form-control" ng-model="selected.size">
-        <option ng-repeat="size in device.selected.sizes" value="size.id">{{ size.value }}</option>
+        <option ng-repeat="size in device.selected.sizes" value="{{ size.id }}">{{ size.value }}</option>
     </select>
 </div>
 
 <div class="form-group evaluate">
     <label>Network</label>
     <select class="form-control" ng-model="selected.network">
-        <option ng-repeat="network in networks" value="network.id">{{ network.name }}</option>
+        <option ng-repeat="network in networks" value="{{ network.id }}">{{ network.name }}</option>
     </select>
 </div>
 

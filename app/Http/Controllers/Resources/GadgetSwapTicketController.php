@@ -94,7 +94,11 @@ class GadgetSwapTicketController extends Controller
             'customer_phone_number',
             'customer_device_imei',
             'customer_email',
-            'device_grade'
+            'device_grade',
+            'gadget_id',
+            'network_id',
+            'size_id',
+            'reward'
         ];
         $data = Input::only(
             $keys

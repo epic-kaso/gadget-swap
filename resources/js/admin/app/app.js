@@ -455,6 +455,8 @@ app.config(['$urlRouterProvider','$stateProvider',
             url: '/evaluate/{id}',
             templateUrl: 'partials/ticket/evaluation/evaluation.html',
             controller: function ($scope, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
+                $scope.ticket = Ticket;
+
                 $scope.selected = {grade: Ticket.device_grade};
 
                 $scope.networks = Networks;
@@ -496,6 +498,10 @@ app.config(['$urlRouterProvider','$stateProvider',
                     });
                 };
 
+                $scope.goHome = function () {
+                    $state.go('ticket.menu');
+                }
+
                 function updateTicket(selected, reward) {
                     Ticket.gadget_id = selected.device.id;
                     Ticket.size_id = selected.size;
@@ -523,11 +529,23 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/reward/{id}',
                 templateUrl: 'partials/ticket/evaluation/reward.html',
-                controller: function ($scope, Ticket) {
+                controller: function ($scope, Ticket, Airtel) {
                     $scope.reward = Ticket.reward;
+                    $scope.ticket = Ticket;
+                    $scope.airtel = Airtel;
 
+                    $scope.goHome = function () {
+                        $state.go('ticket.menu');
+                    }
+
+                    $scope.next = function () {
+                        $state.go('ticket.accept-terms', {id: Ticket.id});
+                    }
                 },
                 resolve: {
+                    'Airtel': function (GadgetEvaluationReward) {
+                        return GadgetEvaluationReward.fetchAirtelBonus();
+                    },
                     'Ticket': function (TicketServ, $state, $stateParams) {
                         return TicketServ.get({id: $stateParams.id});
                     },

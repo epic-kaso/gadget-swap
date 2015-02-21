@@ -41,7 +41,7 @@ app.factory('URLServ', function($rootScope){
     }
 });
 
-app.factory('GadgetEvaluationReward', function () {
+app.factory('GadgetEvaluationReward', function (NetworksServ) {
     var reward = {result: ''};
 
     function getBaseLinePrice(device) {
@@ -61,12 +61,12 @@ app.factory('GadgetEvaluationReward', function () {
     function calculatePriceFromGrade(device, baseLinePrice) {
         switch (device.grade) {
             case 'A':
-                return parseInt(device.brand.normal_condition) * baseLinePrice;
+                return (parseInt(device.brand.normal_condition) / 100) * baseLinePrice;
             case 'B':
-                return parseInt(device.brand.scratched_condition) * baseLinePrice;
+                return (parseInt(device.brand.scratched_condition) / 100) * baseLinePrice;
             case 'C':
             default:
-                return parseInt(device.brand.bad_condition) * baseLinePrice;
+                return (parseInt(device.brand.bad_condition) / 100) * baseLinePrice;
         }
     }
 
@@ -77,6 +77,10 @@ app.factory('GadgetEvaluationReward', function () {
         },
         "getLastReward": function () {
             return reward.result;
+        },
+        fetchAirtelBonus: function () {
+            var network = NetworksServ.get({q: 'airtel'});
+            return network;
         }
     }
 });
