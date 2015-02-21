@@ -50,17 +50,17 @@ class GadgetSwapTicket extends BaseModel {
 
     public function size()
     {
-        return $this->hasOne('SupergeeksGadgetSwap\Size');
+        return $this->belongsTo('SupergeeksGadgetSwap\Size');
     }
 
     public function gadget()
     {
-        return $this->hasOne('SupergeeksGadgetSwap\Gadget');
+        return $this->belongsTo('SupergeeksGadgetSwap\Gadget');
     }
 
     public function network()
     {
-        return $this->hasMany('SupergeeksGadgetSwap\Network');
+        return $this->belongsTo('SupergeeksGadgetSwap\Network');
     }
 
 }

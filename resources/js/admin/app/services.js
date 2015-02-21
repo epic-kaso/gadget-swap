@@ -26,6 +26,11 @@ app.factory('DevicesServ', function ($resource, URLServ) {
 });
 
 
+app.factory('MailServ', function ($resource) {
+    return $resource('/resources/mail', null);//URLServ.getResourceUrlFor("ticket"));
+});
+
+
 app.factory('NetworksServ', function ($resource, URLServ) {
     return $resource('/resources/networks/:id', {id: '@id'}, {
         'update': {method: 'PUT'}

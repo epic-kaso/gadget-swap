@@ -1,69 +1,87 @@
 <div>
-    <h4>User Details</h4>
-    <hr/>
-    <table>
-        <tr>
-            <td>Last Name</td>
-            <td>{{ ticket.customer_last_name }}</td>
-        </tr>
-        <tr>
-            <td>First Name</td>
-            <td>{{ ticket.customer_first_name }}</td>
-        </tr>
-        <tr>
-            <td>Email</td>
-            <td>{{ ticket.customer_email }}</td>
-        </tr>
-        <tr>
-            <td>Phone</td>
-            <td>{{ ticket.customer_phone }}</td>
-        </tr>
-    </table>
+    <div class="col-sm-6">
+        <h4>User Details</h4>
+        <table class="table table-review">
+            <tr>
+                <td>Last Name</td>
+                <td><strong>{{ ticket.customer_last_name }}</strong></td>
+            </tr>
+            <tr>
+                <td>First Name</td>
+                <td><strong>{{ ticket.customer_first_name }}</strong></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><strong>{{ ticket.customer_email }}</strong></td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td><strong>{{ ticket.customer_phone_number }}</strong></td>
+            </tr>
+        </table>
+    </div>
 
-    <h4>Gadget Details</h4>
-    <hr/>
-    <table>
+    <div class="col-sm-6">
+
+
+        <h4>Gadget Details</h4>
+        <table class="table table-review">
         <tr>
             <td>Make</td>
-            <td>{{ ticket.gadget.gadget_maker.name }}</td>
+            <td><strong>{{ ticket.gadget.gadget_maker.name }}</strong></td>
         </tr>
         <tr>
             <td>Model</td>
-            <td>{{ ticket.gadget.model }}</td>
+            <td><strong>{{ ticket.gadget.model }}</strong></td>
         </tr>
 
         <tr>
             <td>IMEI Number</td>
-            <td>{{ ticket.customer_device_imei }}</td>
+            <td><strong>{{ ticket.customer_device_imei }}</strong></td>
         </tr>
 
         <tr>
             <td>Size</td>
-            <td>{{ ticket.size.value }}</td>
+            <td><strong>{{ ticket.size.value }}</strong></td>
         </tr>
         <tr>
             <td>Grade</td>
-            <td>{{ ticket.gadget_grade }}</td>
+            <td><strong>{{ ticket.device_grade }}</strong></td>
         </tr>
     </table>
-
+    </div>
     <h4>Swap Benefits</h4>
-    <hr/>
-    <table>
+
+    <table class="table table-review">
         <tr>
             <td>Reward</td>
-            <td>{{ ticket.reward }}</td>
+            <td><strong>{{ ticket.reward }}</strong></td>
         </tr>
         <tr>
             <td>Bonus</td>
-            <td>{{ ticket.network.description }}</td>
+            <td><strong>{{ ticket.network.description }}</strong></td>
         </tr>
 
         <tr>
             <td>Port To Airtel</td>
-            <td>{{ ticket.port_to_airtel ? 'Yes' : 'No' }}</td>
+            <td><strong>{{ ticket.port_to_airtel ? 'Yes' : 'No' }}</strong></td>
         </tr>
     </table>
 
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <input type="text" placeholder="Discount Voucher Code" name="discount_voucher"
+                       ng-model="ticket.discount_voucher_code"
+                       class="form-control inmate-search-box"/>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <button ng-click="next()" class="btn btn-success btn-block btn-base">Save</button>
+        </div>
+        <div class="col-sm-3">
+            <button ng-click="goHome()" class="btn btn-danger btn-base btn-block">Close</button>
+        </div>
+    </div>
 
 </div>

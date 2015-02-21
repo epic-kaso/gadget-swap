@@ -565,10 +565,56 @@ app.config(['$urlRouterProvider','$stateProvider',
 
         $stateProvider.state('ticket.accept-terms',
             {
-                url: '/accept-terms',
+                url: '/accept-terms/{id}',
                 templateUrl: 'partials/ticket/evaluation/terms.html',
-                controller: function ($scope) {
+                controller: function ($scope, $stateParams, $state) {
+                    $scope.next = function () {
+                        $state.go('ticket.review-ticket', {id: $stateParams.id});
+                    };
+                },
+                resolve: {
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
 
+
+        $stateProvider.state('ticket.review-ticket',
+            {
+                url: '/review/{id}',
+                templateUrl: 'partials/ticket/evaluation/review.html',
+                controller: function ($scope, Ticket, TicketServ, $state, MailServ) {
+                    $scope.ticket = Ticket;
+
+                    $scope.next = function () {
+                        Ticket.discount_voucher_code = $scope.ticket.discount_voucher_code;
+                        TicketServ.update({id: Ticket.id}, Ticket);
+
+                        MailServ.save({'ticket_id': Ticket.id}, function (mail) {
+                            console.log(mail);
+                        });
+
+                        $state.go('ticket.all-done');
+                    }
+                },
+                resolve: {
+                    'Ticket': function (TicketServ, $state, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
+                    },
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.all-done',
+            {
+                url: '/done',
+                templateUrl: 'partials/ticket/done.html',
+                controller: function ($scope) {
                 },
                 resolve: {
                     'hasHistory': function ($rootScope) {
