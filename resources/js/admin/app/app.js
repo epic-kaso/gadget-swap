@@ -265,11 +265,15 @@ app.config(['$urlRouterProvider','$stateProvider',
         {
             url: '/menu',
             templateUrl:'partials/ticket/menu.html',
-            controller: function () {
+            controller: function ($scope, Tickets) {
+                $scope.tickets = Tickets;
             },
             resolve:{
                 'hasHistory': function($rootScope){
                     $rootScope.hasHistory = false;
+                },
+                'Tickets': function (TicketServ) {
+                    return TicketServ.query({limit: 6});
                 }
             }
         }

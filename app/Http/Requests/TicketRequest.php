@@ -20,6 +20,10 @@ class TicketRequest extends Request {
 	 */
 	public function rules()
 	{
+        if ($this->getMethod() == strtolower('get')) {
+            return [];
+        }
+
 		return [
 			'customer_last_name' => 'required|alpha_dash',
 			'customer_first_name' => 'required|alpha_dash',

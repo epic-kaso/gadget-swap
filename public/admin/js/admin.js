@@ -265,11 +265,15 @@ app.config(['$urlRouterProvider','$stateProvider',
         {
             url: '/menu',
             templateUrl:'partials/ticket/menu.html',
-            controller: function () {
+            controller: function ($scope, Tickets) {
+                $scope.tickets = Tickets;
             },
             resolve:{
                 'hasHistory': function($rootScope){
                     $rootScope.hasHistory = false;
+                },
+                'Tickets': function (TicketServ) {
+                    return TicketServ.query({limit: 6});
                 }
             }
         }
@@ -535,8 +539,8 @@ app.directive('backButton',function(){
 var app =  angular.module('adminApp.services',[]);
 
 app.factory('TicketServ', function($resource,URLServ){
-    return $resource('/resources/ticket/:id',{id: '@id'},{
-        'update': { method:'PUT' }
+    return $resource('/resources/ticket/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
     });//URLServ.getResourceUrlFor("ticket"));
 });
 

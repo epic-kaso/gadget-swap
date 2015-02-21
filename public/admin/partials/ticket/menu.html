@@ -1,6 +1,6 @@
 
 <div class="inmates-menu-items">
-    <a ui-sref="ticket.add" class="menu-item">
+    <a ui-sref="ticket.add.stepOne" class="menu-item">
         <span class="fa fa-lock"></span>
         <h4>New Ticket</h4>
     </a>
@@ -23,70 +23,16 @@
 
 <h3>Recent Tickets</h3><hr/>
 <div class="inmates-menu-items">
-    <div class="menu-item inmate-item">
+    <div class="menu-item inmate-item" ng-repeat="ticket in tickets">
         <div class="inmate-pic">
             <span class="fa fa-user"></span>
         </div>
 
         <div class="inmate-bio">
-            <h4>John, Doe</h4>
-            <h4>1023490</h4>
-            <p><span class="fa fa-clock-o"></span> 2 Months left</p>
-        </div>
-    </div>
+            <h4>{{ ticket.customer_last_name}}, {{ ticket.customer_first_name }}</h4>
+            <h4>{{ ticket.hashcode }}</h4>
 
-    <div class="menu-item inmate-item">
-        <div class="inmate-pic">
-            <span class="fa fa-user"></span>
-        </div>
-        <div class="inmate-bio">
-            <h4>John, Doe</h4>
-            <h4>1023490</h4>
-            <p><span class="fa fa-clock-o"></span> 12 Days left</p>
-        </div>
-    </div>
-
-    <div class="menu-item inmate-item">
-        <div class="inmate-pic">
-            <span class="fa fa-user"></span>
-        </div>
-        <div class="inmate-bio">
-            <h4>John, Doe</h4>
-            <h4>1023490</h4>
-            <p><span class="fa fa-clock-o"></span> 2 Months left</p>
-        </div>
-    </div>
-
-    <div class="menu-item inmate-item">
-        <div class="inmate-pic">
-            <span class="fa fa-user"></span>
-        </div>
-        <div class="inmate-bio">
-            <h4>John, Doe</h4>
-            <h4>1023490</h4>
-            <p><span class="fa fa-clock-o"></span> 12 Days left</p>
-        </div>
-    </div>
-
-    <div class="menu-item inmate-item">
-        <div class="inmate-pic">
-            <span class="fa fa-user"></span>
-        </div>
-        <div class="inmate-bio">
-            <h4>John, Doe</h4>
-            <h4>1023490</h4>
-            <p><span class="fa fa-clock-o"></span> 2 Months left</p>
-        </div>
-    </div>
-
-    <div class="menu-item inmate-item">
-        <div class="inmate-pic">
-            <span class="fa fa-user"></span>
-        </div>
-        <div class="inmate-bio">
-            <h4>John, Doe</h4>
-            <h4>1023490</h4>
-            <p><span class="fa fa-clock-o"></span> 12 Days left</p>
+            <p><span class="fa fa-clock-o"></span> {{ ticket.created_date }}</p>
         </div>
     </div>
 </div>

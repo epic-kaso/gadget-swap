@@ -16,7 +16,14 @@ class GadgetSwapTicketController extends Controller
      */
     public function index()
     {
-        return GadgetSwapTicket::all();
+        $limit = Input::get('limit', null);
+
+        if (is_null($limit)) {
+
+            return GadgetSwapTicket::all();
+        } else {
+            return GadgetSwapTicket::take($limit)->latest()->get();
+        }
     }
 
     /**
