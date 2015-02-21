@@ -39,9 +39,14 @@ app.config(['$urlRouterProvider','$stateProvider',
                 resolve:{
                     'hasHistory': function($rootScope){
                         $rootScope.hasHistory = true;
+                    },
+                    'DeviceBrands': function (DeviceBrandsServ) {
+                        return DeviceBrandsServ.query({only: true});
                     }
                 },
-                controller: function($scope,ImageFetcher){
+                controller: function ($scope, ImageFetcher, DeviceBrands) {
+
+                    $scope.models = DeviceBrands;
 
                     $scope.sizes = [];
                     $scope.sizes_string = '';
@@ -449,7 +454,9 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('ticket.evaluate', {
             url: '/evaluate/{id}',
             templateUrl: 'partials/ticket/evaluation/evaluation.html',
-            controller: function ($scope, Networks, Ticket, DeviceBrandsServ, DevicesServ, TicketServ) {
+            controller: function ($scope, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
+                $scope.selected = {grade: Ticket.device_grade};
+
                 $scope.networks = Networks;
 
                 $scope.clear = function () {
@@ -468,11 +475,36 @@ app.config(['$urlRouterProvider','$stateProvider',
 
                 $scope.device = {};
                 $scope.refreshDevices = function (brand) {
-                    var params = {q: brand};
-                    DevicesServ.query({}, function (brands) {
-                        $scope.devices = brands;
+                    $scope.devices = $filter('filter')($scope.brand.selected.gadgets, {model: brand});
+                };
+
+                $scope.$watch('brand.selected', function (newV, oldV) {
+                    console.log('brand changed');
+                    $scope.selected.brand = newV;
+                });
+
+                $scope.$watch('device.selected', function (newV, oldV) {
+                    console.log('device changed');
+                    $scope.selected.device = newV;
+                });
+
+                $scope.next = function () {
+                    var reward = GadgetEvaluationReward.calculate($scope.selected);
+                    updateTicket($scope.selected, reward);
+                    $state.go('ticket.reward', {
+                        'id': Ticket.id
                     });
                 };
+
+                function updateTicket(selected, reward) {
+                    Ticket.gadget_id = selected.device.id;
+                    Ticket.size_id = selected.size;
+                    Ticket.network_id = selected.network;
+                    Ticket.reward = reward;
+
+                    TicketServ.update({id: Ticket.id}, Ticket);
+                }
+
             },
             resolve: {
                 'hasHistory': function ($rootScope) {
@@ -487,7 +519,27 @@ app.config(['$urlRouterProvider','$stateProvider',
             }
         });
 
-    $stateProvider.state('ticket.search',
+        $stateProvider.state('ticket.reward',
+            {
+                url: '/reward/{id}',
+                templateUrl: 'partials/ticket/evaluation/reward.html',
+                controller: function ($scope, Ticket) {
+                    $scope.reward = Ticket.reward;
+
+                },
+                resolve: {
+                    'Ticket': function (TicketServ, $state, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
+                    },
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
+
+
+        $stateProvider.state('ticket.search',
         {
             url: '/search?q',
             templateUrl:'partials/ticket/search.html',

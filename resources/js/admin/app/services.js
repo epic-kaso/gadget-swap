@@ -41,6 +41,46 @@ app.factory('URLServ', function($rootScope){
     }
 });
 
+app.factory('GadgetEvaluationReward', function () {
+    var reward = {result: ''};
+
+    function getBaseLinePrice(device) {
+        var baseLinePrice = 0;
+
+        angular.forEach(device, function (value, key) {
+            angular.forEach(value.base_line_prices, function (v, k) {
+                if (v.id == device.size) {
+                    baseLinePrice = parseInt(v.value);
+                }
+            });
+        });
+
+        return baseLinePrice;
+    }
+
+    function calculatePriceFromGrade(device, baseLinePrice) {
+        switch (device.grade) {
+            case 'A':
+                return parseInt(device.brand.normal_condition) * baseLinePrice;
+            case 'B':
+                return parseInt(device.brand.scratched_condition) * baseLinePrice;
+            case 'C':
+            default:
+                return parseInt(device.brand.bad_condition) * baseLinePrice;
+        }
+    }
+
+    return {
+        "calculate": function (device) {
+            reward.result = calculatePriceFromGrade(device, getBaseLinePrice(device));
+            return reward.result;
+        },
+        "getLastReward": function () {
+            return reward.result;
+        }
+    }
+});
+
 app.factory('GradeDeviceServ', function ($rootScope) {
 
     var threshold = {

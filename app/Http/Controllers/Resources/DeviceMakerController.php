@@ -25,6 +25,10 @@ class DeviceMakerController extends Controller {
 	 */
 	public function index()
 	{
+        if (Input::has('only')) {
+            return GadgetMaker::all();
+        }
+
 		return $this->deviceRepository->getAllDeviceMakers();
 	}
 

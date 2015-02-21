@@ -4,7 +4,7 @@
         <div  class="form-group">
             <label>Select Device Make</label>
             <select class="form-control" name="gadget_maker_id" ng-model="device_make_name">
-                <option value="{{ model.id }}" ng-repeat="model in models">{{ model.name }}</option>
+                <option selected value="{{ model.id }}" ng-repeat="model in models">{{ model.name }}</option>
             </select>
         </div>
 
