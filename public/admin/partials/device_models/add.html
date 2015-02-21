@@ -1,7 +1,8 @@
 <div>
     <form action="/resources/devices" method="post">
         <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}"/>
-        <div  class="form-group">
+
+        <div class="form-group evaluate">
             <label>Select Device Make</label>
             <select class="form-control inmate-search-box" name="gadget_maker_id" ng-model="device_make_name">
                 <option selected value="{{ model.id }}" ng-repeat="model in models">{{ model.name }}</option>
@@ -21,7 +22,9 @@
                 <input type="text" name="device-size" ng-model="device_size" class="form-control inmate-search-box"
                        placeholder="e.g 16gb">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button" ng-click="addToSizes(device_size)">Add</button>
+                        <button class="btn btn-default" style="padding-top: 15px;padding-bottom: 13px;" type="button"
+                                ng-click="addToSizes(device_size)">Add
+                        </button>
                     </span>
             </div>
             <ul class="size-info list-group" ng-if="sizes.length > 0">
