@@ -282,6 +282,10 @@ to prevent collapsing during animation*/
   height: 65px;
 }
 
+.slide[ui-view]{
+  height: 65px;
+}
+
 .main-content-container {
   position: relative;
 }
@@ -386,4 +390,23 @@ ul.search-result-pager{
   height: 80px;
   font-size: 50px;
   width: 80px;
+}
+
+
+a.btn.search-btn.back-btn {
+  border: none;
+  border-radius: 0;
+  padding: 9px 20px;
+  font-size: 22px;
+  background-color: rgba(0,0,0,0.2);
+  color: white;
+  transition: all 0.4s;
+}
+
+a.btn.search-btn.back-btn:hover {
+  background-color: rgba(0,0,0,0.6);
+}
+
+.base-resize{
+  transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
 }

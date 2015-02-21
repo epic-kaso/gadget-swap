@@ -1,19 +1,31 @@
 <div class="row">
     <div class="col-sm-10 col-sm-offset-1">
-        <form>
-            <div class="form-group col-sm-12" style="
+        <div class="row">
+            <div class="col-sm-2" ng-show="hasHistory">
+                <a class="btn search-btn back-btn" href="">
+                    <span class="fa fa-chevron-left"></span>
+                </a>
+            </div>
+
+            <div class="base-resize" ng-class="{'col-sm-10': hasHistory}">
+                <form>
+                    <div class="form-group col-sm-12" style="
                                                         padding-right: 30px;
                                                         padding-left: 0;
                                                     ">
-                <div class="icon-addon addon-lg">
-                    <input type="search" id="search" name="search" ng-model="search" class="form-control inmate-search-box" placeholder="Search Inmates">
-                    <label for="search" class="fa fa-search" rel="tooltip" title="Search"></label>
-                    <a ui-sref="inmates.search({q: search})" class="btn btn-default search-btn"><span class="fa fa-paper-plane"></span></a>
-                </div>
+                        <div class="icon-addon addon-lg">
+                            <input type="search" id="search" name="search" ng-model="search" class="form-control inmate-search-box" placeholder="Search Inmates">
+                            <label for="search" class="fa fa-search" rel="tooltip" title="Search"></label>
+                            <a ui-sref="inmates.search({q: search})" class="btn btn-default search-btn"><span class="fa fa-paper-plane"></span></a>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
 
-        <div ui-view></div>
+        <div class="row main-content-container">
+            <div ui-view class="slide" autoscroll="false"></div>
+        </div>
 
     </div>
 

@@ -21,7 +21,9 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/menu',
                 templateUrl:'partials/device_models/menu.html',
-                controller: function(){}
+                controller: function ($rootScope) {
+                    $rootScope.hasHistory = false;
+                }
             }
         );
 
@@ -103,8 +105,10 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('device_brands.menu',
             {
                 url: '/menu',
-                templateUrl:'partials/device_brands/menu.html',
-                controller: function(){}
+                templateUrl: 'partials/device_brands/menu.html',
+                controller: function ($rootScope) {
+                    $rootScope.hasHistory = false;
+                }
             }
         );
 
@@ -112,7 +116,9 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/add',
                 templateUrl:'partials/device_brands/add.html',
-                controller: function($scope,ImageFetcher){
+                controller: function($rootScope,$scope,ImageFetcher){
+                    $rootScope.hasHistory = true;
+
                     $scope.fetchImages = function(name){
                         var promise = ImageFetcher.fetch(name);
                         promise.then(function(images){
@@ -127,7 +133,9 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/list',
                 templateUrl:'partials/device_brands/list.html',
-                controller: function($scope,$http){
+                controller: function($rootScope, $scope,$http){
+                    $rootScope.hasHistory = false;
+
                     $scope.deleteItem = function(id){
                         var current = window.location.href,
                             url = window.location.origin +
@@ -157,7 +165,9 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/menu',
                 templateUrl:'partials/networks/menu.html',
-                controller: function(){}
+                controller: function ($rootScope) {
+                    $rootScope.hasHistory = false;
+                }
             }
         );
 
@@ -210,7 +220,9 @@ app.config(['$urlRouterProvider','$stateProvider',
         {
             url: '/menu',
             templateUrl:'partials/ticket/menu.html',
-            controller: function(){}
+            controller: function ($rootScope) {
+                $rootScope.hasHistory = false;
+            }
         }
     );
 
