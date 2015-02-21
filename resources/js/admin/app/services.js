@@ -129,6 +129,43 @@ app.factory('GradeDeviceServ', function ($rootScope) {
     }
 });
 
+app.factory('PreloadTemplates', function ($templateCache, $http) {
+    var templates = [
+        "partials/ticket/menu.html",
+        "partials/networks/menu.html",
+        "partials/device_models/menu.html",
+        "partials/device_brands/menu.html",
+        "partials/ticket/dashboard.html",
+        "partials/networks/dashboard.html",
+        "partials/device_models/dashboard.html",
+        "partials/device_brands/dashboard.html",
+        "partials/ticket/add/base.html",
+        "partials/ticket/add/step-one.html",
+        "partials/ticket/add/step-two.html",
+        "partials/ticket/add/step-three.html",
+        "partials/ticket/add/final.html",
+        "partials/networks/add.html",
+        "partials/device_models/add.html",
+        "partials/device_brands/add.html",
+        "partials/networks/list.html",
+        "partials/device_models/list.html",
+        "partials/device_brands/list.html",
+        "partials/ticket/evaluation/evaluation.html",
+        "partials/ticket/evaluation/review.html",
+        "partials/ticket/evaluation/reward.html",
+        "partials/ticket/evaluation/terms.html",
+        "partials/ticket/done.html",
+        "partials/ticket/search.html"
+    ];
+    return {
+        run: function () {
+            templates.forEach(function (currentItem) {
+                $http.get(currentItem, {cache: $templateCache});
+            });
+        }
+    }
+});
+
 
 app.factory('ImageFetcher', function ($http, $q) {
     var searchUrl = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAJ_8QtWECvWTcrukqvfLmRWdARJ2bI2rk&cx=011505858740112002603:dap5yb7naau&q=";

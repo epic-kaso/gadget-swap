@@ -683,7 +683,8 @@ app.config(function($httpProvider){
 
 });
 
-app.run(function($http,$rootScope,CSRF_TOKEN){
+app.run(function ($http, $rootScope, CSRF_TOKEN, PreloadTemplates) {
+    PreloadTemplates.run();
     $rootScope.CSRF_TOKEN = CSRF_TOKEN;
     $http.defaults.headers.common['csrf_token'] = CSRF_TOKEN;
 });

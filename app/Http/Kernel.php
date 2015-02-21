@@ -27,6 +27,8 @@ class Kernel extends HttpKernel {
 		'auth' => 'SupergeeksGadgetSwap\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'guest' => 'SupergeeksGadgetSwap\Http\Middleware\RedirectIfAuthenticated',
+        'auth-admin' => 'SupergeeksGadgetSwap\Http\Middleware\AdminAuthenticate',
+        'auth-adviser' => 'SupergeeksGadgetSwap\Http\Middleware\AdviserAuthenticate',
 	];
 
 }
