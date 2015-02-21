@@ -4,15 +4,15 @@
 var app = angular.module("AdminApp",
     ['ui.select', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'ngAnimate', 'ngResource', 'angular-loading-bar', 'adminApp.directives', 'adminApp.services']);
 
-app.config(['$urlRouterProvider','$stateProvider',
-    function($urlRouterProvider,$stateProvider){
+app.config(['$urlRouterProvider', '$stateProvider',
+    function ($urlRouterProvider, $stateProvider) {
 
 
         $stateProvider.state('devices',
             {
                 url: '/devices',
-                templateUrl:'partials/device_models/dashboard.html',
-                controller: function($state){
+                templateUrl: 'partials/device_models/dashboard.html',
+                controller: function ($state) {
                     $state.go('devices.menu');
                 }
             }
@@ -21,11 +21,11 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('devices.menu',
             {
                 url: '/menu',
-                templateUrl:'partials/device_models/menu.html',
+                templateUrl: 'partials/device_models/menu.html',
                 controller: function () {
                 },
-                resolve:{
-                    'hasHistory': function($rootScope){
+                resolve: {
+                    'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = false;
                     }
                 }
@@ -35,9 +35,9 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('devices.add',
             {
                 url: '/add',
-                templateUrl:'partials/device_models/add.html',
-                resolve:{
-                    'hasHistory': function($rootScope){
+                templateUrl: 'partials/device_models/add.html',
+                resolve: {
+                    'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
                     },
                     'DeviceBrands': function (DeviceBrandsServ) {
@@ -54,32 +54,32 @@ app.config(['$urlRouterProvider','$stateProvider',
                     $scope.baseLinePriceString = '';
                     $scope.images = [];
 
-                    $scope.fetchImages = function(name){
+                    $scope.fetchImages = function (name) {
                         var promise = ImageFetcher.fetch(name);
-                        promise.then(function(images){
+                        promise.then(function (images) {
                             $scope.images = images;
                         });
                     };
 
-                    function createStringVersion(){
-                        $scope.sizes_string =  $scope.sizes.join();
+                    function createStringVersion() {
+                        $scope.sizes_string = $scope.sizes.join();
                     }
 
-                    $scope.addToSizes = function(device_size){
+                    $scope.addToSizes = function (device_size) {
                         $scope.sizes.push(device_size);
                         $scope.device_size = null;
                         createStringVersion();
                     };
 
-                    $scope.removeSize = function(index){
-                        $scope.sizes.splice(index,1);
+                    $scope.removeSize = function (index) {
+                        $scope.sizes.splice(index, 1);
                         createStringVersion();
                     };
 
-                    $scope.updateBaseLineString = function(){
+                    $scope.updateBaseLineString = function () {
                         var temp = [];
-                        angular.forEach($scope.baseLinePrice,function(value,key){
-                            temp.push(""+key+": "+value);
+                        angular.forEach($scope.baseLinePrice, function (value, key) {
+                            temp.push("" + key + ": " + value);
                         });
                         $scope.baseLinePriceString = temp.join();
                     }
@@ -90,22 +90,22 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('devices.list',
             {
                 url: '/list',
-                templateUrl:'partials/device_models/list.html',
-                resolve:{
-                    'hasHistory': function($rootScope){
+                templateUrl: 'partials/device_models/list.html',
+                resolve: {
+                    'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }
                 },
-                controller: function($scope,$http){
+                controller: function ($scope, $http) {
 
-                    $scope.deleteItem = function(id){
+                    $scope.deleteItem = function (id) {
                         var current = window.location.href,
                             url = window.location.origin +
                                 window.location.pathname +
-                                '/delete-device/'+id;
-                        $http.delete(url).then(function(response){
+                                '/delete-device/' + id;
+                        $http.delete(url).then(function (response) {
                             location.reload();
-                        },function(response){
+                        }, function (response) {
                             alert(response);
                         });
                     }
@@ -117,8 +117,8 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('device_brands',
             {
                 url: '/device_brands',
-                templateUrl:'partials/device_brands/dashboard.html',
-                controller: function($state){
+                templateUrl: 'partials/device_brands/dashboard.html',
+                controller: function ($state) {
                     $state.go('device_brands.menu');
                 }
             }
@@ -130,8 +130,8 @@ app.config(['$urlRouterProvider','$stateProvider',
                 templateUrl: 'partials/device_brands/menu.html',
                 controller: function () {
                 },
-                resolve:{
-                    'hasHistory': function($rootScope){
+                resolve: {
+                    'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = false;
                     }
                 }
@@ -141,17 +141,17 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('device_brands.add',
             {
                 url: '/add',
-                templateUrl:'partials/device_brands/add.html',
-                resolve:{
-                    'hasHistory': function($rootScope){
+                templateUrl: 'partials/device_brands/add.html',
+                resolve: {
+                    'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }
                 },
-                controller: function($scope,ImageFetcher){
+                controller: function ($scope, ImageFetcher) {
 
-                    $scope.fetchImages = function(name){
+                    $scope.fetchImages = function (name) {
                         var promise = ImageFetcher.fetch(name);
-                        promise.then(function(images){
+                        promise.then(function (images) {
                             $scope.images = images;
                         });
                     };
@@ -162,22 +162,22 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('device_brands.list',
             {
                 url: '/list',
-                templateUrl:'partials/device_brands/list.html',
-                resolve:{
-                    'hasHistory': function($rootScope){
+                templateUrl: 'partials/device_brands/list.html',
+                resolve: {
+                    'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }
                 },
-                controller: function($scope,$http){
+                controller: function ($scope, $http) {
 
-                    $scope.deleteItem = function(id){
+                    $scope.deleteItem = function (id) {
                         var current = window.location.href,
                             url = window.location.origin +
                                 window.location.pathname +
-                                '/delete-device/'+id;
-                        $http.delete(url).then(function(response){
+                                '/delete-device/' + id;
+                        $http.delete(url).then(function (response) {
                             location.reload();
-                        },function(response){
+                        }, function (response) {
                             alert(response);
                         });
                     }
@@ -188,8 +188,8 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('networks',
             {
                 url: '/networks',
-                templateUrl:'partials/networks/dashboard.html',
-                controller: function($state){
+                templateUrl: 'partials/networks/dashboard.html',
+                controller: function ($state) {
                     $state.go('networks.menu');
                 }
             }
@@ -198,11 +198,11 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('networks.menu',
             {
                 url: '/menu',
-                templateUrl:'partials/networks/menu.html',
+                templateUrl: 'partials/networks/menu.html',
                 controller: function () {
                 },
-                resolve:{
-                    'hasHistory': function($rootScope){
+                resolve: {
+                    'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = false;
                     }
                 }
@@ -212,17 +212,17 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('networks.add',
             {
                 url: '/add',
-                templateUrl:'partials/networks/add.html',
-                resolve:{
-                    'hasHistory': function($rootScope){
+                templateUrl: 'partials/networks/add.html',
+                resolve: {
+                    'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }
                 },
-                controller: function($scope,ImageFetcher){
+                controller: function ($scope, ImageFetcher) {
 
-                    $scope.fetchImages = function(name){
+                    $scope.fetchImages = function (name) {
                         var promise = ImageFetcher.fetch(name);
-                        promise.then(function(images){
+                        promise.then(function (images) {
                             $scope.images = images;
                         });
                     };
@@ -233,23 +233,23 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('networks.list',
             {
                 url: '/list',
-                templateUrl:'partials/networks/list.html',
-                resolve:{
-                    'hasHistory': function($rootScope){
+                templateUrl: 'partials/networks/list.html',
+                resolve: {
+                    'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }
                 },
-                controller: function($scope,$http){
+                controller: function ($scope, $http) {
 
 
-                    $scope.deleteItem = function(id){
+                    $scope.deleteItem = function (id) {
                         var current = window.location.href,
                             url = window.location.origin +
                                 window.location.pathname +
-                                '/delete-device/'+id;
-                        $http.delete(url).then(function(response){
+                                '/delete-device/' + id;
+                        $http.delete(url).then(function (response) {
                             location.reload();
-                        },function(response){
+                        }, function (response) {
                             alert(response);
                         });
                     }
@@ -257,33 +257,33 @@ app.config(['$urlRouterProvider','$stateProvider',
             }
         );
 
-    $stateProvider.state('ticket',
-        {
-            url: '/ticket',
-            templateUrl:'partials/ticket/dashboard.html',
-            controller: function($state){
-                $state.go('ticket.menu');
-            }
-        }
-    );
-
-    $stateProvider.state('ticket.menu',
-        {
-            url: '/menu',
-            templateUrl:'partials/ticket/menu.html',
-            controller: function ($scope, Tickets) {
-                $scope.tickets = Tickets;
-            },
-            resolve:{
-                'hasHistory': function($rootScope){
-                    $rootScope.hasHistory = false;
-                },
-                'Tickets': function (TicketServ) {
-                    return TicketServ.query({limit: 6});
+        $stateProvider.state('ticket',
+            {
+                url: '/ticket',
+                templateUrl: 'partials/ticket/dashboard.html',
+                controller: function ($state) {
+                    $state.go('ticket.menu');
                 }
             }
-        }
-    );
+        );
+
+        $stateProvider.state('ticket.menu',
+            {
+                url: '/menu',
+                templateUrl: 'partials/ticket/menu.html',
+                controller: function ($scope, Tickets) {
+                    $scope.tickets = Tickets;
+                },
+                resolve: {
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = false;
+                    },
+                    'Tickets': function (TicketServ) {
+                        return TicketServ.query({limit: 6});
+                    }
+                }
+            }
+        );
 
         $stateProvider.state('ticket.add',
             {
@@ -292,8 +292,8 @@ app.config(['$urlRouterProvider','$stateProvider',
                 controller: function ($scope, $state) {
 
                 },
-                resolve:{
-                    'hasHistory': function($rootScope){
+                resolve: {
+                    'hasHistory': function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }
                 }
@@ -626,48 +626,48 @@ app.config(['$urlRouterProvider','$stateProvider',
         );
 
         $stateProvider.state('ticket.search',
-        {
-            url: '/search?q',
-            templateUrl:'partials/ticket/search.html',
-            controller: function($scope,result,$stateParams){
-                console.log(result);
-                $scope.result = result.data;
-                $scope.search = $stateParams.q;
-            },
-            resolve: {
-                'result': function($stateParams,$http){
-                    return $http.get('/search',{q: $stateParams.q});
+            {
+                url: '/search?q',
+                templateUrl: 'partials/ticket/search.html',
+                controller: function ($scope, result, $stateParams) {
+                    console.log(result);
+                    $scope.result = result.data;
+                    $scope.search = $stateParams.q;
                 },
-                'hasHistory': function($rootScope){
-                    $rootScope.hasHistory = true;
+                resolve: {
+                    'result': function ($stateParams, $http) {
+                        return $http.get('/search', {q: $stateParams.q});
+                    },
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
                 }
             }
-        }
-    );
+        );
 
-    $stateProvider.state('config',
-        {
-            url: '/config',
-            templateUrl:'partials/config/form.html',
-            controller: function($scope){
+        $stateProvider.state('config',
+            {
+                url: '/config',
+                templateUrl: 'partials/config/form.html',
+                controller: function ($scope) {
+                }
             }
-        }
-    );
+        );
 
 
-    $urlRouterProvider.otherwise('/ticket/menu');
-}]);
+        $urlRouterProvider.otherwise('/ticket/menu');
+    }]);
 
-app.config(function($httpProvider){
+app.config(function ($httpProvider) {
 
-    var interceptor = function($rootScope,$location,$q){
+    var interceptor = function ($rootScope, $location, $q) {
 
-        var success = function(response){
+        var success = function (response) {
             return response
         };
 
-        var error = function(response){
-            if (response.status = 401){
+        var error = function (response) {
+            if (response.status = 401) {
                 delete sessionStorage.authenticated;
                 $location.path('/');
                 //Flash.show(response.data.flash)
@@ -676,7 +676,7 @@ app.config(function($httpProvider){
             return $q.reject(response)
 
         };
-        return function(promise){
+        return function (promise) {
             return promise.then(success, error)
         }
     };
@@ -691,3 +691,229 @@ app.run(function ($http, $rootScope, CSRF_TOKEN, PreloadTemplates) {
 });
 
 
+/**
+ * Created by Ak on 2/19/2015.
+ */
+
+var app = angular.module('adminApp.directives', []);
+
+app.directive('backButton', function () {
+    return {
+        'restrict': 'EA',
+        'template': '<a class="btn base-resize search-btn back-btn" href=""><span class="fa fa-chevron-left"></span></a>',
+        'link': function link(scope, element, attrs) {
+            element.click(function (e) {
+                window.history.back();
+                e.preventDefault();
+            })
+        }
+    }
+});
+/**
+ * Created by Ak on 2/19/2015.
+ */
+
+
+/**
+ * Created by Ak on 2/19/2015.
+ */
+
+var app = angular.module('adminApp.services', []);
+
+app.factory('TicketServ', function ($resource, URLServ) {
+    return $resource('/resources/ticket/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+});
+
+app.factory('DeviceBrandsServ', function ($resource, URLServ) {
+    return $resource('/resources/device_makers/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+});
+
+
+app.factory('DevicesServ', function ($resource, URLServ) {
+    return $resource('/resources/devices/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+});
+
+
+app.factory('MailServ', function ($resource) {
+    return $resource('/resources/mail', null);//URLServ.getResourceUrlFor("ticket"));
+});
+
+
+app.factory('NetworksServ', function ($resource, URLServ) {
+    return $resource('/resources/networks/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+});
+
+
+app.factory('URLServ', function ($rootScope) {
+    return {
+        "getResourceUrlFor": function (name) {
+            return $rootScope.data.resources[name];
+        }
+    }
+});
+
+app.factory('GadgetEvaluationReward', function (NetworksServ) {
+    var reward = {result: ''};
+
+    function getBaseLinePrice(device) {
+        var baseLinePrice = 0;
+
+        angular.forEach(device, function (value, key) {
+            angular.forEach(value.base_line_prices, function (v, k) {
+                if (v.id == device.size) {
+                    baseLinePrice = parseInt(v.value);
+                }
+            });
+        });
+
+        return baseLinePrice;
+    }
+
+    function calculatePriceFromGrade(device, baseLinePrice) {
+        switch (device.grade) {
+            case 'A':
+                return (parseInt(device.brand.normal_condition) / 100) * baseLinePrice;
+            case 'B':
+                return (parseInt(device.brand.scratched_condition) / 100) * baseLinePrice;
+            case 'C':
+            default:
+                return (parseInt(device.brand.bad_condition) / 100) * baseLinePrice;
+        }
+    }
+
+    return {
+        "calculate": function (device) {
+            reward.result = calculatePriceFromGrade(device, getBaseLinePrice(device));
+            return reward.result;
+        },
+        "getLastReward": function () {
+            return reward.result;
+        },
+        fetchAirtelBonus: function () {
+            var network = NetworksServ.get({q: 'airtel'});
+            return network;
+        }
+    }
+});
+
+app.factory('GradeDeviceServ', function ($rootScope) {
+
+    var threshold = {
+        'A': 8.1,
+        'B': 5.85
+    };
+
+    function generateGradePoint(device) {
+        var result = {gradePoint: 0};
+
+        angular.forEach(device, function (value, key) {
+            if (value.rating != '') {
+                this.gradePoint += parseInt(value.rating) * value.weight;
+            }
+        }, result);
+
+        return result.gradePoint;
+    }
+
+    function generateGradeLetter(gradePoint) {
+        var value = parseFloat(gradePoint);
+
+        if (value >= threshold.A) {
+            return 'A';
+        } else if (value >= threshold.B) {
+            return 'B';
+        } else {
+            return 'C';
+        }
+    }
+
+    return {
+        "getGrade": function (device) {
+            var gradePoint = generateGradePoint(device);
+            return generateGradeLetter(gradePoint);
+        }
+    }
+});
+
+app.factory('PreloadTemplates', function ($templateCache, $http) {
+    var templates = [
+        "partials/ticket/menu.html",
+        "partials/networks/menu.html",
+        "partials/device_models/menu.html",
+        "partials/device_brands/menu.html",
+        "partials/ticket/dashboard.html",
+        "partials/networks/dashboard.html",
+        "partials/device_models/dashboard.html",
+        "partials/device_brands/dashboard.html",
+        "partials/ticket/add/base.html",
+        "partials/ticket/add/step-one.html",
+        "partials/ticket/add/step-two.html",
+        "partials/ticket/add/step-three.html",
+        "partials/ticket/add/final.html",
+        "partials/networks/add.html",
+        "partials/device_models/add.html",
+        "partials/device_brands/add.html",
+        "partials/networks/list.html",
+        "partials/device_models/list.html",
+        "partials/device_brands/list.html",
+        "partials/ticket/evaluation/evaluation.html",
+        "partials/ticket/evaluation/review.html",
+        "partials/ticket/evaluation/reward.html",
+        "partials/ticket/evaluation/terms.html",
+        "partials/ticket/done.html",
+        "partials/ticket/search.html"
+    ];
+    return {
+        run: function () {
+            templates.forEach(function (currentItem) {
+                $http.get(currentItem, {cache: $templateCache});
+            });
+        }
+    }
+});
+
+
+app.factory('ImageFetcher', function ($http, $q) {
+    var searchUrl = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAJ_8QtWECvWTcrukqvfLmRWdARJ2bI2rk&cx=011505858740112002603:dap5yb7naau&q=";
+
+    return {
+        fetch: function (query) {
+            var images = [];
+            var deferred = $q.defer();
+            $http.get(searchUrl + encodeURI(query)).then(function (response) {
+                console.log(response.data);
+                response.data.items.forEach(function (currentValue) {
+                    if (angular.isDefined(currentValue.pagemap)) {
+                        var temp = currentValue.pagemap.cse_image;//cse_thumbnail;
+                        if (angular.isDefined(temp) && angular.isArray(temp)) {
+                            temp.forEach(function (cValue) {
+                                images.push(cValue);
+//                                if (cValue.height > cValue.width) {
+//                                    images.push(cValue);
+//                                }
+                            });
+                        } else if (angular.isDefined(temp) && angular.isObject(temp)) {
+                            images.push(temp);
+                        }
+                    }
+                });
+                console.log(images);
+                deferred.resolve(images);
+            }, function (response) {
+                console.log(response);
+                deferred.reject(response);
+            });
+
+            return deferred.promise;
+        }
+    }
+
+});
