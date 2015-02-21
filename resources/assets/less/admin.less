@@ -151,10 +151,9 @@ body {
       border-radius: 0;
       transition: all 0.3s;
       position: relative;
-      border-left: 2px solid white;
     }
     .list-group-item:hover {
-      border-left: 2px solid red;
+      box-shadow: inset 2px 0px red;
     }
 
     .list-group-item:hover span {
@@ -171,7 +170,7 @@ body {
       color: inherit;
       border-top: 2px solid rgba(0,0,0,0.02);
       border-bottom: 2px solid rgba(0,0,0,0.02);
-      border-left: 2px solid red;
+      box-shadow: inset 2px 0px red;
       box-sizing: content-box;
       background-color: rgba(0,0,0,0.01);
 
@@ -274,7 +273,7 @@ img.img-responsive.inmate-pic {
 }
 
 .menu-item.inmate-item {
-  min-width: 310px;
+  min-width: 290px;
 }
 /* Have to set height explicity on ui-view
 to prevent collapsing during animation*/
@@ -282,9 +281,6 @@ to prevent collapsing during animation*/
   height: 65px;
 }
 
-.slide[ui-view]{
-  height: 65px;
-}
 
 .main-content-container {
   position: relative;

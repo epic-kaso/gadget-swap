@@ -1,7 +1,7 @@
 /**
  * Created by Ak on 2/19/2015.
  */
-var app = angular.module("AdminApp",['ui.router','ngAnimate','ngResource','angular-loading-bar']);
+var app = angular.module("AdminApp",['ui.router','ngAnimate','ngResource','angular-loading-bar','adminApp.directives']);
 
 app.config(['$urlRouterProvider','$stateProvider',
     function($urlRouterProvider,$stateProvider){
@@ -21,8 +21,12 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/menu',
                 templateUrl:'partials/device_models/menu.html',
-                controller: function ($rootScope) {
-                    $rootScope.hasHistory = false;
+                controller: function () {
+                },
+                resolve:{
+                    'hasHistory': function($rootScope){
+                        $rootScope.hasHistory = false;
+                    }
                 }
             }
         );
@@ -31,7 +35,13 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/add',
                 templateUrl:'partials/device_models/add.html',
+                resolve:{
+                    'hasHistory': function($rootScope){
+                        $rootScope.hasHistory = true;
+                    }
+                },
                 controller: function($scope,ImageFetcher){
+
                     $scope.sizes = [];
                     $scope.sizes_string = '';
                     $scope.baseLinePrice = {};
@@ -75,7 +85,13 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/list',
                 templateUrl:'partials/device_models/list.html',
+                resolve:{
+                    'hasHistory': function($rootScope){
+                        $rootScope.hasHistory = true;
+                    }
+                },
                 controller: function($scope,$http){
+
                     $scope.deleteItem = function(id){
                         var current = window.location.href,
                             url = window.location.origin +
@@ -106,8 +122,12 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/menu',
                 templateUrl: 'partials/device_brands/menu.html',
-                controller: function ($rootScope) {
-                    $rootScope.hasHistory = false;
+                controller: function () {
+                },
+                resolve:{
+                    'hasHistory': function($rootScope){
+                        $rootScope.hasHistory = false;
+                    }
                 }
             }
         );
@@ -116,8 +136,12 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/add',
                 templateUrl:'partials/device_brands/add.html',
-                controller: function($rootScope,$scope,ImageFetcher){
-                    $rootScope.hasHistory = true;
+                resolve:{
+                    'hasHistory': function($rootScope){
+                        $rootScope.hasHistory = true;
+                    }
+                },
+                controller: function($scope,ImageFetcher){
 
                     $scope.fetchImages = function(name){
                         var promise = ImageFetcher.fetch(name);
@@ -133,8 +157,12 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/list',
                 templateUrl:'partials/device_brands/list.html',
-                controller: function($rootScope, $scope,$http){
-                    $rootScope.hasHistory = false;
+                resolve:{
+                    'hasHistory': function($rootScope){
+                        $rootScope.hasHistory = true;
+                    }
+                },
+                controller: function($scope,$http){
 
                     $scope.deleteItem = function(id){
                         var current = window.location.href,
@@ -165,8 +193,12 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/menu',
                 templateUrl:'partials/networks/menu.html',
-                controller: function ($rootScope) {
-                    $rootScope.hasHistory = false;
+                controller: function () {
+                },
+                resolve:{
+                    'hasHistory': function($rootScope){
+                        $rootScope.hasHistory = false;
+                    }
                 }
             }
         );
@@ -175,7 +207,13 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/add',
                 templateUrl:'partials/networks/add.html',
+                resolve:{
+                    'hasHistory': function($rootScope){
+                        $rootScope.hasHistory = true;
+                    }
+                },
                 controller: function($scope,ImageFetcher){
+
                     $scope.fetchImages = function(name){
                         var promise = ImageFetcher.fetch(name);
                         promise.then(function(images){
@@ -190,7 +228,14 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/list',
                 templateUrl:'partials/networks/list.html',
+                resolve:{
+                    'hasHistory': function($rootScope){
+                        $rootScope.hasHistory = true;
+                    }
+                },
                 controller: function($scope,$http){
+
+
                     $scope.deleteItem = function(id){
                         var current = window.location.href,
                             url = window.location.origin +
@@ -220,8 +265,12 @@ app.config(['$urlRouterProvider','$stateProvider',
         {
             url: '/menu',
             templateUrl:'partials/ticket/menu.html',
-            controller: function ($rootScope) {
-                $rootScope.hasHistory = false;
+            controller: function () {
+            },
+            resolve:{
+                'hasHistory': function($rootScope){
+                    $rootScope.hasHistory = false;
+                }
             }
         }
     );
@@ -238,6 +287,9 @@ app.config(['$urlRouterProvider','$stateProvider',
             resolve: {
                 'result': function($stateParams,$http){
                     return $http.get('/search',{q: $stateParams.q});
+                },
+                'hasHistory': function($rootScope){
+                    $rootScope.hasHistory = true;
                 }
             }
         }
