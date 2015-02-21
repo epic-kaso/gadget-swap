@@ -251,17 +251,17 @@ app.config(['$urlRouterProvider','$stateProvider',
             }
         );
 
-    $stateProvider.state('inmates',
+    $stateProvider.state('ticket',
         {
-            url: '/inmates',
+            url: '/ticket',
             templateUrl:'partials/ticket/dashboard.html',
             controller: function($state){
-                $state.go('inmates.menu');
+                $state.go('ticket.menu');
             }
         }
     );
 
-    $stateProvider.state('inmates.menu',
+    $stateProvider.state('ticket.menu',
         {
             url: '/menu',
             templateUrl:'partials/ticket/menu.html',
@@ -275,7 +275,24 @@ app.config(['$urlRouterProvider','$stateProvider',
         }
     );
 
-    $stateProvider.state('inmates.search',
+        $stateProvider.state('ticket.add',
+            {
+                url: '/add/{step}',
+                templateUrl: function($stateParams){
+                    var step = $stateParams.step || 'step-one';
+                    return 'partials/ticket/add/'+step+'.html';
+                },
+                controller: function () {
+                },
+                resolve:{
+                    'hasHistory': function($rootScope){
+                        $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
+
+    $stateProvider.state('ticket.search',
         {
             url: '/search?q',
             templateUrl:'partials/ticket/search.html',
@@ -305,7 +322,7 @@ app.config(['$urlRouterProvider','$stateProvider',
     );
 
 
-    $urlRouterProvider.otherwise('/inmates/menu');
+    $urlRouterProvider.otherwise('/ticket/menu');
 }]);
 
 app.config(function($httpProvider){

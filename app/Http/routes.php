@@ -28,4 +28,5 @@ Route::group(['prefix' => 'resources','namespace' => 'Resources'],function(){
     Route::resource('device_makers','DeviceMakerController');
     Route::resource('networks','NetworkController');
     Route::resource('swap_user','SwapUsersController');
+    Route::resource('ticket','GadgetSwapTicketController');
 });
