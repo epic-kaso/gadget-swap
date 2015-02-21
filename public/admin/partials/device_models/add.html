@@ -52,6 +52,12 @@
                       ng-model="baseLinePriceString" class="form-control inmate-search-box"></textarea>
         </div>
 
+        <div class="form-group">
+            <label for="logo">Logo Url:</label>
+            <input type="text" id="logo" name="device_image_url" ng-model="logoUrl" placeholder="Logo Url"
+                   class="form-control inmate-search-box">
+        </div>
+
         <div class="panel panel-default" ng-if="images.length > 0">
             <div class="panel-heading">
                 <label>Select image to use as logo (please choose a portrait) </label>
@@ -62,7 +68,7 @@
                         <label>
                             <img class="img-thumbnail img-responsive" ng-src="{{ image.src }}"
                                  style="height: {{ image.height || '150' }}px"/>
-                            <input type="radio" name="device_image_url" value="{{ image.src }}"/>
+                            <input type="radio" name="device_image_url" ng-model="logoUrl" value="{{ image.src }}"/>
                         </label>
                     </div>
                 </div>
