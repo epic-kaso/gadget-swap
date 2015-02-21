@@ -1,0 +1,41 @@
+<div>
+    <form action="{{ route('resources.device_makers.store') }}" method="post">
+        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>"/>
+        <div class="col-md-6">
+            <div  class="form-group">
+                <input type="text" name="name" placeholder="Make" ng-blur="fetchImages(device_maker + ' logo')" ng-model="device_maker"   class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label for="scratched-condition">Normal Condition Value (%):</label>
+                <input type="text" value="100" id="scratched-condition" name="normal_condition" placeholder="%" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="scratched-condition">Scratched Condition Value (%):</label>
+                <input type="text" id="scratched-condition" name="scratched_condition" placeholder="%" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="bad-condition">Bad Condition Value (%):</label>
+                <input type="text" id="bad-condition" name="bad_condition" placeholder="%" class="form-control">
+            </div>
+
+            <div class="panel panel-default" ng-if="images.length > 0">
+                <div class="panel-heading">
+                    <label>Select image to use as logo (please choose a portrait) </label>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="image-item" ng-repeat="image in images">
+                            <label>
+                                <img class="img-thumbnail img-responsive" ng-src="{| image.src |}" style="height: {| image.height || '150' |}px" />
+                                <input type="radio" name="logo_url" value="{| image.src |}" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  class="form-group">
+                <input type="submit" value="Submit"  class="btn"/>
+            </div>
+        </div>
+    </form>
+</div>

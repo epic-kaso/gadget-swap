@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>Network providers</h2>
+    </div>
+    <table class="table table-striped">
+        <tbody>
+        <?php if(isset($networks)){
+                $index = 0;
+                foreach($networks as $value){
+                    $index++;
+                    ?>
+        <tr>
+            <td>{{ $index }}</td>
+            <td>
+                <h4>{{ $value->name }}</h4>
+                <p>
+                    {{ $value->description }}
+                </p>
+            </td>
+            <td>
+                <a ng-click="deleteItem({{ $value->id }})" class="btn btn-xs btn-danger">Delete</a>
+            </td>
+        </tr>
+        <?php
+                }
+            } ?>
+        </tbody>
+    </table>
+</div>

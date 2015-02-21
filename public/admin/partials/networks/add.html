@@ -1,0 +1,34 @@
+<div>
+    <form action="{{ route('resources.networks.store') }}" method="post">
+        <input type="hidden" name="_token" value="<?php echo csrf_token() ?>"/>
+        <div class="col-md-6">
+            <div  class="form-group">
+                <label>Network Name</label>
+                <input type="text" name="name" placeholder="e.g Mtn Ng" ng-blur="fetchImages(network_name + ' logo nigeria')" ng-model="network_name" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label>Bonus Information</label>
+                <textarea class="form-control" name="description" placeholder="Get Extra 1 Gigabyte of data"></textarea>
+            </div>
+
+            <div class="panel panel-default" ng-if="images.length > 0">
+                <div class="panel-heading">
+                    <label>Select image to use as logo (please choose a portrait) </label>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="image-item" ng-repeat="image in images">
+                            <label>
+                                <img class="img-thumbnail img-responsive" ng-src="{| image.src |}" style="height: {| image.height || '150' |}px" />
+                                <input type="radio" name="logo_url" value="{| image.src |}" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  class="form-group">
+                <input type="submit" value="Submit"  class="btn"/>
+            </div>
+        </div>
+    </form>
+</div>

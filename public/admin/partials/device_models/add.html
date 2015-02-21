@@ -1,0 +1,70 @@
+<div>
+    <form>
+        <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}"/>
+        <div  class="form-group">
+            <label>Select Device Make</label>
+            <select class="form-control" name="gadget_maker_id" ng-model="device_make_name">
+                <option value="{{ model.id }}" ng-repeat="model in models">{{ model.name }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Provide Device Model</label>
+            <input type="text" placeholder="e.g Galaxy S5" ng-blur="fetchImages(device_make_name + ' ' +device_model_name)" ng-model="device_model_name" name="model" class="form-control"/>
+        </div>
+
+        <div  class="form-group">
+            <label>Add Memory Sizes</label>
+            <div class="input-group size-info">
+                <input type="text" name="device-size" ng-model="device_size" class="form-control" placeholder="e.g 16gb">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" ng-click="addToSizes(device_size)">Add</button>
+                    </span>
+            </div>
+            <ul class="size-info list-group" ng-if="sizes.length > 0">
+                <li class="size-info list-group-item" ng-repeat="size in sizes"><span ng-bind="size"></span> <span class="btn pull-right btn-xs btn-danger" ng-click="removeSize($index)">X</span></li>
+            </ul>
+
+            <textarea style="display: none" name="sizes" ng-model="sizes_string" placeholder="Sizes, seperate each with a comma" class="form-control"></textarea>
+        </div>
+
+        <div  class="form-group">
+            <label ng-if="sizes.length > 0">Provide Device BaseLine Price</label>
+            <table class="size-info table" ng-if="sizes.length > 0">
+                <tr class="size-info" ng-repeat="size in sizes">
+                    <td colspan="2"><span ng-bind="size"></span></td>
+                    <td>
+                        <input type="number"
+                               name="base_line_price"
+                               ng-change="updateBaseLineString()"
+                               ng-model="baseLinePrice[size]"
+                               ng-blur="updateBaseLineString()"
+                               class="form-control"
+                               placeholder="e.g 20000">
+                    </td>
+                </tr>
+            </table>
+            <textarea name="baselines" style="display: none;" placeholder="baseline price eg 16gb: 10000,32gb: 20000" ng-model="baseLinePriceString" class="form-control"></textarea>
+        </div>
+
+        <div class="panel panel-default" ng-if="images.length > 0">
+            <div class="panel-heading">
+                <label>Select image to use as logo (please choose a portrait) </label>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="image-item" ng-repeat="image in images">
+                        <label>
+                            <img class="img-thumbnail img-responsive" ng-src="{| image.src |}" style="height: {| image.height || '150' |}px" />
+                            <input type="radio" name="device_image_url" value="{| image.src |}" />
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div  class="form-group">
+            <input type="submit" value="Submit" class="btn"/>
+        </div>
+    </form>
+</div>

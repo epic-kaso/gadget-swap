@@ -42,7 +42,9 @@ class DashboardController extends Controller {
                 'devices' => $neededGadgets,
                 'networks' => $networks
             );
-            return view('server.dashboard',$data);
+//            return view('server.dashboard',$data);
+
+            return view('admin.dashboard');
         }
     }
 

@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>Devices</h2>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Make</td>
+            <td>Model</td>
+            <td>Sizes</td>
+            <td>Colors</td>
+            <td>Baseline Price</td>
+            <td>Conditions</td>
+        </tr>
+        </thead>
+        <tbody>
+        @if(isset($devices))
+        @foreach($devices as $value)
+        <tr>
+            <td>{{ $value->gadget_maker->name }}</td>
+            <td>{{ $value->model }}</td>
+            <td>
+                <ul class="list-unstyled">
+                    @foreach($value->sizes as $s)
+                    <li> {{ $s->value }}</li>
+                    @endforeach
+                </ul>
+            </td>
+            <td>
+                <ul class="list-unstyled">
+                    @foreach($value->colors as $s)
+                    <li> {{ $s->value }}</li>
+                    @endforeach
+                </ul>
+            </td>
+            <td>
+                <ul class="list-unstyled">
+                    @foreach($value->base_line_prices as $s)
+                    <li>{{ $s->size }}: N{{ $s->value }}</li>
+                    @endforeach
+                </ul>
+            </td>
+            <td>
+                <ul class="list-unstyled">
+                    <li>Normal - {{ $value->gadget_maker->normal_condition }}%</li>
+                    <li>Faulty - {{ $value->gadget_maker->scratched_condition }}%</li>
+                    <li>Bad - {{ $value->gadget_maker->bad_condition }}%</li>
+                </ul>
+            </td>
+            <td>
+                <a ng-click="deleteItem({{ $value->id }})" class="btn btn-xs btn-danger">Delete</a>
+            </td>
+        </tr>
+        @endforeach
+        @endif
+        </tbody>
+    </table>
+</div>
