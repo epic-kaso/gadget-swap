@@ -529,17 +529,24 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/reward/{id}',
                 templateUrl: 'partials/ticket/evaluation/reward.html',
-                controller: function ($scope, Ticket, Airtel) {
+                controller: function ($scope, Ticket, TicketServ, Airtel, $state) {
                     $scope.reward = Ticket.reward;
                     $scope.ticket = Ticket;
                     $scope.airtel = Airtel;
 
                     $scope.goHome = function () {
                         $state.go('ticket.menu');
-                    }
+                    };
 
                     $scope.next = function () {
+                        updateTicket();
                         $state.go('ticket.accept-terms', {id: Ticket.id});
+                    };
+
+                    function updateTicket() {
+                        Ticket.port_to_airtel = $scope.portToAirtel;
+
+                        TicketServ.update({id: Ticket.id}, Ticket);
                     }
                 },
                 resolve: {
@@ -556,6 +563,20 @@ app.config(['$urlRouterProvider','$stateProvider',
             }
         );
 
+        $stateProvider.state('ticket.accept-terms',
+            {
+                url: '/accept-terms',
+                templateUrl: 'partials/ticket/evaluation/terms.html',
+                controller: function ($scope) {
+
+                },
+                resolve: {
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
 
         $stateProvider.state('ticket.search',
         {

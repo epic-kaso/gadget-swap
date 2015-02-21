@@ -47,4 +47,20 @@ class GadgetSwapTicket extends BaseModel {
 
         return is_null($item) ? false : true;
     }
+
+    public function size()
+    {
+        return $this->hasOne('SupergeeksGadgetSwap\Size');
+    }
+
+    public function gadget()
+    {
+        return $this->hasOne('SupergeeksGadgetSwap\Gadget');
+    }
+
+    public function network()
+    {
+        return $this->hasMany('SupergeeksGadgetSwap\Network');
+    }
+
 }

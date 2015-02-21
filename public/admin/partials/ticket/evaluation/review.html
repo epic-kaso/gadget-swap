@@ -1,0 +1,69 @@
+<div>
+    <h4>User Details</h4>
+    <hr/>
+    <table>
+        <tr>
+            <td>Last Name</td>
+            <td>{{ ticket.customer_last_name }}</td>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td>{{ ticket.customer_first_name }}</td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>{{ ticket.customer_email }}</td>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <td>{{ ticket.customer_phone }}</td>
+        </tr>
+    </table>
+
+    <h4>Gadget Details</h4>
+    <hr/>
+    <table>
+        <tr>
+            <td>Make</td>
+            <td>{{ ticket.gadget.gadget_maker.name }}</td>
+        </tr>
+        <tr>
+            <td>Model</td>
+            <td>{{ ticket.gadget.model }}</td>
+        </tr>
+
+        <tr>
+            <td>IMEI Number</td>
+            <td>{{ ticket.customer_device_imei }}</td>
+        </tr>
+
+        <tr>
+            <td>Size</td>
+            <td>{{ ticket.size.value }}</td>
+        </tr>
+        <tr>
+            <td>Grade</td>
+            <td>{{ ticket.gadget_grade }}</td>
+        </tr>
+    </table>
+
+    <h4>Swap Benefits</h4>
+    <hr/>
+    <table>
+        <tr>
+            <td>Reward</td>
+            <td>{{ ticket.reward }}</td>
+        </tr>
+        <tr>
+            <td>Bonus</td>
+            <td>{{ ticket.network.description }}</td>
+        </tr>
+
+        <tr>
+            <td>Port To Airtel</td>
+            <td>{{ ticket.port_to_airtel ? 'Yes' : 'No' }}</td>
+        </tr>
+    </table>
+
+
+</div>

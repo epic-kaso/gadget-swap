@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div>
+        <div ng-if="ticket.network_id != airtel.id ">
             <h3>Extra Bonus</h3>
             <hr/>
             <p>Port to Airtel Now to Enjoy this bonus</p>
@@ -23,9 +23,9 @@
 
             <h2>
                 I wish to Port to <strong>Airtel</strong>
-                <button type="button" ng-init="singleModel = true " class="btn btn-default"
+                <button type="button" ng-init="portToAirtel = true " class="btn btn-default"
                         ng-model="singleModel" btn-checkbox btn-checkbox-true="Yes" btn-checkbox-false="No">
-                    {{ singleModel }}
+                    {{ portToAirtel }}
                 </button>
             </h2>
 
@@ -33,10 +33,10 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <button ng-cick="next()" class="btn btn-success btn-block btn-base">Accepts Offer</button>
+                <button ng-click="next()" class="btn btn-success btn-block btn-base">Accepts Offer</button>
             </div>
             <div class="col-sm-6">
-                <button ng-cick="goHome()" class="btn btn-danger btn-base btn-block">Rejects Offer</button>
+                <button ng-click="goHome()" class="btn btn-danger btn-base btn-block">Rejects Offer</button>
             </div>
         </div>
     </div>

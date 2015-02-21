@@ -20,9 +20,9 @@ class GadgetSwapTicketController extends Controller
 
         if (is_null($limit)) {
 
-            return GadgetSwapTicket::all();
+            return GadgetSwapTicket::with('gadget.gadget_maker', 'size', 'network')->get();
         } else {
-            return GadgetSwapTicket::take($limit)->latest()->get();
+            return GadgetSwapTicket::with('gadget.gadget_maker', 'size', 'network')->take($limit)->latest()->get();
         }
     }
 
@@ -66,7 +66,7 @@ class GadgetSwapTicketController extends Controller
      */
     public function show($id)
     {
-        return GadgetSwapTicket::find($id);
+        return GadgetSwapTicket::with('gadget.gadget_maker', 'size', 'network')->find($id);
     }
 
     /**

@@ -18,6 +18,7 @@ class AddDeviceColumsGradeToSwapCustomer extends Migration
             $table->integer('size_id');
             $table->integer('network_id');
             $table->text('reward');
+            $table->boolean('port_to_airtel')->default(false);
 
         });
     }
@@ -30,7 +31,7 @@ class AddDeviceColumsGradeToSwapCustomer extends Migration
     public function down()
     {
         Schema::table('gadget_swap_tickets', function (Blueprint $table) {
-            $table->dropColumn(['gadget_id', 'size_id', 'network_id', 'reward']);
+            $table->dropColumn(['gadget_id', 'size_id', 'network_id', 'reward', 'port_to_airtel']);
         });
     }
 
