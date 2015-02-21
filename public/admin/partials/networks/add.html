@@ -4,11 +4,14 @@
         <div class="col-md-6">
             <div  class="form-group">
                 <label>Network Name</label>
-                <input type="text" name="name" placeholder="e.g Mtn Ng" ng-blur="fetchImages(network_name + ' logo nigeria')" ng-model="network_name" class="form-control"/>
+                <input type="text" name="name" placeholder="e.g Mtn Ng"
+                       ng-blur="fetchImages(network_name + ' logo nigeria')" ng-model="network_name"
+                       class="form-control inmate-search-box"/>
             </div>
             <div class="form-group">
                 <label>Bonus Information</label>
-                <textarea class="form-control" name="description" placeholder="Get Extra 1 Gigabyte of data"></textarea>
+                <textarea class="form-control inmate-search-box" name="description"
+                          placeholder="Get Extra 1 Gigabyte of data"></textarea>
             </div>
 
             <div class="panel panel-default" ng-if="images.length > 0">

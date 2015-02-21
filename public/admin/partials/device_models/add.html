@@ -3,20 +3,23 @@
         <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}"/>
         <div  class="form-group">
             <label>Select Device Make</label>
-            <select class="form-control" name="gadget_maker_id" ng-model="device_make_name">
+            <select class="form-control inmate-search-box" name="gadget_maker_id" ng-model="device_make_name">
                 <option selected value="{{ model.id }}" ng-repeat="model in models">{{ model.name }}</option>
             </select>
         </div>
 
         <div class="form-group">
             <label>Provide Device Model</label>
-            <input type="text" placeholder="e.g Galaxy S5" ng-blur="fetchImages(device_make_name + ' ' +device_model_name)" ng-model="device_model_name" name="model" class="form-control"/>
+            <input type="text" placeholder="e.g Galaxy S5"
+                   ng-blur="fetchImages(device_make_name + ' ' +device_model_name)" ng-model="device_model_name"
+                   name="model" class="form-control inmate-search-box"/>
         </div>
 
         <div  class="form-group">
             <label>Add Memory Sizes</label>
             <div class="input-group size-info">
-                <input type="text" name="device-size" ng-model="device_size" class="form-control" placeholder="e.g 16gb">
+                <input type="text" name="device-size" ng-model="device_size" class="form-control inmate-search-box"
+                       placeholder="e.g 16gb">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button" ng-click="addToSizes(device_size)">Add</button>
                     </span>
@@ -25,7 +28,8 @@
                 <li class="size-info list-group-item" ng-repeat="size in sizes"><span ng-bind="size"></span> <span class="btn pull-right btn-xs btn-danger" ng-click="removeSize($index)">X</span></li>
             </ul>
 
-            <textarea style="display: none" name="sizes" ng-model="sizes_string" placeholder="Sizes, seperate each with a comma" class="form-control"></textarea>
+            <textarea style="display: none" name="sizes" ng-model="sizes_string"
+                      placeholder="Sizes, seperate each with a comma" class="form-control inmate-search-box"></textarea>
         </div>
 
         <div  class="form-group">
@@ -39,12 +43,13 @@
                                ng-change="updateBaseLineString()"
                                ng-model="baseLinePrice[size]"
                                ng-blur="updateBaseLineString()"
-                               class="form-control"
+                               class="form-control inmate-search-box"
                                placeholder="e.g 20000">
                     </td>
                 </tr>
             </table>
-            <textarea name="baselines" style="display: none;" placeholder="baseline price eg 16gb: 10000,32gb: 20000" ng-model="baseLinePriceString" class="form-control"></textarea>
+            <textarea name="baselines" style="display: none;" placeholder="baseline price eg 16gb: 10000,32gb: 20000"
+                      ng-model="baseLinePriceString" class="form-control inmate-search-box"></textarea>
         </div>
 
         <div class="panel panel-default" ng-if="images.length > 0">
