@@ -1,7 +1,8 @@
 <div>
     <form action="/resources/device_makers" method="post">
         <input type="hidden" name="_token" value="{{ CSRF_TOKEN }}"/>
-        <div class="col-md-6">
+
+        <div class="col-md-12">
             <div  class="form-group">
                 <input type="text" name="name" placeholder="Make" ng-blur="fetchImages(device_maker + ' logo')"
                        ng-model="device_maker" class="form-control inmate-search-box"/>
