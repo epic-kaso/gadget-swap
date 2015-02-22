@@ -431,8 +431,8 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/final/{id}/{grade}',
                 templateUrl: 'partials/ticket/add/final.html',
-                controller: function ($scope, Ticket, $state, grade) {
-                    $scope.grade = Ticket.device_grade;
+                controller: function ($scope, Ticket, $state, $stateParams) {
+                    $scope.grade = $stateParams.grade || Ticket.device_grade;
 
                     $scope.next = function () {
                         $state.go('ticket.evaluate', {'id': Ticket.id});
@@ -444,9 +444,6 @@ app.config(['$urlRouterProvider','$stateProvider',
                     },
                     'Ticket': function (TicketServ, $state, $stateParams) {
                         return TicketServ.get({id: $stateParams.id});
-                    },
-                    'grade': function ($stateParams) {
-                        return $stateParams.grade;
                     }
                 }
             }
