@@ -465,7 +465,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                     $scope.grade = $stateParams.grade || Ticket.device_grade;
 
                     $scope.next = function () {
-                        $state.go('ticket.evaluate', {'id': Ticket.id});
+                        $state.go('ticket.evaluate', {'id': Ticket.id, 'grade': $scope.grade});
                     }
                 },
                 resolve: {
@@ -529,7 +529,7 @@ app.config(['$urlRouterProvider','$stateProvider',
 
                 $scope.goHome = function () {
                     $state.go('ticket.menu');
-                }
+                };
 
                 function updateTicket(selected, reward) {
                     Ticket.gadget_id = selected.device.id;
