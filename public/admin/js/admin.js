@@ -1,1 +1,1066 @@
-var app=angular.module("AdminApp",["ui.select","ngSanitize","ui.bootstrap","ui.router","ngAnimate","ngResource","angular-loading-bar","adminApp.directives","adminApp.services","ngCookies"]);app.config(["$urlRouterProvider","$stateProvider",function(e,t){t.state("devices",{url:"/devices","abstract":!0,templateUrl:"partials/device_models/dashboard.html",controller:function(){},resolve:{active:["$rootScope",function(e){e.active_nav="devices"}]}}),t.state("devices.search",{url:"/search?q",templateUrl:"partials/device_models/search.html",controller:["$scope","result","$stateParams",function(e,t,r){console.log(t),e.result=t,e.search=r.q}],resolve:{result:["$stateParams","DevicesServ",function(e,t){return t.query({q:e.q})}],hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("devices.menu",{url:"/menu",templateUrl:"partials/device_models/menu.html",controller:function(){},resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("devices.add",{url:"/add",templateUrl:"partials/device_models/add.html",resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}],DeviceBrands:["DeviceBrandsServ",function(e){return e.query({only:!0})}]},controller:["$scope","ImageFetcher","DeviceBrands",function(e,t,r){function a(){e.sizes_string=e.sizes.join()}e.models=r,e.sizes=[],e.sizes_string="",e.baseLinePrice={},e.baseLinePriceString="",e.images=[],e.fetchImages=function(r){var a=t.fetch(r);a.then(function(t){e.images=t})},e.addToSizes=function(t){e.sizes.push(t),e.device_size=null,a()},e.removeSize=function(t){e.sizes.splice(t,1),a()},e.updateBaseLineString=function(){var t=[];angular.forEach(e.baseLinePrice,function(e,r){t.push(""+r+": "+e)}),e.baseLinePriceString=t.join()}}]}),t.state("devices.list",{url:"/list",templateUrl:"partials/device_models/list.html",resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}],Devices:["DevicesServ",function(e){return e.query({})}]},controller:["$scope","DevicesServ","Devices",function(e,t,r){e.models=r,e.deleteItem=function(e){t["delete"]({id:e},function(){location.reload()},function(e){alert(e)})}}]}),t.state("device_brands",{url:"/device_brands","abstract":!0,templateUrl:"partials/device_brands/dashboard.html",controller:function(){},resolve:{active:["$rootScope",function(e){e.active_nav="device_brands"}]}}),t.state("device_brands.search",{url:"/search?q",templateUrl:"partials/device_brands/search.html",controller:["$scope","result","$stateParams",function(e,t,r){console.log(t),e.result=t,e.search=r.q}],resolve:{result:["$stateParams","DeviceBrandsServ",function(e,t){return t.query({q:e.q})}],hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("device_brands.menu",{url:"/menu",templateUrl:"partials/device_brands/menu.html",controller:function(){},resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("device_brands.add",{url:"/add",templateUrl:"partials/device_brands/add.html",resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}]},controller:["$scope","ImageFetcher",function(e,t){e.fetchImages=function(r){var a=t.fetch(r);a.then(function(t){e.images=t})}}]}),t.state("device_brands.list",{url:"/list",templateUrl:"partials/device_brands/list.html",resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}],DeviceBrands:["DeviceBrandsServ",function(e){return e.query({only:!0})}]},controller:["$scope","DeviceBrandsServ","DeviceBrands",function(e,t,r){e.brands=r,e.deleteItem=function(e){t["delete"]({id:e},function(){location.reload()},function(e){alert(e)})}}]}),t.state("networks",{url:"/networks","abstract":!0,templateUrl:"partials/networks/dashboard.html",controller:function(){},resolve:{active:["$rootScope",function(e){e.active_nav="networks"}]}}),t.state("networks.search",{url:"/search?q",templateUrl:"partials/networks/search.html",controller:["$scope","result","$stateParams",function(e,t,r){console.log(t),e.result=t,e.search=r.q}],resolve:{result:["$stateParams","NetworksServ",function(e,t){return t.query({q:e.q})}],hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("networks.menu",{url:"/menu",templateUrl:"partials/networks/menu.html",controller:function(){},resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("networks.add",{url:"/add",templateUrl:"partials/networks/add.html",resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}]},controller:["$scope","ImageFetcher",function(e,t){e.fetchImages=function(r){var a=t.fetch(r);a.then(function(t){e.images=t})}}]}),t.state("networks.list",{url:"/list",templateUrl:"partials/networks/list.html",resolve:{Networks:["NetworksServ",function(e){return e.query({})}],hasHistory:["$rootScope",function(e){e.hasHistory=!0}]},controller:["$scope","Networks","NetworksServ",function(e,t,r){e.networks=t,e.deleteItem=function(e){r["delete"]({id:e},function(){location.reload()},function(e){alert(e)})}}]}),t.state("ticket",{url:"/ticket","abstract":!0,templateUrl:"partials/ticket/dashboard.html",controller:function(){},resolve:{active:["$rootScope",function(e){e.active_nav="ticket"}]}}),t.state("ticket.menu",{url:"/menu",templateUrl:"partials/ticket/menu.html",controller:["$scope","Tickets",function(e,t){e.tickets=t}],resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}],Tickets:["TicketServ",function(e){return e.query({limit:6})}]}}),t.state("ticket.list",{url:"/list",templateUrl:"partials/ticket/list.html",controller:["$scope","Tickets","TicketServ",function(e,t,r){e.tickets=t,e.deleteItem=function(e){r["delete"]({id:e},function(){location.reload()},function(e){alert(e)})}}],resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}],Tickets:["TicketServ",function(e){return e.query()}]}}),t.state("ticket.add",{url:"/add",templateUrl:"partials/ticket/add/base.html",controller:function(){},resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("ticket.add.stepOne",{url:"/step-one",templateUrl:"partials/ticket/add/step-one.html",controller:["$scope","TicketServ","$state",function(e,t,r){function a(e){r.go("ticket.add.stepTwo",{id:e})}e.createTicket=function(e){t.save(e,function(e){a(e.id),console.log(e)},function(e){alert("failed"),console.log(e)})}}],resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("ticket.add.stepTwo",{url:"/step-two/{id}",templateUrl:"partials/ticket/add/step-two.html",controller:["$scope","Ticket","$state",function(e,t,r){function a(e){var t={ready:!0};return angular.forEach(e,function(e){"no"==e&&(this.ready=!1)},t),t.ready}function o(t){e.activeNextButton=t,e.message=t?"Ok, proceed.":"Sorry, Device doesn't Qualify to Continue"}e.test={deviceBoot:"",callUnlock:"",wirelessConnection:"",icloudConnection:""},e.activeNextButton=!1,e.$watch("test",function(e){console.log("test change"),console.log(e);var t=a(e);o(t)},!0),e.next=function(){r.go("ticket.add.stepThree",{id:t.id})}}],resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}],Ticket:["$state","$stateParams",function(e,t){return{id:t.id}}]}}),t.state("ticket.add.stepThree",{url:"/step-three/{id}",templateUrl:"partials/ticket/add/step-three.html",controller:["$scope","GradeDeviceServ","$state","Ticket","TicketServ",function(e,t,r,a,o){e.test={touchScreen:{rating:"",weight:.625},lcdScreen:{rating:"",weight:.625},deviceCasing:{rating:"",weight:.625},deviceKeypad:{rating:"",weight:.25},deviceCamera:{rating:"",weight:.25},deviceEarPiece:{rating:"",weight:.125},deviceSpeaker:{rating:"",weight:.125},deviceEarphoneJack:{rating:"",weight:.125},deviceChargingPort:{rating:"",weight:.25}},e.$watch("test",function(r){console.log("test change"),console.log(r),e.grade=t.getGrade(r),console.log("Grade:"+e.grade)},!0),e.next=function(){a.device_grade=e.grade,o.update({id:a.id},a),r.go("ticket.add.final",{id:a.id,grade:e.grade})}}],resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}],Ticket:["TicketServ","$state","$stateParams",function(e,t,r){return e.get({id:r.id})}]}}),t.state("ticket.add.final",{url:"/final/{id}/{grade}",templateUrl:"partials/ticket/add/final.html",controller:["$scope","Ticket","$state","$stateParams",function(e,t,r,a){e.grade=a.grade||t.device_grade,e.next=function(){r.go("ticket.evaluate",{id:t.id,grade:e.grade})}}],resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}],Ticket:["TicketServ","$state","$stateParams",function(e,t,r){return e.get({id:r.id})}]}}),t.state("ticket.evaluate",{url:"/evaluate/{id}/{grade}",templateUrl:"partials/ticket/evaluation/evaluation.html",controller:["$scope","$stateParams","$filter"," Networks","Ticket","TicketServ","DeviceBrandsServ","GadgetEvaluationReward","$state",function(e,t,r,a,o,i,n,s,c){function l(e,t){o.gadget_id=e.device.id,o.size_id=e.size,o.network_id=e.network,o.reward=t,i.update({id:o.id},o)}e.ticket=o,e.selected={grade:t.grade||o.device_grade},e.networks=a,e.clear=function(){e.person.selected=void 0,e.address.selected=void 0,e.country.selected=void 0},e.brand={},e.refreshBrands=function(t){n.query({},function(t){console.log(t),e.device_brands=t})},e.device={},e.refreshDevices=function(t){e.devices=r("filter")(e.brand.selected.gadgets,{model:t})},e.$watch("brand.selected",function(t){console.log("brand changed"),e.selected.brand=t}),e.$watch("device.selected",function(t){console.log("device changed"),e.selected.device=t}),e.next=function(){var t=s.calculate(e.selected);l(e.selected,t),c.go("ticket.reward",{id:o.id})},e.goHome=function(){c.go("ticket.menu")}}],resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}],Ticket:["TicketServ","$state","$stateParams",function(e,t,r){return e.get({id:r.id})}],Networks:["NetworksServ",function(e){return e.query({})}]}}),t.state("ticket.reward",{url:"/reward/{id}",templateUrl:"partials/ticket/evaluation/reward.html",controller:["$scope","Ticket","TicketServ","GadgetEvaluationReward","Airtel","$state",function(e,t,r,a,o,i){function n(){t.port_to_airtel=e.portToAirtel,r.update({id:t.id},t)}e.reward=a.getLastReward(),e.ticket=t,e.airtel=o,e.goHome=function(){i.go("ticket.menu")},e.next=function(){n(),i.go("ticket.accept-terms",{id:t.id})}}],resolve:{Airtel:["GadgetEvaluationReward",function(e){return e.fetchAirtelBonus()}],hasHistory:["$rootScope",function(e){e.hasHistory=!0}],Ticket:["TicketServ","$state","$stateParams",function(e,t,r){return e.get({id:r.id})}]}}),t.state("ticket.accept-terms",{url:"/accept-terms/{id}",templateUrl:"partials/ticket/evaluation/terms.html",controller:["$scope","$stateParams","$state",function(e,t,r){e.next=function(){r.go("ticket.review-ticket",{id:t.id})}}],resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("ticket.review-ticket",{url:"/review/{id}",templateUrl:"partials/ticket/evaluation/review.html",controller:["$scope","Ticket","TicketServ","$state","MailServ",function(e,t,r,a,o){e.ticket=t,e.next=function(){t.discount_voucher_code=e.ticket.discount_voucher_code,r.update({id:t.id},t),o.save({ticket_id:t.id},function(e){console.log(e)}),a.go("ticket.all-done")}}],resolve:{Ticket:["TicketServ","$state","$stateParams",function(e,t,r){return e.get({id:r.id})}],hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("ticket.all-done",{url:"/done",templateUrl:"partials/ticket/done.html",controller:function(){},resolve:{hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("ticket.search",{url:"/search?q",templateUrl:"partials/ticket/search.html",controller:["$scope","result","$stateParams",function(e,t,r){console.log(t),e.result=t,e.search=r.q}],resolve:{result:["$stateParams","TicketServ",function(e,t){return t.query({q:e.q})}],hasHistory:["$rootScope",function(e){e.hasHistory=!0}]}}),t.state("config",{url:"/config",templateUrl:"partials/config/form.html",controller:function(){},resolve:{active:["$rootScope",function(e){e.active_nav="config"}]}}),e.otherwise("/ticket/menu")}]),app.config(["$httpProvider",function(e){var t=["$rootScope","$location","$q",function(e,t,r){var a=function(e){return e},o=function(e){return(e.status=401)&&(delete sessionStorage.authenticated,location.href=t.host()+"/auth/login"),r.reject(e)};return function(e){return e.then(a,o)}}];e.interceptors.push(t)}]),app.factory("sessionInjector",[function(){var e={request:function(e){return e.headers["X-Requested-With"]="XMLHttpRequest",e}};return e}]),app.config(["$httpProvider",function(e){e.interceptors.push("sessionInjector")}]),app.run(["$http","$rootScope","CSRF_TOKEN","PreloadTemplates",function(e,t,r,a){a.run(),t.CSRF_TOKEN=r,e.defaults.headers.common.csrf_token=r}]);var app=angular.module("adminApp.directives",[]);app.directive("backButton",function(){return{restrict:"EA",template:'<a class="btn base-resize search-btn back-btn" href=""><span class="fa fa-chevron-left"></span></a>',link:function(e,t){t.click(function(e){window.history.back(),e.preventDefault()})}}});var app=angular.module("adminApp.services",[]);app.factory("TicketServ",["$resource","URLServ",function(e){return e("/resources/ticket/:id",{id:"@id"},{update:{method:"PUT"}})}]),app.factory("DeviceBrandsServ",["$resource","URLServ",function(e){return e("/resources/device_makers/:id",{id:"@id"},{update:{method:"PUT"}})}]),app.factory("DevicesServ",["$resource","URLServ",function(e){return e("/resources/devices/:id",{id:"@id"},{update:{method:"PUT"}})}]),app.factory("MailServ",["$resource",function(e){return e("/resources/mail",null)}]),app.factory("NetworksServ",["$resource","URLServ",function(e){return e("/resources/networks/:id",{id:"@id"},{update:{method:"PUT"}})}]),app.factory("URLServ",["$rootScope",function(e){return{getResourceUrlFor:function(t){return e.data.resources[t]}}}]),app.factory("GadgetEvaluationReward",["NetworksServ","$cookieStore",function(e,t){function r(e,t){var r=0;return console.log("Device --reward"),console.log(e),angular.forEach(e.base_line_prices,function(e){e.id==t&&(r=parseInt(e.value))}),r}function a(e,t,r){switch(console.log(r),console.log(e.brand.normal_condition),console.log(e.brand),console.log(t),t){case"A":return parseFloat(parseInt(e.brand.normal_condition)/100)*r;case"B":return parseFloat(parseInt(e.brand.scratched_condition)/100)*r;case"C":return parseFloat(parseInt(e.brand.bad_condition)/100)*r}}var o={result:""};return{calculate:function(e){return o.result=a(e,e.grade,r(e.device,e.size)),console.log(o.result),t.put("last-reward",o.result),o.result},getLastReward:function(){return t.get("last-reward")},fetchAirtelBonus:function(){var t=e.get({q:"airtel"});return t}}}]),app.factory("GradeDeviceServ",["$rootScope",function(){function e(e){var t={gradePoint:0};return angular.forEach(e,function(e){""!=e.rating&&(this.gradePoint+=parseInt(e.rating)*e.weight)},t),t.gradePoint}function t(e){var t=parseFloat(e);return t>=r.A?"A":t>=r.B?"B":"C"}var r={A:8.1,B:5.85};return{getGrade:function(r){var a=e(r);return t(a)}}}]),app.factory("PreloadTemplates",["$templateCache","$http",function(e,t){var r=["partials/ticket/menu.html","partials/networks/menu.html","partials/device_models/menu.html","partials/device_brands/menu.html","partials/ticket/dashboard.html","partials/networks/dashboard.html","partials/device_models/dashboard.html","partials/device_brands/dashboard.html","partials/networks/add.html","partials/device_models/add.html","partials/device_brands/add.html","partials/networks/list.html","partials/device_models/list.html","partials/device_brands/list.html","partials/ticket/evaluation/evaluation.html","partials/ticket/evaluation/review.html","partials/ticket/evaluation/reward.html","partials/ticket/evaluation/terms.html","partials/ticket/done.html","partials/ticket/search.html","partials/device_models/search.html","partials/device_brands/search.html","partials/networks/search.html","partials/ticket/list.html","partials/ticket/add/base.html","partials/ticket/add/step-one.html","partials/ticket/add/step-two.html","partials/ticket/add/step-three.html","partials/ticket/add/final.html"];return{run:function(){r.forEach(function(r){t.get(r,{cache:e})})}}}]),app.factory("ImageFetcher",["$http","$q",function(e,t){var r="https://www.googleapis.com/customsearch/v1?key=AIzaSyAJ_8QtWECvWTcrukqvfLmRWdARJ2bI2rk&cx=011505858740112002603:dap5yb7naau&q=";return{fetch:function(a){var o=[],i=t.defer();return e.get(r+encodeURI(a)).then(function(e){console.log(e.data),e.data.items.forEach(function(e){if(angular.isDefined(e.pagemap)){var t=e.pagemap.cse_image;angular.isDefined(t)&&angular.isArray(t)?t.forEach(function(e){o.push(e)}):angular.isDefined(t)&&angular.isObject(t)&&o.push(t)}}),console.log(o),i.resolve(o)},function(e){console.log(e),i.reject(e)}),i.promise}}}]);
+/**
+ * Created by Ak on 2/19/2015.
+ */
+var app = angular.module("AdminApp",
+    ['ui.select', 'ngSanitize',
+        'ui.bootstrap', 'ui.router',
+        'ngAnimate', 'ngResource',
+        'angular-loading-bar', 'adminApp.directives',
+        'adminApp.services', 'ngCookies']);
+
+app.config(['$urlRouterProvider','$stateProvider',
+    function($urlRouterProvider,$stateProvider){
+        $stateProvider.state('devices',
+            {
+                url: '/devices',
+                abstract: true,
+                templateUrl:'partials/device_models/dashboard.html',
+                controller: function () {
+                },
+                resolve: {
+                    'active': ['$rootScope', function ($rootScope) {
+                        $rootScope.active_nav = 'devices';
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('devices.search',
+            {
+                url: '/search?q',
+                templateUrl: 'partials/device_models/search.html',
+                controller: ['$scope', 'result', '$stateParams', function ($scope, result, $stateParams) {
+                    console.log(result);
+                    $scope.result = result;
+                    $scope.search = $stateParams.q;
+                }],
+                resolve: {
+                    'result': ['$stateParams', 'DevicesServ', function ($stateParams, DevicesServ) {
+                        return DevicesServ.query({q: $stateParams.q});
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('devices.menu',
+            {
+                url: '/menu',
+                templateUrl:'partials/device_models/menu.html',
+                controller: function () {
+                },
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('devices.add',
+            {
+                url: '/add',
+                templateUrl:'partials/device_models/add.html',
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'DeviceBrands': ['DeviceBrandsServ', function (DeviceBrandsServ) {
+                        return DeviceBrandsServ.query({only: true});
+                    }]
+                },
+                controller: ['$scope', 'ImageFetcher', 'DeviceBrands', function ($scope, ImageFetcher, DeviceBrands) {
+
+                    $scope.models = DeviceBrands;
+
+                    $scope.sizes = [];
+                    $scope.sizes_string = '';
+                    $scope.baseLinePrice = {};
+                    $scope.baseLinePriceString = '';
+                    $scope.images = [];
+
+                    $scope.fetchImages = function(name){
+                        var promise = ImageFetcher.fetch(name);
+                        promise.then(function(images){
+                            $scope.images = images;
+                        });
+                    };
+
+                    function createStringVersion(){
+                        $scope.sizes_string =  $scope.sizes.join();
+                    }
+
+                    $scope.addToSizes = function(device_size){
+                        $scope.sizes.push(device_size);
+                        $scope.device_size = null;
+                        createStringVersion();
+                    };
+
+                    $scope.removeSize = function(index){
+                        $scope.sizes.splice(index,1);
+                        createStringVersion();
+                    };
+
+                    $scope.updateBaseLineString = function(){
+                        var temp = [];
+                        angular.forEach($scope.baseLinePrice,function(value,key){
+                            temp.push(""+key+": "+value);
+                        });
+                        $scope.baseLinePriceString = temp.join();
+                    }
+                }]
+            }
+        );
+
+        $stateProvider.state('devices.list',
+            {
+                url: '/list',
+                templateUrl:'partials/device_models/list.html',
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'Devices': ['DevicesServ', function (DevicesServ) {
+                        return DevicesServ.query({});
+                    }]
+                },
+                controller: ['$scope', 'DevicesServ', 'Devices', function ($scope, DevicesServ, Devices) {
+                    $scope.models = Devices;
+                    $scope.deleteItem = function (id) {
+                        DevicesServ.delete({id: id}, function (response) {
+                            location.reload();
+                        },function(response){
+                            alert(response);
+                        });
+                    }
+                }]
+            }
+        );
+
+
+        $stateProvider.state('device_brands',
+            {
+                url: '/device_brands',
+                abstract: true,
+                templateUrl:'partials/device_brands/dashboard.html',
+                controller: function () {
+
+                }
+                ,
+                resolve: {
+                    'active': ['$rootScope', function ($rootScope) {
+                        $rootScope.active_nav = 'device_brands';
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('device_brands.search',
+            {
+                url: '/search?q',
+                templateUrl: 'partials/device_brands/search.html',
+                controller: ['$scope', 'result', '$stateParams', function ($scope, result, $stateParams) {
+                    console.log(result);
+                    $scope.result = result;
+                    $scope.search = $stateParams.q;
+                }],
+                resolve: {
+                    'result': ['$stateParams', 'DeviceBrandsServ', function ($stateParams, DeviceBrandsServ) {
+                        return DeviceBrandsServ.query({q: $stateParams.q});
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('device_brands.menu',
+            {
+                url: '/menu',
+                templateUrl: 'partials/device_brands/menu.html',
+                controller: function () {
+                },
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('device_brands.add',
+            {
+                url: '/add',
+                templateUrl:'partials/device_brands/add.html',
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                },
+                controller: ['$scope', 'ImageFetcher', function ($scope, ImageFetcher) {
+
+                    $scope.fetchImages = function(name){
+                        var promise = ImageFetcher.fetch(name);
+                        promise.then(function(images){
+                            $scope.images = images;
+                        });
+                    };
+                }]
+            }
+        );
+
+        $stateProvider.state('device_brands.list',
+            {
+                url: '/list',
+                templateUrl:'partials/device_brands/list.html',
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'DeviceBrands': ['DeviceBrandsServ', function (DeviceBrandsServ) {
+                        return DeviceBrandsServ.query({only: true});
+                    }]
+                },
+                controller: ['$scope', 'DeviceBrandsServ', 'DeviceBrands', function ($scope, DeviceBrandsServ, DeviceBrands) {
+                    $scope.brands = DeviceBrands;
+                    $scope.deleteItem = function(id){
+                        DeviceBrandsServ.delete({id: id}, function (response) {
+                            location.reload();
+                        },function(response){
+                            alert(response);
+                        });
+                    }
+                }]
+            }
+        );
+
+        $stateProvider.state('networks',
+            {
+                url: '/networks',
+                abstract: true,
+                templateUrl:'partials/networks/dashboard.html',
+                controller: function () {
+                    //$state.go('networks.menu');
+                },
+                resolve: {
+                    'active': ['$rootScope', function ($rootScope) {
+                        $rootScope.active_nav = 'networks';
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('networks.search',
+            {
+                url: '/search?q',
+                templateUrl: 'partials/networks/search.html',
+                controller: ['$scope', 'result', '$stateParams', function ($scope, result, $stateParams) {
+                    console.log(result);
+                    $scope.result = result;
+                    $scope.search = $stateParams.q;
+                }],
+                resolve: {
+                    'result': ['$stateParams', 'NetworksServ', function ($stateParams, NetworksServ) {
+                        return NetworksServ.query({q: $stateParams.q});
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('networks.menu',
+            {
+                url: '/menu',
+                templateUrl:'partials/networks/menu.html',
+                controller: function () {
+                },
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('networks.add',
+            {
+                url: '/add',
+                templateUrl:'partials/networks/add.html',
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                },
+                controller: ['$scope', 'ImageFetcher', function ($scope, ImageFetcher) {
+
+                    $scope.fetchImages = function(name){
+                        var promise = ImageFetcher.fetch(name);
+                        promise.then(function(images){
+                            $scope.images = images;
+                        });
+                    };
+                }]
+            }
+        );
+
+        $stateProvider.state('networks.list',
+            {
+                url: '/list',
+                templateUrl:'partials/networks/list.html',
+                resolve:{
+                    'Networks': ['NetworksServ', function (NetworksServ) {
+                        return NetworksServ.query({});
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                },
+                controller: ['$scope', 'Networks', 'NetworksServ', function ($scope, Networks, NetworksServ) {
+                    $scope.networks = Networks;
+                    $scope.deleteItem = function(id){
+                        NetworksServ.delete({id: id}, function (response) {
+                            location.reload();
+                        },function(response){
+                            alert(response);
+                        });
+                    }
+                }]
+            }
+        );
+
+    $stateProvider.state('ticket',
+        {
+            url: '/ticket',
+            abstract: true,
+            templateUrl:'partials/ticket/dashboard.html',
+            controller: function () {
+            },
+            resolve: {
+                'active': ['$rootScope', function ($rootScope) {
+                    $rootScope.active_nav = 'ticket';
+                }]
+            }
+        }
+    );
+
+    $stateProvider.state('ticket.menu',
+        {
+            url: '/menu',
+            templateUrl:'partials/ticket/menu.html',
+            controller: ['$scope', 'Tickets', function ($scope, Tickets) {
+                $scope.tickets = Tickets;
+            }],
+            resolve:{
+                'hasHistory': ['$rootScope', function ($rootScope) {
+                    $rootScope.hasHistory = true;
+                }],
+                'Tickets': ['TicketServ', function (TicketServ) {
+                    return TicketServ.query({limit: 6});
+                }]
+            }
+        }
+    );
+
+        $stateProvider.state('ticket.list',
+            {
+                url: '/list',
+                templateUrl: 'partials/ticket/list.html',
+                controller: ['$scope', 'Tickets', 'TicketServ', function ($scope, Tickets, TicketServ) {
+                    $scope.tickets = Tickets;
+
+                    $scope.deleteItem = function (id) {
+                        TicketServ.delete({id: id}, function (response) {
+                            location.reload();
+                        }, function (response) {
+                            alert(response);
+                        });
+                    }
+                }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'Tickets': ['TicketServ', function (TicketServ) {
+                        return TicketServ.query();
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.add',
+            {
+                url: '/add',
+                templateUrl: 'partials/ticket/add/base.html',
+                controller: function () {
+
+                },
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.add.stepOne',
+            {
+                url: '/step-one',
+                templateUrl: 'partials/ticket/add/step-one.html',
+                controller: ['$scope', 'TicketServ', '$state', function ($scope, TicketServ, $state) {
+                    $scope.createTicket = function (ticket) {
+                        TicketServ.save(ticket, function (ticket) {
+                            next(ticket.id);
+                            console.log(ticket);
+                        }, function (ticket) {
+                            alert("failed");
+                            console.log(ticket);
+                        });
+                    };
+
+                    function next(id) {
+                        $state.go('ticket.add.stepTwo', {'id': id});
+                    }
+                }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.add.stepTwo',
+            {
+                url: '/step-two/{id}',
+                templateUrl: 'partials/ticket/add/step-two.html',
+                controller: ['$scope', 'Ticket', '$state', function ($scope, Ticket, $state) {
+                    $scope.test = {
+                        deviceBoot: '',
+                        callUnlock: '',
+                        wirelessConnection: '',
+                        icloudConnection: ''
+                    };
+                    $scope.activeNextButton = false;
+
+                    $scope.$watch('test', function (newV, oldV) {
+                        console.log('test change');
+                        console.log(newV);
+
+                        var ready = checkReadinessForNextStep(newV);
+                        setViewState(ready);
+
+                    }, true);
+
+                    $scope.next = function () {
+                        $state.go('ticket.add.stepThree', {'id': Ticket.id});
+                    };
+
+                    function checkReadinessForNextStep(obj) {
+                        var state = {ready: true};
+
+                        angular.forEach(obj, function (value, key) {
+                            if (value == 'no') {
+                                this.ready = false;
+                            }
+                        }, state);
+
+                        return state.ready;
+                    }
+
+                    function setViewState(ready) {
+                        $scope.activeNextButton = ready;
+                        if (ready) {
+                            $scope.message = "Ok, proceed.";
+                        } else {
+                            $scope.message = "Sorry, Device doesn't Qualify to Continue";
+                        }
+                    }
+                }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'Ticket': ['$state', '$stateParams', function ($state, $stateParams) {
+                        return {id: $stateParams.id};
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.add.stepThree',
+            {
+                url: '/step-three/{id}',
+                templateUrl: 'partials/ticket/add/step-three.html',
+                controller: ['$scope', 'GradeDeviceServ', '$state', 'Ticket', 'TicketServ', function ($scope, GradeDeviceServ, $state, Ticket, TicketServ) {
+                    $scope.test = {
+                        touchScreen: {rating: '', weight: 0.625},
+                        lcdScreen: {rating: '', weight: 0.625},
+                        deviceCasing: {rating: '', weight: 0.625},
+                        deviceKeypad: {rating: '', weight: 0.25},
+                        deviceCamera: {rating: '', weight: 0.25},
+                        deviceEarPiece: {rating: '', weight: 0.125},
+                        deviceSpeaker: {rating: '', weight: 0.125},
+                        deviceEarphoneJack: {rating: '', weight: 0.125},
+                        deviceChargingPort: {rating: '', weight: 0.25}
+                    };
+
+                    $scope.$watch('test', function (newV, oldV) {
+                        console.log('test change');
+                        console.log(newV);
+                        $scope.grade = GradeDeviceServ.getGrade(newV);
+                        console.log('Grade:' + $scope.grade);
+
+                    }, true);
+
+                    $scope.next = function () {
+                        Ticket.device_grade = $scope.grade;
+                        TicketServ.update({id: Ticket.id}, Ticket);
+
+                        $state.go('ticket.add.final', {
+                            'id': Ticket.id,
+                            'grade': $scope.grade
+                        });
+                    }
+                }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.add.final',
+            {
+                url: '/final/{id}/{grade}',
+                templateUrl: 'partials/ticket/add/final.html',
+                controller: ['$scope', 'Ticket', '$state', '$stateParams', function ($scope, Ticket, $state, $stateParams) {
+                    $scope.grade = $stateParams.grade || Ticket.device_grade;
+
+                    $scope.next = function () {
+                        $state.go('ticket.evaluate', {'id': Ticket.id, 'grade': $scope.grade});
+                    }
+                }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.evaluate', {
+            url: '/evaluate/{id}/{grade}',
+            templateUrl: 'partials/ticket/evaluation/evaluation.html',
+            controller: ['$scope', '$stateParams', '$filter', ' Networks', 'Ticket', 'TicketServ', 'DeviceBrandsServ', 'GadgetEvaluationReward', '$state',
+                function ($scope, $stateParams, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
+                $scope.ticket = Ticket;
+
+                $scope.selected = {grade: $stateParams.grade || Ticket.device_grade};
+
+                $scope.networks = Networks;
+
+                $scope.clear = function () {
+                    $scope.person.selected = undefined;
+                    $scope.address.selected = undefined;
+                    $scope.country.selected = undefined;
+                };
+
+                $scope.brand = {};
+                $scope.refreshBrands = function (brand) {
+                    var params = {q: brand};
+                    DeviceBrandsServ.query({}, function (brands) {
+                        console.log(brands);
+                        $scope.device_brands = brands;
+                    });
+                };
+
+                $scope.device = {};
+                $scope.refreshDevices = function (brand) {
+                    $scope.devices = $filter('filter')($scope.brand.selected.gadgets, {model: brand});
+                };
+
+                $scope.$watch('brand.selected', function (newV, oldV) {
+                    console.log('brand changed');
+                    $scope.selected.brand = newV;
+                });
+
+                $scope.$watch('device.selected', function (newV, oldV) {
+                    console.log('device changed');
+                    $scope.selected.device = newV;
+                });
+
+                $scope.next = function () {
+                    var reward = GadgetEvaluationReward.calculate($scope.selected);
+                    updateTicket($scope.selected, reward);
+                    $state.go('ticket.reward', {
+                        'id': Ticket.id
+                    });
+                };
+
+                $scope.goHome = function () {
+                    $state.go('ticket.menu');
+                };
+
+                function updateTicket(selected, reward) {
+                    Ticket.gadget_id = selected.device.id;
+                    Ticket.size_id = selected.size;
+                    Ticket.network_id = selected.network;
+                    Ticket.reward = reward;
+
+                    TicketServ.update({id: Ticket.id}, Ticket);
+                }
+
+                }],
+            resolve: {
+                'hasHistory': ['$rootScope', function ($rootScope) {
+                    $rootScope.hasHistory = true;
+                }],
+                'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
+                    return TicketServ.get({id: $stateParams.id});
+                }],
+                'Networks': ['NetworksServ', function (NetworksServ) {
+                    return NetworksServ.query({});
+                }]
+            }
+        });
+
+        $stateProvider.state('ticket.reward',
+            {
+                url: '/reward/{id}',
+                templateUrl: 'partials/ticket/evaluation/reward.html',
+                controller: ['$scope', 'Ticket', 'TicketServ', 'GadgetEvaluationReward', 'Airtel', '$state',
+                    function ($scope, Ticket, TicketServ, GadgetEvaluationReward, Airtel, $state) {
+                    $scope.reward = GadgetEvaluationReward.getLastReward();// Ticket.reward;
+                    $scope.ticket = Ticket;
+                    $scope.airtel = Airtel;
+
+                    $scope.goHome = function () {
+                        $state.go('ticket.menu');
+                    };
+
+                    $scope.next = function () {
+                        updateTicket();
+                        $state.go('ticket.accept-terms', {id: Ticket.id});
+                    };
+
+                    function updateTicket() {
+                        Ticket.port_to_airtel = $scope.portToAirtel;
+
+                        TicketServ.update({id: Ticket.id}, Ticket);
+                    }
+                    }],
+                resolve: {
+                    'Airtel': ['GadgetEvaluationReward', function (GadgetEvaluationReward) {
+                        return GadgetEvaluationReward.fetchAirtelBonus();
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.accept-terms',
+            {
+                url: '/accept-terms/{id}',
+                templateUrl: 'partials/ticket/evaluation/terms.html',
+                controller: ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
+                    $scope.next = function () {
+                        $state.go('ticket.review-ticket', {id: $stateParams.id});
+                    };
+                }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+
+        $stateProvider.state('ticket.review-ticket',
+            {
+                url: '/review/{id}',
+                templateUrl: 'partials/ticket/evaluation/review.html',
+                controller: ['$scope', 'Ticket', 'TicketServ', '$state', 'MailServ',
+                    function ($scope, Ticket, TicketServ, $state, MailServ) {
+                    $scope.ticket = Ticket;
+
+                    $scope.next = function () {
+                        Ticket.discount_voucher_code = $scope.ticket.discount_voucher_code;
+                        TicketServ.update({id: Ticket.id}, Ticket);
+
+                        MailServ.save({'ticket_id': Ticket.id}, function (mail) {
+                            console.log(mail);
+                        });
+
+                        $state.go('ticket.all-done');
+                    }
+                    }],
+                resolve: {
+                    'Ticket': ['TicketServ', '$state', '$stateParams',
+                        function (TicketServ, $state, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
+                        }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.all-done',
+            {
+                url: '/done',
+                templateUrl: 'partials/ticket/done.html',
+                controller: function () {
+                },
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('ticket.search',
+        {
+            url: '/search?q',
+            templateUrl:'partials/ticket/search.html',
+            controller: ['$scope', 'result', '$stateParams', function ($scope, result, $stateParams) {
+                console.log(result);
+                $scope.result = result;
+                $scope.search = $stateParams.q;
+            }],
+            resolve: {
+                'result': ['$stateParams', 'TicketServ', function ($stateParams, TicketServ) {
+                    return TicketServ.query({q: $stateParams.q});
+                }],
+                'hasHistory': ['$rootScope', function ($rootScope) {
+                    $rootScope.hasHistory = true;
+                }]
+            }
+        }
+    );
+
+    $stateProvider.state('config',
+        {
+            url: '/config',
+            templateUrl:'partials/config/form.html',
+            controller: function () {
+            },
+            resolve: {
+                'active': ['$rootScope', function ($rootScope) {
+                    $rootScope.active_nav = 'config';
+                }]
+            }
+        }
+    );
+
+
+    $urlRouterProvider.otherwise('/ticket/menu');
+}]);
+
+app.config(['$httpProvider', function ($httpProvider) {
+
+    var interceptor = ['$rootScope', '$location', '$q', function ($rootScope, $location, $q) {
+
+        var success = function(response){
+            return response
+        };
+
+        var error = function(response){
+            if (response.status = 401){
+                delete sessionStorage.authenticated;
+                location.href = $location.host() + '/auth/login';
+                //Flash.show(response.data.flash)
+
+            }
+            return $q.reject(response)
+
+        };
+        return function(promise){
+            return promise.then(success, error)
+        }
+    }];
+    $httpProvider.interceptors.push(interceptor);
+
+}]);
+
+app.factory('sessionInjector', [function () {
+    var sessionInjector = {
+        request: function (config) {
+            config.headers['X-Requested-With'] = 'XMLHttpRequest';
+            return config;
+        }
+    };
+    return sessionInjector;
+}]);
+app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push('sessionInjector');
+}]);
+
+app.run(['$http', '$rootScope', 'CSRF_TOKEN', 'PreloadTemplates',
+    function ($http, $rootScope, CSRF_TOKEN, PreloadTemplates) {
+    PreloadTemplates.run();
+    $rootScope.CSRF_TOKEN = CSRF_TOKEN;
+    $http.defaults.headers.common['csrf_token'] = CSRF_TOKEN;
+    }]);
+
+
+
+/**
+ * Created by Ak on 2/19/2015.
+ */
+
+var app =  angular.module('adminApp.directives',[]);
+
+app.directive('backButton',function(){
+    return {
+        'restrict': 'EA',
+        'template': '<a class="btn base-resize search-btn back-btn" href=""><span class="fa fa-chevron-left"></span></a>',
+        'link': function link(scope, element, attrs) {
+            element.click(function(e){
+                window.history.back();
+                e.preventDefault();
+            })
+        }
+    }
+});
+
+
+/**
+ * Created by Ak on 2/19/2015.
+ */
+
+
+
+/**
+ * Created by Ak on 2/19/2015.
+ */
+
+var app =  angular.module('adminApp.services',[]);
+
+app.factory('TicketServ', ['$resource', 'URLServ', function ($resource, URLServ) {
+    return $resource('/resources/ticket/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+}]);
+
+app.factory('DeviceBrandsServ', ['$resource', 'URLServ', function ($resource, URLServ) {
+    return $resource('/resources/device_makers/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+}]);
+
+
+app.factory('DevicesServ', ['$resource', 'URLServ', function ($resource, URLServ) {
+    return $resource('/resources/devices/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+}]);
+
+
+app.factory('MailServ', ['$resource', function ($resource) {
+    return $resource('/resources/mail', null);//URLServ.getResourceUrlFor("ticket"));
+}]);
+
+
+app.factory('NetworksServ', ['$resource', 'URLServ', function ($resource, URLServ) {
+    return $resource('/resources/networks/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+}]);
+
+
+app.factory('URLServ', ['$rootScope', function ($rootScope) {
+    return {
+        "getResourceUrlFor": function(name){
+            return $rootScope.data.resources[name];
+        }
+    }
+}]);
+
+app.factory('GadgetEvaluationReward', ['NetworksServ', '$cookieStore', function (NetworksServ, $cookieStore) {
+    var reward = {result: ''};
+
+    function getBaseLinePrice(device, size) {
+        var baseLinePrice = 0;
+
+        console.log('Device --reward');
+        console.log(device);
+        angular.forEach(device.base_line_prices, function (v, k) {
+            if (v.id == size) {
+                    baseLinePrice = parseInt(v.value);
+                }
+        });
+
+        return baseLinePrice;
+    }
+
+    function calculatePriceFromGrade(device, grade, baseLinePrice) {
+        console.log(baseLinePrice);
+        console.log(device.brand.normal_condition);
+        console.log(device.brand);
+        console.log(grade);
+
+        switch (grade) {
+            case 'A':
+                return parseFloat(parseInt(device.brand.normal_condition) / 100.0) * baseLinePrice;
+            case 'B':
+                return parseFloat(parseInt(device.brand.scratched_condition) / 100.0) * baseLinePrice;
+            case 'C':
+                return parseFloat(parseInt(device.brand.bad_condition) / 100.0) * baseLinePrice;
+        }
+    }
+
+    return {
+        "calculate": function (model) {
+            reward.result = calculatePriceFromGrade(model, model.grade, getBaseLinePrice(model.device, model.size));
+            console.log(reward.result);
+
+            $cookieStore.put('last-reward', reward.result);
+            return reward.result;
+        },
+        "getLastReward": function () {
+            return $cookieStore.get('last-reward');
+        },
+        fetchAirtelBonus: function () {
+            var network = NetworksServ.get({q: 'airtel'});
+            return network;
+        }
+    }
+}]);
+
+app.factory('GradeDeviceServ', ['$rootScope', function ($rootScope) {
+
+    var threshold = {
+        'A': 8.1,
+        'B': 5.85
+    };
+
+    function generateGradePoint(device) {
+        var result = {gradePoint: 0};
+
+        angular.forEach(device, function (value, key) {
+            if (value.rating != '') {
+                this.gradePoint += parseInt(value.rating) * value.weight;
+            }
+        }, result);
+
+        return result.gradePoint;
+    }
+
+    function generateGradeLetter(gradePoint) {
+        var value = parseFloat(gradePoint);
+
+        if (value >= threshold.A) {
+            return 'A';
+        } else if (value >= threshold.B) {
+            return 'B';
+        } else {
+            return 'C';
+        }
+    }
+
+    return {
+        "getGrade": function (device) {
+            var gradePoint = generateGradePoint(device);
+            return generateGradeLetter(gradePoint);
+        }
+    }
+}]);
+
+app.factory('PreloadTemplates', ['$templateCache', '$http', function ($templateCache, $http) {
+    var templates = [
+        "partials/ticket/menu.html",
+        "partials/networks/menu.html",
+        "partials/device_models/menu.html",
+        "partials/device_brands/menu.html",
+        "partials/ticket/dashboard.html",
+        "partials/networks/dashboard.html",
+        "partials/device_models/dashboard.html",
+        "partials/device_brands/dashboard.html",
+        "partials/networks/add.html",
+        "partials/device_models/add.html",
+        "partials/device_brands/add.html",
+        "partials/networks/list.html",
+        "partials/device_models/list.html",
+        "partials/device_brands/list.html",
+        "partials/ticket/evaluation/evaluation.html",
+        "partials/ticket/evaluation/review.html",
+        "partials/ticket/evaluation/reward.html",
+        "partials/ticket/evaluation/terms.html",
+        "partials/ticket/done.html",
+        "partials/ticket/search.html",
+        "partials/device_models/search.html",
+        "partials/device_brands/search.html",
+        "partials/networks/search.html",
+        'partials/ticket/list.html',
+        "partials/ticket/add/base.html",
+        "partials/ticket/add/step-one.html",
+        "partials/ticket/add/step-two.html",
+        "partials/ticket/add/step-three.html",
+        "partials/ticket/add/final.html"
+    ];
+    return {
+        run: function () {
+            templates.forEach(function (currentItem) {
+                $http.get(currentItem, {cache: $templateCache});
+            });
+        }
+    }
+}]);
+
+
+app.factory('ImageFetcher', ['$http', '$q', function ($http, $q) {
+    var searchUrl = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAJ_8QtWECvWTcrukqvfLmRWdARJ2bI2rk&cx=011505858740112002603:dap5yb7naau&q=";
+
+    return {
+        fetch: function (query) {
+            var images = [];
+            var deferred = $q.defer();
+            $http.get(searchUrl + encodeURI(query)).then(function (response) {
+                console.log(response.data);
+                response.data.items.forEach(function (currentValue) {
+                    if (angular.isDefined(currentValue.pagemap)) {
+                        var temp = currentValue.pagemap.cse_image;//cse_thumbnail;
+                        if (angular.isDefined(temp) && angular.isArray(temp)) {
+                            temp.forEach(function (cValue) {
+                                images.push(cValue);
+//                                if (cValue.height > cValue.width) {
+//                                    images.push(cValue);
+//                                }
+                            });
+                        } else if (angular.isDefined(temp) && angular.isObject(temp)) {
+                            images.push(temp);
+                        }
+                    }
+                });
+                console.log(images);
+                deferred.resolve(images);
+            }, function (response) {
+                console.log(response);
+                deferred.reject(response);
+            });
+
+            return deferred.promise;
+        }
+    }
+
+}]);
