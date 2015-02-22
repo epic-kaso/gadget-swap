@@ -302,7 +302,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                 },
                 resolve: {
                     'hasHistory': function ($rootScope) {
-                        $rootScope.hasHistory = false;
+                        $rootScope.hasHistory = true;
                     },
                     'Tickets': function (TicketServ) {
                         return TicketServ.query();
