@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>Network providers</h2>
+    </div>
+    <table class="table table-striped">
+        <tbody>
+        <tr ng-repeat="value in brands">
+            <td>{{ $index }}</td>
+            <td>
+                <h4>{{ value.name }} </h4>
+            </td>
+            <td>
+                <a ng-click="deleteItem(value.id)" class="btn btn-xs btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

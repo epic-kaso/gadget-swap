@@ -4,26 +4,18 @@
     </div>
     <table class="table table-striped">
         <tbody>
-        <?php if(isset($networks)){
-                $index = 0;
-                foreach($networks as $value){
-                    $index++;
-                    ?>
-        <tr>
+        <tr ng-repeat="value in networks">
             <td>{{ $index }}</td>
             <td>
-                <h4>{{ $value->name }}</h4>
+                <h4>{{ value.name }}</h4>
                 <p>
-                    {{ $value->description }}
+                    {{ value.description }}
                 </p>
             </td>
             <td>
-                <a ng-click="deleteItem({{ $value->id }})" class="btn btn-xs btn-danger">Delete</a>
+                <a ng-click="deleteItem(value.id)" class="btn btn-xs btn-danger">Delete</a>
             </td>
         </tr>
-        <?php
-                }
-            } ?>
         </tbody>
     </table>
 </div>

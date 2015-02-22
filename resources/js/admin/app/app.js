@@ -94,16 +94,15 @@ app.config(['$urlRouterProvider','$stateProvider',
                 resolve:{
                     'hasHistory': function($rootScope){
                         $rootScope.hasHistory = true;
+                    },
+                    'Devices': function (DevicesServ) {
+                        return DevicesServ.query({});
                     }
                 },
-                controller: function($scope,$http){
-
-                    $scope.deleteItem = function(id){
-                        var current = window.location.href,
-                            url = window.location.origin +
-                                window.location.pathname +
-                                '/delete-device/'+id;
-                        $http.delete(url).then(function(response){
+                controller: function ($scope, DevicesServ, Devices) {
+                    $scope.models = Devices;
+                    $scope.deleteItem = function (id) {
+                        DevicesServ.delete({id: id}, function (response) {
                             location.reload();
                         },function(response){
                             alert(response);
@@ -166,16 +165,15 @@ app.config(['$urlRouterProvider','$stateProvider',
                 resolve:{
                     'hasHistory': function($rootScope){
                         $rootScope.hasHistory = true;
+                    },
+                    'DeviceBrands': function (DeviceBrandsServ) {
+                        return DeviceBrandsServ.query({only: true});
                     }
                 },
-                controller: function($scope,$http){
-
+                controller: function ($scope, $http, DeviceBrandsServ, DeviceBrands) {
+                    $scope.brands = DeviceBrands;
                     $scope.deleteItem = function(id){
-                        var current = window.location.href,
-                            url = window.location.origin +
-                                window.location.pathname +
-                                '/delete-device/'+id;
-                        $http.delete(url).then(function(response){
+                        DeviceBrandsServ.delete({id: id}, function (response) {
                             location.reload();
                         },function(response){
                             alert(response);
@@ -235,19 +233,17 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/list',
                 templateUrl:'partials/networks/list.html',
                 resolve:{
+                    'Networks': function (NetworksServ) {
+                        return NetworksServ.query({});
+                    },
                     'hasHistory': function($rootScope){
                         $rootScope.hasHistory = true;
                     }
                 },
-                controller: function($scope,$http){
-
-
+                controller: function ($scope, Networks, NetworksServ) {
+                    $scope.networks = Networks;
                     $scope.deleteItem = function(id){
-                        var current = window.location.href,
-                            url = window.location.origin +
-                                window.location.pathname +
-                                '/delete-device/'+id;
-                        $http.delete(url).then(function(response){
+                        NetworksServ.delete({id: id}, function (response) {
                             location.reload();
                         },function(response){
                             alert(response);

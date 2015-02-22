@@ -213,7 +213,7 @@ app.config(function ($stateProvider, $urlRouterProvider,ViewBaseURL) {
 var app = angular.module('SupergeeksWidget.Controllers', []);
 
 app.controller('NavbarController', [
-    '$scope', '$rootScope', function ($scope, $rootScope) {
+    '$scope','$rootScope', function ($scope,$rootScope) {
 
         $rootScope.$on('progress-update-event', function (event, val) {
             console.log('Progress Update Event Received');
@@ -222,7 +222,7 @@ app.controller('NavbarController', [
     }
 ]);
 
-app.controller('DeviceMakeController', function ($scope, Makes, $rootScope, $sce) {
+app.controller('DeviceMakeController', function ($scope,Makes,$rootScope,$sce) {
     $rootScope.tiny_heading = $sce.trustAsHtml('Get <span style="font-size: 30px;color: green;">₦</span> value of your Gadget, Swap Now.');
     $rootScope.big_heading = 'First, Select your Gadget Make';
     $rootScope.device_make = 'others';
@@ -234,7 +234,7 @@ app.controller('DeviceMakeController', function ($scope, Makes, $rootScope, $sce
 });
 
 app.controller('DeviceModelController',
-    function (CurrentMake, Models, $scope, $stateParams, $cookieStore, GadgetServ, $state, $rootScope) {
+    function (CurrentMake,Models,$scope, $stateParams, $cookieStore, GadgetServ, $state,$rootScope) {
 
         console.log(Models);
 
@@ -249,7 +249,7 @@ app.controller('DeviceModelController',
 
         $scope.models = Models;
 
-        $scope.selectModel = function ($event, model, state) {
+        $scope.selectModel = function ($event,model, state) {
             $scope.currentGadget.model = model;
             $scope.currentGadget.image_url = $scope.currentGadget.model.image_url || '/Assets/img/smartphone.png';
             $state.go(state,
@@ -263,21 +263,21 @@ app.controller('DeviceModelController',
     });
 
 app.controller('DeviceSizeController',
-    function ($scope, $stateParams, $cookieStore, GadgetServ, $state, $rootScope, GadgetsInfoServ) {
+    function ($scope, $stateParams, $cookieStore, GadgetServ, $state,$rootScope,GadgetsInfoServ) {
         $rootScope.big_heading = 'Ok Now, Select your Storage Size';
 
         $scope.$emit('progress-update-event', '54%');
 
         $scope.device_class = $rootScope.device_make = 'others';
-        $scope.image_label = $scope.currentGadget.make + ' ' +
-        $scope.currentGadget.model.model;
+        $scope.image_label = $scope.currentGadget.make +' '+
+                             $scope.currentGadget.model.model;
         $scope.image_url = $scope.currentGadget.model.image_url || '/Assets/img/smartphone.png';
 
         $scope.sizes = $scope.currentGadget.model.sizes;
 
-        $scope.selectSize = function ($event, size, state) {
+        $scope.selectSize = function ($event,size, state) {
             $scope.currentGadget.size = size;
-            $scope.currentGadget.baseLinePrice = GadgetsInfoServ.getBaseLinePriceForSize($scope.currentGadget.model, size.value);
+            $scope.currentGadget.baseLinePrice = GadgetsInfoServ.getBaseLinePriceForSize($scope.currentGadget.model,size.value);
             $state.go(state,
                 {
                     device_make: $stateParams.device_make,
@@ -291,13 +291,13 @@ app.controller('DeviceSizeController',
 
 
 app.controller('DeviceNetworkController',
-    function (Networks, $scope, $stateParams, $cookieStore, GadgetServ, $state, $rootScope) {
+    function (Networks, $scope, $stateParams, $cookieStore, GadgetServ, $state,$rootScope) {
         $rootScope.big_heading = 'Please, Select your Network Provider';
 
         $scope.$emit('progress-update-event', '65%');
 
         $scope.device_class = $rootScope.device_make = 'others';
-        $scope.image_label = $scope.currentGadget.make + ' ' +
+        $scope.image_label = $scope.currentGadget.make +' '+
         $scope.currentGadget.model.model;
         $scope.image_url = $scope.currentGadget.model.image_url || '/Assets/img/smartphone.png';
         $scope.networks = Networks;
@@ -306,9 +306,9 @@ app.controller('DeviceNetworkController',
             $scope.currentGadget.network = network;
             $state.go(state,
                 {
-                    device_make: $stateParams.device_make,
+                    device_make:  $stateParams.device_make,
                     device_model: $stateParams.device_model,
-                    device_size: $stateParams.device_size,
+                    device_size:  $stateParams.device_size,
                     device_network: network.name
                 });
             $event.preventDefault();
@@ -316,22 +316,25 @@ app.controller('DeviceNetworkController',
     });
 
 app.controller('DeviceConditionController',
-    function (CurrentModel, $scope, $stateParams, GadgetsInfoServ, $state, $rootScope) {
+    function (CurrentModel,$scope, $stateParams, GadgetsInfoServ, $state,$rootScope) {
 
         $scope.tooltips = {
-            normal_condition: '<ul class="list-unstyled text-left"><li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Powers on and makes calls</li>' +
-            '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> No visible scratches or cracks</li>' +
-            '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> All buttons click</li>' +
-            '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Has never been repaired in any way</li></ul>',
-            cracked_condition: '<ul class="list-unstyled text-left"><li><span class="glyphicon glyphicon-ok text-info text-justify"></span>Minor scratches or cracks on device</li>' +
-            '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Has been repaired in any way</li>' +
-            '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Some Buttons are not functional</li>' +
-            '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Normal wear and tear</li>' +
-            '</ul>',
-            faulty_condition: '<ul class="list-unstyled text-left"><li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Does not power on or make calls</li>' +
-            '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Buttons not functional</li>' +
-            '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Serious physical damage to frame like bends or cracks</li>' +
-            '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Water damaged before</li>' +
+            normal_condition:
+        '<ul class="list-unstyled text-left"><li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Powers on and makes calls</li>'+
+        '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> No visible scratches or cracks</li>'+
+        '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> All buttons click</li>'+
+        '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Has never been repaired in any way</li></ul>',
+            cracked_condition:
+        '<ul class="list-unstyled text-left"><li><span class="glyphicon glyphicon-ok text-info text-justify"></span>Minor scratches or cracks on device</li>'+
+        '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Has been repaired in any way</li>'+
+        '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Some Buttons are not functional</li>' +
+        '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Normal wear and tear</li>' +
+        '</ul>',
+            faulty_condition:
+        '<ul class="list-unstyled text-left"><li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Does not power on or make calls</li>'+
+        '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Buttons not functional</li>'+
+        '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Serious physical damage to frame like bends or cracks</li>'+
+        '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Water damaged before</li>'+
             '<li><span class="glyphicon glyphicon-ok text-info text-justify"></span> Faulty touch screen/ broken LCD</li></ul>'
         };
 
@@ -343,13 +346,13 @@ app.controller('DeviceConditionController',
 
         $scope.device_class = $rootScope.device_make = 'others';
 
-        $scope.image_label = $scope.currentGadget.make + ' ' +
-        $scope.currentGadget.model.model + ' ' +
-        $scope.currentGadget.size.value + ' ';
+        $scope.image_label = $scope.currentGadget.make +' '+
+                             $scope.currentGadget.model.model+ ' '+
+                             $scope.currentGadget.size.value + ' ';
 
-        $scope.viewReward = function (state, radioModel) {
-            for (var i = 0; i < $scope.conditions.length; i++) {
-                if ($scope.conditions[i].slug == radioModel) {
+        $scope.viewReward = function (state,radioModel) {
+            for(var i = 0;i < $scope.conditions.length;i++){
+                if($scope.conditions[i].slug == radioModel) {
                     $scope.currentGadget.condition_value = $scope.conditions[i].value;
                     break;
                 }
@@ -359,9 +362,9 @@ app.controller('DeviceConditionController',
             $scope.$emit('progress-update-event', '100%');
             $state.go(state,
                 {
-                    device_make: $stateParams.device_make,
+                    device_make:  $stateParams.device_make,
                     device_model: $stateParams.device_model,
-                    device_size: $stateParams.device_size,
+                    device_size:  $stateParams.device_size,
                     device_network: $stateParams.device_network,
                     device_condition: $scope.currentGadget.condition
                 }
@@ -370,30 +373,30 @@ app.controller('DeviceConditionController',
     });
 
 app.controller('DeviceRewardController',
-    function ($scope, $rootScope, $filter) {
+    function ($scope,$rootScope,$filter) {
         $rootScope.big_heading = 'Fantastic,Thank you! Here\'s your Reward';
 
         var reward = $scope.currentGadget.getReward();
         $scope.currentGadget.reward = reward;
 
-        if (angular.isNumber(reward)) {
-            $scope.reward_price = $filter('currency')(reward, '₦') + '*';
+        if(angular.isNumber(reward)){
+            $scope.reward_price = $filter('currency')(reward,'₦') + '*';
             $scope.reward_message = 'Estimated Value is';
             $scope.reward_disclaimer = '*this value is subject to final verification by our engineers.'
-        } else {
+        }else{
             $scope.reward_price = reward;
         }
     });
 
 app.controller(
     'BookAppointmentController',
-    function ($scope, $stateParams, $cookieStore, MailServ, $state, $rootScope, GadgetsInfoServ) {
+    function ($scope, $stateParams, $cookieStore, MailServ,$state,$rootScope, GadgetsInfoServ) {
         $rootScope.big_heading = "Book your Swap Now!";
         var currentDevice = $scope.currentGadget;
         currentDevice.swap_center = $stateParams.swap_center;
         $scope.swap_center = $stateParams.swap_center.split('-').join(' ');
 
-        $scope.sendMail = function (destination, phone, message) {
+        $scope.sendMail = function (destination,phone, message) {
             var info = {
                 device: currentDevice,
                 user: {
@@ -403,9 +406,9 @@ app.controller(
             };
 
             var p = GadgetsInfoServ.postSwapDetails(info);
-            p.then(function (response) {
+            p.then(function(response){
                 console.log(response);
-            }, function (response) {
+            },function(response){
                 console.log(response);
             });
 
@@ -423,64 +426,64 @@ app.controller(
  * Created by kaso on 11/6/2014.
  */
 
-var app = angular.module('SupergeeksWidget.directives', []);
+var app = angular.module('SupergeeksWidget.directives',[]);
 
-app.directive('progressBar', function () {
-    return {
-        'restrict': 'EA',
-        'scope': {
-            'val': '='
-        },
-        'link': function (scope, elem, attrs) {
-            elem.css('width', '0');
-            scope.$watch('val', function (newv, oldv) {
-                console.log('val changed');
-                elem.css('width', newv);
-            })
-        }
+app.directive('progressBar',function(){
+   return {
+       'restrict': 'EA',
+       'scope': {
+           'val': '='
+       },
+       'link': function(scope,elem,attrs){
+           elem.css('width','0');
+           scope.$watch('val',function(newv,oldv){
+               console.log('val changed');
+               elem.css('width',newv);
+           })
+       }
 
-    }
+   }
 });
 
 
-app.directive('conditionSelect', function () {
+app.directive('conditionSelect',function(){
     return {
         'restrict': 'EA',
         'scope': {
             'val': '='
         },
-        'link': function (scope, elem, attrs) {
-            scope.$watch('val', function (newv, oldv) {
-                if (newv == true) {
-                    elem.css('border', '#e8e8e8 solid 1px');
-                } else {
-                    elem.css('border', 'none');
+        'link': function(scope,elem,attrs){
+            scope.$watch('val',function(newv,oldv){
+                if(newv == true){
+                    elem.css('border','#e8e8e8 solid 1px');
+                }else{
+                    elem.css('border','none');
                 }
             })
         }
     }
 });
 
-app.directive('previousButton', function ($window) {
-    return {
-        restrict: 'EA',
-        link: function (scope, element, attrs) {
-            element.on('click', function () {
-                $window.history.back();
-            });
-        }
-    };
+app.directive('previousButton',function($window){
+   return {
+       restrict: 'EA',
+       link: function(scope, element, attrs) {
+           element.on('click', function() {
+               $window.history.back();
+           });
+       }
+   };
 });
 
-app.directive('ensureValid', function () {
-    return {
-        'restrict': 'EA',
-        'link': function (scope, elem, attrs) {
-            elem.on('click', function () {
-                $state.transitionTo(TimeLine.prev());
-            })
-        }
-    };
+app.directive('ensureValid',function(){
+   return {
+       'restrict': 'EA',
+       'link': function(scope,elem,attrs){
+           elem.on('click',function(){
+               $state.transitionTo(TimeLine.prev());
+           })
+       }
+   };
 });
 /**
  * Created by kaso on 11/6/2014.

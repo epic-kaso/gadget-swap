@@ -14,45 +14,35 @@
         </tr>
         </thead>
         <tbody>
-        @if(isset($devices))
-        @foreach($devices as $value)
-        <tr>
-            <td>{{ $value->gadget_maker->name }}</td>
-            <td>{{ $value->model }}</td>
+        <tr ng-repeat="value in models">
+            <td>{{ value.gadget_maker.name }}</td>
+            <td>{{ value.model }}</td>
             <td>
                 <ul class="list-unstyled">
-                    @foreach($value->sizes as $s)
-                    <li> {{ $s->value }}</li>
-                    @endforeach
+                    <li ng-repeat="s in value.sizes"> {{ s.value }}</li>
                 </ul>
             </td>
             <td>
                 <ul class="list-unstyled">
-                    @foreach($value->colors as $s)
-                    <li> {{ $s->value }}</li>
-                    @endforeach
+                    <li ng-repeat="s in value.colors"> {{ s.value }}</li>
                 </ul>
             </td>
             <td>
                 <ul class="list-unstyled">
-                    @foreach($value->base_line_prices as $s)
-                    <li>{{ $s->size }}: N{{ $s->value }}</li>
-                    @endforeach
+                    <li ng-repeat="s in value.base_line_prices">{{ s.size }}: N{{ s.value }}</li>
                 </ul>
             </td>
             <td>
                 <ul class="list-unstyled">
-                    <li>Normal - {{ $value->gadget_maker->normal_condition }}%</li>
-                    <li>Faulty - {{ $value->gadget_maker->scratched_condition }}%</li>
-                    <li>Bad - {{ $value->gadget_maker->bad_condition }}%</li>
+                    <li>Normal - {{ value.gadget_maker.normal_condition }}%</li>
+                    <li>Faulty - {{ value.gadget_maker.scratched_condition }}%</li>
+                    <li>Bad - {{ value.gadget_maker.bad_condition }}%</li>
                 </ul>
             </td>
             <td>
-                <a ng-click="deleteItem({{ $value->id }})" class="btn btn-xs btn-danger">Delete</a>
+                <a ng-click="deleteItem(value.id)" class="btn btn-xs btn-danger">Delete</a>
             </td>
         </tr>
-        @endforeach
-        @endif
         </tbody>
     </table>
 </div>
