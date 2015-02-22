@@ -53,7 +53,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                 },
                 resolve:{
                     'hasHistory': ['$rootScope', function ($rootScope) {
-                        $rootScope.hasHistory = true;
+                        $rootScope.hasHistory = false;
                     }]
                 }
             }
@@ -185,7 +185,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                 },
                 resolve:{
                     'hasHistory': ['$rootScope', function ($rootScope) {
-                        $rootScope.hasHistory = true;
+                        $rootScope.hasHistory = false;
                     }]
                 }
             }
@@ -281,7 +281,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                 },
                 resolve:{
                     'hasHistory': ['$rootScope', function ($rootScope) {
-                        $rootScope.hasHistory = true;
+                        $rootScope.hasHistory = false;
                     }]
                 }
             }
@@ -357,7 +357,7 @@ app.config(['$urlRouterProvider','$stateProvider',
             }],
             resolve:{
                 'hasHistory': ['$rootScope', function ($rootScope) {
-                    $rootScope.hasHistory = true;
+                    $rootScope.hasHistory = false;
                 }],
                 'Tickets': ['TicketServ', function (TicketServ) {
                     return TicketServ.query({limit: 6});
