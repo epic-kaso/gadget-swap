@@ -4,22 +4,23 @@
 
         <div class="col-md-12">
             <div  class="form-group">
-                <input type="text" name="name" placeholder="Make" ng-blur="fetchImages(device_maker + ' logo')"
+                <input type="text" name="name" required="" placeholder="Make"
+                       ng-blur="fetchImages(device_maker + ' logo')"
                        ng-model="device_maker" class="form-control inmate-search-box"/>
             </div>
             <div class="form-group">
                 <label for="scratched-condition">Normal Condition Value (%):</label>
-                <input type="text" value="100" id="normal-condition" name="normal_condition" placeholder="%"
+                <input type="text" value="100" required="" id="normal-condition" name="normal_condition" placeholder="%"
                        class="form-control inmate-search-box">
             </div>
             <div class="form-group">
                 <label for="scratched-condition">Scratched Condition Value (%):</label>
-                <input type="text" id="scratched-condition" name="scratched_condition" placeholder="%"
+                <input type="text" id="scratched-condition" required="" name="scratched_condition" placeholder="%"
                        class="form-control inmate-search-box">
             </div>
             <div class="form-group">
                 <label for="bad-condition">Bad Condition Value (%):</label>
-                <input type="text" id="bad-condition" name="bad_condition" placeholder="%"
+                <input type="text" id="bad-condition" required="" name="bad_condition" placeholder="%"
                        class="form-control inmate-search-box">
             </div>
 

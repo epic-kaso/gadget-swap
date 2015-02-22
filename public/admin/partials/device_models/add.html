@@ -4,14 +4,15 @@
 
         <div class="form-group evaluate">
             <label>Select Device Make</label>
-            <select class="form-control inmate-search-box" name="gadget_maker_id" ng-model="device_make_name">
+            <select class="form-control inmate-search-box" name="gadget_maker_id" required=""
+                    ng-model="device_make_name">
                 <option selected value="{{ model.id }}" ng-repeat="model in models">{{ model.name }}</option>
             </select>
         </div>
 
         <div class="form-group">
             <label>Provide Device Model</label>
-            <input type="text" placeholder="e.g Galaxy S5"
+            <input required="" type="text" placeholder="e.g Galaxy S5"
                    ng-blur="fetchImages(device_make_name + ' ' +device_model_name)" ng-model="device_model_name"
                    name="model" class="form-control inmate-search-box"/>
         </div>
