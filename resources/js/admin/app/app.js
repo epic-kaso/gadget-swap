@@ -697,7 +697,7 @@ app.config(function($httpProvider){
         var error = function(response){
             if (response.status = 401){
                 delete sessionStorage.authenticated;
-                $location.path('/');
+                location.href = $location.host() + '/auth/login';
                 //Flash.show(response.data.flash)
 
             }
@@ -711,6 +711,19 @@ app.config(function($httpProvider){
     $httpProvider.interceptors.push(interceptor);
 
 });
+
+app.factory('sessionInjector', [function () {
+    var sessionInjector = {
+        request: function (config) {
+            config.headers['X-Requested-With'] = 'XMLHttpRequest';
+            return config;
+        }
+    };
+    return sessionInjector;
+}]);
+app.config(['$httpProvider', function ($httpProvider) {
+    $httpProvider.interceptors.push('sessionInjector');
+}]);
 
 app.run(function ($http, $rootScope, CSRF_TOKEN, PreloadTemplates) {
     PreloadTemplates.run();
