@@ -163,7 +163,7 @@ app.factory('PreloadTemplates', function ($templateCache, $http) {
         "partials/ticket/add/step-one.html",
         "partials/ticket/add/step-two.html",
         "partials/ticket/add/step-three.html",
-        "partials/ticket/add/final.html",
+        "partials/ticket/add/final.html"
     ];
     return {
         run: function () {

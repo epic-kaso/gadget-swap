@@ -903,11 +903,6 @@ app.factory('PreloadTemplates', function ($templateCache, $http) {
         "partials/networks/dashboard.html",
         "partials/device_models/dashboard.html",
         "partials/device_brands/dashboard.html",
-        "partials/ticket/add/base.html",
-        "partials/ticket/add/step-one.html",
-        "partials/ticket/add/step-two.html",
-        "partials/ticket/add/step-three.html",
-        "partials/ticket/add/final.html",
         "partials/networks/add.html",
         "partials/device_models/add.html",
         "partials/device_brands/add.html",
@@ -920,7 +915,12 @@ app.factory('PreloadTemplates', function ($templateCache, $http) {
         "partials/ticket/evaluation/terms.html",
         "partials/ticket/done.html",
         "partials/ticket/search.html",
-        'partials/ticket/list.html'
+        'partials/ticket/list.html',
+        "partials/ticket/add/base.html",
+        "partials/ticket/add/step-one.html",
+        "partials/ticket/add/step-two.html",
+        "partials/ticket/add/step-three.html",
+        "partials/ticket/add/final.html"
     ];
     return {
         run: function () {
