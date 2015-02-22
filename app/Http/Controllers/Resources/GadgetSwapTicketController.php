@@ -17,9 +17,15 @@ class GadgetSwapTicketController extends Controller
     public function index()
     {
         $limit = Input::get('limit', null);
+        $q = Input::get('q', null);
+
+        if (!is_null($q)) {
+            return GadgetSwapTicket::where('customer_last_name', 'like', "%$q%")
+                ->orWhere('customer_first_name', 'like', "%$q%")
+                ->get();
+        }
 
         if (is_null($limit)) {
-
             return GadgetSwapTicket::with('gadget.gadget_maker', 'size', 'network')->get();
         } else {
             return GadgetSwapTicket::with('gadget.gadget_maker', 'size', 'network')->take($limit)->latest()->get();

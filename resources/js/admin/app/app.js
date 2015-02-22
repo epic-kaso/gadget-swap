@@ -22,6 +22,26 @@ app.config(['$urlRouterProvider','$stateProvider',
             }
         );
 
+        $stateProvider.state('devices.search',
+            {
+                url: '/search?q',
+                templateUrl: 'partials/device_models/search.html',
+                controller: function ($scope, result, $stateParams) {
+                    console.log(result);
+                    $scope.result = result;
+                    $scope.search = $stateParams.q;
+                },
+                resolve: {
+                    'result': function ($stateParams, DevicesServ) {
+                        return DevicesServ.query({q: $stateParams.q});
+                    },
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
+
         $stateProvider.state('devices.menu',
             {
                 url: '/menu',
@@ -127,6 +147,26 @@ app.config(['$urlRouterProvider','$stateProvider',
             }
         );
 
+        $stateProvider.state('device_brands.search',
+            {
+                url: '/search?q',
+                templateUrl: 'partials/device_brands/search.html',
+                controller: function ($scope, result, $stateParams) {
+                    console.log(result);
+                    $scope.result = result;
+                    $scope.search = $stateParams.q;
+                },
+                resolve: {
+                    'result': function ($stateParams, DeviceBrandsServ) {
+                        return DeviceBrandsServ.query({q: $stateParams.q});
+                    },
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
+                }
+            }
+        );
+
         $stateProvider.state('device_brands.menu',
             {
                 url: '/menu',
@@ -193,6 +233,26 @@ app.config(['$urlRouterProvider','$stateProvider',
                 templateUrl:'partials/networks/dashboard.html',
                 controller: function($state){
                     $state.go('networks.menu');
+                }
+            }
+        );
+
+        $stateProvider.state('networks.search',
+            {
+                url: '/search?q',
+                templateUrl: 'partials/networks/search.html',
+                controller: function ($scope, result, $stateParams) {
+                    console.log(result);
+                    $scope.result = result;
+                    $scope.search = $stateParams.q;
+                },
+                resolve: {
+                    'result': function ($stateParams, NetworksServ) {
+                        return NetworksServ.query({q: $stateParams.q});
+                    },
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }
                 }
             }
         );
@@ -659,12 +719,12 @@ app.config(['$urlRouterProvider','$stateProvider',
             templateUrl:'partials/ticket/search.html',
             controller: function($scope,result,$stateParams){
                 console.log(result);
-                $scope.result = result.data;
+                $scope.result = result;
                 $scope.search = $stateParams.q;
             },
             resolve: {
-                'result': function($stateParams,$http){
-                    return $http.get('/search',{q: $stateParams.q});
+                'result': function ($stateParams, TicketServ) {
+                    return TicketServ.query({q: $stateParams.q});
                 },
                 'hasHistory': function($rootScope){
                     $rootScope.hasHistory = true;

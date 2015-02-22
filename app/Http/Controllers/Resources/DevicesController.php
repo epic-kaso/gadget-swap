@@ -29,6 +29,12 @@ class DevicesController extends Controller {
 	 */
 	public function index()
 	{
+        $q = Input::get('q', null);
+
+        if (!is_null($q)) {
+            return Gadget::where('model', 'like', "%$q%")
+                ->get();
+        }
         return $this->devicesRepository->getAllDevices();
 	}
 

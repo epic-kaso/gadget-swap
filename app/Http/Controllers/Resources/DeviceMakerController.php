@@ -25,6 +25,13 @@ class DeviceMakerController extends Controller {
 	 */
 	public function index()
 	{
+        $q = Input::get('q', null);
+
+        if (!is_null($q)) {
+            return GadgetMaker::where('name', 'like', "%$q%")
+                ->get();
+        }
+
         if (Input::has('only')) {
             return GadgetMaker::all();
         }
