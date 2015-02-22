@@ -6,47 +6,47 @@
 
 var app =  angular.module('adminApp.services',[]);
 
-app.factory('TicketServ', function($resource,URLServ){
+app.factory('TicketServ', ['$resource', 'URLServ', function ($resource, URLServ) {
     return $resource('/resources/ticket/:id', {id: '@id'}, {
         'update': {method: 'PUT'}
     });//URLServ.getResourceUrlFor("ticket"));
-});
+}]);
 
-app.factory('DeviceBrandsServ', function ($resource, URLServ) {
+app.factory('DeviceBrandsServ', ['$resource', 'URLServ', function ($resource, URLServ) {
     return $resource('/resources/device_makers/:id', {id: '@id'}, {
         'update': {method: 'PUT'}
     });//URLServ.getResourceUrlFor("ticket"));
-});
+}]);
 
 
-app.factory('DevicesServ', function ($resource, URLServ) {
+app.factory('DevicesServ', ['$resource', 'URLServ', function ($resource, URLServ) {
     return $resource('/resources/devices/:id', {id: '@id'}, {
         'update': {method: 'PUT'}
     });//URLServ.getResourceUrlFor("ticket"));
-});
+}]);
 
 
-app.factory('MailServ', function ($resource) {
+app.factory('MailServ', ['$resource', function ($resource) {
     return $resource('/resources/mail', null);//URLServ.getResourceUrlFor("ticket"));
-});
+}]);
 
 
-app.factory('NetworksServ', function ($resource, URLServ) {
+app.factory('NetworksServ', ['$resource', 'URLServ', function ($resource, URLServ) {
     return $resource('/resources/networks/:id', {id: '@id'}, {
         'update': {method: 'PUT'}
     });//URLServ.getResourceUrlFor("ticket"));
-});
+}]);
 
 
-app.factory('URLServ', function($rootScope){
+app.factory('URLServ', ['$rootScope', function ($rootScope) {
     return {
         "getResourceUrlFor": function(name){
             return $rootScope.data.resources[name];
         }
     }
-});
+}]);
 
-app.factory('GadgetEvaluationReward', function (NetworksServ, $cookieStore) {
+app.factory('GadgetEvaluationReward', ['NetworksServ', '$cookieStore', function (NetworksServ, $cookieStore) {
     var reward = {result: ''};
 
     function getBaseLinePrice(device, size) {
@@ -95,9 +95,9 @@ app.factory('GadgetEvaluationReward', function (NetworksServ, $cookieStore) {
             return network;
         }
     }
-});
+}]);
 
-app.factory('GradeDeviceServ', function ($rootScope) {
+app.factory('GradeDeviceServ', ['$rootScope', function ($rootScope) {
 
     var threshold = {
         'A': 8.1,
@@ -134,9 +134,9 @@ app.factory('GradeDeviceServ', function ($rootScope) {
             return generateGradeLetter(gradePoint);
         }
     }
-});
+}]);
 
-app.factory('PreloadTemplates', function ($templateCache, $http) {
+app.factory('PreloadTemplates', ['$templateCache', '$http', function ($templateCache, $http) {
     var templates = [
         "partials/ticket/menu.html",
         "partials/networks/menu.html",
@@ -175,10 +175,10 @@ app.factory('PreloadTemplates', function ($templateCache, $http) {
             });
         }
     }
-});
+}]);
 
 
-app.factory('ImageFetcher', function ($http, $q) {
+app.factory('ImageFetcher', ['$http', '$q', function ($http, $q) {
     var searchUrl = "https://www.googleapis.com/customsearch/v1?key=AIzaSyAJ_8QtWECvWTcrukqvfLmRWdARJ2bI2rk&cx=011505858740112002603:dap5yb7naau&q=";
 
     return {
@@ -213,4 +213,4 @@ app.factory('ImageFetcher', function ($http, $q) {
         }
     }
 
-});
+}]);

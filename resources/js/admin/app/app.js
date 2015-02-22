@@ -10,14 +10,17 @@ var app = angular.module("AdminApp",
 
 app.config(['$urlRouterProvider','$stateProvider',
     function($urlRouterProvider,$stateProvider){
-
-
         $stateProvider.state('devices',
             {
                 url: '/devices',
+                abstract: true,
                 templateUrl:'partials/device_models/dashboard.html',
-                controller: function($state){
-                    $state.go('devices.menu');
+                controller: function () {
+                },
+                resolve: {
+                    'active': ['$rootScope', function ($rootScope) {
+                        $rootScope.active_nav = 'devices';
+                    }]
                 }
             }
         );
@@ -26,18 +29,18 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/search?q',
                 templateUrl: 'partials/device_models/search.html',
-                controller: function ($scope, result, $stateParams) {
+                controller: ['$scope', 'result', '$stateParams', function ($scope, result, $stateParams) {
                     console.log(result);
                     $scope.result = result;
                     $scope.search = $stateParams.q;
-                },
+                }],
                 resolve: {
-                    'result': function ($stateParams, DevicesServ) {
+                    'result': ['$stateParams', 'DevicesServ', function ($stateParams, DevicesServ) {
                         return DevicesServ.query({q: $stateParams.q});
-                    },
-                    'hasHistory': function ($rootScope) {
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 }
             }
         );
@@ -49,9 +52,9 @@ app.config(['$urlRouterProvider','$stateProvider',
                 controller: function () {
                 },
                 resolve:{
-                    'hasHistory': function($rootScope){
-                        $rootScope.hasHistory = false;
-                    }
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
                 }
             }
         );
@@ -61,14 +64,14 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/add',
                 templateUrl:'partials/device_models/add.html',
                 resolve:{
-                    'hasHistory': function($rootScope){
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    },
-                    'DeviceBrands': function (DeviceBrandsServ) {
+                    }],
+                    'DeviceBrands': ['DeviceBrandsServ', function (DeviceBrandsServ) {
                         return DeviceBrandsServ.query({only: true});
-                    }
+                    }]
                 },
-                controller: function ($scope, ImageFetcher, DeviceBrands) {
+                controller: ['$scope', 'ImageFetcher', 'DeviceBrands', function ($scope, ImageFetcher, DeviceBrands) {
 
                     $scope.models = DeviceBrands;
 
@@ -107,7 +110,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                         });
                         $scope.baseLinePriceString = temp.join();
                     }
-                }
+                }]
             }
         );
 
@@ -116,14 +119,14 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/list',
                 templateUrl:'partials/device_models/list.html',
                 resolve:{
-                    'hasHistory': function($rootScope){
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    },
-                    'Devices': function (DevicesServ) {
+                    }],
+                    'Devices': ['DevicesServ', function (DevicesServ) {
                         return DevicesServ.query({});
-                    }
+                    }]
                 },
-                controller: function ($scope, DevicesServ, Devices) {
+                controller: ['$scope', 'DevicesServ', 'Devices', function ($scope, DevicesServ, Devices) {
                     $scope.models = Devices;
                     $scope.deleteItem = function (id) {
                         DevicesServ.delete({id: id}, function (response) {
@@ -132,7 +135,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                             alert(response);
                         });
                     }
-                }
+                }]
             }
         );
 
@@ -140,9 +143,16 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('device_brands',
             {
                 url: '/device_brands',
+                abstract: true,
                 templateUrl:'partials/device_brands/dashboard.html',
-                controller: function($state){
-                    $state.go('device_brands.menu');
+                controller: function () {
+
+                }
+                ,
+                resolve: {
+                    'active': ['$rootScope', function ($rootScope) {
+                        $rootScope.active_nav = 'device_brands';
+                    }]
                 }
             }
         );
@@ -151,18 +161,18 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/search?q',
                 templateUrl: 'partials/device_brands/search.html',
-                controller: function ($scope, result, $stateParams) {
+                controller: ['$scope', 'result', '$stateParams', function ($scope, result, $stateParams) {
                     console.log(result);
                     $scope.result = result;
                     $scope.search = $stateParams.q;
-                },
+                }],
                 resolve: {
-                    'result': function ($stateParams, DeviceBrandsServ) {
+                    'result': ['$stateParams', 'DeviceBrandsServ', function ($stateParams, DeviceBrandsServ) {
                         return DeviceBrandsServ.query({q: $stateParams.q});
-                    },
-                    'hasHistory': function ($rootScope) {
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 }
             }
         );
@@ -174,9 +184,9 @@ app.config(['$urlRouterProvider','$stateProvider',
                 controller: function () {
                 },
                 resolve:{
-                    'hasHistory': function($rootScope){
-                        $rootScope.hasHistory = false;
-                    }
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
                 }
             }
         );
@@ -186,11 +196,11 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/add',
                 templateUrl:'partials/device_brands/add.html',
                 resolve:{
-                    'hasHistory': function($rootScope){
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 },
-                controller: function($scope,ImageFetcher){
+                controller: ['$scope', 'ImageFetcher', function ($scope, ImageFetcher) {
 
                     $scope.fetchImages = function(name){
                         var promise = ImageFetcher.fetch(name);
@@ -198,7 +208,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                             $scope.images = images;
                         });
                     };
-                }
+                }]
             }
         );
 
@@ -207,14 +217,14 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/list',
                 templateUrl:'partials/device_brands/list.html',
                 resolve:{
-                    'hasHistory': function($rootScope){
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    },
-                    'DeviceBrands': function (DeviceBrandsServ) {
+                    }],
+                    'DeviceBrands': ['DeviceBrandsServ', function (DeviceBrandsServ) {
                         return DeviceBrandsServ.query({only: true});
-                    }
+                    }]
                 },
-                controller: function ($scope, $http, DeviceBrandsServ, DeviceBrands) {
+                controller: ['$scope', 'DeviceBrandsServ', 'DeviceBrands', function ($scope, DeviceBrandsServ, DeviceBrands) {
                     $scope.brands = DeviceBrands;
                     $scope.deleteItem = function(id){
                         DeviceBrandsServ.delete({id: id}, function (response) {
@@ -223,16 +233,22 @@ app.config(['$urlRouterProvider','$stateProvider',
                             alert(response);
                         });
                     }
-                }
+                }]
             }
         );
 
         $stateProvider.state('networks',
             {
                 url: '/networks',
+                abstract: true,
                 templateUrl:'partials/networks/dashboard.html',
-                controller: function($state){
-                    $state.go('networks.menu');
+                controller: function () {
+                    //$state.go('networks.menu');
+                },
+                resolve: {
+                    'active': ['$rootScope', function ($rootScope) {
+                        $rootScope.active_nav = 'networks';
+                    }]
                 }
             }
         );
@@ -241,18 +257,18 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/search?q',
                 templateUrl: 'partials/networks/search.html',
-                controller: function ($scope, result, $stateParams) {
+                controller: ['$scope', 'result', '$stateParams', function ($scope, result, $stateParams) {
                     console.log(result);
                     $scope.result = result;
                     $scope.search = $stateParams.q;
-                },
+                }],
                 resolve: {
-                    'result': function ($stateParams, NetworksServ) {
+                    'result': ['$stateParams', 'NetworksServ', function ($stateParams, NetworksServ) {
                         return NetworksServ.query({q: $stateParams.q});
-                    },
-                    'hasHistory': function ($rootScope) {
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 }
             }
         );
@@ -264,9 +280,9 @@ app.config(['$urlRouterProvider','$stateProvider',
                 controller: function () {
                 },
                 resolve:{
-                    'hasHistory': function($rootScope){
-                        $rootScope.hasHistory = false;
-                    }
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
                 }
             }
         );
@@ -276,11 +292,11 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/add',
                 templateUrl:'partials/networks/add.html',
                 resolve:{
-                    'hasHistory': function($rootScope){
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 },
-                controller: function($scope,ImageFetcher){
+                controller: ['$scope', 'ImageFetcher', function ($scope, ImageFetcher) {
 
                     $scope.fetchImages = function(name){
                         var promise = ImageFetcher.fetch(name);
@@ -288,7 +304,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                             $scope.images = images;
                         });
                     };
-                }
+                }]
             }
         );
 
@@ -297,14 +313,14 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/list',
                 templateUrl:'partials/networks/list.html',
                 resolve:{
-                    'Networks': function (NetworksServ) {
+                    'Networks': ['NetworksServ', function (NetworksServ) {
                         return NetworksServ.query({});
-                    },
-                    'hasHistory': function($rootScope){
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 },
-                controller: function ($scope, Networks, NetworksServ) {
+                controller: ['$scope', 'Networks', 'NetworksServ', function ($scope, Networks, NetworksServ) {
                     $scope.networks = Networks;
                     $scope.deleteItem = function(id){
                         NetworksServ.delete({id: id}, function (response) {
@@ -313,16 +329,21 @@ app.config(['$urlRouterProvider','$stateProvider',
                             alert(response);
                         });
                     }
-                }
+                }]
             }
         );
 
     $stateProvider.state('ticket',
         {
             url: '/ticket',
+            abstract: true,
             templateUrl:'partials/ticket/dashboard.html',
-            controller: function($state){
-                $state.go('ticket.menu');
+            controller: function () {
+            },
+            resolve: {
+                'active': ['$rootScope', function ($rootScope) {
+                    $rootScope.active_nav = 'ticket';
+                }]
             }
         }
     );
@@ -331,16 +352,16 @@ app.config(['$urlRouterProvider','$stateProvider',
         {
             url: '/menu',
             templateUrl:'partials/ticket/menu.html',
-            controller: function ($scope, Tickets) {
+            controller: ['$scope', 'Tickets', function ($scope, Tickets) {
                 $scope.tickets = Tickets;
-            },
+            }],
             resolve:{
-                'hasHistory': function($rootScope){
-                    $rootScope.hasHistory = false;
-                },
-                'Tickets': function (TicketServ) {
+                'hasHistory': ['$rootScope', function ($rootScope) {
+                    $rootScope.hasHistory = true;
+                }],
+                'Tickets': ['TicketServ', function (TicketServ) {
                     return TicketServ.query({limit: 6});
-                }
+                }]
             }
         }
     );
@@ -349,7 +370,7 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/list',
                 templateUrl: 'partials/ticket/list.html',
-                controller: function ($scope, Tickets, TicketServ) {
+                controller: ['$scope', 'Tickets', 'TicketServ', function ($scope, Tickets, TicketServ) {
                     $scope.tickets = Tickets;
 
                     $scope.deleteItem = function (id) {
@@ -359,14 +380,14 @@ app.config(['$urlRouterProvider','$stateProvider',
                             alert(response);
                         });
                     }
-                },
+                }],
                 resolve: {
-                    'hasHistory': function ($rootScope) {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    },
-                    'Tickets': function (TicketServ) {
+                    }],
+                    'Tickets': ['TicketServ', function (TicketServ) {
                         return TicketServ.query();
-                    }
+                    }]
                 }
             }
         );
@@ -375,13 +396,13 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/add',
                 templateUrl: 'partials/ticket/add/base.html',
-                controller: function ($scope, $state) {
+                controller: function () {
 
                 },
                 resolve:{
-                    'hasHistory': function($rootScope){
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 }
             }
         );
@@ -390,7 +411,7 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/step-one',
                 templateUrl: 'partials/ticket/add/step-one.html',
-                controller: function ($scope, TicketServ, $state) {
+                controller: ['$scope', 'TicketServ', '$state', function ($scope, TicketServ, $state) {
                     $scope.createTicket = function (ticket) {
                         TicketServ.save(ticket, function (ticket) {
                             next(ticket.id);
@@ -404,11 +425,11 @@ app.config(['$urlRouterProvider','$stateProvider',
                     function next(id) {
                         $state.go('ticket.add.stepTwo', {'id': id});
                     }
-                },
+                }],
                 resolve: {
-                    'hasHistory': function ($rootScope) {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 }
             }
         );
@@ -417,7 +438,7 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/step-two/{id}',
                 templateUrl: 'partials/ticket/add/step-two.html',
-                controller: function ($scope, Ticket, $state) {
+                controller: ['$scope', 'Ticket', '$state', function ($scope, Ticket, $state) {
                     $scope.test = {
                         deviceBoot: '',
                         callUnlock: '',
@@ -459,14 +480,14 @@ app.config(['$urlRouterProvider','$stateProvider',
                             $scope.message = "Sorry, Device doesn't Qualify to Continue";
                         }
                     }
-                },
+                }],
                 resolve: {
-                    'hasHistory': function ($rootScope) {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    },
-                    'Ticket': function ($state, $stateParams) {
+                    }],
+                    'Ticket': ['$state', '$stateParams', function ($state, $stateParams) {
                         return {id: $stateParams.id};
-                    }
+                    }]
                 }
             }
         );
@@ -475,7 +496,7 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/step-three/{id}',
                 templateUrl: 'partials/ticket/add/step-three.html',
-                controller: function ($scope, GradeDeviceServ, $state, Ticket, TicketServ) {
+                controller: ['$scope', 'GradeDeviceServ', '$state', 'Ticket', 'TicketServ', function ($scope, GradeDeviceServ, $state, Ticket, TicketServ) {
                     $scope.test = {
                         touchScreen: {rating: '', weight: 0.625},
                         lcdScreen: {rating: '', weight: 0.625},
@@ -505,14 +526,14 @@ app.config(['$urlRouterProvider','$stateProvider',
                             'grade': $scope.grade
                         });
                     }
-                },
+                }],
                 resolve: {
-                    'hasHistory': function ($rootScope) {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    },
-                    'Ticket': function (TicketServ, $state, $stateParams) {
+                    }],
+                    'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
                         return TicketServ.get({id: $stateParams.id});
-                    }
+                    }]
                 }
             }
         );
@@ -521,20 +542,20 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/final/{id}/{grade}',
                 templateUrl: 'partials/ticket/add/final.html',
-                controller: function ($scope, Ticket, $state, $stateParams) {
+                controller: ['$scope', 'Ticket', '$state', '$stateParams', function ($scope, Ticket, $state, $stateParams) {
                     $scope.grade = $stateParams.grade || Ticket.device_grade;
 
                     $scope.next = function () {
                         $state.go('ticket.evaluate', {'id': Ticket.id, 'grade': $scope.grade});
                     }
-                },
+                }],
                 resolve: {
-                    'hasHistory': function ($rootScope) {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    },
-                    'Ticket': function (TicketServ, $state, $stateParams) {
+                    }],
+                    'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
                         return TicketServ.get({id: $stateParams.id});
-                    }
+                    }]
                 }
             }
         );
@@ -542,7 +563,8 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('ticket.evaluate', {
             url: '/evaluate/{id}/{grade}',
             templateUrl: 'partials/ticket/evaluation/evaluation.html',
-            controller: function ($scope, $stateParams, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
+            controller: ['$scope', '$stateParams', '$filter', ' Networks', 'Ticket', 'TicketServ', 'DeviceBrandsServ', 'GadgetEvaluationReward', '$state',
+                function ($scope, $stateParams, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
                 $scope.ticket = Ticket;
 
                 $scope.selected = {grade: $stateParams.grade || Ticket.device_grade};
@@ -600,17 +622,17 @@ app.config(['$urlRouterProvider','$stateProvider',
                     TicketServ.update({id: Ticket.id}, Ticket);
                 }
 
-            },
+                }],
             resolve: {
-                'hasHistory': function ($rootScope) {
+                'hasHistory': ['$rootScope', function ($rootScope) {
                     $rootScope.hasHistory = true;
-                },
-                'Ticket': function (TicketServ, $state, $stateParams) {
+                }],
+                'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
                     return TicketServ.get({id: $stateParams.id});
-                },
-                'Networks': function (NetworksServ) {
+                }],
+                'Networks': ['NetworksServ', function (NetworksServ) {
                     return NetworksServ.query({});
-                }
+                }]
             }
         });
 
@@ -618,7 +640,8 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/reward/{id}',
                 templateUrl: 'partials/ticket/evaluation/reward.html',
-                controller: function ($scope, Ticket, TicketServ, GadgetEvaluationReward, Airtel, $state) {
+                controller: ['$scope', 'Ticket', 'TicketServ', 'GadgetEvaluationReward', 'Airtel', '$state',
+                    function ($scope, Ticket, TicketServ, GadgetEvaluationReward, Airtel, $state) {
                     $scope.reward = GadgetEvaluationReward.getLastReward();// Ticket.reward;
                     $scope.ticket = Ticket;
                     $scope.airtel = Airtel;
@@ -637,17 +660,17 @@ app.config(['$urlRouterProvider','$stateProvider',
 
                         TicketServ.update({id: Ticket.id}, Ticket);
                     }
-                },
+                    }],
                 resolve: {
-                    'Airtel': function (GadgetEvaluationReward) {
+                    'Airtel': ['GadgetEvaluationReward', function (GadgetEvaluationReward) {
                         return GadgetEvaluationReward.fetchAirtelBonus();
-                    },
-                    'Ticket': function (TicketServ, $state, $stateParams) {
-                        return TicketServ.get({id: $stateParams.id});
-                    },
-                    'hasHistory': function ($rootScope) {
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }],
+                    'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
+                    }]
                 }
             }
         );
@@ -656,15 +679,15 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/accept-terms/{id}',
                 templateUrl: 'partials/ticket/evaluation/terms.html',
-                controller: function ($scope, $stateParams, $state) {
+                controller: ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
                     $scope.next = function () {
                         $state.go('ticket.review-ticket', {id: $stateParams.id});
                     };
-                },
+                }],
                 resolve: {
-                    'hasHistory': function ($rootScope) {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 }
             }
         );
@@ -674,7 +697,8 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/review/{id}',
                 templateUrl: 'partials/ticket/evaluation/review.html',
-                controller: function ($scope, Ticket, TicketServ, $state, MailServ) {
+                controller: ['$scope', 'Ticket', 'TicketServ', '$state', 'MailServ',
+                    function ($scope, Ticket, TicketServ, $state, MailServ) {
                     $scope.ticket = Ticket;
 
                     $scope.next = function () {
@@ -687,14 +711,15 @@ app.config(['$urlRouterProvider','$stateProvider',
 
                         $state.go('ticket.all-done');
                     }
-                },
+                    }],
                 resolve: {
-                    'Ticket': function (TicketServ, $state, $stateParams) {
+                    'Ticket': ['TicketServ', '$state', '$stateParams',
+                        function (TicketServ, $state, $stateParams) {
                         return TicketServ.get({id: $stateParams.id});
-                    },
-                    'hasHistory': function ($rootScope) {
+                        }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 }
             }
         );
@@ -703,12 +728,12 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/done',
                 templateUrl: 'partials/ticket/done.html',
-                controller: function ($scope) {
+                controller: function () {
                 },
                 resolve: {
-                    'hasHistory': function ($rootScope) {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }
+                    }]
                 }
             }
         );
@@ -717,18 +742,18 @@ app.config(['$urlRouterProvider','$stateProvider',
         {
             url: '/search?q',
             templateUrl:'partials/ticket/search.html',
-            controller: function($scope,result,$stateParams){
+            controller: ['$scope', 'result', '$stateParams', function ($scope, result, $stateParams) {
                 console.log(result);
                 $scope.result = result;
                 $scope.search = $stateParams.q;
-            },
+            }],
             resolve: {
-                'result': function ($stateParams, TicketServ) {
+                'result': ['$stateParams', 'TicketServ', function ($stateParams, TicketServ) {
                     return TicketServ.query({q: $stateParams.q});
-                },
-                'hasHistory': function($rootScope){
+                }],
+                'hasHistory': ['$rootScope', function ($rootScope) {
                     $rootScope.hasHistory = true;
-                }
+                }]
             }
         }
     );
@@ -737,7 +762,12 @@ app.config(['$urlRouterProvider','$stateProvider',
         {
             url: '/config',
             templateUrl:'partials/config/form.html',
-            controller: function($scope){
+            controller: function () {
+            },
+            resolve: {
+                'active': ['$rootScope', function ($rootScope) {
+                    $rootScope.active_nav = 'config';
+                }]
             }
         }
     );
@@ -746,9 +776,9 @@ app.config(['$urlRouterProvider','$stateProvider',
     $urlRouterProvider.otherwise('/ticket/menu');
 }]);
 
-app.config(function($httpProvider){
+app.config(['$httpProvider', function ($httpProvider) {
 
-    var interceptor = function($rootScope,$location,$q){
+    var interceptor = ['$rootScope', '$location', '$q', function ($rootScope, $location, $q) {
 
         var success = function(response){
             return response
@@ -767,10 +797,10 @@ app.config(function($httpProvider){
         return function(promise){
             return promise.then(success, error)
         }
-    };
+    }];
     $httpProvider.interceptors.push(interceptor);
 
-});
+}]);
 
 app.factory('sessionInjector', [function () {
     var sessionInjector = {
@@ -785,10 +815,11 @@ app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('sessionInjector');
 }]);
 
-app.run(function ($http, $rootScope, CSRF_TOKEN, PreloadTemplates) {
+app.run(['$http', '$rootScope', 'CSRF_TOKEN', 'PreloadTemplates',
+    function ($http, $rootScope, CSRF_TOKEN, PreloadTemplates) {
     PreloadTemplates.run();
     $rootScope.CSRF_TOKEN = CSRF_TOKEN;
     $http.defaults.headers.common['csrf_token'] = CSRF_TOKEN;
-});
+    }]);
 
 
