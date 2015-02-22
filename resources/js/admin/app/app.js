@@ -2,7 +2,11 @@
  * Created by Ak on 2/19/2015.
  */
 var app = angular.module("AdminApp",
-    ['ui.select', 'ngSanitize', 'ui.bootstrap', 'ui.router', 'ngAnimate', 'ngResource', 'angular-loading-bar', 'adminApp.directives', 'adminApp.services']);
+    ['ui.select', 'ngSanitize',
+        'ui.bootstrap', 'ui.router',
+        'ngAnimate', 'ngResource',
+        'angular-loading-bar', 'adminApp.directives',
+        'adminApp.services', 'ngCookies']);
 
 app.config(['$urlRouterProvider','$stateProvider',
     function($urlRouterProvider,$stateProvider){
@@ -469,6 +473,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                 $scope.refreshBrands = function (brand) {
                     var params = {q: brand};
                     DeviceBrandsServ.query({}, function (brands) {
+                        console.log(brands);
                         $scope.device_brands = brands;
                     });
                 };
@@ -527,8 +532,8 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/reward/{id}',
                 templateUrl: 'partials/ticket/evaluation/reward.html',
-                controller: function ($scope, Ticket, TicketServ, Airtel, $state) {
-                    $scope.reward = Ticket.reward;
+                controller: function ($scope, Ticket, TicketServ, GadgetEvaluationReward, Airtel, $state) {
+                    $scope.reward = GadgetEvaluationReward.getLastReward();// Ticket.reward;
                     $scope.ticket = Ticket;
                     $scope.airtel = Airtel;
 
