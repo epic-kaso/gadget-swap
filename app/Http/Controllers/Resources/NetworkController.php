@@ -93,7 +93,7 @@ class NetworkController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        return Network::destroy($id);
 	}
 
 }

@@ -86,7 +86,7 @@ class DeviceMakerController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        return GadgetMaker::destroy($id);
 	}
 
 }
