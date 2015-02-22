@@ -454,12 +454,12 @@ app.config(['$urlRouterProvider','$stateProvider',
         );
 
         $stateProvider.state('ticket.evaluate', {
-            url: '/evaluate/{id}',
+            url: '/evaluate/{id}/{grade}',
             templateUrl: 'partials/ticket/evaluation/evaluation.html',
-            controller: function ($scope, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
+            controller: function ($scope, $stateParams, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
                 $scope.ticket = Ticket;
 
-                $scope.selected = {grade: Ticket.device_grade};
+                $scope.selected = {grade: $stateParams.grade || Ticket.device_grade};
 
                 $scope.networks = Networks;
 
@@ -781,21 +781,27 @@ app.factory('GadgetEvaluationReward', function (NetworksServ, $cookieStore) {
         return baseLinePrice;
     }
 
-    function calculatePriceFromGrade(device, baseLinePrice) {
-        switch (device.grade) {
+    function calculatePriceFromGrade(device, grade, baseLinePrice) {
+        console.log(baseLinePrice);
+        console.log(device.brand.normal_condition);
+        console.log(device.brand);
+        console.log(grade);
+
+        switch (grade) {
             case 'A':
-                return (parseInt(device.brand.normal_condition) / 100) * baseLinePrice;
+                return parseFloat(parseInt(device.brand.normal_condition) / 100.0) * baseLinePrice;
             case 'B':
-                return (parseInt(device.brand.scratched_condition) / 100) * baseLinePrice;
+                return parseFloat(parseInt(device.brand.scratched_condition) / 100.0) * baseLinePrice;
             case 'C':
-            default:
-                return (parseInt(device.brand.bad_condition) / 100) * baseLinePrice;
+                return parseFloat(parseInt(device.brand.bad_condition) / 100.0) * baseLinePrice;
         }
     }
 
     return {
         "calculate": function (model) {
-            reward.result = calculatePriceFromGrade(model, getBaseLinePrice(model.device, model.size));
+            reward.result = calculatePriceFromGrade(model, model.grade, getBaseLinePrice(model.device, model.size));
+            console.log(reward.result);
+
             $cookieStore.put('last-reward', reward.result);
             return reward.result;
         },

@@ -454,12 +454,12 @@ app.config(['$urlRouterProvider','$stateProvider',
         );
 
         $stateProvider.state('ticket.evaluate', {
-            url: '/evaluate/{id}',
+            url: '/evaluate/{id}/{grade}',
             templateUrl: 'partials/ticket/evaluation/evaluation.html',
-            controller: function ($scope, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
+            controller: function ($scope, $stateParams, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
                 $scope.ticket = Ticket;
 
-                $scope.selected = {grade: Ticket.device_grade};
+                $scope.selected = {grade: $stateParams.grade || Ticket.device_grade};
 
                 $scope.networks = Networks;
 
