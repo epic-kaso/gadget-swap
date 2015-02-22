@@ -1,0 +1,21 @@
+<div class="inmates-menu-items">
+    <div class="menu-item inmate-item" ng-repeat="ticket in tickets">
+        <div class="inmate-pic">
+            <span class="fa fa-user"></span>
+        </div>
+
+        <div class="inmate-bio">
+            <h4>{{ ticket.customer_last_name}}, {{ ticket.customer_first_name }}</h4>
+            <h4>{{ ticket.hashcode }}</h4>
+
+            <a class="btn btn-danger" ng-click="deleteItem(ticket.id)">Delete</a>
+        </div>
+    </div>
+</div>
+
+<nav>
+    <ul class="pager search-result-pager">
+        <li><a href="#"><span class="fa fa-chevron-left"></span></a></li>
+        <li><a href="#"><span class="fa fa-chevron-right"></span></a></li>
+    </ul>
+</nav>

@@ -285,6 +285,32 @@ app.config(['$urlRouterProvider','$stateProvider',
         }
     );
 
+        $stateProvider.state('ticket.list',
+            {
+                url: '/list',
+                templateUrl: 'partials/ticket/list.html',
+                controller: function ($scope, Tickets, TicketServ) {
+                    $scope.tickets = Tickets;
+
+                    $scope.deleteItem = function (id) {
+                        TicketServ.delete({id: id}, function (response) {
+                            location.reload();
+                        }, function (response) {
+                            alert(response);
+                        });
+                    }
+                },
+                resolve: {
+                    'hasHistory': function ($rootScope) {
+                        $rootScope.hasHistory = false;
+                    },
+                    'Tickets': function (TicketServ) {
+                        return TicketServ.query();
+                    }
+                }
+            }
+        );
+
         $stateProvider.state('ticket.add',
             {
                 url: '/add',
