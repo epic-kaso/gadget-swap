@@ -5,16 +5,16 @@ var app = angular.module("AdminApp",
     ['ui.select', 'ngSanitize',
         'ui.bootstrap', 'ui.router',
         'ngAnimate', 'ngResource',
-        'angular-loading-bar', 'adminApp.directives','adminApp.controllers',
+        'angular-loading-bar', 'adminApp.directives', 'adminApp.controllers',
         'adminApp.services', 'ngCookies']);
 
-app.config(['$urlRouterProvider','$stateProvider',
-    function($urlRouterProvider,$stateProvider){
+app.config(['$urlRouterProvider', '$stateProvider',
+    function ($urlRouterProvider, $stateProvider) {
         $stateProvider.state('devices',
             {
                 url: '/devices',
                 abstract: true,
-                templateUrl:'partials/device_models/dashboard.html',
+                templateUrl: 'partials/device_models/dashboard.html',
                 controller: function () {
                 },
                 resolve: {
@@ -48,10 +48,10 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('devices.menu',
             {
                 url: '/menu',
-                templateUrl:'partials/device_models/menu.html',
+                templateUrl: 'partials/device_models/menu.html',
                 controller: function () {
                 },
-                resolve:{
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = false;
                     }]
@@ -62,8 +62,8 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('devices.add',
             {
                 url: '/add',
-                templateUrl:'partials/device_models/add.html',
-                resolve:{
+                templateUrl: 'partials/device_models/add.html',
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }],
@@ -81,32 +81,32 @@ app.config(['$urlRouterProvider','$stateProvider',
                     $scope.baseLinePriceString = '';
                     $scope.images = [];
 
-                    $scope.fetchImages = function(name){
+                    $scope.fetchImages = function (name) {
                         var promise = ImageFetcher.fetch(name);
-                        promise.then(function(images){
+                        promise.then(function (images) {
                             $scope.images = images;
                         });
                     };
 
-                    function createStringVersion(){
-                        $scope.sizes_string =  $scope.sizes.join();
+                    function createStringVersion() {
+                        $scope.sizes_string = $scope.sizes.join();
                     }
 
-                    $scope.addToSizes = function(device_size){
+                    $scope.addToSizes = function (device_size) {
                         $scope.sizes.push(device_size);
                         $scope.device_size = null;
                         createStringVersion();
                     };
 
-                    $scope.removeSize = function(index){
-                        $scope.sizes.splice(index,1);
+                    $scope.removeSize = function (index) {
+                        $scope.sizes.splice(index, 1);
                         createStringVersion();
                     };
 
-                    $scope.updateBaseLineString = function(){
+                    $scope.updateBaseLineString = function () {
                         var temp = [];
-                        angular.forEach($scope.baseLinePrice,function(value,key){
-                            temp.push(""+key+": "+value);
+                        angular.forEach($scope.baseLinePrice, function (value, key) {
+                            temp.push("" + key + ": " + value);
                         });
                         $scope.baseLinePriceString = temp.join();
                     }
@@ -117,8 +117,8 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('devices.list',
             {
                 url: '/list',
-                templateUrl:'partials/device_models/list.html',
-                resolve:{
+                templateUrl: 'partials/device_models/list.html',
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }],
@@ -131,7 +131,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                     $scope.deleteItem = function (id) {
                         DevicesServ.delete({id: id}, function (response) {
                             location.reload();
-                        },function(response){
+                        }, function (response) {
                             alert(response);
                         });
                     }
@@ -144,7 +144,7 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/device_brands',
                 abstract: true,
-                templateUrl:'partials/device_brands/dashboard.html',
+                templateUrl: 'partials/device_brands/dashboard.html',
                 controller: function () {
 
                 }
@@ -183,7 +183,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                 templateUrl: 'partials/device_brands/menu.html',
                 controller: function () {
                 },
-                resolve:{
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = false;
                     }]
@@ -194,17 +194,17 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('device_brands.add',
             {
                 url: '/add',
-                templateUrl:'partials/device_brands/add.html',
-                resolve:{
+                templateUrl: 'partials/device_brands/add.html',
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }]
                 },
                 controller: ['$scope', 'ImageFetcher', function ($scope, ImageFetcher) {
 
-                    $scope.fetchImages = function(name){
+                    $scope.fetchImages = function (name) {
                         var promise = ImageFetcher.fetch(name);
-                        promise.then(function(images){
+                        promise.then(function (images) {
                             $scope.images = images;
                         });
                     };
@@ -215,8 +215,8 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('device_brands.list',
             {
                 url: '/list',
-                templateUrl:'partials/device_brands/list.html',
-                resolve:{
+                templateUrl: 'partials/device_brands/list.html',
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }],
@@ -226,10 +226,10 @@ app.config(['$urlRouterProvider','$stateProvider',
                 },
                 controller: ['$scope', 'DeviceBrandsServ', 'DeviceBrands', function ($scope, DeviceBrandsServ, DeviceBrands) {
                     $scope.brands = DeviceBrands;
-                    $scope.deleteItem = function(id){
+                    $scope.deleteItem = function (id) {
                         DeviceBrandsServ.delete({id: id}, function (response) {
                             location.reload();
-                        },function(response){
+                        }, function (response) {
                             alert(response);
                         });
                     }
@@ -241,7 +241,7 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/networks',
                 abstract: true,
-                templateUrl:'partials/networks/dashboard.html',
+                templateUrl: 'partials/networks/dashboard.html',
                 controller: function () {
                     //$state.go('networks.menu');
                 },
@@ -276,10 +276,10 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('networks.menu',
             {
                 url: '/menu',
-                templateUrl:'partials/networks/menu.html',
+                templateUrl: 'partials/networks/menu.html',
                 controller: function () {
                 },
-                resolve:{
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = false;
                     }]
@@ -290,17 +290,17 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('networks.add',
             {
                 url: '/add',
-                templateUrl:'partials/networks/add.html',
-                resolve:{
+                templateUrl: 'partials/networks/add.html',
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }]
                 },
                 controller: ['$scope', 'ImageFetcher', function ($scope, ImageFetcher) {
 
-                    $scope.fetchImages = function(name){
+                    $scope.fetchImages = function (name) {
                         var promise = ImageFetcher.fetch(name);
-                        promise.then(function(images){
+                        promise.then(function (images) {
                             $scope.images = images;
                         });
                     };
@@ -311,8 +311,8 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('networks.list',
             {
                 url: '/list',
-                templateUrl:'partials/networks/list.html',
-                resolve:{
+                templateUrl: 'partials/networks/list.html',
+                resolve: {
                     'Networks': ['NetworksServ', function (NetworksServ) {
                         return NetworksServ.query({});
                     }],
@@ -322,10 +322,10 @@ app.config(['$urlRouterProvider','$stateProvider',
                 },
                 controller: ['$scope', 'Networks', 'NetworksServ', function ($scope, Networks, NetworksServ) {
                     $scope.networks = Networks;
-                    $scope.deleteItem = function(id){
+                    $scope.deleteItem = function (id) {
                         NetworksServ.delete({id: id}, function (response) {
                             location.reload();
-                        },function(response){
+                        }, function (response) {
                             alert(response);
                         });
                     }
@@ -338,7 +338,7 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/advisers',
                 abstract: true,
-                templateUrl:'partials/advisers/dashboard.html',
+                templateUrl: 'partials/advisers/dashboard.html',
                 controller: function () {
                 },
                 resolve: {
@@ -352,11 +352,11 @@ app.config(['$urlRouterProvider','$stateProvider',
         $stateProvider.state('advisers.menu',
             {
                 url: '/menu',
-                templateUrl:'partials/advisers/menu.html',
+                templateUrl: 'partials/advisers/menu.html',
                 controller: ['$scope', 'advisers', function ($scope, advisers) {
                     $scope.advisers = advisers;
                 }],
-                resolve:{
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = false;
                     }],
@@ -397,59 +397,57 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/add',
                 templateUrl: 'partials/advisers/add/add.html',
-                controller: ['$scope','AdvisersServ','$state', function ($scope,AdvisersServ,$state) {
-                    $scope.createAdviser = function(adviser){
-                        AdvisersServ.save(adviser,function(adviser){
-                           console.log(adviser);
+                controller: ['$scope', 'AdvisersServ', '$state', function ($scope, AdvisersServ, $state) {
+                    $scope.createAdviser = function (adviser) {
+                        AdvisersServ.save(adviser, function (adviser) {
+                            console.log(adviser);
                             $state.go('advisers.list');
-                        },function(error){
+                        }, function (error) {
                             alert("Ensure values are all filled correctly");
                         });
                     }
                 }],
-                resolve:{
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }]
                 }
             }
         );
-        
-        
-        
 
-    $stateProvider.state('ticket',
-        {
-            url: '/ticket',
-            abstract: true,
-            templateUrl:'partials/ticket/dashboard.html',
-            controller: function () {
-            },
-            resolve: {
-                'active': ['$rootScope', function ($rootScope) {
-                    $rootScope.active_nav = 'ticket';
-                }]
+
+        $stateProvider.state('ticket',
+            {
+                url: '/ticket',
+                abstract: true,
+                templateUrl: 'partials/ticket/dashboard.html',
+                controller: function () {
+                },
+                resolve: {
+                    'active': ['$rootScope', function ($rootScope) {
+                        $rootScope.active_nav = 'ticket';
+                    }]
+                }
             }
-        }
-    );
+        );
 
-    $stateProvider.state('ticket.menu',
-        {
-            url: '/menu',
-            templateUrl:'partials/ticket/menu.html',
-            controller: ['$scope', 'Tickets', function ($scope, Tickets) {
-                $scope.tickets = Tickets;
-            }],
-            resolve:{
-                'hasHistory': ['$rootScope', function ($rootScope) {
-                    $rootScope.hasHistory = false;
+        $stateProvider.state('ticket.menu',
+            {
+                url: '/menu',
+                templateUrl: 'partials/ticket/menu.html',
+                controller: ['$scope', 'Tickets', function ($scope, Tickets) {
+                    $scope.tickets = Tickets;
                 }],
-                'Tickets': ['TicketServ', function (TicketServ) {
-                    return TicketServ.query({limit: 6});
-                }]
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = false;
+                    }],
+                    'Tickets': ['TicketServ', function (TicketServ) {
+                        return TicketServ.query({limit: 6});
+                    }]
+                }
             }
-        }
-    );
+        );
 
         $stateProvider.state('ticket.list',
             {
@@ -482,7 +480,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/add',
                 templateUrl: 'partials/ticket/add/base.html',
                 controller: 'NewTicketController',
-                resolve:{
+                resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
                     }]
@@ -539,63 +537,64 @@ app.config(['$urlRouterProvider','$stateProvider',
         );
 
         $stateProvider.state('ticket.evaluate', {
-            url: '/evaluate/{id}/{grade}',
+            url: '/evaluate/{id}',
             templateUrl: 'partials/ticket/evaluation/evaluation.html',
             controller: ['$scope', '$stateParams', '$filter', ' Networks', 'Ticket', 'TicketServ', 'DeviceBrandsServ', 'GadgetEvaluationReward', '$state',
                 function ($scope, $stateParams, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
 
-                    if(typeof $stateParams.id == "undefined")
+                    if (typeof $stateParams.id == "undefined")
                         $state.go('ticket.add.stepOne');
 
                     $scope.ticket = Ticket;
 
-                $scope.selected = {grade: $stateParams.grade || Ticket.device_grade};
+                    $scope.selected = {grade: Ticket.device_grade};
 
-                $scope.networks = Networks;
+                    $scope.networks = Networks;
 
-                $scope.brand = {};
-                $scope.refreshBrands = function (brand) {
-                    DeviceBrandsServ.query({}, function (brands) {
-                        console.log(brands);
-                        $scope.device_brands = brands;
+                    $scope.brand = {};
+
+                    $scope.refreshBrands = function (brand) {
+                        DeviceBrandsServ.query({}, function (brands) {
+                            console.log(brands);
+                            $scope.device_brands = brands;
+                        });
+                    };
+
+                    $scope.device = {};
+                    $scope.refreshDevices = function (brand) {
+                        $scope.devices = $filter('filter')($scope.brand.selected.gadgets, {model: brand});
+                    };
+
+                    $scope.$watch('brand.selected', function (newV, oldV) {
+                        console.log('brand changed');
+                        $scope.selected.brand = newV;
                     });
-                };
 
-                $scope.device = {};
-                $scope.refreshDevices = function (brand) {
-                    $scope.devices = $filter('filter')($scope.brand.selected.gadgets, {model: brand});
-                };
-
-                $scope.$watch('brand.selected', function (newV, oldV) {
-                    console.log('brand changed');
-                    $scope.selected.brand = newV;
-                });
-
-                $scope.$watch('device.selected', function (newV, oldV) {
-                    console.log('device changed');
-                    $scope.selected.device = newV;
-                });
-
-                $scope.next = function () {
-                    var reward = GadgetEvaluationReward.calculate($scope.selected);
-                    updateTicket($scope.selected, reward);
-                    $state.go('ticket.reward', {
-                        'id': Ticket.id
+                    $scope.$watch('device.selected', function (newV, oldV) {
+                        console.log('device changed');
+                        $scope.selected.device = newV;
                     });
-                };
 
-                $scope.goHome = function () {
-                    $state.go('ticket.menu');
-                };
+                    $scope.next = function () {
+                        var reward = GadgetEvaluationReward.calculate($scope.selected);
+                        updateTicket($scope.selected, reward);
+                        $state.go('ticket.reward', {
+                            'id': Ticket.id
+                        });
+                    };
 
-                function updateTicket(selected, reward) {
-                    Ticket.gadget_id = selected.device.id;
-                    Ticket.size_id = selected.size;
-                    Ticket.network_id = selected.network;
-                    Ticket.reward = reward;
+                    $scope.goHome = function () {
+                        $state.go('ticket.menu');
+                    };
 
-                    TicketServ.update({id: Ticket.id}, Ticket);
-                }
+                    function updateTicket(selected, reward) {
+                        Ticket.gadget_id = selected.device.id;
+                        Ticket.size_id = selected.size;
+                        Ticket.network_id = selected.network;
+                        Ticket.reward = reward;
+
+                        TicketServ.update({id: Ticket.id}, Ticket);
+                    }
 
                 }],
             resolve: {
@@ -615,30 +614,30 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/reward/{id}',
                 templateUrl: 'partials/ticket/evaluation/reward.html',
-                controller: ['$scope','$stateParams', 'Ticket', 'TicketServ', 'GadgetEvaluationReward', 'Airtel', '$state',
-                    function ($scope,$stateParams, Ticket, TicketServ, GadgetEvaluationReward, Airtel, $state) {
+                controller: ['$scope', '$stateParams', 'Ticket', 'TicketServ', 'GadgetEvaluationReward', 'Airtel', '$state',
+                    function ($scope, $stateParams, Ticket, TicketServ, GadgetEvaluationReward, Airtel, $state) {
 
-                        if(typeof $stateParams.id == "undefined")
+                        if (typeof $stateParams.id == "undefined")
                             $state.go('ticket.add.stepOne');
 
                         $scope.reward = GadgetEvaluationReward.getLastReward();// Ticket.reward;
-                    $scope.ticket = Ticket;
-                    $scope.airtel = Airtel;
+                        $scope.ticket = Ticket;
+                        $scope.airtel = Airtel;
 
-                    $scope.goHome = function () {
-                        $state.go('ticket.menu');
-                    };
+                        $scope.goHome = function () {
+                            $state.go('ticket.menu');
+                        };
 
-                    $scope.next = function () {
-                        updateTicket();
-                        $state.go('ticket.accept-terms', {id: Ticket.id});
-                    };
+                        $scope.next = function () {
+                            updateTicket();
+                            $state.go('ticket.accept-terms', {id: Ticket.id});
+                        };
 
-                    function updateTicket() {
-                        Ticket.port_to_airtel = $scope.portToAirtel;
+                        function updateTicket() {
+                            Ticket.port_to_airtel = $scope.portToAirtel;
 
-                        TicketServ.update({id: Ticket.id}, Ticket);
-                    }
+                            TicketServ.update({id: Ticket.id}, Ticket);
+                        }
                     }],
                 resolve: {
                     'Airtel': ['GadgetEvaluationReward', function (GadgetEvaluationReward) {
@@ -659,7 +658,7 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/accept-terms/{id}',
                 templateUrl: 'partials/ticket/evaluation/terms.html',
                 controller: ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
-                    if(typeof $stateParams.id == "undefined")
+                    if (typeof $stateParams.id == "undefined")
                         $state.go('ticket.add.stepOne');
 
                     $scope.next = function () {
@@ -679,29 +678,29 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/review/{id}',
                 templateUrl: 'partials/ticket/evaluation/review.html',
-                controller: ['$scope','$stateParams', 'Ticket', 'TicketServ', '$state', 'MailServ',
-                    function ($scope,$stateParams, Ticket, TicketServ, $state, MailServ) {
+                controller: ['$scope', '$stateParams', 'Ticket', 'TicketServ', '$state', 'MailServ',
+                    function ($scope, $stateParams, Ticket, TicketServ, $state, MailServ) {
 
-                        if(typeof $stateParams.id == "undefined")
+                        if (typeof $stateParams.id == "undefined")
                             $state.go('ticket.add.stepOne');
 
                         $scope.ticket = Ticket;
 
-                    $scope.next = function () {
-                        Ticket.discount_voucher_code = $scope.ticket.discount_voucher_code;
-                        TicketServ.update({id: Ticket.id}, Ticket);
+                        $scope.next = function () {
+                            Ticket.discount_voucher_code = $scope.ticket.discount_voucher_code;
+                            TicketServ.update({id: Ticket.id}, Ticket);
 
-                        MailServ.save({'ticket_id': Ticket.id}, function (mail) {
-                            console.log(mail);
-                        });
+                            MailServ.save({'ticket_id': Ticket.id}, function (mail) {
+                                console.log(mail);
+                            });
 
-                        $state.go('ticket.all-done');
-                    }
+                            $state.go('ticket.all-done');
+                        }
                     }],
                 resolve: {
                     'Ticket': ['TicketServ', '$state', '$stateParams',
                         function (TicketServ, $state, $stateParams) {
-                        return TicketServ.get({id: $stateParams.id});
+                            return TicketServ.get({id: $stateParams.id});
                         }],
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
@@ -725,44 +724,44 @@ app.config(['$urlRouterProvider','$stateProvider',
         );
 
         $stateProvider.state('ticket.search',
-        {
-            url: '/search?q',
-            templateUrl:'partials/ticket/search.html',
-            controller: ['$scope', 'result', '$stateParams', function ($scope, result, $stateParams) {
-                console.log(result);
-                $scope.result = result;
-                $scope.search = $stateParams.q;
-            }],
-            resolve: {
-                'result': ['$stateParams', 'TicketServ', function ($stateParams, TicketServ) {
-                    return TicketServ.query({q: $stateParams.q});
+            {
+                url: '/search?q',
+                templateUrl: 'partials/ticket/search.html',
+                controller: ['$scope', 'result', '$stateParams', function ($scope, result, $stateParams) {
+                    console.log(result);
+                    $scope.result = result;
+                    $scope.search = $stateParams.q;
                 }],
-                'hasHistory': ['$rootScope', function ($rootScope) {
-                    $rootScope.hasHistory = true;
-                }]
+                resolve: {
+                    'result': ['$stateParams', 'TicketServ', function ($stateParams, TicketServ) {
+                        return TicketServ.query({q: $stateParams.q});
+                    }],
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
             }
-        }
-    );
+        );
 
-    $stateProvider.state('config',
-        {
-            url: '/config',
-            templateUrl:'partials/config/form.html',
-            controller: function () {
-            },
-            resolve: {
-                'active': ['$rootScope', function ($rootScope) {
-                    $rootScope.active_nav = 'config';
-                }]
+        $stateProvider.state('config',
+            {
+                url: '/config',
+                templateUrl: 'partials/config/form.html',
+                controller: function () {
+                },
+                resolve: {
+                    'active': ['$rootScope', function ($rootScope) {
+                        $rootScope.active_nav = 'config';
+                    }]
+                }
             }
-        }
-    );
+        );
 
 
-    $urlRouterProvider.otherwise('/ticket/menu');
-}]);
+        $urlRouterProvider.otherwise('/ticket/menu');
+    }]);
 
-app.factory('sessionInjector', ['$location',function ($location) {
+app.factory('sessionInjector', ['$location', function ($location) {
     return {
         request: function (config) {
             config.headers['X-Requested-With'] = 'XMLHttpRequest';
@@ -770,14 +769,14 @@ app.factory('sessionInjector', ['$location',function ($location) {
             return config;
         },
         responseError: function (response) {
-            if (response.status == 401){
+            if (response.status == 401) {
                 location.href = '/auth/login';
                 return response;
             }
             return response;
         },
         response: function (response) {
-            if (response.status == 401){
+            if (response.status == 401) {
                 location.href = '/auth/login';
                 return response;
             }
@@ -792,9 +791,9 @@ app.config(['$httpProvider', function ($httpProvider) {
 
 app.run(['$http', '$rootScope', 'CSRF_TOKEN', 'PreloadTemplates',
     function ($http, $rootScope, CSRF_TOKEN, PreloadTemplates) {
-    PreloadTemplates.run();
-    $rootScope.CSRF_TOKEN = CSRF_TOKEN;
-    $http.defaults.headers.common['csrf_token'] = CSRF_TOKEN;
+        PreloadTemplates.run();
+        $rootScope.CSRF_TOKEN = CSRF_TOKEN;
+        $http.defaults.headers.common['csrf_token'] = CSRF_TOKEN;
     }]);
 
 

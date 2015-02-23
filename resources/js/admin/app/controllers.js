@@ -79,9 +79,8 @@ module.controller('NewTicketController', [
        //grade
 
         $scope.nextStepEvaluation = function () {
-            $state.go('ticket.evaluate', {'id': $scope.ticket.id, 'grade': $scope.ticket.grade});
+            $state.go('ticket.evaluate', {'id': $scope.ticket.id });
         };
-
 
         function checkTestsPassed(obj) {
             var state = {ready: true};
