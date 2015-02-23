@@ -31,4 +31,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    public function isAdmin(){
+        $roles  = explode(',',$this->role);
+        return in_array('admin',$roles);
+    }
+
+    public function isAdviser(){
+        $roles  = explode(',',$this->role);
+        return in_array('adviser',$roles);
+    }
+
 }

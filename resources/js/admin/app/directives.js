@@ -9,7 +9,7 @@ app.directive('backButton',function(){
         'restrict': 'EA',
         'template': '<a class="btn base-resize search-btn back-btn" href=""><span class="fa fa-chevron-left"></span></a>',
         'link': function link(scope, element, attrs) {
-            element.click(function(e){
+            element.bind('click',function(e){
                 window.history.back();
                 e.preventDefault();
             })

@@ -776,41 +776,34 @@ app.config(['$urlRouterProvider','$stateProvider',
     $urlRouterProvider.otherwise('/ticket/menu');
 }]);
 
-app.config(['$httpProvider', function ($httpProvider) {
-
-    var interceptor = ['$rootScope', '$location', '$q', function ($rootScope, $location, $q) {
-
-        var success = function(response){
-            return response
-        };
-
-        var error = function(response){
-            if (response.status = 401){
-                delete sessionStorage.authenticated;
-                location.href = $location.host() + '/auth/login';
-                //Flash.show(response.data.flash)
-
-            }
-            return $q.reject(response)
-
-        };
-        return function(promise){
-            return promise.then(success, error)
-        }
-    }];
-    $httpProvider.interceptors.push(interceptor);
-
-}]);
-
-app.factory('sessionInjector', [function () {
-    var sessionInjector = {
+app.factory('sessionInjector', ['$location',function ($location) {
+    return {
         request: function (config) {
             config.headers['X-Requested-With'] = 'XMLHttpRequest';
+            console.log('Header modified');
             return config;
+        },
+        responseError: function (response) {
+            console.log(response);
+            if (response.status == 401){
+                console.log('Auth needed');
+                location.href = '/auth/login';
+                return response;
+            }
+            return response;
+        },
+        response: function (response) {
+            console.log(response);
+            if (response.status == 401){
+                console.log('Auth needed');
+                location.href = '/auth/login';
+                return response;
+            }
+            return response;
         }
     };
-    return sessionInjector;
 }]);
+
 app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('sessionInjector');
 }]);
@@ -835,7 +828,7 @@ app.directive('backButton',function(){
         'restrict': 'EA',
         'template': '<a class="btn base-resize search-btn back-btn" href=""><span class="fa fa-chevron-left"></span></a>',
         'link': function link(scope, element, attrs) {
-            element.click(function(e){
+            element.bind('click',function(e){
                 window.history.back();
                 e.preventDefault();
             })

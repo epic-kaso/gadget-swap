@@ -18,12 +18,12 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 //,'middleware' => 'auth'
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth-adviser'], function () {
     Route::get('dashboard',['as' => 'devices','uses' => 'DashboardController@getIndex']);
 });
 
 
-Route::group(['prefix' => 'resources', 'namespace' => 'Resources', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'resources', 'namespace' => 'Resources', 'middleware' => 'auth-adviser'], function () {
     Route::resource('devices','DevicesController');
     Route::resource('device_makers','DeviceMakerController');
     Route::resource('networks','NetworkController');

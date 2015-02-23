@@ -1,6 +1,9 @@
 <?php namespace SupergeeksGadgetSwap\Http\Middleware;
 
 use Closure;
+use Illuminate\Contracts\Auth\Guard;
+use Response;
+
 
 class AdminAuthenticate
 {
@@ -33,12 +36,25 @@ class AdminAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->user()->role !== 'admin') {
+        if ($this->auth->guest()) {
+            if ($request->ajax())
+            {
+                return Response::json(['Unauthorized.'], 401);
+            }
+            else
+            {
+                return redirect()->guest('auth/login');
+            }
+        }
 
-            if ($request->ajax()) {
-                return response('Unauthorized.', 401);
-            } else {
-                return 'Only Admin can access!';
+        if (!$this->auth->user()->isAdmin()) {
+            if ($request->ajax())
+            {
+                return Response::json(['Unauthorized.'], 401);
+            }
+            else
+            {
+                return redirect()->guest('auth/login');
             }
         }
 
