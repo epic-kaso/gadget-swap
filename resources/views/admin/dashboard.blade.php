@@ -15,7 +15,7 @@
                                 @if(Auth::user()->isAdmin())
                                     <a class="list-group-item"
                                        ng-class="{'active': active_nav == 'advisers'}"
-                                       ui-sref="advisers.menu"><span class="fa fa-apple"></span> Advisers</a>
+                                       ui-sref="advisers.menu"><span class="fa fa-user-secret"></span> Advisers</a>
                                     <a class="list-group-item"
                                        ng-class="{'active': active_nav == 'device_brands'}"
                                        ui-sref="device_brands.menu"><span class="fa fa-apple"></span> Device Brands</a>
