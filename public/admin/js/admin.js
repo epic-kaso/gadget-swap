@@ -5,7 +5,7 @@ var app = angular.module("AdminApp",
     ['ui.select', 'ngSanitize',
         'ui.bootstrap', 'ui.router',
         'ngAnimate', 'ngResource',
-        'angular-loading-bar', 'adminApp.directives',
+        'angular-loading-bar', 'adminApp.directives','adminApp.controllers',
         'adminApp.services', 'ngCookies']);
 
 app.config(['$urlRouterProvider','$stateProvider',
@@ -481,9 +481,7 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/add',
                 templateUrl: 'partials/ticket/add/base.html',
-                controller: function ($scope) {
-                    $scope.ticket = {};
-                },
+                controller: 'NewTicketController',
                 resolve:{
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
@@ -496,24 +494,6 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/step-one',
                 templateUrl: 'partials/ticket/add/step-one.html',
-                controller: ['$scope', 'TicketServ', '$state', function ($scope, TicketServ, $state) {
-                    $scope.createTicket = function (ticket) {
-                        TicketServ.save(ticket, function (ticket) {
-                            if(typeof ticket.id != "undefined"){
-                                $scope.ticket = ticket;
-                                next(ticket.id);
-                                console.log(ticket);
-                            }
-                        }, function (ticket) {
-                            alert("failed");
-                            console.log(ticket);
-                        });
-                    };
-
-                    function next(id) {
-                        $state.go('ticket.add.stepTwo', {'id': id});
-                    }
-                }],
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
@@ -524,62 +504,11 @@ app.config(['$urlRouterProvider','$stateProvider',
 
         $stateProvider.state('ticket.add.stepTwo',
             {
-                url: '/step-two/{id}',
+                url: '/step-two',
                 templateUrl: 'partials/ticket/add/step-two.html',
-                controller: ['$scope', 'Ticket', '$state', function ($scope, Ticket, $state) {
-                    if(typeof Ticket.id == "undefined")
-                        $state.go('ticket.add.stepOne');
-
-                    $scope.ticket = Ticket;
-
-                    $scope.test = {
-                        deviceBoot: '',
-                        callUnlock: '',
-                        wirelessConnection: '',
-                        icloudConnection: ''
-                    };
-                    $scope.activeNextButton = false;
-
-                    $scope.$watch('test', function (newV, oldV) {
-                        console.log('test change');
-                        console.log(newV);
-
-                        var ready = checkReadinessForNextStep(newV);
-                        setViewState(ready);
-
-                    }, true);
-
-                    $scope.next = function () {
-                        $state.go('ticket.add.stepThree', {'id': Ticket.id});
-                    };
-
-                    function checkReadinessForNextStep(obj) {
-                        var state = {ready: true};
-
-                        angular.forEach(obj, function (value, key) {
-                            if (value == 'no') {
-                                this.ready = false;
-                            }
-                        }, state);
-
-                        return state.ready;
-                    }
-
-                    function setViewState(ready) {
-                        $scope.activeNextButton = ready;
-                        if (ready) {
-                            $scope.message = "Ok, proceed.";
-                        } else {
-                            $scope.message = "Sorry, Device doesn't Qualify to Continue";
-                        }
-                    }
-                }],
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }],
-                    'Ticket': ['$state', '$stateParams', function ($state, $stateParams) {
-                        return {id: $stateParams.id};
                     }]
                 }
             }
@@ -587,50 +516,11 @@ app.config(['$urlRouterProvider','$stateProvider',
 
         $stateProvider.state('ticket.add.stepThree',
             {
-                url: '/step-three/{id}',
+                url: '/step-three',
                 templateUrl: 'partials/ticket/add/step-three.html',
-                controller: ['$scope','$stateParams', 'GradeDeviceServ', '$state', 'Ticket', 'TicketServ', function ($scope,$stateParams, GradeDeviceServ, $state, Ticket, TicketServ) {
-                    if(typeof $stateParams.id == "undefined")
-                        $state.go('ticket.add.stepOne');
-
-                    $scope.ticket = Ticket;
-
-                    $scope.test = {
-                        touchScreen: {rating: '', weight: 0.625},
-                        lcdScreen: {rating: '', weight: 0.625},
-                        deviceCasing: {rating: '', weight: 0.625},
-                        deviceKeypad: {rating: '', weight: 0.25},
-                        deviceCamera: {rating: '', weight: 0.25},
-                        deviceEarPiece: {rating: '', weight: 0.125},
-                        deviceSpeaker: {rating: '', weight: 0.125},
-                        deviceEarphoneJack: {rating: '', weight: 0.125},
-                        deviceChargingPort: {rating: '', weight: 0.25}
-                    };
-
-                    $scope.$watch('test', function (newV, oldV) {
-                        console.log('test change');
-                        console.log(newV);
-                        $scope.grade = GradeDeviceServ.getGrade(newV);
-                        console.log('Grade:' + $scope.grade);
-
-                    }, true);
-
-                    $scope.next = function () {
-                        Ticket.device_grade = $scope.grade;
-                        TicketServ.update({id: Ticket.id}, Ticket);
-
-                        $state.go('ticket.add.final', {
-                            'id': Ticket.id,
-                            'grade': $scope.grade
-                        });
-                    }
-                }],
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }],
-                    'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
-                        return TicketServ.get({id: $stateParams.id});
                     }]
                 }
             }
@@ -638,26 +528,11 @@ app.config(['$urlRouterProvider','$stateProvider',
 
         $stateProvider.state('ticket.add.final',
             {
-                url: '/final/{id}/{grade}',
+                url: '/final',
                 templateUrl: 'partials/ticket/add/final.html',
-                controller: ['$scope', 'Ticket', '$state', '$stateParams', function ($scope, Ticket, $state, $stateParams) {
-                    if(typeof $stateParams.id == "undefined")
-                        $state.go('ticket.add.stepOne');
-
-                    $scope.ticket = Ticket;
-
-                    $scope.grade = $stateParams.grade || Ticket.device_grade;
-
-                    $scope.next = function () {
-                        $state.go('ticket.evaluate', {'id': Ticket.id, 'grade': $scope.grade});
-                    }
-                }],
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
-                    }],
-                    'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
-                        return TicketServ.get({id: $stateParams.id});
                     }]
                 }
             }
