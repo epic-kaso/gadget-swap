@@ -60,7 +60,6 @@ module.controller('NewTicketController', [
                 console.log(ticket);
                 if (typeof ticket.id != "undefined") {
                     $scope.ticket = ticket;
-                    $scope.ticketObj = ticket;
                 }
             }, function (ticket) {
                 alert("failed");
@@ -88,7 +87,7 @@ module.controller('NewTicketController', [
        //grade
 
         $scope.nextStepEvaluation = function () {
-            $state.go('ticket.evaluate', {'id': $scope.ticketObj.id });
+            $state.go('ticket.evaluate', {'id': $scope.ticket.id });
         };
 
         function checkTestsPassed(obj) {
