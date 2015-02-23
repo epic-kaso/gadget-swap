@@ -481,8 +481,8 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/add',
                 templateUrl: 'partials/ticket/add/base.html',
-                controller: function () {
-
+                controller: function ($scope) {
+                    $scope.ticket = {};
                 },
                 resolve:{
                     'hasHistory': ['$rootScope', function ($rootScope) {
@@ -499,8 +499,11 @@ app.config(['$urlRouterProvider','$stateProvider',
                 controller: ['$scope', 'TicketServ', '$state', function ($scope, TicketServ, $state) {
                     $scope.createTicket = function (ticket) {
                         TicketServ.save(ticket, function (ticket) {
-                            next(ticket.id);
-                            console.log(ticket);
+                            if(typeof ticket.id != "undefined"){
+                                $scope.ticket = ticket;
+                                next(ticket.id);
+                                console.log(ticket);
+                            }
                         }, function (ticket) {
                             alert("failed");
                             console.log(ticket);
@@ -524,6 +527,11 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/step-two/{id}',
                 templateUrl: 'partials/ticket/add/step-two.html',
                 controller: ['$scope', 'Ticket', '$state', function ($scope, Ticket, $state) {
+                    if(typeof Ticket.id == "undefined")
+                        $state.go('ticket.add.stepOne');
+
+                    $scope.ticket = Ticket;
+
                     $scope.test = {
                         deviceBoot: '',
                         callUnlock: '',
@@ -581,7 +589,12 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/step-three/{id}',
                 templateUrl: 'partials/ticket/add/step-three.html',
-                controller: ['$scope', 'GradeDeviceServ', '$state', 'Ticket', 'TicketServ', function ($scope, GradeDeviceServ, $state, Ticket, TicketServ) {
+                controller: ['$scope','$stateParams', 'GradeDeviceServ', '$state', 'Ticket', 'TicketServ', function ($scope,$stateParams, GradeDeviceServ, $state, Ticket, TicketServ) {
+                    if(typeof $stateParams.id == "undefined")
+                        $state.go('ticket.add.stepOne');
+
+                    $scope.ticket = Ticket;
+
                     $scope.test = {
                         touchScreen: {rating: '', weight: 0.625},
                         lcdScreen: {rating: '', weight: 0.625},
@@ -628,6 +641,11 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/final/{id}/{grade}',
                 templateUrl: 'partials/ticket/add/final.html',
                 controller: ['$scope', 'Ticket', '$state', '$stateParams', function ($scope, Ticket, $state, $stateParams) {
+                    if(typeof $stateParams.id == "undefined")
+                        $state.go('ticket.add.stepOne');
+
+                    $scope.ticket = Ticket;
+
                     $scope.grade = $stateParams.grade || Ticket.device_grade;
 
                     $scope.next = function () {
@@ -650,21 +668,18 @@ app.config(['$urlRouterProvider','$stateProvider',
             templateUrl: 'partials/ticket/evaluation/evaluation.html',
             controller: ['$scope', '$stateParams', '$filter', ' Networks', 'Ticket', 'TicketServ', 'DeviceBrandsServ', 'GadgetEvaluationReward', '$state',
                 function ($scope, $stateParams, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
-                $scope.ticket = Ticket;
+
+                    if(typeof $stateParams.id == "undefined")
+                        $state.go('ticket.add.stepOne');
+
+                    $scope.ticket = Ticket;
 
                 $scope.selected = {grade: $stateParams.grade || Ticket.device_grade};
 
                 $scope.networks = Networks;
 
-                $scope.clear = function () {
-                    $scope.person.selected = undefined;
-                    $scope.address.selected = undefined;
-                    $scope.country.selected = undefined;
-                };
-
                 $scope.brand = {};
                 $scope.refreshBrands = function (brand) {
-                    var params = {q: brand};
                     DeviceBrandsServ.query({}, function (brands) {
                         console.log(brands);
                         $scope.device_brands = brands;
@@ -725,9 +740,13 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/reward/{id}',
                 templateUrl: 'partials/ticket/evaluation/reward.html',
-                controller: ['$scope', 'Ticket', 'TicketServ', 'GadgetEvaluationReward', 'Airtel', '$state',
-                    function ($scope, Ticket, TicketServ, GadgetEvaluationReward, Airtel, $state) {
-                    $scope.reward = GadgetEvaluationReward.getLastReward();// Ticket.reward;
+                controller: ['$scope','$stateParams', 'Ticket', 'TicketServ', 'GadgetEvaluationReward', 'Airtel', '$state',
+                    function ($scope,$stateParams, Ticket, TicketServ, GadgetEvaluationReward, Airtel, $state) {
+
+                        if(typeof $stateParams.id == "undefined")
+                            $state.go('ticket.add.stepOne');
+
+                        $scope.reward = GadgetEvaluationReward.getLastReward();// Ticket.reward;
                     $scope.ticket = Ticket;
                     $scope.airtel = Airtel;
 
@@ -765,6 +784,9 @@ app.config(['$urlRouterProvider','$stateProvider',
                 url: '/accept-terms/{id}',
                 templateUrl: 'partials/ticket/evaluation/terms.html',
                 controller: ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
+                    if(typeof $stateParams.id == "undefined")
+                        $state.go('ticket.add.stepOne');
+
                     $scope.next = function () {
                         $state.go('ticket.review-ticket', {id: $stateParams.id});
                     };
@@ -782,9 +804,13 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/review/{id}',
                 templateUrl: 'partials/ticket/evaluation/review.html',
-                controller: ['$scope', 'Ticket', 'TicketServ', '$state', 'MailServ',
-                    function ($scope, Ticket, TicketServ, $state, MailServ) {
-                    $scope.ticket = Ticket;
+                controller: ['$scope','$stateParams', 'Ticket', 'TicketServ', '$state', 'MailServ',
+                    function ($scope,$stateParams, Ticket, TicketServ, $state, MailServ) {
+
+                        if(typeof $stateParams.id == "undefined")
+                            $state.go('ticket.add.stepOne');
+
+                        $scope.ticket = Ticket;
 
                     $scope.next = function () {
                         Ticket.discount_voucher_code = $scope.ticket.discount_voucher_code;
