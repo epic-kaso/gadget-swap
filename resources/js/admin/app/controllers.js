@@ -1,12 +1,11 @@
 /**
  * Created by Ak on 2/19/2015.
  */
-var app = angular.module('adminApp.controllers', ['adminApp.services']);
+var module = angular.module('adminApp.controllers', ['adminApp.services']);
 
-app.controller('NewTicketController', [
+module.controller('NewTicketController', [
     '$scope', 'TicketServ', '$state', '$stateParams', 'GradeDeviceServ',
     function ($scope, TicketServ, $state, $stateParams, GradeDeviceServ) {
-
         $scope.ticket = {
             test: {
                 deviceBoot: '',
