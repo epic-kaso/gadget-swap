@@ -8,8 +8,8 @@
         </div>
         <div class="col-sm-3">
             <div class="btn-group" style="margin-top: 30px">
-                <label class="btn btn-test btn-default btn-yes" ng-model="test.deviceBoot" btn-radio="'yes'">Yes</label>
-                <label class="btn btn-test btn-default btn-no" ng-model="test.deviceBoot" btn-radio="'no'">No</label>
+                <label class="btn btn-test btn-default btn-yes" ng-model="ticket.test.deviceBoot" btn-radio="'yes'">Yes</label>
+                <label class="btn btn-test btn-default btn-no" ng-model="ticket.test.deviceBoot" btn-radio="'no'">No</label>
             </div>
         </div>
     </div>
@@ -22,8 +22,8 @@
         </div>
         <div class="col-sm-3">
             <div class="btn-group" style="margin-top: 30px">
-                <label class="btn btn-test btn-default btn-yes" ng-model="test.callUnlock" btn-radio="'yes'">Yes</label>
-                <label class="btn btn-test btn-default btn-no" ng-model="test.callUnlock" btn-radio="'no'">No</label>
+                <label class="btn btn-test btn-default btn-yes" ng-model="ticket.test.callUnlock" btn-radio="'yes'">Yes</label>
+                <label class="btn btn-test btn-default btn-no" ng-model="ticket.test.callUnlock" btn-radio="'no'">No</label>
             </div>
         </div>
     </div>
@@ -36,9 +36,9 @@
         </div>
         <div class="col-sm-3">
             <div class="btn-group" style="margin-top: 30px">
-                <label class="btn btn-test btn-default btn-yes" ng-model="test.wirelessConnection"
+                <label class="btn btn-test btn-default btn-yes" ng-model="ticket.test.wirelessConnection"
                        btn-radio="'yes'">Yes</label>
-                <label class="btn btn-test btn-default btn-no" ng-model="test.wirelessConnection"
+                <label class="btn btn-test btn-default btn-no" ng-model="ticket.test.wirelessConnection"
                        btn-radio="'no'">No</label>
             </div>
         </div>
@@ -52,9 +52,9 @@
         </div>
         <div class="col-sm-3">
             <div class="btn-group" style="margin-top: 30px">
-                <label class="btn btn-test btn-default btn-yes" ng-model="test.icloudConnection"
+                <label class="btn btn-test btn-default btn-yes" ng-model="ticket.test.icloudConnection"
                        btn-radio="'yes'">Yes</label>
-                <label class="btn btn-test btn-default btn-no" ng-model="test.icloudConnection"
+                <label class="btn btn-test btn-default btn-no" ng-model="ticket.test.icloudConnection"
                        btn-radio="'no'">No</label>
             </div>
         </div>
@@ -64,7 +64,7 @@
         <div ng-show="!activeNextButton" class="base-resize alert alert-danger text-center"><h4 ng-bind="message"></h4>
         </div>
         <button class="btn base-resize search-btn back-btn pull-right" ng-show="activeNextButton"
-                ng-click="next()"><span class="fa fa-chevron-right"></span></button>
+                ng-click="nextStepThree()"><span class="fa fa-chevron-right"></span></button>
     </div>
 
 </div>
