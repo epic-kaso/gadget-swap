@@ -88,7 +88,6 @@ app.factory('GadgetEvaluationReward', ['NetworksServ', '$cookieStore', function 
         "calculate": function (model) {
             reward.result = calculatePriceFromGrade(model, model.grade, getBaseLinePrice(model.device, model.size));
             console.log(reward.result);
-
             $cookieStore.put('last-reward', reward.result);
             return reward.result;
         },

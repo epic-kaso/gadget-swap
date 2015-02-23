@@ -4,9 +4,10 @@
 var module = angular.module('adminApp.controllers', ['adminApp.services']);
 
 module.controller('NewTicketController', [
-    '$scope', 'TicketServ', '$state', '$stateParams', 'GradeDeviceServ',
-    function ($scope, TicketServ, $state, $stateParams, GradeDeviceServ) {
+    '$scope','$rootScope','TicketServ', '$state', '$stateParams', 'GradeDeviceServ',
+    function ($scope,$rootScope,TicketServ, $state, $stateParams, GradeDeviceServ) {
         $scope.activeStep = 'stepOne';
+        $state.isCreatingTicket = true;
         $scope.ticket = {
             test: {
                 deviceBoot: '',
@@ -29,7 +30,13 @@ module.controller('NewTicketController', [
 
         $scope.activeNextButton = false;
 
+        $rootScope.$on('cfpLoadingBar:loading',function(){
+            $state.isCreatingTicket = true;
+        });
 
+        $rootScope.$on('cfpLoadingBar:completed',function(){
+            $state.isCreatingTicket = false;
+        });
 
         $scope.$watch('ticket.test', function (newV, oldV) {
             console.log('test change');
@@ -44,25 +51,23 @@ module.controller('NewTicketController', [
         $scope.$watch('ticket.gradingSystem', function (newV, oldV) {
             console.log('gradingSystem change');
             console.log(newV);
-            $scope.ticket.grade = GradeDeviceServ.getGrade(newV);
-            console.log('Grade:' + $scope.ticket.grade);
+            $scope.ticket.device_grade = GradeDeviceServ.getGrade(newV);
+            console.log('Grade:' + $scope.ticket.device_grade);
         }, true);
 
         $scope.createTicket = function (ticket) {
             TicketServ.save(ticket, function (ticket) {
+                console.log(ticket);
                 if (typeof ticket.id != "undefined") {
                     $scope.ticket = ticket;
                     $scope.ticketObj = ticket;
-                    $state.isCreatingTicket = false;
                 }
             }, function (ticket) {
                 alert("failed");
                 console.log(ticket);
-                $state.isCreatingTicket = false;
                 $state.creationError = true;
             });
         };
-
 
         $scope.nextStepTwo   = function() {
             $scope.activeStep = 'stepTwo';
@@ -77,7 +82,6 @@ module.controller('NewTicketController', [
         $scope.nextStepFinal = function () {
             $scope.activeStep = 'stepFinal';
             $state.go('ticket.add.final');
-            $state.isCreatingTicket  = true;
             $scope.createTicket($scope.ticket);
         };
 
