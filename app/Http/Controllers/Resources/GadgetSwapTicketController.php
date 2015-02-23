@@ -55,7 +55,8 @@ class GadgetSwapTicketController extends Controller
                 'customer_last_name',
                 'customer_phone_number',
                 'customer_device_imei',
-                'customer_email'
+                'customer_email',
+                'device_grade'
             ]
         );
 

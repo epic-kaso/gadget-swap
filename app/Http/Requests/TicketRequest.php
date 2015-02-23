@@ -30,6 +30,7 @@ class TicketRequest extends Request {
 			'customer_email' => 'required|email',
 			'customer_phone_number' => 'required|digits:11,14',
             'customer_device_imei' => 'required|digits:15',
+            'device_grade'=>'alpha'
 		];
 	}
 
