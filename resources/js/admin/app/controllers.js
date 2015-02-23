@@ -4,8 +4,8 @@
 var module = angular.module('adminApp.controllers', ['adminApp.services']);
 
 module.controller('NewTicketController', [
-    '$scope','TicketServ', '$state', '$stateParams', 'GradeDeviceServ',
-    function ($scope,TicketServ, $state, $stateParams, GradeDeviceServ) {
+    '$scope','TicketServ', '$state', '$stateParams', 'GradeDeviceServ','$cookieStore',
+    function ($scope,TicketServ, $state, $stateParams, GradeDeviceServ,$cookieStore) {
         $scope.activeStep = 'stepOne';
         $scope.isCreatingTicket = true;
         $scope.creationError = false;
@@ -89,6 +89,7 @@ module.controller('NewTicketController', [
        //grade
 
         $scope.nextStepEvaluation = function () {
+            $cookieStore.put('ticket',$scope.ticket.savedTicket);
             $state.go('ticket.evaluate', {'id': $scope.ticket.savedTicket.id });
         };
 

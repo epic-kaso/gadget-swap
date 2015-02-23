@@ -545,8 +545,7 @@ app.config(['$urlRouterProvider', '$stateProvider',
                     if (typeof $stateParams.id == "undefined")
                         $state.go('ticket.add.stepOne');
 
-                    $scope.ticket = Ticket;
-
+                    console.log(Ticket);
                     $scope.selected = {grade: Ticket.device_grade};
 
                     $scope.networks = Networks;
@@ -576,11 +575,18 @@ app.config(['$urlRouterProvider', '$stateProvider',
                     });
 
                     $scope.next = function () {
+                        console.log(Ticket);
+                        console.log($scope.selected);
                         var reward = GadgetEvaluationReward.calculate($scope.selected);
-                        updateTicket($scope.selected, reward);
-                        $state.go('ticket.reward', {
-                            'id': Ticket.id
-                        });
+                        var promise = updateTicket($scope.selected, reward);
+                        promise.then(function(){
+                            $state.go('ticket.reward', {
+                                'id': Ticket.id
+                            });
+                        },function(){
+                            alert('Error occured while saving reward');
+                        })
+
                     };
 
                     $scope.goHome = function () {
@@ -593,7 +599,7 @@ app.config(['$urlRouterProvider', '$stateProvider',
                         Ticket.network_id = selected.network;
                         Ticket.reward = reward;
 
-                        TicketServ.update({id: Ticket.id}, Ticket);
+                        return TicketServ.update({id: Ticket.id}, Ticket).$promise;
                     }
 
                 }],
@@ -601,8 +607,8 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 'hasHistory': ['$rootScope', function ($rootScope) {
                     $rootScope.hasHistory = true;
                 }],
-                'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
-                    return TicketServ.get({id: $stateParams.id});
+                'Ticket': ['TicketServ', '$state', '$stateParams','$cookieStore', function (TicketServ, $state, $stateParams,$cookieStore) {
+                    return  $cookieStore.get('ticket');//TicketServ.get({id: $stateParams.id});
                 }],
                 'Networks': ['NetworksServ', function (NetworksServ) {
                     return NetworksServ.query({});
