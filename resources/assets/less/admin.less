@@ -428,7 +428,11 @@ img.img-responsive.inmate-pic {
 }
 
 .menu-item.inmate-item {
-  min-width: 290px;
+  max-width: 290px;
+  width: 290px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px;
 }
 /* Have to set height explicity on ui-view
 to prevent collapsing during animation*/

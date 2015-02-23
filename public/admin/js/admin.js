@@ -806,6 +806,7 @@ var module = angular.module('adminApp.controllers', ['adminApp.services']);
 module.controller('NewTicketController', [
     '$scope', 'TicketServ', '$state', '$stateParams', 'GradeDeviceServ',
     function ($scope, TicketServ, $state, $stateParams, GradeDeviceServ) {
+        $scope.activeStep = 'stepOne';
         $scope.ticket = {
             test: {
                 deviceBoot: '',
@@ -863,14 +864,17 @@ module.controller('NewTicketController', [
 
 
         $scope.nextStepTwo   = function() {
+            $scope.activeStep = 'stepTwo';
             $state.go('ticket.add.stepTwo');
         };
 
         $scope.nextStepThree = function () {
+            $scope.activeStep = 'stepThree';
             $state.go('ticket.add.stepThree');
         };
 
         $scope.nextStepFinal = function () {
+            $scope.activeStep = 'stepFinal';
             $state.go('ticket.add.final');
             $state.isCreatingTicket  = true;
             $scope.createTicket($scope.ticket);
