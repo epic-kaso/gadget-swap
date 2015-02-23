@@ -6551,7 +6551,7 @@ body .main-panel .panel-body {
 }
 body .list-group.my-menu-group {
   padding-top: 94px;
-  border-right: 1px solid rgba(0, 0, 0, 0.01);
+  border-right: 1px solid #f8f8f8;
   min-height: inherit;
   margin-bottom: 0;
 }
@@ -6565,7 +6565,7 @@ body .main-content {
   min-height: inherit;
   margin-left: 0;
   padding-left: 0;
-  background-color: rgba(0, 0, 0, 0.01);
+  background-color: #f8f8f8;
 }
 body .main-content-container {
   padding: 20px;
@@ -6592,11 +6592,11 @@ body .my-menu-group .list-group-item span {
 }
 body .my-menu-group .list-group-item.active {
   color: inherit;
-  border-top: 2px solid rgba(0, 0, 0, 0.02);
-  border-bottom: 2px solid rgba(0, 0, 0, 0.02);
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
   box-shadow: inset 2px 0px red;
   box-sizing: content-box;
-  background-color: rgba(0, 0, 0, 0.01);
+  background-color: #f8f8f8;
 }
 body .my-menu-group .list-group-item.active span.br {
   height: 72px;
@@ -6654,7 +6654,7 @@ input.form-control.inmate-search-box,
   display: inline-block;
   margin-right: 25px;
   min-width: 170px;
-  border: 1px solid rgba(0, 0, 0, 0.02);
+  border: 1px solid rgba(0, 0, 0, 0.3);
   padding: 10px;
   background-color: white;
   font-weight: 300;
