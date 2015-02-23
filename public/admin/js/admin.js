@@ -397,10 +397,11 @@ app.config(['$urlRouterProvider','$stateProvider',
             {
                 url: '/add',
                 templateUrl: 'partials/advisers/add/add.html',
-                controller: ['$scope','AdvisersServ', function ($scope,AdvisersServ) {
+                controller: ['$scope','AdvisersServ','$state', function ($scope,AdvisersServ,$state) {
                     $scope.createAdviser = function(adviser){
                         AdvisersServ.save(adviser,function(adviser){
                            console.log(adviser);
+                            $state.go('advisers.list');
                         },function(error){
                             alert("Ensure values are all filled correctly");
                         });

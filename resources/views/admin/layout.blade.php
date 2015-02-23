@@ -89,6 +89,11 @@
                     "partials/ticket/add/final.html"
                     @if(Auth::user()->isAdmin())
                     ,
+                    "partials/advisers/menu.html",
+                    "partials/advisers/dashboard.html",
+                    "partials/advisers/search.html",
+                    "partials/advisers/list.html",
+                    "partials/advisers/add/add.html",
                     "partials/device_models/search.html",
                     "partials/device_brands/search.html",
                     "partials/networks/search.html",
