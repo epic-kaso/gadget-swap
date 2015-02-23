@@ -45,7 +45,7 @@ module.controller('NewTicketController', [
             console.log('gradingSystem change');
             console.log(newV);
             $scope.ticket.grade = GradeDeviceServ.getGrade(newV);
-            console.log('Grade:' + $scope.grade);
+            console.log('Grade:' + $scope.ticket.grade);
         }, true);
 
         $scope.createTicket = function (ticket) {
