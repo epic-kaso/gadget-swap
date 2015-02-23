@@ -1,6 +1,6 @@
 <h4>User Details</h4>
 <hr/>
-<form name="UserTicketForm">
+<form name="UserTicketForm" ng-submit="nextStepTwo()">
 
     <div class="form-group">
         <input type="text" required="" placeholder="Last Name" name="name" ng-model="ticket.customer_last_name"
@@ -19,17 +19,17 @@
 
     <div class="form-group">
         <input type="text" required="" placeholder="Phone Number" name="phone" ng-model="ticket.customer_phone_number"
-               class="form-control inmate-search-box"/>
+               class="form-control inmate-search-box" ng-minlength="10" ng-maxlength="10"/>
     </div>
 
     <div class="form-group">
         <input type="text" required="" placeholder="IMEI of Device" name="device_imei"
-               ng-model="ticket.customer_device_imei"
+               ng-model="ticket.customer_device_imei" ng-minlength="15" ng-maxlength="15"
                class="form-control inmate-search-box"/>
     </div>
 
     <div class="form-group">
-        <button class="btn search-btn back-btn pull-right" ng-disabled="!UserTicketForm.$valid" ng-click="nextStepTwo()"><span
+        <button class="btn search-btn back-btn pull-right" ng-disabled="UserTicketForm.$invalid" ng-click="nextStepTwo()"><span
                 class="fa fa-chevron-right"></span></button>
     </div>
 </form>

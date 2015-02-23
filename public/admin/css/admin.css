@@ -6893,3 +6893,12 @@ span.device-reward {
   border-radius: 0;
   box-shadow: none;
 }
+form {
+  transition: border-color 0.2s;
+}
+form .ng-invalid.ng-dirty {
+  border-color: #ff0000;
+}
+form .ng-valid.ng-dirty {
+  border-color: #90ee90;
+}
