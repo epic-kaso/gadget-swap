@@ -1,0 +1,25 @@
+
+
+<div class="inmates-menu-items">
+    <div class="menu-item inmate-item" ng-repeat="adviser in advisers">
+        <div class="inmate-pic">
+            <span class="fa fa-user"></span>
+        </div>
+
+        <div class="inmate-bio">
+            <h4>{{ adviser.last_name}}, {{ adviser.first_name }}</h4>
+            <h4>{{ adviser.email }}</h4>
+
+            <a class="btn btn-danger" ng-click="deleteItem(adviser.id)">Delete</a>
+        </div>
+    </div>
+
+
+</div>
+
+<nav>
+    <ul class="pager search-result-pager">
+        <li><a href="#"><span class="fa fa-chevron-left"></span></a></li>
+        <li><a href="#"><span class="fa fa-chevron-right"></span></a></li>
+    </ul>
+</nav>

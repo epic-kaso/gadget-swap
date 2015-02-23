@@ -18,6 +18,11 @@ app.factory('DeviceBrandsServ', ['$resource', 'URLServ', function ($resource, UR
     });//URLServ.getResourceUrlFor("ticket"));
 }]);
 
+app.factory('AdvisersServ', ['$resource', 'URLServ', function ($resource, URLServ) {
+    return $resource('/resources/advisers/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+}]);
 
 app.factory('DevicesServ', ['$resource', 'URLServ', function ($resource, URLServ) {
     return $resource('/resources/devices/:id', {id: '@id'}, {

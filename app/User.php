@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password'];
+	protected $fillable = ['last_name','first_name','phone_number','email','password'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -39,6 +39,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function isAdviser(){
         $roles  = explode(',',$this->role);
         return in_array('adviser',$roles);
+    }
+
+    public function setAsAdviser()
+    {
+        $this->role = 'adviser';
     }
 
 }

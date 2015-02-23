@@ -1,0 +1,33 @@
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div class="row">
+            <div class="col-sm-2" ng-show="hasHistory">
+                <back-button></back-button>
+            </div>
+
+            <div class="base-resize" ng-class="{'col-sm-10': hasHistory}">
+                <form>
+                    <div class="form-group col-sm-12" style="
+                                                        padding-right: 30px;
+                                                        padding-left: 0;
+                                                    ">
+                        <div class="icon-addon addon-lg">
+                            <input type="search" id="search" name="search" ng-model="search"
+                                   class="form-control inmate-search-box" placeholder="Search Advisers">
+                            <label for="search" class="fa fa-search" rel="tooltip" title="Search"></label>
+                            <a ui-sref="advisers.search({q: search})" class="btn btn-default search-btn"><span
+                                    class="fa fa-paper-plane"></span></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <div class="row main-content-container">
+            <div ui-view class="slide" autoscroll="false"></div>
+        </div>
+
+    </div>
+
+</div>

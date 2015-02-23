@@ -333,6 +333,90 @@ app.config(['$urlRouterProvider','$stateProvider',
             }
         );
 
+
+        $stateProvider.state('advisers',
+            {
+                url: '/advisers',
+                abstract: true,
+                templateUrl:'partials/advisers/dashboard.html',
+                controller: function () {
+                },
+                resolve: {
+                    'active': ['$rootScope', function ($rootScope) {
+                        $rootScope.active_nav = 'advisers';
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('advisers.menu',
+            {
+                url: '/menu',
+                templateUrl:'partials/advisers/menu.html',
+                controller: ['$scope', 'advisers', function ($scope, advisers) {
+                    $scope.advisers = advisers;
+                }],
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = false;
+                    }],
+                    'advisers': ['AdvisersServ', function (AdvisersServ) {
+                        return AdvisersServ.query({limit: 6});
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('advisers.list',
+            {
+                url: '/list',
+                templateUrl: 'partials/advisers/list.html',
+                controller: ['$scope', 'advisers', 'AdvisersServ', function ($scope, advisers, AdvisersServ) {
+                    $scope.advisers = advisers;
+
+                    $scope.deleteItem = function (id) {
+                        AdvisersServ.delete({id: id}, function (response) {
+                            location.reload();
+                        }, function (response) {
+                            alert(response);
+                        });
+                    }
+                }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'advisers': ['AdvisersServ', function (AdvisersServ) {
+                        return AdvisersServ.query();
+                    }]
+                }
+            }
+        );
+
+        $stateProvider.state('advisers.add',
+            {
+                url: '/add',
+                templateUrl: 'partials/advisers/add/add.html',
+                controller: ['$scope','AdvisersServ', function ($scope,AdvisersServ) {
+                    $scope.createAdviser = function(adviser){
+                        AdvisersServ.save(adviser,function(adviser){
+                           console.log(adviser);
+                        },function(error){
+                            alert("Ensure values are all filled correctly");
+                        });
+                    }
+                }],
+                resolve:{
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+        
+        
+        
+
     $stateProvider.state('ticket',
         {
             url: '/ticket',
@@ -784,18 +868,14 @@ app.factory('sessionInjector', ['$location',function ($location) {
             return config;
         },
         responseError: function (response) {
-            console.log(response);
             if (response.status == 401){
-                console.log('Auth needed');
                 location.href = '/auth/login';
                 return response;
             }
             return response;
         },
         response: function (response) {
-            console.log(response);
             if (response.status == 401){
-                console.log('Auth needed');
                 location.href = '/auth/login';
                 return response;
             }

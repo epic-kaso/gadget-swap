@@ -1,0 +1,33 @@
+
+<div class="inmates-menu-items">
+    <a ui-sref="advisers.add" class="menu-item">
+        <span class="fa fa-plus"></span>
+        <h4>New Adviser</h4>
+    </a>
+
+    <a ui-sref="advisers.list" class="menu-item">
+        <span class="fa fa-list-alt"></span>
+        <h4>All Advisers</h4>
+    </a>
+
+    <div class="menu-item">
+        <span class="fa fa-cog"></span>
+        <h4>Configuration</h4>
+    </div>
+</div>
+
+<h3>Recent Advisers</h3><hr/>
+<div class="inmates-menu-items">
+    <div class="menu-item inmate-item" ng-repeat="adviser in advisers">
+        <div class="inmate-pic">
+            <span class="fa fa-user"></span>
+        </div>
+
+        <div class="inmate-bio">
+            <h4>{{ adviser.last_name}}, {{ adviser.first_name }}</h4>
+            <h4>{{ adviser.email }}</h4>
+
+            <p><span class="fa fa-clock-o"></span> {{ adviser.created_date }}</p>
+        </div>
+    </div>
+</div>
