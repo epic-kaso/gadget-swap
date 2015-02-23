@@ -69,6 +69,46 @@
 <script src="{{ asset('admin/js/admin.js') }}"></script>
 <script>
     angular.module("AdminApp").constant("CSRF_TOKEN", '<?php echo csrf_token(); ?>');
+    angular.module("AdminApp").factory("PRELOAD_UI_LIST",function(){
+        return {
+            'get': function(){
+                return [
+                    "partials/ticket/menu.html",
+                    "partials/ticket/dashboard.html",
+                    "partials/ticket/evaluation/evaluation.html",
+                    "partials/ticket/evaluation/review.html",
+                    "partials/ticket/evaluation/reward.html",
+                    "partials/ticket/evaluation/terms.html",
+                    "partials/ticket/done.html",
+                    "partials/ticket/search.html",
+                    'partials/ticket/list.html',
+                    "partials/ticket/add/base.html",
+                    "partials/ticket/add/step-one.html",
+                    "partials/ticket/add/step-two.html",
+                    "partials/ticket/add/step-three.html",
+                    "partials/ticket/add/final.html"
+                    @if(Auth::user()->isAdmin())
+                    ,
+                    "partials/device_models/search.html",
+                    "partials/device_brands/search.html",
+                    "partials/networks/search.html",
+                    "partials/networks/dashboard.html",
+                    "partials/networks/menu.html",
+                    "partials/device_models/menu.html",
+                    "partials/device_brands/menu.html",
+                    "partials/device_models/dashboard.html",
+                    "partials/device_brands/dashboard.html",
+                    "partials/networks/add.html",
+                    "partials/device_models/add.html",
+                    "partials/device_brands/add.html",
+                    "partials/networks/list.html",
+                    "partials/device_models/list.html",
+                    "partials/device_brands/list.html"
+                    @endif
+                ];
+            }
+        }
+    });
 </script>
 </body>
 </html>

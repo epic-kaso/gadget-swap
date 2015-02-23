@@ -12,9 +12,11 @@ class DeviceMakerController extends Controller {
 
     private $deviceRepository;
 
-    function __construct(DevicesRepository $deviceRepository)
+    public function __construct(DevicesRepository $deviceRepository)
     {
         $this->deviceRepository = $deviceRepository;
+        $this->middleware('auth-adviser',['only'  => ['index','show'] ]);
+        $this->middleware('auth-admin');
     }
 
 

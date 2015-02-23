@@ -12,15 +12,17 @@
                                 <a class="list-group-item {{ $inmates or '' }}"
                                    ng-class="{'active': active_nav == 'ticket'}"
                                    ui-sref="ticket.menu"><span class="fa fa-ticket"></span> Ticket</a>
-                                <a class="list-group-item {{ $cells or '' }}"
-                                   ng-class="{'active': active_nav == 'device_brands'}"
-                                   ui-sref="device_brands.menu"><span class="fa fa-apple"></span> Device Brands</a>
-                                <a class="list-group-item {{ $sentences or '' }}"
-                                   ng-class="{'active': active_nav == 'devices'}"
-                                   ui-sref="devices.menu"><span class="fa fa-mobile-phone"></span> Device Models</a>
-                                <a class="list-group-item {{ $warders or '' }}"
-                                   ng-class="{'active': active_nav == 'networks'}"
-                                   ui-sref="networks.menu"><span class="fa fa-globe"></span> Networks </a>
+                                @if(Auth::user()->isAdmin())
+                                    <a class="list-group-item {{ $cells or '' }}"
+                                       ng-class="{'active': active_nav == 'device_brands'}"
+                                       ui-sref="device_brands.menu"><span class="fa fa-apple"></span> Device Brands</a>
+                                    <a class="list-group-item {{ $sentences or '' }}"
+                                       ng-class="{'active': active_nav == 'devices'}"
+                                       ui-sref="devices.menu"><span class="fa fa-mobile-phone"></span> Device Models</a>
+                                    <a class="list-group-item {{ $warders or '' }}"
+                                       ng-class="{'active': active_nav == 'networks'}"
+                                       ui-sref="networks.menu"><span class="fa fa-globe"></span> Networks </a>
+                                @endif
                                 <a class="list-group-item {{ $configurations or '' }}" ui-sref="config"
                                    ng-class="{'active': active_nav == 'config'}"><span class="fa fa-cogs"></span>
                                     Settings</a>

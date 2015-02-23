@@ -11,7 +11,15 @@ use SupergeeksGadgetSwap\Network;
 
 class NetworkController extends Controller {
 
-	/**
+
+    public function __construct()
+    {
+        $this->middleware('auth-adviser',['only'  => ['index','show'] ]);
+        $this->middleware('auth-admin');
+    }
+
+
+    /**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
