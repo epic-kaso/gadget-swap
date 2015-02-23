@@ -28,7 +28,7 @@ class TicketRequest extends Request {
 			'customer_last_name' => 'required|alpha_dash',
 			'customer_first_name' => 'required|alpha_dash',
 			'customer_email' => 'required|email',
-			'customer_phone_number' => 'required|digits:11',
+			'customer_phone_number' => 'required|digits:11,14',
             'customer_device_imei' => 'required|digits:15',
 		];
 	}
