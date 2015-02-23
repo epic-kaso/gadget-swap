@@ -52,6 +52,7 @@ module.controller('NewTicketController', [
             TicketServ.save(ticket, function (ticket) {
                 if (typeof ticket.id != "undefined") {
                     $scope.ticket = ticket;
+                    $scope.ticketObj = ticket;
                     $state.isCreatingTicket = false;
                 }
             }, function (ticket) {
@@ -83,7 +84,7 @@ module.controller('NewTicketController', [
        //grade
 
         $scope.nextStepEvaluation = function () {
-            $state.go('ticket.evaluate', {'id': $scope.ticket.id });
+            $state.go('ticket.evaluate', {'id': $scope.ticketObj.id });
         };
 
         function checkTestsPassed(obj) {

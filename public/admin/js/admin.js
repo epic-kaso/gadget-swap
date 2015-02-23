@@ -539,7 +539,7 @@ app.config(['$urlRouterProvider', '$stateProvider',
         $stateProvider.state('ticket.evaluate', {
             url: '/evaluate/{id}',
             templateUrl: 'partials/ticket/evaluation/evaluation.html',
-            controller: ['$scope', '$stateParams', '$filter', ' Networks', 'Ticket', 'TicketServ', 'DeviceBrandsServ', 'GadgetEvaluationReward', '$state',
+            controller: ['$scope', '$stateParams', '$filter', 'Networks', 'Ticket', 'TicketServ', 'DeviceBrandsServ', 'GadgetEvaluationReward', '$state',
                 function ($scope, $stateParams, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
 
                     if (typeof $stateParams.id == "undefined")
@@ -852,6 +852,7 @@ module.controller('NewTicketController', [
             TicketServ.save(ticket, function (ticket) {
                 if (typeof ticket.id != "undefined") {
                     $scope.ticket = ticket;
+                    $scope.ticketObj = ticket;
                     $state.isCreatingTicket = false;
                 }
             }, function (ticket) {
@@ -883,7 +884,7 @@ module.controller('NewTicketController', [
        //grade
 
         $scope.nextStepEvaluation = function () {
-            $state.go('ticket.evaluate', {'id': $scope.ticket.id });
+            $state.go('ticket.evaluate', {'id': $scope.ticketObj.id });
         };
 
         function checkTestsPassed(obj) {
