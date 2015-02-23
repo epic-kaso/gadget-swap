@@ -55,13 +55,15 @@ class GadgetSwapTicketController extends Controller
                 'customer_last_name',
                 'customer_phone_number',
                 'customer_device_imei',
-                'customer_email',
-                'device_grade'
+                'customer_email'
             ]
         );
 
-        $ticket = GadgetSwapTicket::create($data);
-
+        $ticket = GadgetSwapTicket::firstOrNew($data);
+        if(empty($ticket->device_grade)) {
+            $ticket->device_grade = Input::get('device_grade');
+        }
+        $ticket->save();
         return $ticket;
     }
 

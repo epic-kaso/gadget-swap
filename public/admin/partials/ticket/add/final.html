@@ -1,23 +1,23 @@
 <div class="text-center">
 
-    <div class="processing-ticket" ng-if="isCreatingTicket">
+    <div class="processing-ticket" ng-show="isCreatingTicket">
         <h2>Please Wait while device is graded.....</h2>
 
     </div>
 
-    <div class="alert alert-danger error" ng-if="creationError">
+    <div class="alert alert-danger error" ng-show="creationError">
         <p>Error occurred while creating ticket, try again.</p>
     </div>
 
-    <div class="device-grade" ng-if="!isCreatingTicket">
+    <div class="device-grade" ng-show="!isCreatingTicket">
         <div class="alert alert-info" style="margin-top: 10px;">
-            <p>Ticket created Successfully <span><strong>{{ ticket.hashcode }}</strong></span></p>
+            <p>Ticket created Successfully <span><strong>{{ ticket.savedTicket.hashcode }}</strong></span></p>
         </div>
 
         <h2>Device Grade</h2>
 
         <div class="text-center">
-            <span class="device-grade">{{ ticket.device_grade }}</span>
+            <span class="device-grade">{{ ticket.savedTicket.device_grade }}</span>
 
             <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">

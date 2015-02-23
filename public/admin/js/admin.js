@@ -804,10 +804,11 @@ app.run(['$http', '$rootScope', 'CSRF_TOKEN', 'PreloadTemplates',
 var module = angular.module('adminApp.controllers', ['adminApp.services']);
 
 module.controller('NewTicketController', [
-    '$scope','$rootScope','TicketServ', '$state', '$stateParams', 'GradeDeviceServ',
-    function ($scope,$rootScope,TicketServ, $state, $stateParams, GradeDeviceServ) {
+    '$scope','TicketServ', '$state', '$stateParams', 'GradeDeviceServ',
+    function ($scope,TicketServ, $state, $stateParams, GradeDeviceServ) {
         $scope.activeStep = 'stepOne';
-        $state.isCreatingTicket = true;
+        $scope.isCreatingTicket = true;
+        $scope.creationError = false;
         $scope.ticket = {
             test: {
                 deviceBoot: '',
@@ -830,25 +831,21 @@ module.controller('NewTicketController', [
 
         $scope.activeNextButton = false;
 
-        $rootScope.$on('cfpLoadingBar:loading',function(){
-            $state.isCreatingTicket = true;
-        });
-
-        $rootScope.$on('cfpLoadingBar:completed',function(){
-            $state.isCreatingTicket = false;
-        });
-
         $scope.$watch('ticket.test', function (newV, oldV) {
+            if(!stepTwoActive()){
+                return;
+            }
             console.log('test change');
             console.log(newV);
-
             var ready = checkTestsPassed(newV);
             setViewState(ready);
-
         }, true);
 
 
         $scope.$watch('ticket.gradingSystem', function (newV, oldV) {
+            if(!stepThreeActive()){
+                return;
+            }
             console.log('gradingSystem change');
             console.log(newV);
             $scope.ticket.device_grade = GradeDeviceServ.getGrade(newV);
@@ -856,15 +853,20 @@ module.controller('NewTicketController', [
         }, true);
 
         $scope.createTicket = function (ticket) {
-            TicketServ.save(ticket, function (ticket) {
-                console.log(ticket);
-                if (typeof ticket.id != "undefined") {
-                    $scope.ticket = ticket;
+            var ticketSaved = TicketServ.save(ticket);
+            ticketSaved.$promise.then(function (ticket) {
+                $scope.isCreatingTicket = false;
+                if (ticket.hasOwnProperty('id')) {
+                    $scope.ticket.savedTicket = ticket;
+                    console.log(ticket);
+                }else{
+                    console.log('error');
+                    $scope.creationError = true;
                 }
             }, function (ticket) {
                 alert("failed");
                 console.log(ticket);
-                $state.creationError = true;
+                $scope.creationError = true;
             });
         };
 
@@ -887,8 +889,16 @@ module.controller('NewTicketController', [
        //grade
 
         $scope.nextStepEvaluation = function () {
-            $state.go('ticket.evaluate', {'id': $scope.ticket.id });
+            $state.go('ticket.evaluate', {'id': $scope.ticket.savedTicket.id });
         };
+
+        function stepTwoActive(){
+            return $scope.activeStep == 'stepTwo';
+        }
+
+        function stepThreeActive(){
+            return $scope.activeStep == 'stepThree';
+        }
 
         function checkTestsPassed(obj) {
             var state = {ready: true};
