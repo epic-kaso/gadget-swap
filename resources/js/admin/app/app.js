@@ -475,6 +475,33 @@ app.config(['$urlRouterProvider', '$stateProvider',
             }
         );
 
+        $stateProvider.state('ticket.config',
+            {
+                url: '/config',
+                templateUrl: 'partials/ticket/config.html',
+                controller: ['$scope', 'TicketConfigServ', function ($scope, TicketConfigServ) {
+                    $scope.columns = [];
+
+                    TicketConfigServ.query({},function(result){
+                        $scope.columns = result;
+                    });
+
+                    $scope.deleteItem = function (id) {
+                        TicketConfigServ.delete({id: id}, function (response) {
+                            location.reload();
+                        }, function (response) {
+                            alert(response);
+                        });
+                    }
+                }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
         $stateProvider.state('ticket.add',
             {
                 url: '/add',
@@ -483,6 +510,9 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
+                    }],
+                    'TicketColumns': ['TicketConfigServ',function(TicketConfigServ){
+                        return TicketConfigServ.query({});
                     }]
                 }
             }

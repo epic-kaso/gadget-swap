@@ -4,8 +4,9 @@
 var module = angular.module('adminApp.controllers', ['adminApp.services']);
 
 module.controller('NewTicketController', [
-    '$scope','TicketServ', '$state', '$stateParams', 'GradeDeviceServ','$cookieStore',
-    function ($scope,TicketServ, $state, $stateParams, GradeDeviceServ,$cookieStore) {
+    '$scope','TicketServ','TicketColumns', '$state', '$stateParams', 'GradeDeviceServ','$cookieStore',
+    function ($scope,TicketServ,TicketColumns, $state, $stateParams, GradeDeviceServ,$cookieStore) {
+        $scope.TicketColumns = TicketColumns;
         $scope.activeStep = 'stepOne';
         $scope.isCreatingTicket = true;
         $scope.creationError = false;

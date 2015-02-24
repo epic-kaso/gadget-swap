@@ -31,4 +31,5 @@ Route::group(['prefix' => 'resources', 'namespace' => 'Resources','middleware' =
     Route::resource('ticket','GadgetSwapTicketController');
     Route::resource('mail', 'MailerController');
     Route::resource('advisers','AdvisersController');
+    Route::resource('ticket-config','TicketDataConfigController');
 });

@@ -12,6 +12,13 @@ app.factory('TicketServ', ['$resource', 'URLServ', function ($resource, URLServ)
     });//URLServ.getResourceUrlFor("ticket"));
 }]);
 
+//TicketConfigServ
+app.factory('TicketConfigServ', ['$resource', 'URLServ', function ($resource, URLServ) {
+    return $resource('/resources/ticket-config/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+}]);
+
 app.factory('DeviceBrandsServ', ['$resource', 'URLServ', function ($resource, URLServ) {
     return $resource('/resources/device_makers/:id', {id: '@id'}, {
         'update': {method: 'PUT'}
