@@ -6916,8 +6916,8 @@ form .ng-valid.ng-dirty {
 .tr-row.ng-enter,
 .inmates-menu-items .menu-item.inmate-item.ng-enter,
 .menu-item.inmate-item.ng-enter {
-  -webkit-animation: fadeInAnimation 0.5s ease-in;
-          animation: fadeInAnimation 0.5s ease-in;
+  -webkit-animation: fadeInAnimation 0.3s ease-in;
+          animation: fadeInAnimation 0.3s ease-in;
   opacity: 0;
 }
 .tr-row.ng-enter-stagger,
@@ -6935,8 +6935,8 @@ form .ng-valid.ng-dirty {
           animation-duration: 0s;
 }
 .menu-item.inmate-item.ng-leave {
-  -webkit-animation: fadeInAnimation 0.5s ease-in;
-          animation: fadeInAnimation 0.5s ease-in;
+  -webkit-animation: fadeInAnimation 0.3s ease-in;
+          animation: fadeInAnimation 0.3s ease-in;
   -webkit-animation-direction: reverse;
           animation-direction: reverse;
   opacity: 0;
