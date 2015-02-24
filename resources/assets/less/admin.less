@@ -494,10 +494,6 @@ to prevent collapsing during animation*/
   animation: slideIn 0.5s;
 }
 
-.slide.ng-enter-stagger,.slide.ng-leave-stagger {
-  animation-delay: 0.2s;
-  animation-duration: 0s;
-}
 
 .slide.ng-enter.ng-enter-active, .slide.ng-leave {
   position: absolute;
@@ -674,36 +670,18 @@ form .ng-valid.ng-dirty{ border-color: lightgreen}
 
 //Animations
 
-
-.tr-row.ng-enter,.inmates-menu-items .menu-item.inmate-item.ng-enter,.menu-item.inmate-item.ng-enter{
-  animation: fadeInAnimation 0.3s ease-in;
+.menu-item.inmate-item.ng-enter{
+  transform: translateY(-50%);
   opacity: 0;
+  transition: all 0.5s;
 }
 
-.tr-row.ng-enter-stagger,.inmates-menu-items .menu-item.inmate-item.ng-enter-stagger, .menu-item.inmate-item.ng-enter-stagger{
-  animation-delay: 0.2s;
-  animation-duration: 0s;
+.menu-item.inmate-item.ng-enter.ng-enter-active{
+  transform: translateY(0%);
+  opacity: 1;
 }
 
-.menu-item.inmate-item.ng-leave-stagger{
-  animation-delay: 0.2s;
-  animation-duration: 0s;
-}
-
-.menu-item.inmate-item.ng-leave{
-  animation: fadeInAnimation 0.3s ease-in;
-  animation-direction: reverse;
-  opacity: 0;
-}
-
-@keyframes fadeInAnimation {
-  0% {
-      transform: translateY(-50%);
-      opacity: 0;
-   }
-
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-     }
+.menu-item.inmate-item.ng-enter-stagger{
+  transition-delay: 0.2s;
+  transition-duration: 0s;
 }

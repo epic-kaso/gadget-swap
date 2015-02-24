@@ -475,6 +475,33 @@ app.config(['$urlRouterProvider', '$stateProvider',
             }
         );
 
+        $stateProvider.state('ticket.config',
+            {
+                url: '/config',
+                templateUrl: 'partials/ticket/config.html',
+                controller: ['$scope', 'TicketConfigServ', function ($scope, TicketConfigServ) {
+                    $scope.columns = [];
+
+                    TicketConfigServ.query({},function(result){
+                        $scope.columns = result;
+                    });
+
+                    $scope.deleteItem = function (id) {
+                        TicketConfigServ.delete({id: id}, function (response) {
+                            location.reload();
+                        }, function (response) {
+                            alert(response);
+                        });
+                    }
+                }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
         $stateProvider.state('ticket.add',
             {
                 url: '/add',
@@ -483,6 +510,9 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
+                    }],
+                    'TicketColumns': ['TicketConfigServ',function(TicketConfigServ){
+                        return TicketConfigServ.query({});
                     }]
                 }
             }
@@ -838,8 +868,9 @@ app.run(['$http', '$rootScope', 'CSRF_TOKEN', 'PreloadTemplates',
 var module = angular.module('adminApp.controllers', ['adminApp.services']);
 
 module.controller('NewTicketController', [
-    '$scope','TicketServ', '$state', '$stateParams', 'GradeDeviceServ','$cookieStore',
-    function ($scope,TicketServ, $state, $stateParams, GradeDeviceServ,$cookieStore) {
+    '$scope','TicketServ','TicketColumns', '$state', '$stateParams', 'GradeDeviceServ','$cookieStore',
+    function ($scope,TicketServ,TicketColumns, $state, $stateParams, GradeDeviceServ,$cookieStore) {
+        $scope.TicketColumns = TicketColumns;
         $scope.activeStep = 'stepOne';
         $scope.isCreatingTicket = true;
         $scope.creationError = false;
@@ -990,6 +1021,13 @@ var app =  angular.module('adminApp.services',[]);
 
 app.factory('TicketServ', ['$resource', 'URLServ', function ($resource, URLServ) {
     return $resource('/resources/ticket/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+}]);
+
+//TicketConfigServ
+app.factory('TicketConfigServ', ['$resource', 'URLServ', function ($resource, URLServ) {
+    return $resource('/resources/ticket-config/:id', {id: '@id'}, {
         'update': {method: 'PUT'}
     });//URLServ.getResourceUrlFor("ticket"));
 }]);

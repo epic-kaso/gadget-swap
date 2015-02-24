@@ -2,29 +2,12 @@
 <hr/>
 <form name="UserTicketForm" ng-submit="nextStepTwo()">
 
-    <div class="form-group">
-        <input type="text" required="" placeholder="Last Name" name="name" ng-model="ticket.customer_last_name"
-               class="form-control inmate-search-box"/>
-    </div>
-
-    <div class="form-group">
-        <input type="text" required="" placeholder="First Name" name="name" ng-model="ticket.customer_first_name"
-               class="form-control inmate-search-box"/>
-    </div>
-
-    <div class="form-group">
-        <input type="text" required="" placeholder="Email" name="email" ng-model="ticket.customer_email"
-               class="form-control inmate-search-box"/>
-    </div>
-
-    <div class="form-group">
-        <input type="text" required="" placeholder="Phone Number" name="phone" ng-model="ticket.customer_phone_number"
-               class="form-control inmate-search-box" ng-minlength="11" ng-maxlength="14"/>
-    </div>
-
-    <div class="form-group">
-        <input type="text" required="" placeholder="IMEI of Device" name="device_imei"
-               ng-model="ticket.customer_device_imei" ng-minlength="15" ng-maxlength="15"
+    <div class="form-group" ng-repeat="TicketColumn in TicketColumns">
+        <input type="text" required=""
+               placeholder="{{ TicketColumn.value }}"
+               name="{{ TicketColumn.name }}"
+               ng-pattern="/{{ TicketColumn.pattern }}/"
+               ng-model="ticket[TicketColumn.name]"
                class="form-control inmate-search-box"/>
     </div>
 

@@ -14,7 +14,7 @@ class GadgetSwapTicket extends BaseModel {
 	 */
 
     protected $guarded = ['id'];
-    protected $hiddent = ['id'];
+    public static $tableName   = 'gadget_swap_tickets';
 
     public static function boot(){
         parent::boot();
