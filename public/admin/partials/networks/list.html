@@ -1,21 +1,22 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h2>Network providers</h2>
+<div class="inmates-menu-items">
+    <div class="menu-item inmate-item" ng-repeat="value in networks">
+        <div class="inmate-pic">
+            <span class="fa fa-certificate"></span>
+        </div>
+
+        <div class="inmate-bio">
+            <h4>{{ value.name }}</h4>
+            <p>
+                {{ value.description }}&nbsp;&nbsp;
+            </p>
+            <a class="btn btn-danger" ng-click="deleteItem(value.id)">Delete</a>
+        </div>
     </div>
-    <table class="table table-striped">
-        <tbody>
-        <tr ng-repeat="value in networks">
-            <td>{{ $index }}</td>
-            <td>
-                <h4>{{ value.name }}</h4>
-                <p>
-                    {{ value.description }}
-                </p>
-            </td>
-            <td>
-                <a ng-click="deleteItem(value.id)" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
 </div>
+
+<nav>
+    <ul class="pager search-result-pager">
+        <li><a href="#"><span class="fa fa-chevron-left"></span></a></li>
+        <li><a href="#"><span class="fa fa-chevron-right"></span></a></li>
+    </ul>
+</nav>

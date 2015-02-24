@@ -1,18 +1,19 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h2>Device Brands</h2>
+<div class="inmates-menu-items">
+    <div class="menu-item inmate-item" ng-repeat="value in brands">
+        <div class="inmate-pic">
+            <span class="fa fa-certificate"></span>
+        </div>
+
+        <div class="inmate-bio">
+            <h4>{{ value.name }} </h4>
+            <a class="btn btn-danger" ng-click="deleteItem(value.id)">Delete</a>
+        </div>
     </div>
-    <table class="table table-striped">
-        <tbody>
-        <tr ng-repeat="value in brands">
-            <td>{{ $index }}</td>
-            <td>
-                <h4>{{ value.name }} </h4>
-            </td>
-            <td>
-                <a ng-click="deleteItem(value.id)" class="btn btn-danger">Delete</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
 </div>
+
+<nav>
+    <ul class="pager search-result-pager">
+        <li><a href="#"><span class="fa fa-chevron-left"></span></a></li>
+        <li><a href="#"><span class="fa fa-chevron-right"></span></a></li>
+    </ul>
+</nav>

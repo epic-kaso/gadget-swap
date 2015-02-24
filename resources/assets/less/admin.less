@@ -494,6 +494,11 @@ to prevent collapsing during animation*/
   animation: slideIn 0.5s;
 }
 
+.slide.ng-enter-stagger,.slide.ng-leave-stagger {
+  animation-delay: 0.2s;
+  animation-duration: 0s;
+}
+
 .slide.ng-enter.ng-enter-active, .slide.ng-leave {
   position: absolute;
   transform: translateX(0);
@@ -666,3 +671,38 @@ form{
 }
 form .ng-invalid.ng-dirty{ border-color: #ff0000}
 form .ng-valid.ng-dirty{ border-color: lightgreen}
+
+//Animations
+
+.inmates-menu-items .menu-item.inmate-item.ng-enter,.menu-item.inmate-item.ng-enter{
+  animation: fadeInAnimation 0.5s ease-in;
+  opacity: 0;
+}
+
+.inmates-menu-items .menu-item.inmate-item.ng-enter-stagger, .menu-item.inmate-item.ng-enter-stagger{
+  animation-delay: 0.2s;
+  animation-duration: 0s;
+}
+
+.menu-item.inmate-item.ng-leave-stagger{
+  animation-delay: 0.2s;
+  animation-duration: 0s;
+}
+
+.menu-item.inmate-item.ng-leave{
+  animation: fadeInAnimation 0.5s ease-in;
+  animation-direction: reverse;
+  opacity: 0;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+      transform: translateY(-50%);
+      opacity: 0;
+   }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+     }
+}
