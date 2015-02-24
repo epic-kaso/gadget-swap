@@ -6913,12 +6913,14 @@ form .ng-invalid.ng-dirty {
 form .ng-valid.ng-dirty {
   border-color: #90ee90;
 }
+.tr-row.ng-enter,
 .inmates-menu-items .menu-item.inmate-item.ng-enter,
 .menu-item.inmate-item.ng-enter {
   -webkit-animation: fadeInAnimation 0.5s ease-in;
           animation: fadeInAnimation 0.5s ease-in;
   opacity: 0;
 }
+.tr-row.ng-enter-stagger,
 .inmates-menu-items .menu-item.inmate-item.ng-enter-stagger,
 .menu-item.inmate-item.ng-enter-stagger {
   -webkit-animation-delay: 0.2s;
