@@ -75,6 +75,7 @@
                 return [
                     "partials/ticket/menu.html",
                     "partials/ticket/dashboard.html",
+                    "partials/ticket/show.html",
                     "partials/ticket/evaluation/evaluation.html",
                     "partials/ticket/evaluation/review.html",
                     "partials/ticket/evaluation/reward.html",
