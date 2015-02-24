@@ -6738,13 +6738,6 @@ to prevent collapsing during animation*/
   -webkit-animation: slideIn 0.5s;
           animation: slideIn 0.5s;
 }
-.slide.ng-enter-stagger,
-.slide.ng-leave-stagger {
-  -webkit-animation-delay: 0.2s;
-          animation-delay: 0.2s;
-  -webkit-animation-duration: 0s;
-          animation-duration: 0s;
-}
 .slide.ng-enter.ng-enter-active,
 .slide.ng-leave {
   position: absolute;
@@ -6913,55 +6906,20 @@ form .ng-invalid.ng-dirty {
 form .ng-valid.ng-dirty {
   border-color: #90ee90;
 }
-.tr-row.ng-enter,
-.inmates-menu-items .menu-item.inmate-item.ng-enter,
 .menu-item.inmate-item.ng-enter {
-  -webkit-animation: fadeInAnimation 0.3s ease-in;
-          animation: fadeInAnimation 0.3s ease-in;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
   opacity: 0;
+  transition: all 0.5s;
 }
-.tr-row.ng-enter-stagger,
-.inmates-menu-items .menu-item.inmate-item.ng-enter-stagger,
+.menu-item.inmate-item.ng-enter.ng-enter-active {
+  -webkit-transform: translateY(0%);
+      -ms-transform: translateY(0%);
+          transform: translateY(0%);
+  opacity: 1;
+}
 .menu-item.inmate-item.ng-enter-stagger {
-  -webkit-animation-delay: 0.2s;
-          animation-delay: 0.2s;
-  -webkit-animation-duration: 0s;
-          animation-duration: 0s;
-}
-.menu-item.inmate-item.ng-leave-stagger {
-  -webkit-animation-delay: 0.2s;
-          animation-delay: 0.2s;
-  -webkit-animation-duration: 0s;
-          animation-duration: 0s;
-}
-.menu-item.inmate-item.ng-leave {
-  -webkit-animation: fadeInAnimation 0.3s ease-in;
-          animation: fadeInAnimation 0.3s ease-in;
-  -webkit-animation-direction: reverse;
-          animation-direction: reverse;
-  opacity: 0;
-}
-@-webkit-keyframes fadeInAnimation {
-  0% {
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes fadeInAnimation {
-  0% {
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-    opacity: 1;
-  }
+  transition-delay: 0.2s;
+  transition-duration: 0s;
 }
