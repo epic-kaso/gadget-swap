@@ -34,7 +34,7 @@ class TicketDataConfigController extends Controller {
             if(str_contains($item,'email')){
                 $obj->pattern  = "(\S)+@(\S)+\.(\S){2,5}";
             }elseif(str_contains($item,'phone')){
-                $obj->pattern  = "\d{11,14}";
+                $obj->pattern  = "\d{11}";
             }elseif(str_contains($item,'name')){
                 $obj->pattern  = "[a-zA-Z\s]+";
             }elseif(str_contains($item,'imei')){
