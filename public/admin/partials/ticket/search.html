@@ -1,7 +1,7 @@
 
 
 <div class="inmates-menu-items">
-    <div class="menu-item inmate-item" ng-repeat="item in result">
+    <a ui-sref="ticket.show({id: item.id})" class="menu-item inmate-item" ng-repeat="item in result">
         <div class="inmate-pic">
             <span class="fa fa-user"></span>
         </div>
@@ -10,7 +10,7 @@
             <h4>{{ item.customer_last_name}}, {{ item.customer_first_name }}</h4>
             <h4>{{ item.hashcode }}</h4>
         </div>
-    </div>
+    </a>
 
 </div>
 

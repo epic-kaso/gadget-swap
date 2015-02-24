@@ -18,7 +18,7 @@
 
 <h3>Recent Tickets</h3><hr/>
 <div class="inmates-menu-items">
-    <div class="menu-item inmate-item" ng-repeat="ticket in tickets">
+    <a ui-sref="ticket.show({id: ticket.id})"  class="menu-item inmate-item" ng-repeat="ticket in tickets">
         <div class="inmate-pic">
             <span class="fa fa-user"></span>
         </div>
@@ -29,5 +29,5 @@
 
             <p><span class="fa fa-clock-o"></span> {{ ticket.created_date }}</p>
         </div>
-    </div>
+    </a>
 </div>

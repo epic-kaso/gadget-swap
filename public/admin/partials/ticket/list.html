@@ -1,5 +1,5 @@
 <div class="inmates-menu-items">
-    <div class="menu-item inmate-item" ng-repeat="ticket in tickets">
+    <a ui-sref="ticket.show({id: ticket.id})" class="menu-item inmate-item" ng-repeat="ticket in tickets">
         <div class="inmate-pic">
             <span class="fa fa-user"></span>
         </div>
@@ -10,7 +10,7 @@
 
             <a class="btn btn-danger" ng-click="deleteItem(ticket.id)">Delete</a>
         </div>
-    </div>
+    </a>
 </div>
 
 <nav>

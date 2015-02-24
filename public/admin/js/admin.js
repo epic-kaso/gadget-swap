@@ -616,6 +616,26 @@ app.config(['$urlRouterProvider', '$stateProvider',
             }
         });
 
+
+        $stateProvider.state('ticket.show',
+            {
+                url: '/show/{id}',
+                templateUrl: 'partials/ticket/show.html',
+                controller: ['$scope', '$stateParams', 'Ticket',
+                    function ($scope, $stateParams, Ticket) {
+                        $scope.ticket = Ticket;
+                    }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'Ticket': ['TicketServ', '$stateParams', function (TicketServ, $stateParams) {
+                        return TicketServ.get({id: $stateParams.id});
+                    }]
+                }
+            }
+        );
+
         $stateProvider.state('ticket.reward',
             {
                 url: '/reward/{id}',
