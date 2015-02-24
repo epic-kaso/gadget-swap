@@ -621,9 +621,17 @@ app.config(['$urlRouterProvider', '$stateProvider',
             {
                 url: '/show/{id}',
                 templateUrl: 'partials/ticket/show.html',
-                controller: ['$scope', '$stateParams', 'Ticket',
-                    function ($scope, $stateParams, Ticket) {
+                controller: ['$scope', '$stateParams','TicketServ','$state','Ticket',
+                    function ($scope, $stateParams,TicketServ,$state, Ticket) {
                         $scope.ticket = Ticket;
+
+                        $scope.deleteItem = function (id) {
+                            TicketServ.delete({id: id}, function (response) {
+                                $state.go('ticket.list');
+                            }, function (response) {
+                                alert(response);
+                            });
+                        }
                     }],
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
