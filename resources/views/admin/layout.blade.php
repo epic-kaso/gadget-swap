@@ -76,9 +76,7 @@
                     "partials/ticket/menu.html?{{ time() }}",
                     "partials/ticket/dashboard.html?{{ time() }}",
                     "partials/ticket/show.html?{{ time() }}",
-                    "partials/ticket/evaluation/evaluation.html?{{ time() }}",
                     "partials/ticket/evaluation/review.html?{{ time() }}",
-                    "partials/ticket/evaluation/reward.html?{{ time() }}",
                     "partials/ticket/evaluation/terms.html?{{ time() }}",
                     "partials/ticket/done.html?{{ time() }}",
                     "partials/ticket/search.html?{{ time() }}",
@@ -87,6 +85,7 @@
                     "partials/ticket/add/step-one.html?{{ time() }}",
                     "partials/ticket/add/step-two.html?{{ time() }}",
                     "partials/ticket/add/step-three.html?{{ time() }}",
+                    "partials/ticket/add/step-four.html?{{ time() }}",
                     "partials/ticket/add/final.html?{{ time() }}"
                     @if(Auth::user()->isAdmin())
                     ,
