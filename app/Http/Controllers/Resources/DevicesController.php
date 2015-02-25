@@ -19,8 +19,8 @@ class DevicesController extends Controller {
     public function __construct(DevicesRepository $devicesRepository)
     {
         $this->devicesRepository = $devicesRepository;
-        $this->middleware('auth-adviser',['only'  => ['index','show'] ]);
-        $this->middleware('auth-admin');
+        //$this->middleware('auth-adviser',['only'  => ['index','show'] ]);
+        //$this->middleware('auth-admin');
     }
 
 

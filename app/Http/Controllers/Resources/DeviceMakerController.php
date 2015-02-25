@@ -15,8 +15,8 @@ class DeviceMakerController extends Controller {
     public function __construct(DevicesRepository $deviceRepository)
     {
         $this->deviceRepository = $deviceRepository;
-        $this->middleware('auth-adviser',['only'  => ['index','show'] ]);
-        $this->middleware('auth-admin');
+//        $this->middleware('auth-adviser',['only'  => ['index','show'] ]);
+//        $this->middleware('auth-admin');
     }
 
 
