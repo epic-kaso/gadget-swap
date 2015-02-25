@@ -59,10 +59,22 @@ class GadgetSwapTicketController extends Controller
             ]
         );
 
+        $others = Input::only(
+            [
+                'device_grade',
+                'gadget_id',
+                'network_id',
+                'size_id',
+                'reward'
+            ]
+        );
+
         $ticket = GadgetSwapTicket::firstOrNew($data);
-        if(empty($ticket->device_grade)) {
-            $ticket->device_grade = Input::get('device_grade');
+
+        foreach ($others as $k => $value) {
+            $ticket->{$k} = $others;
         }
+
         $ticket->save();
         return $ticket;
     }
