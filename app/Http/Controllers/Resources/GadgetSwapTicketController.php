@@ -72,7 +72,7 @@ class GadgetSwapTicketController extends Controller
         $ticket = GadgetSwapTicket::firstOrNew($data);
 
         foreach ($others as $k => $value) {
-            $ticket->{$k} = $others;
+            $ticket->{$k} = $value;
         }
 
         $ticket->save();
