@@ -2,7 +2,7 @@
  * Created by Ak on 2/19/2015.
  */
 var app = angular.module("AdminApp",
-    ['ui.select', 'ngSanitize',
+    ['ui.select', 'ngSanitize','ngImgCrop',
         'ui.bootstrap', 'ui.router',
         'ngAnimate', 'ngResource',
         'angular-loading-bar', 'adminApp.directives', 'adminApp.controllers',
@@ -110,6 +110,25 @@ app.config(['$urlRouterProvider', '$stateProvider',
                         });
                         $scope.baseLinePriceString = temp.join();
                     }
+
+
+                    //
+
+                    $scope.myImage='';
+                    $scope.myCroppedImage='';
+
+                    var handleFileSelect=function(evt) {
+                        var file=evt.currentTarget.files[0];
+                        var reader = new FileReader();
+                        reader.onload = function (evt) {
+                            $scope.$apply(function($scope){
+                                $scope.myImage=evt.target.result;
+                            });
+                        };
+                        reader.readAsDataURL(file);
+                    };
+                    angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
+
                 }]
             }
         );
