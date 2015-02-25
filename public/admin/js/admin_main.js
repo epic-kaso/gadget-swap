@@ -843,14 +843,13 @@ module.controller('NewTicketController', [
         });
 
 
-        $scope.createTicket = function (ticket,callback) {
+        $scope.createTicket = function (ticket) {
             var ticketSaved = TicketServ.save(ticket);
             ticketSaved.$promise.then(function (ticket) {
                 $scope.isCreatingTicket = false;
                 if (ticket.hasOwnProperty('id')) {
                     $scope.ticket.savedTicket = ticket;
                     console.log(ticket);
-                    callback();
                 }else{
                     console.log('error');
                     $scope.creationError = true;
