@@ -82,6 +82,9 @@ module.controller('NewTicketController', [
 
 
         $scope.createTicket = function (ticket) {
+            ticket.network_id = parseInt(ticket.network_id);
+            ticket.size_id = parseInt(ticket.size_id);
+
             var ticketSaved = TicketServ.save(ticket);
             ticketSaved.$promise.then(function (ticket) {
                 $scope.isCreatingTicket = false;
