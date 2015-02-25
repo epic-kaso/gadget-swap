@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>GadgetSwap</title>
 
-    <link href="{{ asset('admin/css/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin/css/admin.css')."?".time() }}" rel="stylesheet">
 
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
