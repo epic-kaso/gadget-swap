@@ -34,8 +34,12 @@ module.controller('NewTicketController', [
         };
         $scope.selected = {};
         $scope.networks = Networks;
-        $scope.brand = {};
-        $scope.device = {};
+        $scope.brand = {
+            selectedIndex: 0
+        };
+        $scope.device = {
+            selectedIndex: 0
+        };
         $scope.activeNextButton = false;
         $scope.airtel = Airtel;
         $scope.portToAirtel = 'No';

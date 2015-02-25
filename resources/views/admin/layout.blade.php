@@ -64,52 +64,52 @@
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="{{ asset('app/libs/core_main.js') }}" ></script>
-<script src="{{ asset('app/libs/others_main.js') }}" ></script>
-<script src="{{ asset('admin/js/admin_main.js') }}"></script>
+<script src="{{ asset('app/libs/core_main.js')."?".time() }}" ></script>
+<script src="{{ asset('app/libs/others_main.js')."?".time() }}" ></script>
+<script src="{{ asset('admin/js/admin_main.js')."?".time() }}"></script>
 <script>
     angular.module("AdminApp").constant("CSRF_TOKEN", '<?php echo csrf_token(); ?>');
     angular.module("AdminApp").factory("PRELOAD_UI_LIST",function(){
         return {
             'get': function(){
                 return [
-                    "partials/ticket/menu.html",
-                    "partials/ticket/dashboard.html",
-                    "partials/ticket/show.html",
-                    "partials/ticket/evaluation/evaluation.html",
-                    "partials/ticket/evaluation/review.html",
-                    "partials/ticket/evaluation/reward.html",
-                    "partials/ticket/evaluation/terms.html",
-                    "partials/ticket/done.html",
-                    "partials/ticket/search.html",
+                    "partials/ticket/menu.html?{{ time() }}",
+                    "partials/ticket/dashboard.html?{{ time() }}",
+                    "partials/ticket/show.html?{{ time() }}",
+                    "partials/ticket/evaluation/evaluation.html?{{ time() }}",
+                    "partials/ticket/evaluation/review.html?{{ time() }}",
+                    "partials/ticket/evaluation/reward.html?{{ time() }}",
+                    "partials/ticket/evaluation/terms.html?{{ time() }}",
+                    "partials/ticket/done.html?{{ time() }}",
+                    "partials/ticket/search.html?{{ time() }}",
                     'partials/ticket/list.html',
-                    "partials/ticket/add/base.html",
-                    "partials/ticket/add/step-one.html",
-                    "partials/ticket/add/step-two.html",
-                    "partials/ticket/add/step-three.html",
-                    "partials/ticket/add/final.html"
+                    "partials/ticket/add/base.html?{{ time() }}",
+                    "partials/ticket/add/step-one.html?{{ time() }}",
+                    "partials/ticket/add/step-two.html?{{ time() }}",
+                    "partials/ticket/add/step-three.html?{{ time() }}",
+                    "partials/ticket/add/final.html?{{ time() }}"
                     @if(Auth::user()->isAdmin())
                     ,
-                    "partials/advisers/menu.html",
-                    "partials/advisers/dashboard.html",
-                    "partials/advisers/search.html",
-                    "partials/advisers/list.html",
-                    "partials/advisers/add/add.html",
-                    "partials/device_models/search.html",
-                    "partials/device_brands/search.html",
-                    "partials/networks/search.html",
-                    "partials/networks/dashboard.html",
-                    "partials/networks/menu.html",
-                    "partials/device_models/menu.html",
-                    "partials/device_brands/menu.html",
-                    "partials/device_models/dashboard.html",
-                    "partials/device_brands/dashboard.html",
-                    "partials/networks/add.html",
-                    "partials/device_models/add.html",
-                    "partials/device_brands/add.html",
-                    "partials/networks/list.html",
-                    "partials/device_models/list.html",
-                    "partials/device_brands/list.html"
+                    "partials/advisers/menu.html?{{ time() }}",
+                    "partials/advisers/dashboard.html?{{ time() }}",
+                    "partials/advisers/search.html?{{ time() }}",
+                    "partials/advisers/list.html?{{ time() }}",
+                    "partials/advisers/add/add.html?{{ time() }}",
+                    "partials/device_models/search.html?{{ time() }}",
+                    "partials/device_brands/search.html?{{ time() }}",
+                    "partials/networks/search.html?{{ time() }}",
+                    "partials/networks/dashboard.html?{{ time() }}",
+                    "partials/networks/menu.html?{{ time() }}",
+                    "partials/device_models/menu.html?{{ time() }}",
+                    "partials/device_brands/menu.html?{{ time() }}",
+                    "partials/device_models/dashboard.html?{{ time() }}",
+                    "partials/device_brands/dashboard.html?{{ time() }}",
+                    "partials/networks/add.html?{{ time() }}",
+                    "partials/device_models/add.html?{{ time() }}",
+                    "partials/device_brands/add.html?{{ time() }}",
+                    "partials/networks/list.html?{{ time() }}",
+                    "partials/device_models/list.html?{{ time() }}",
+                    "partials/device_brands/list.html?{{ time() }}"
                     @endif
                 ];
             }
