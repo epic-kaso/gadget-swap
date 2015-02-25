@@ -23,7 +23,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth
 });
 
 
-Route::group(['prefix' => 'resources', 'namespace' => 'Resources','middleware' => 'auth'], function () {
+Route::group(['prefix' => 'resources', 'namespace' => 'Resources'], function () {
     Route::resource('devices','DevicesController');
     Route::resource('device_makers','DeviceMakerController');
     Route::resource('networks','NetworkController');
