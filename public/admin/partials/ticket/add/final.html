@@ -9,19 +9,63 @@
         <p>Error occurred while creating ticket, try again.</p>
     </div>
 
-    <div class="device-grade" ng-show="!isCreatingTicket">
+    <div class="device-grade" ng-show="!creationError && !isCreatingTicket">
         <div class="alert alert-info" style="margin-top: 10px;">
             <p>Ticket created Successfully <span><strong>{{ ticket.savedTicket.hashcode }}</strong></span></p>
         </div>
 
-        <h2>Device Grade</h2>
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>Device Grade</h4>
 
-        <div class="text-center">
-            <span class="device-grade">{{ ticket.savedTicket.device_grade }}</span>
+                <div class="text-center">
+                    <span class="device-grade">{{ ticket.savedTicket.device_grade }}</span>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <h4>Your Reward</h4>
+
+                <div class="text-center">
+                    <span class="device-reward">{{ ticket.reward | currency: '₦'}}</span>
+
+                    <div ng-if="ticket.network_id == airtel.id ">
+                        <h5>Bonus</h5>
+                        <hr/>
+                        <div>
+                            <img ng-src="{{ airtel.logo_url }}" class="img-thumbnail img-responsive"/>
+
+                            <p>{{ airtel.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div ng-if="ticket.network_id != airtel.id ">
+                <h3>Extra Bonus</h3>
+                <hr/>
+                <p>Port to Airtel Now to Enjoy this bonus</p>
+
+                <p><strong> {{ airtel.description}} </strong></p>
+
+                <h2>
+                    I wish to Port to <strong>Airtel</strong>
+                    <button type="button" class="btn btn-default"
+                            ng-model="portToAirtel" btn-checkbox btn-checkbox-true="Yes" btn-checkbox-false="No">
+                        {{ portToAirtel }}
+                    </button>
+                </h2>
+
+            </div>
 
             <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
-                    <button ng-click="nextStepEvaluation()" class="btn btn-success btn-block">Proceed To Value Evaluation</button>
+                <div class="col-sm-6">
+                    <button ng-click="nextStepAcceptTerms()" class="btn btn-success btn-block btn-base">Accepts Offer</button>
+                </div>
+                <div class="col-sm-6">
+                    <button ng-click="goHome()" class="btn btn-danger btn-base btn-block">Rejects Offer</button>
                 </div>
             </div>
         </div>

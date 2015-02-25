@@ -513,6 +513,15 @@ app.config(['$urlRouterProvider', '$stateProvider',
                     }],
                     'TicketColumns': ['TicketConfigServ',function(TicketConfigServ){
                         return TicketConfigServ.query({});
+                    }],
+                    'Networks': ['NetworksServ', function (NetworksServ) {
+                        return NetworksServ.query({});
+                    }],
+                    'Airtel': ['GadgetEvaluationReward', function (GadgetEvaluationReward) {
+                        return GadgetEvaluationReward.fetchAirtelBonus();
+                    }],
+                    'DeviceBrands':['DeviceBrandsServ',function(DeviceBrandsServ){
+                        return DeviceBrandsServ.query({});
                     }]
                 }
             }
@@ -554,6 +563,18 @@ app.config(['$urlRouterProvider', '$stateProvider',
             }
         );
 
+        $stateProvider.state('ticket.add.stepFour',
+            {
+                url: '/step-three',
+                templateUrl: 'partials/ticket/add/step-four.html',
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
         $stateProvider.state('ticket.add.final',
             {
                 url: '/final',
@@ -565,87 +586,6 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 }
             }
         );
-
-        $stateProvider.state('ticket.evaluate', {
-            url: '/evaluate/{id}',
-            templateUrl: 'partials/ticket/evaluation/evaluation.html',
-            controller: ['$scope', '$stateParams', '$filter', 'Networks', 'Ticket', 'TicketServ', 'DeviceBrandsServ', 'GadgetEvaluationReward', '$state',
-                function ($scope, $stateParams, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
-
-                    if (typeof $stateParams.id == "undefined")
-                        $state.go('ticket.add.stepOne');
-
-                    console.log(Ticket);
-                    $scope.selected = {grade: Ticket.device_grade};
-
-                    $scope.networks = Networks;
-
-                    $scope.brand = {};
-
-                    $scope.refreshBrands = function (brand) {
-                        DeviceBrandsServ.query({}, function (brands) {
-                            console.log(brands);
-                            $scope.device_brands = brands;
-                        });
-                    };
-
-                    $scope.device = {};
-                    $scope.refreshDevices = function (brand) {
-                        $scope.devices = $filter('filter')($scope.brand.selected.gadgets, {model: brand});
-                    };
-
-                    $scope.$watch('brand.selected', function (newV, oldV) {
-                        console.log('brand changed');
-                        $scope.selected.brand = newV;
-                    });
-
-                    $scope.$watch('device.selected', function (newV, oldV) {
-                        console.log('device changed');
-                        $scope.selected.device = newV;
-                    });
-
-                    $scope.next = function () {
-                        console.log(Ticket);
-                        console.log($scope.selected);
-                        var reward = GadgetEvaluationReward.calculate($scope.selected);
-                        var promise = updateTicket($scope.selected, reward);
-                        promise.then(function(){
-                            $state.go('ticket.reward', {
-                                'id': Ticket.id
-                            });
-                        },function(){
-                            alert('Error occured while saving reward');
-                        })
-
-                    };
-
-                    $scope.goHome = function () {
-                        $state.go('ticket.menu');
-                    };
-
-                    function updateTicket(selected, reward) {
-                        Ticket.gadget_id = selected.device.id;
-                        Ticket.size_id = selected.size;
-                        Ticket.network_id = selected.network;
-                        Ticket.reward = reward;
-
-                        return TicketServ.update({id: Ticket.id}, Ticket).$promise;
-                    }
-
-                }],
-            resolve: {
-                'hasHistory': ['$rootScope', function ($rootScope) {
-                    $rootScope.hasHistory = true;
-                }],
-                'Ticket': ['TicketServ', '$state', '$stateParams','$cookieStore', function (TicketServ, $state, $stateParams,$cookieStore) {
-                    return  $cookieStore.get('ticket');//TicketServ.get({id: $stateParams.id});
-                }],
-                'Networks': ['NetworksServ', function (NetworksServ) {
-                    return NetworksServ.query({});
-                }]
-            }
-        });
-
 
         $stateProvider.state('ticket.show',
             {
@@ -674,49 +614,6 @@ app.config(['$urlRouterProvider', '$stateProvider',
             }
         );
 
-        $stateProvider.state('ticket.reward',
-            {
-                url: '/reward/{id}',
-                templateUrl: 'partials/ticket/evaluation/reward.html',
-                controller: ['$scope', '$stateParams', 'Ticket', 'TicketServ', 'GadgetEvaluationReward', 'Airtel', '$state',
-                    function ($scope, $stateParams, Ticket, TicketServ, GadgetEvaluationReward, Airtel, $state) {
-
-                        if (typeof $stateParams.id == "undefined")
-                            $state.go('ticket.add.stepOne');
-
-                        $scope.reward = GadgetEvaluationReward.getLastReward();// Ticket.reward;
-                        $scope.ticket = Ticket;
-                        $scope.airtel = Airtel;
-                        $scope.portToAirtel = 'No';
-
-                        $scope.goHome = function () {
-                            $state.go('ticket.menu');
-                        };
-
-                        $scope.next = function () {
-                            updateTicket();
-                            $state.go('ticket.accept-terms', {id: Ticket.id});
-                        };
-
-                        function updateTicket() {
-                            Ticket.port_to_airtel = $scope.portToAirtel;
-
-                            TicketServ.update({id: Ticket.id}, Ticket);
-                        }
-                    }],
-                resolve: {
-                    'Airtel': ['GadgetEvaluationReward', function (GadgetEvaluationReward) {
-                        return GadgetEvaluationReward.fetchAirtelBonus();
-                    }],
-                    'hasHistory': ['$rootScope', function ($rootScope) {
-                        $rootScope.hasHistory = true;
-                    }],
-                    'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
-                        return TicketServ.get({id: $stateParams.id});
-                    }]
-                }
-            }
-        );
 
         $stateProvider.state('ticket.accept-terms',
             {
@@ -869,8 +766,11 @@ app.run(['$http', '$rootScope', 'CSRF_TOKEN', 'PreloadTemplates',
 var module = angular.module('adminApp.controllers', ['adminApp.services']);
 
 module.controller('NewTicketController', [
-    '$scope','TicketServ','TicketColumns', '$state', '$stateParams', 'GradeDeviceServ','$cookieStore',
-    function ($scope,TicketServ,TicketColumns, $state, $stateParams, GradeDeviceServ,$cookieStore) {
+    '$scope','TicketServ','TicketColumns', '$state', '$stateParams','DeviceBrands',
+    'GradeDeviceServ','$cookieStore','Networks','GadgetEvaluationReward','Airtel',
+    function ($scope,TicketServ,TicketColumns, $state, $stateParams,DeviceBrands,
+              GradeDeviceServ,$cookieStore,Networks,GadgetEvaluationReward,Airtel) {
+        $scope.device_brands = DeviceBrands;
         $scope.TicketColumns = TicketColumns;
         $scope.activeStep = 'stepOne';
         $scope.isCreatingTicket = true;
@@ -894,11 +794,16 @@ module.controller('NewTicketController', [
                 deviceChargingPort: {rating: '', weight: 0.25}
             }
         };
-
+        $scope.selected = {};
+        $scope.networks = Networks;
+        $scope.brand = {};
+        $scope.device = {};
         $scope.activeNextButton = false;
+        $scope.airtel = Airtel;
+        $scope.portToAirtel = 'No';
 
         $scope.$watch('ticket.test', function (newV, oldV) {
-            if(!stepTwoActive()){
+            if(!stepThreeActive()){
                 return;
             }
             console.log('test change');
@@ -909,7 +814,7 @@ module.controller('NewTicketController', [
 
 
         $scope.$watch('ticket.gradingSystem', function (newV, oldV) {
-            if(!stepThreeActive()){
+            if(!stepFourActive()){
                 return;
             }
             console.log('gradingSystem change');
@@ -918,13 +823,34 @@ module.controller('NewTicketController', [
             console.log('Grade:' + $scope.ticket.device_grade);
         }, true);
 
-        $scope.createTicket = function (ticket) {
+        $scope.$watch('brand.selectedIndex', function (newV, oldV) {
+            if(!stepTwoActive()){
+                return;
+            }
+            console.log('brand changed');
+            $scope.selected.brand = $scope.device_brands[newV];
+            $scope.devices = $scope.selected.brand.gadgets;
+            //brand.selected
+        });
+
+        $scope.$watch('device.selectedIndex', function (newV, oldV) {
+            if(!stepTwoActive()){
+                return;
+            }
+            console.log('device changed');
+            $scope.selected.device = $scope.devices[newV];
+            $scope.ticket.gadget_id = $scope.selected.device.id;
+        });
+
+
+        $scope.createTicket = function (ticket,callback) {
             var ticketSaved = TicketServ.save(ticket);
             ticketSaved.$promise.then(function (ticket) {
                 $scope.isCreatingTicket = false;
                 if (ticket.hasOwnProperty('id')) {
                     $scope.ticket.savedTicket = ticket;
                     console.log(ticket);
+                    callback();
                 }else{
                     console.log('error');
                     $scope.creationError = true;
@@ -934,6 +860,12 @@ module.controller('NewTicketController', [
                 console.log(ticket);
                 $scope.creationError = true;
             });
+        };
+
+
+        $scope.nextStepOne   = function() {
+            $scope.activeStep = 'stepOne';
+            $state.go('ticket.add.stepOne');
         };
 
         $scope.nextStepTwo   = function() {
@@ -946,18 +878,37 @@ module.controller('NewTicketController', [
             $state.go('ticket.add.stepThree');
         };
 
+        $scope.nextStepFour = function () {
+            $scope.activeStep = 'stepFour';
+            $state.go('ticket.add.stepFour');
+        };
+
         $scope.nextStepFinal = function () {
             $scope.activeStep = 'stepFinal';
+            calculateDeviceReward();
             $state.go('ticket.add.final');
             $scope.createTicket($scope.ticket);
         };
 
-       //grade
-
-        $scope.nextStepEvaluation = function () {
-            $cookieStore.put('ticket',$scope.ticket.savedTicket);
-            $state.go('ticket.evaluate', {'id': $scope.ticket.savedTicket.id });
+        $scope.nextStepAcceptTerms = function () {
+            $scope.activeStep = 'stepAcceptTerms';
+            updateTicketsPortToAirtel();
+            $state.go('ticket.accept-terms', {id: $scope.ticket.savedTicket.id});
         };
+
+        $scope.goHome = function () {
+            $state.go('ticket.menu');
+        };
+
+        function calculateDeviceGrade(){
+            return $scope.ticket.device_grade;
+        }
+
+        function calculateDeviceReward(){
+            $scope.selected.grade = calculateDeviceGrade();
+            $scope.selected.size = $scope.ticket.size_id;
+            $scope.ticket.reward = GadgetEvaluationReward.calculate($scope.selected);
+        }
 
         function stepTwoActive(){
             return $scope.activeStep == 'stepTwo';
@@ -965,6 +916,12 @@ module.controller('NewTicketController', [
 
         function stepThreeActive(){
             return $scope.activeStep == 'stepThree';
+        }
+        function stepFourActive(){
+            return $scope.activeStep == 'stepFour';
+        }
+        function stepFinalActive(){
+            return $scope.activeStep == 'stepFinal';
         }
 
         function checkTestsPassed(obj) {
@@ -986,6 +943,12 @@ module.controller('NewTicketController', [
             } else {
                 $scope.message = "Sorry, Device doesn't Qualify to Continue";
             }
+        }
+
+        function updateTicketsPortToAirtel() {
+            $scope.ticket.savedTicket.port_to_airtel = $scope.portToAirtel;
+
+            TicketServ.update({id:  $scope.ticket.savedTicket.id},  $scope.ticket.savedTicket);
         }
     }]);
 /**

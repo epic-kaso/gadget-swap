@@ -513,6 +513,15 @@ app.config(['$urlRouterProvider', '$stateProvider',
                     }],
                     'TicketColumns': ['TicketConfigServ',function(TicketConfigServ){
                         return TicketConfigServ.query({});
+                    }],
+                    'Networks': ['NetworksServ', function (NetworksServ) {
+                        return NetworksServ.query({});
+                    }],
+                    'Airtel': ['GadgetEvaluationReward', function (GadgetEvaluationReward) {
+                        return GadgetEvaluationReward.fetchAirtelBonus();
+                    }],
+                    'DeviceBrands':['DeviceBrandsServ',function(DeviceBrandsServ){
+                        return DeviceBrandsServ.query({});
                     }]
                 }
             }
@@ -554,6 +563,18 @@ app.config(['$urlRouterProvider', '$stateProvider',
             }
         );
 
+        $stateProvider.state('ticket.add.stepFour',
+            {
+                url: '/step-three',
+                templateUrl: 'partials/ticket/add/step-four.html',
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }]
+                }
+            }
+        );
+
         $stateProvider.state('ticket.add.final',
             {
                 url: '/final',
@@ -565,87 +586,6 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 }
             }
         );
-
-        $stateProvider.state('ticket.evaluate', {
-            url: '/evaluate/{id}',
-            templateUrl: 'partials/ticket/evaluation/evaluation.html',
-            controller: ['$scope', '$stateParams', '$filter', 'Networks', 'Ticket', 'TicketServ', 'DeviceBrandsServ', 'GadgetEvaluationReward', '$state',
-                function ($scope, $stateParams, $filter, Networks, Ticket, TicketServ, DeviceBrandsServ, GadgetEvaluationReward, $state) {
-
-                    if (typeof $stateParams.id == "undefined")
-                        $state.go('ticket.add.stepOne');
-
-                    console.log(Ticket);
-                    $scope.selected = {grade: Ticket.device_grade};
-
-                    $scope.networks = Networks;
-
-                    $scope.brand = {};
-
-                    $scope.refreshBrands = function (brand) {
-                        DeviceBrandsServ.query({}, function (brands) {
-                            console.log(brands);
-                            $scope.device_brands = brands;
-                        });
-                    };
-
-                    $scope.device = {};
-                    $scope.refreshDevices = function (brand) {
-                        $scope.devices = $filter('filter')($scope.brand.selected.gadgets, {model: brand});
-                    };
-
-                    $scope.$watch('brand.selected', function (newV, oldV) {
-                        console.log('brand changed');
-                        $scope.selected.brand = newV;
-                    });
-
-                    $scope.$watch('device.selected', function (newV, oldV) {
-                        console.log('device changed');
-                        $scope.selected.device = newV;
-                    });
-
-                    $scope.next = function () {
-                        console.log(Ticket);
-                        console.log($scope.selected);
-                        var reward = GadgetEvaluationReward.calculate($scope.selected);
-                        var promise = updateTicket($scope.selected, reward);
-                        promise.then(function(){
-                            $state.go('ticket.reward', {
-                                'id': Ticket.id
-                            });
-                        },function(){
-                            alert('Error occured while saving reward');
-                        })
-
-                    };
-
-                    $scope.goHome = function () {
-                        $state.go('ticket.menu');
-                    };
-
-                    function updateTicket(selected, reward) {
-                        Ticket.gadget_id = selected.device.id;
-                        Ticket.size_id = selected.size;
-                        Ticket.network_id = selected.network;
-                        Ticket.reward = reward;
-
-                        return TicketServ.update({id: Ticket.id}, Ticket).$promise;
-                    }
-
-                }],
-            resolve: {
-                'hasHistory': ['$rootScope', function ($rootScope) {
-                    $rootScope.hasHistory = true;
-                }],
-                'Ticket': ['TicketServ', '$state', '$stateParams','$cookieStore', function (TicketServ, $state, $stateParams,$cookieStore) {
-                    return  $cookieStore.get('ticket');//TicketServ.get({id: $stateParams.id});
-                }],
-                'Networks': ['NetworksServ', function (NetworksServ) {
-                    return NetworksServ.query({});
-                }]
-            }
-        });
-
 
         $stateProvider.state('ticket.show',
             {
@@ -674,49 +614,6 @@ app.config(['$urlRouterProvider', '$stateProvider',
             }
         );
 
-        $stateProvider.state('ticket.reward',
-            {
-                url: '/reward/{id}',
-                templateUrl: 'partials/ticket/evaluation/reward.html',
-                controller: ['$scope', '$stateParams', 'Ticket', 'TicketServ', 'GadgetEvaluationReward', 'Airtel', '$state',
-                    function ($scope, $stateParams, Ticket, TicketServ, GadgetEvaluationReward, Airtel, $state) {
-
-                        if (typeof $stateParams.id == "undefined")
-                            $state.go('ticket.add.stepOne');
-
-                        $scope.reward = GadgetEvaluationReward.getLastReward();// Ticket.reward;
-                        $scope.ticket = Ticket;
-                        $scope.airtel = Airtel;
-                        $scope.portToAirtel = 'No';
-
-                        $scope.goHome = function () {
-                            $state.go('ticket.menu');
-                        };
-
-                        $scope.next = function () {
-                            updateTicket();
-                            $state.go('ticket.accept-terms', {id: Ticket.id});
-                        };
-
-                        function updateTicket() {
-                            Ticket.port_to_airtel = $scope.portToAirtel;
-
-                            TicketServ.update({id: Ticket.id}, Ticket);
-                        }
-                    }],
-                resolve: {
-                    'Airtel': ['GadgetEvaluationReward', function (GadgetEvaluationReward) {
-                        return GadgetEvaluationReward.fetchAirtelBonus();
-                    }],
-                    'hasHistory': ['$rootScope', function ($rootScope) {
-                        $rootScope.hasHistory = true;
-                    }],
-                    'Ticket': ['TicketServ', '$state', '$stateParams', function (TicketServ, $state, $stateParams) {
-                        return TicketServ.get({id: $stateParams.id});
-                    }]
-                }
-            }
-        );
 
         $stateProvider.state('ticket.accept-terms',
             {
