@@ -687,6 +687,7 @@ app.config(['$urlRouterProvider', '$stateProvider',
                         $scope.reward = GadgetEvaluationReward.getLastReward();// Ticket.reward;
                         $scope.ticket = Ticket;
                         $scope.airtel = Airtel;
+                        $scope.portToAirtel = 'No';
 
                         $scope.goHome = function () {
                             $state.go('ticket.menu');
