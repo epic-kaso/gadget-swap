@@ -6872,7 +6872,7 @@ ul.steps-bar {
 }
 span.device-grade {
   text-align: center;
-  font-size: 150px;
+  font-size: 80px;
   font-weight: 700;
   display: inline-block;
   padding: 10px 35px;
@@ -6881,7 +6881,7 @@ span.device-grade {
 }
 span.device-reward {
   text-align: center;
-  font-size: 95px;
+  font-size: 80px;
   font-weight: 700;
   display: inline-block;
   padding: 10px 35px;
