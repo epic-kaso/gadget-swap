@@ -64,9 +64,9 @@
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="{{ asset('app/libs/core.js') }}" ></script>
-<script src="{{ asset('app/libs/others.js') }}" ></script>
-<script src="{{ asset('admin/js/admin.js') }}"></script>
+<script src="{{ asset('app/libs/core_main.js') }}" ></script>
+<script src="{{ asset('app/libs/others_main.js') }}" ></script>
+<script src="{{ asset('admin/js/admin_main.js') }}"></script>
 <script>
     angular.module("AdminApp").constant("CSRF_TOKEN", '<?php echo csrf_token(); ?>');
     angular.module("AdminApp").factory("PRELOAD_UI_LIST",function(){
