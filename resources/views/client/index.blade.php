@@ -61,7 +61,7 @@
                 ui-sref="device-make"
                 ui-sref-active="active">
                 <p>Device</p>
-                <span ng-bind="currentGadget.make"></span>
+                <span>@{{ currentGadget.make | limitTo : 14 }}</span>
             </a>
         </div>
 
@@ -72,7 +72,7 @@
                 ui-sref="device-model({device_make: currentGadget.make})"
                 ui-sref-active="active">
                 <p>Model</p>
-                <span ng-bind="currentGadget.model.model"></span>
+                <span>@{{ currentGadget.model.model | limitTo : 14 }}</span>
             </a>
         </div>
 
@@ -83,7 +83,7 @@
                 ng-class="{disabled: !currentGadget.make || !currentGadget.model.slug}"
                 ui-sref-active="active">
                 <p>Size</p>
-                <span ng-bind="currentGadget.size.value"></span>
+                <span>@{{ currentGadget.size.value | limitTo : 14 }}</span>
             </a>
         </div>
 
@@ -94,7 +94,7 @@
                 ng-class="{disabled: !currentGadget.make || !currentGadget.model.slug || !currentGadget.size.slug}"
                 ui-sref-active="active">
                 <p>Network</p>
-                <span ng-bind="currentGadget.network.name"></span>
+                <span>@{{ currentGadget.network.name | limitTo : 14 }}</span>
             </a>
         </div>
 
@@ -104,7 +104,7 @@
                 ng-class="{disabled: !currentGadget.make || !currentGadget.model.slug || !currentGadget.size.slug || !currentGadget.network.name}"
                 ui-sref="device-condition({device_make: currentGadget.make,device_model: currentGadget.model.slug,device_size: currentGadget.size.slug,device_network: currentGadget.network.slug})" ui-sref-active="active">
                 <p>Condition</p>
-                <span ng-bind="currentGadget.condition" ></span>
+                <span>@{{ currentGadget.condition | limitTo : 14 }}</span>
             </a>
         </div>
     </div>
