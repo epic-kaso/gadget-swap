@@ -72,11 +72,18 @@ app.factory('GadgetEvaluationReward', ['NetworksServ', '$cookieStore', function 
 
         console.log('Device --reward');
         console.log(device);
-        angular.forEach(device.base_line_prices, function (v, k) {
-            if (v.id == size) {
+        console.log(size);
+
+        if(device.base_line_prices.length == 1 ){
+            baseLinePrice = parseInt(device.base_line_prices[0].value);
+        }else {
+
+            angular.forEach(device.base_line_prices, function (v, k) {
+                if (v.id == size) {
                     baseLinePrice = parseInt(v.value);
                 }
-        });
+            });
+        }
 
         return baseLinePrice;
     }
