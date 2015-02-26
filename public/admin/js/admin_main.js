@@ -494,6 +494,32 @@ app.config(['$urlRouterProvider', '$stateProvider',
             }
         );
 
+        $stateProvider.state('ticket.import',
+            {
+                url: '/import',
+                templateUrl: 'partials/ticket/import.html',
+                controller: ['$scope', 'Tickets', 'TicketServ', function ($scope, Tickets, TicketServ) {
+                    $scope.tickets = Tickets;
+
+                    $scope.deleteItem = function (id) {
+                        TicketServ.delete({id: id}, function (response) {
+                            location.reload();
+                        }, function (response) {
+                            alert(response);
+                        });
+                    }
+                }],
+                resolve: {
+                    'hasHistory': ['$rootScope', function ($rootScope) {
+                        $rootScope.hasHistory = true;
+                    }],
+                    'Tickets': ['TicketServ', function (TicketServ) {
+                        return TicketServ.query();
+                    }]
+                }
+            }
+        );
+
         $stateProvider.state('ticket.config',
             {
                 url: '/config',
