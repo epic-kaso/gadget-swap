@@ -533,8 +533,8 @@ app.config(['$urlRouterProvider', '$stateProvider',
                         $scope.columns = result;
                     });
 
-                    $scope.deleteItem = function (id) {
-                        TicketConfigServ.delete({id: id}, function (response) {
+                    $scope.deleteItem = function (column) {
+                        TicketConfigServ.delete({id: 0,column_title: column}, function (response) {
                             location.reload();
                         }, function (response) {
                             alert(response);

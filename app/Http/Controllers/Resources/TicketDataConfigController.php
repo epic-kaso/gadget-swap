@@ -90,9 +90,9 @@ class TicketDataConfigController extends Controller {
      * @return Response
      * @internal param int $id
      */
-	public function destroy(TicketDataConfigRequest $request)
+	public function destroy(TicketDataConfigRequest $request,$id)
 	{
-        $column = $request->get('column');
+        $column = $request->get('column_title');
         Schema::table(GadgetSwapTicket::$tableName, function (Blueprint $table) use($column) {
             $table->dropColumn($column);
         });
