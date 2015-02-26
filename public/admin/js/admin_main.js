@@ -978,6 +978,13 @@ module.controller('NewTicketController', [
         function calculateDeviceReward(){
             $scope.selected.grade = calculateDeviceGrade();
             $scope.selected.size = $scope.ticket.size_id;
+
+            angular.forEach($scope.selected.device.sizes,function(value,key){
+              if(value.id == $scope.ticket.size_id){
+                  this.size = value.value;
+              }
+            },$scope.selected);
+
             $scope.ticket.reward = GadgetEvaluationReward.calculate($scope.selected);
         }
 
@@ -1208,7 +1215,7 @@ app.factory('GadgetEvaluationReward', ['NetworksServ', '$cookieStore', function 
         }else {
 
             angular.forEach(device.base_line_prices, function (v, k) {
-                if (v.id == size) {
+                if (v.size == size) {
                     baseLinePrice = parseInt(v.value);
                 }
             });
