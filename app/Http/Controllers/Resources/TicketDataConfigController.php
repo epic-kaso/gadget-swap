@@ -58,7 +58,9 @@ class TicketDataConfigController extends Controller {
      */
 	public function store(TicketDataConfigRequest $request)
 	{
-        $column = $request->get('column');
+        $column = $request->get('column_title');
+        $column = Str::slug($column,'_');
+
         Schema::table(GadgetSwapTicket::$tableName, function (Blueprint $table) use($column) {
                 $table->string($column)->nullable();
         });

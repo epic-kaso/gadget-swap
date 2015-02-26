@@ -541,6 +541,14 @@ app.config(['$urlRouterProvider', '$stateProvider',
                         });
                     };
 
+                    $scope.createColumn = function (title) {
+                        TicketConfigServ.save({column_title: title}, function (response) {
+                            location.reload();
+                        }, function (response) {
+                            alert(response);
+                        });
+                    };
+
                     $scope.updateGrade = function (grade) {
                         grade.status = 'loading';
                         //grade.status = 'failure';
