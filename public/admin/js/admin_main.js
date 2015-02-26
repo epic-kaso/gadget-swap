@@ -1254,8 +1254,10 @@ app.factory('GradeDeviceServ', ['$rootScope', function ($rootScope) {
         var result = {gradePoint: 0};
 
         angular.forEach(device, function (value, key) {
-            if (value.rating != '') {
+            if (angular.isDefined(value.rating) && value.rating != '') {
+                console.log(value.rating+" -- "+value.weight);
                 this.gradePoint += parseInt(value.rating) * value.weight;
+                console.log(this.gradePoint);
             }
         }, result);
 
