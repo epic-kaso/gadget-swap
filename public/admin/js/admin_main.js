@@ -838,17 +838,6 @@ module.controller('NewTicketController', [
                 icloudConnection: ''
             },
             gradingSystem: GradingSystem
-            //{
-            //    touchScreen: {rating: '', weight: 0.625},
-            //    lcdScreen: {rating: '', weight: 0.625},
-            //    deviceCasing: {rating: '', weight: 0.625},
-            //    deviceKeypad: {rating: '', weight: 0.25},
-            //    deviceCamera: {rating: '', weight: 0.25},
-            //    deviceEarPiece: {rating: '', weight: 0.125},
-            //    deviceSpeaker: {rating: '', weight: 0.125},
-            //    deviceEarphoneJack: {rating: '', weight: 0.125},
-            //    deviceChargingPort: {rating: '', weight: 0.25}
-            //}
         };
         $scope.selected = {};
         $scope.networks = Networks;
@@ -856,7 +845,7 @@ module.controller('NewTicketController', [
         $scope.device = {};
         $scope.activeNextButton = false;
         $scope.airtel = Airtel;
-        $scope.portToAirtel = 'No';
+        $scope.portToAirtel = false;
 
         $scope.$watch('ticket.test', function (newV, oldV) {
             if(!stepThreeActive()){
@@ -1006,7 +995,7 @@ module.controller('NewTicketController', [
         }
 
         function updateTicketsPortToAirtel() {
-            $scope.ticket.savedTicket.port_to_airtel = $scope.portToAirtel;
+            //$scope.ticket.savedTicket.port_to_airtel = $scope.portToAirtel;
 
             TicketServ.update({id:  $scope.ticket.savedTicket.id},  $scope.ticket.savedTicket);
         }

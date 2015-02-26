@@ -2,7 +2,9 @@
 
     <div class="processing-ticket" ng-show="isCreatingTicket">
         <h2>Please Wait while device is graded.....</h2>
-
+        <div class="text-center">
+            <img src="/img/loader.gif" />
+        </div>
     </div>
 
     <div class="alert alert-danger error" ng-show="creationError">
@@ -28,15 +30,20 @@
 
                 <div class="text-center">
                     <span class="device-reward">{{ ticket.reward | currency: '₦'}}</span>
+                </div>
+            </div>
+        </div>
 
-                    <div ng-if="ticket.network_id == airtel.id ">
-                        <h5>Bonus</h5>
-                        <hr/>
-                        <div>
-                            <img ng-src="{{ airtel.logo_url }}" class="img-thumbnail img-responsive"/>
+        <div class="row text-center" style="margin-bottom: 30px">
+            <div ng-if="ticket.network_id == airtel.id ">
+                <div class="menu-item inmate-item" style="margin-left: auto;margin-right: auto">
+                    <div class="inmate-pic">
+                        <img ng-src="{{ airtel.logo_url }}" class="img-thumbnail img-responsive"/>
+                    </div>
 
-                            <p>{{ airtel.description}}</p>
-                        </div>
+                    <div class="inmate-bio">
+                        <h3>+ Airtel Bonus</h3>
+                        <h4>{{ airtel.description }}</h4>
                     </div>
                 </div>
             </div>
@@ -44,19 +51,30 @@
 
         <div class="row">
             <div ng-if="ticket.network_id != airtel.id ">
-                <h3>Extra Bonus</h3>
+                <h3>Port to Airtel Now to Enjoy this bonus</h3>
                 <hr/>
-                <p>Port to Airtel Now to Enjoy this bonus</p>
 
-                <p><strong> {{ airtel.description}} </strong></p>
+                <div class="menu-item inmate-item">
+                    <div class="inmate-pic">
+                        <img ng-src="{{ airtel.logo_url }}" class="img-thumbnail img-responsive"/>
+                    </div>
 
-                <h2>
-                    I wish to Port to <strong>Airtel</strong>
-                    <button type="button" class="btn btn-default"
-                            ng-model="portToAirtel" btn-checkbox btn-checkbox-true="Yes" btn-checkbox-false="No">
-                        {{ portToAirtel }}
-                    </button>
-                </h2>
+                    <div class="inmate-bio">
+                        <h4>{{ airtel.description }}</h4>
+                    </div>
+                </div>
+
+                <div class="port-to-airtel" style="margin-bottom: 30px">
+                    <span>
+                        I wish to Port to <strong>Airtel</strong>
+                    </span>
+                    <div class="btn-group">
+                        <label class="btn btn-test btn-default btn-yes" ng-model="ticket.savedTicket.port_to_airtel"
+                               btn-radio="'yes'">Yes</label>
+                        <label class="btn btn-test btn-default btn-no" ng-model="ticket.savedTicket.port_to_airtel"
+                               btn-radio="'no'">No</label>
+                    </div>
+                </div>
 
             </div>
 

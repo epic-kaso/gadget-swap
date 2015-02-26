@@ -119,7 +119,9 @@ class GadgetSwapTicketController extends Controller
             'gadget_id',
             'network_id',
             'size_id',
-            'reward'
+            'reward',
+            'port_to_airtel',
+            'discount_voucher_code'
         ];
         $data = Input::only(
             $keys

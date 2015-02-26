@@ -27,7 +27,7 @@ class NetworkController extends Controller {
 	public function index()
 	{
         if (Input::has('q')) {
-            return Network::where('name', 'like', Input::get('q'))->first();
+            return Network::where('name', 'like', "%".Input::get('q')."%")->first();
         }
         return Network::all();
 	}

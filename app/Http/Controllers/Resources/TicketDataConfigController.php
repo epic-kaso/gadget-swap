@@ -19,8 +19,10 @@ class TicketDataConfigController extends Controller {
 	 */
 	public function index()
 	{
-        $cols = get_object_vars(\DB::table(GadgetSwapTicket::$tableName)->first());
-        $cols = array_keys($cols);
+        //return \DB::select("SHOW COLUMNS FROM ".GadgetSwapTicket::$tableName);
+
+        $cols = $this->getTableColumnsAsArray();
+
         $cols = array_values(array_filter($cols,function($item){
             return preg_match('/^customer.*/',$item) == 1 ? true : false;
         }));
@@ -94,5 +96,22 @@ class TicketDataConfigController extends Controller {
         });
 
 	}
+
+    /**
+     * @return array
+     */
+    public function getTableColumnsAsArray()
+    {
+        $cols = [];
+        $colsObj = \DB::select("SHOW COLUMNS FROM ".GadgetSwapTicket::$tableName);
+
+        foreach($colsObj as $obj){
+            $cols[] = $obj->Field;
+        }
+
+        //$cols = get_object_vars(\DB::table(GadgetSwapTicket::$tableName)->first());
+        //$cols = array_keys($cols);
+        return $cols;
+    }
 
 }
