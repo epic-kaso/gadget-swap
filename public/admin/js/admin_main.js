@@ -498,8 +498,10 @@ app.config(['$urlRouterProvider', '$stateProvider',
             {
                 url: '/config',
                 templateUrl: 'partials/ticket/config.html',
-                controller: ['$scope', 'TicketConfigServ', function ($scope, TicketConfigServ) {
+                controller: ['$scope', 'TicketConfigServ','GradingSystem','GradingSystemServ',
+                    function ($scope, TicketConfigServ,GradingSystem,GradingSystemServ) {
                     $scope.columns = [];
+                    $scope.gradingSystem = GradingSystem;
 
                     TicketConfigServ.query({},function(result){
                         $scope.columns = result;
@@ -516,7 +518,11 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
+                    }],
+                    'GradingSystem': ['GradingSystemServ',function(GradingSystemServ){
+                        return GradingSystemServ.get({});
                     }]
+
                 }
             }
         );
@@ -541,6 +547,9 @@ app.config(['$urlRouterProvider', '$stateProvider',
                     }],
                     'DeviceBrands':['DeviceBrandsServ',function(DeviceBrandsServ){
                         return DeviceBrandsServ.query({});
+                    }],
+                    'GradingSystem': ['GradingSystemServ',function(GradingSystemServ){
+                        return GradingSystemServ.get({});
                     }]
                 }
             }
@@ -770,11 +779,12 @@ app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('sessionInjector');
 }]);
 
-app.run(['$http', '$rootScope', 'CSRF_TOKEN', 'PreloadTemplates',
-    function ($http, $rootScope, CSRF_TOKEN, PreloadTemplates) {
+app.run(['$http', '$rootScope', 'CSRF_TOKEN','$timeout','PreloadTemplates',
+    function ($http, $rootScope, CSRF_TOKEN,$timeout, PreloadTemplates) {
         PreloadTemplates.run();
         $rootScope.CSRF_TOKEN = CSRF_TOKEN;
         $http.defaults.headers.common['csrf_token'] = CSRF_TOKEN;
+        $rootScope.toast  = { messages: [],show: false,type: 'info' };
     }]);
 
 
@@ -785,10 +795,10 @@ app.run(['$http', '$rootScope', 'CSRF_TOKEN', 'PreloadTemplates',
 var module = angular.module('adminApp.controllers', ['adminApp.services']);
 
 module.controller('NewTicketController', [
-    '$scope','TicketServ','TicketColumns', '$state', '$stateParams','DeviceBrands',
-    'GradeDeviceServ','$cookieStore','Networks','GadgetEvaluationReward','Airtel',
-    function ($scope,TicketServ,TicketColumns, $state, $stateParams,DeviceBrands,
-              GradeDeviceServ,$cookieStore,Networks,GadgetEvaluationReward,Airtel) {
+    '$scope','TicketServ','TicketColumns', '$state', '$stateParams','DeviceBrands','ToastService',
+    'GradeDeviceServ','$cookieStore','Networks','GadgetEvaluationReward','Airtel','GradingSystem',
+    function ($scope,TicketServ,TicketColumns, $state, $stateParams,DeviceBrands,ToastService,
+              GradeDeviceServ,$cookieStore,Networks,GadgetEvaluationReward,Airtel,GradingSystem) {
         $scope.device_brands = DeviceBrands;
         $scope.TicketColumns = TicketColumns;
         $scope.activeStep = 'stepOne';
@@ -801,26 +811,23 @@ module.controller('NewTicketController', [
                 wirelessConnection: '',
                 icloudConnection: ''
             },
-            gradingSystem: {
-                touchScreen: {rating: '', weight: 0.625},
-                lcdScreen: {rating: '', weight: 0.625},
-                deviceCasing: {rating: '', weight: 0.625},
-                deviceKeypad: {rating: '', weight: 0.25},
-                deviceCamera: {rating: '', weight: 0.25},
-                deviceEarPiece: {rating: '', weight: 0.125},
-                deviceSpeaker: {rating: '', weight: 0.125},
-                deviceEarphoneJack: {rating: '', weight: 0.125},
-                deviceChargingPort: {rating: '', weight: 0.25}
-            }
+            gradingSystem: GradingSystem
+            //{
+            //    touchScreen: {rating: '', weight: 0.625},
+            //    lcdScreen: {rating: '', weight: 0.625},
+            //    deviceCasing: {rating: '', weight: 0.625},
+            //    deviceKeypad: {rating: '', weight: 0.25},
+            //    deviceCamera: {rating: '', weight: 0.25},
+            //    deviceEarPiece: {rating: '', weight: 0.125},
+            //    deviceSpeaker: {rating: '', weight: 0.125},
+            //    deviceEarphoneJack: {rating: '', weight: 0.125},
+            //    deviceChargingPort: {rating: '', weight: 0.25}
+            //}
         };
         $scope.selected = {};
         $scope.networks = Networks;
-        $scope.brand = {
-            selectedIndex: 0
-        };
-        $scope.device = {
-            selectedIndex: 0
-        };
+        $scope.brand = {};
+        $scope.device = {};
         $scope.activeNextButton = false;
         $scope.airtel = Airtel;
         $scope.portToAirtel = 'No';
@@ -879,11 +886,13 @@ module.controller('NewTicketController', [
                 }else{
                     console.log('error');
                     $scope.creationError = true;
+                    ToastService.error("Could not create ticket, please try again later");
                 }
             }, function (ticket) {
                 alert("failed");
                 console.log(ticket);
                 $scope.creationError = true;
+                ToastService.error("Could not create ticket, please try again later");
             });
         };
 
@@ -995,6 +1004,37 @@ app.directive('backButton',function(){
     }
 });
 
+app.directive('toast',function($animate,$timeout){
+    return {
+        'restrict': 'EA',
+        'template': '<div class="toast alert alert-{{ type }}" ><ul><li ng-repeat="message in messages"> {{ message }}</li></ul></div>',
+        scope: {
+            type: '=type',
+            messages: '=messages',
+            show: '=show'
+        },
+        'link': function link(scope, element, attrs) {
+            function showToast() {
+                //$animate.addClass(element,'toast-alert');
+                element.css({opacity: 1});
+                $timeout(hideToast,10000);
+            }
+
+            function hideToast() {
+                element.css({opacity: 0});
+                //$animate.removeClass(element,'toast-alert');
+            }
+            showToast();
+            scope.$watch(function() { return scope.show; },function(newV,oldV){
+                if(newV == true){
+                    showToast();
+                }else{
+                    hideToast();
+                }
+            })
+        }
+    }
+});
 
 /**
  * Created by Ak on 2/19/2015.
@@ -1035,6 +1075,12 @@ app.factory('AdvisersServ', ['$resource', 'URLServ', function ($resource, URLSer
 
 app.factory('DevicesServ', ['$resource', 'URLServ', function ($resource, URLServ) {
     return $resource('/resources/devices/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+}]);
+
+app.factory('GradingSystemServ', ['$resource', 'URLServ', function ($resource, URLServ) {
+    return $resource('/resources/grading-system-config/:id', {id: '@id'}, {
         'update': {method: 'PUT'}
     });//URLServ.getResourceUrlFor("ticket"));
 }]);
@@ -1196,4 +1242,24 @@ app.factory('ImageFetcher', ['$http', '$q', function ($http, $q) {
         }
     }
 
+}]);
+
+
+app.factory('ToastService', ['$rootScope', function ($rootScope) {
+
+    if(angular.isUndefined( $rootScope.toast)){
+        $rootScope.toast  = {messages: [],show: false,type: 'info'};
+    }
+
+    return {
+        error: function (message) {
+            $rootScope.toast  = {messages: [message],show: true,type: 'danger'};
+        },
+        info: function(message){
+            $rootScope.toast= {messages: [message],show: true,type: 'info'};
+        },
+        success: function(message){
+            $rootScope.toast= {messages: [message],show: true,type: 'success'};
+        }
+    }
 }]);

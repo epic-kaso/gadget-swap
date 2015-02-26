@@ -1,24 +1,15 @@
-<div>
-    <h2>User Details</h2>
-    <div class="row">
-        <div class="form-group col-sm-6">
-            <div class="icon-addon addon-lg">
-                <input type="text" class="form-control inmate-search-box" name="column_name" placeholder="Enter Column Title">
-                <a ng-click="createColumn(column_title)" class="btn btn-default search-btn"><span
-                        class="fa fa-save"></span></a>
-            </div>
-        </div>
-    </div>
+<tabset>
+    <tab>
+        <tab-heading><span>User Details</span></tab-heading>
 
-    <div class="row" style="margin-top: 20px">
-
-        <div class="col-sm-12">
-            <ul class="list-group">
-                <li class="list-group-item" ng-repeat="col in columns">
-                    {{ col.value }}
-                    <button class="btn btn-xs btn-danger pull-right" ng-click="deleteItem(col.name)">Delete</button>
-                </li>
-            </ul>
+        <div style="margin-top: 20px;">
+            <ng-include  src="'/admin/partials/ticket/config/user-details.html'"></ng-include>
         </div>
-    </div>
-</div>
+    </tab>
+    <tab>
+        <tab-heading><span>Grading System</span></tab-heading>
+        <div style="margin-top: 20px;">
+            <ng-include  src="'/admin/partials/ticket/config/grading-system.html'"></ng-include>
+        </div>
+    </tab>
+</tabset>

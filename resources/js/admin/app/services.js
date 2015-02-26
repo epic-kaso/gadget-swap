@@ -37,6 +37,12 @@ app.factory('DevicesServ', ['$resource', 'URLServ', function ($resource, URLServ
     });//URLServ.getResourceUrlFor("ticket"));
 }]);
 
+app.factory('GradingSystemServ', ['$resource', 'URLServ', function ($resource, URLServ) {
+    return $resource('/resources/grading-system-config/:id', {id: '@id'}, {
+        'update': {method: 'PUT'}
+    });//URLServ.getResourceUrlFor("ticket"));
+}]);
+
 
 app.factory('MailServ', ['$resource', function ($resource) {
     return $resource('/resources/mail', null);//URLServ.getResourceUrlFor("ticket"));
@@ -194,4 +200,24 @@ app.factory('ImageFetcher', ['$http', '$q', function ($http, $q) {
         }
     }
 
+}]);
+
+
+app.factory('ToastService', ['$rootScope', function ($rootScope) {
+
+    if(angular.isUndefined( $rootScope.toast)){
+        $rootScope.toast  = {messages: [],show: false,type: 'info'};
+    }
+
+    return {
+        error: function (message) {
+            $rootScope.toast  = {messages: [message],show: true,type: 'danger'};
+        },
+        info: function(message){
+            $rootScope.toast= {messages: [message],show: true,type: 'info'};
+        },
+        success: function(message){
+            $rootScope.toast= {messages: [message],show: true,type: 'success'};
+        }
+    }
 }]);

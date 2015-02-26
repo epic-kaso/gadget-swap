@@ -60,6 +60,7 @@
     </div>
 </div>
 
+<toast type="toast.type" show="toast.show" messages="toast.messages"></toast>
 
 <!-- Scripts -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

@@ -4,10 +4,10 @@
 var module = angular.module('adminApp.controllers', ['adminApp.services']);
 
 module.controller('NewTicketController', [
-    '$scope','TicketServ','TicketColumns', '$state', '$stateParams','DeviceBrands',
-    'GradeDeviceServ','$cookieStore','Networks','GadgetEvaluationReward','Airtel',
-    function ($scope,TicketServ,TicketColumns, $state, $stateParams,DeviceBrands,
-              GradeDeviceServ,$cookieStore,Networks,GadgetEvaluationReward,Airtel) {
+    '$scope','TicketServ','TicketColumns', '$state', '$stateParams','DeviceBrands','ToastService',
+    'GradeDeviceServ','$cookieStore','Networks','GadgetEvaluationReward','Airtel','GradingSystem',
+    function ($scope,TicketServ,TicketColumns, $state, $stateParams,DeviceBrands,ToastService,
+              GradeDeviceServ,$cookieStore,Networks,GadgetEvaluationReward,Airtel,GradingSystem) {
         $scope.device_brands = DeviceBrands;
         $scope.TicketColumns = TicketColumns;
         $scope.activeStep = 'stepOne';
@@ -20,26 +20,23 @@ module.controller('NewTicketController', [
                 wirelessConnection: '',
                 icloudConnection: ''
             },
-            gradingSystem: {
-                touchScreen: {rating: '', weight: 0.625},
-                lcdScreen: {rating: '', weight: 0.625},
-                deviceCasing: {rating: '', weight: 0.625},
-                deviceKeypad: {rating: '', weight: 0.25},
-                deviceCamera: {rating: '', weight: 0.25},
-                deviceEarPiece: {rating: '', weight: 0.125},
-                deviceSpeaker: {rating: '', weight: 0.125},
-                deviceEarphoneJack: {rating: '', weight: 0.125},
-                deviceChargingPort: {rating: '', weight: 0.25}
-            }
+            gradingSystem: GradingSystem
+            //{
+            //    touchScreen: {rating: '', weight: 0.625},
+            //    lcdScreen: {rating: '', weight: 0.625},
+            //    deviceCasing: {rating: '', weight: 0.625},
+            //    deviceKeypad: {rating: '', weight: 0.25},
+            //    deviceCamera: {rating: '', weight: 0.25},
+            //    deviceEarPiece: {rating: '', weight: 0.125},
+            //    deviceSpeaker: {rating: '', weight: 0.125},
+            //    deviceEarphoneJack: {rating: '', weight: 0.125},
+            //    deviceChargingPort: {rating: '', weight: 0.25}
+            //}
         };
         $scope.selected = {};
         $scope.networks = Networks;
-        $scope.brand = {
-            selectedIndex: 0
-        };
-        $scope.device = {
-            selectedIndex: 0
-        };
+        $scope.brand = {};
+        $scope.device = {};
         $scope.activeNextButton = false;
         $scope.airtel = Airtel;
         $scope.portToAirtel = 'No';
@@ -98,11 +95,13 @@ module.controller('NewTicketController', [
                 }else{
                     console.log('error');
                     $scope.creationError = true;
+                    ToastService.error("Could not create ticket, please try again later");
                 }
             }, function (ticket) {
                 alert("failed");
                 console.log(ticket);
                 $scope.creationError = true;
+                ToastService.error("Could not create ticket, please try again later");
             });
         };
 

@@ -32,4 +32,5 @@ Route::group(['prefix' => 'resources', 'namespace' => 'Resources'], function () 
     Route::resource('mail', 'MailerController');
     Route::resource('advisers','AdvisersController');
     Route::resource('ticket-config','TicketDataConfigController');
+    Route::resource('grading-system-config','GradingSystemController');
 });

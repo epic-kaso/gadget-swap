@@ -498,8 +498,10 @@ app.config(['$urlRouterProvider', '$stateProvider',
             {
                 url: '/config',
                 templateUrl: 'partials/ticket/config.html',
-                controller: ['$scope', 'TicketConfigServ', function ($scope, TicketConfigServ) {
+                controller: ['$scope', 'TicketConfigServ','GradingSystem','GradingSystemServ',
+                    function ($scope, TicketConfigServ,GradingSystem,GradingSystemServ) {
                     $scope.columns = [];
+                    $scope.gradingSystem = GradingSystem;
 
                     TicketConfigServ.query({},function(result){
                         $scope.columns = result;
@@ -516,7 +518,11 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
+                    }],
+                    'GradingSystem': ['GradingSystemServ',function(GradingSystemServ){
+                        return GradingSystemServ.get({});
                     }]
+
                 }
             }
         );
@@ -541,6 +547,9 @@ app.config(['$urlRouterProvider', '$stateProvider',
                     }],
                     'DeviceBrands':['DeviceBrandsServ',function(DeviceBrandsServ){
                         return DeviceBrandsServ.query({});
+                    }],
+                    'GradingSystem': ['GradingSystemServ',function(GradingSystemServ){
+                        return GradingSystemServ.get({});
                     }]
                 }
             }
@@ -770,11 +779,12 @@ app.config(['$httpProvider', function ($httpProvider) {
     $httpProvider.interceptors.push('sessionInjector');
 }]);
 
-app.run(['$http', '$rootScope', 'CSRF_TOKEN', 'PreloadTemplates',
-    function ($http, $rootScope, CSRF_TOKEN, PreloadTemplates) {
+app.run(['$http', '$rootScope', 'CSRF_TOKEN','$timeout','PreloadTemplates',
+    function ($http, $rootScope, CSRF_TOKEN,$timeout, PreloadTemplates) {
         PreloadTemplates.run();
         $rootScope.CSRF_TOKEN = CSRF_TOKEN;
         $http.defaults.headers.common['csrf_token'] = CSRF_TOKEN;
+        $rootScope.toast  = { messages: [],show: false,type: 'info' };
     }]);
 
 
