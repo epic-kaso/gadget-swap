@@ -524,8 +524,8 @@ app.config(['$urlRouterProvider', '$stateProvider',
             {
                 url: '/config',
                 templateUrl: 'partials/ticket/config.html',
-                controller: ['$scope', 'TicketConfigServ','GradingSystem','GradingSystemServ',
-                    function ($scope, TicketConfigServ,GradingSystem,GradingSystemServ) {
+                controller: ['$scope', 'TicketConfigServ','GradingSystem','GradingSystemServ','ToastService',
+                    function ($scope, TicketConfigServ,GradingSystem,GradingSystemServ,ToastService) {
                     $scope.columns = [];
                     $scope.gradingSystem = GradingSystem;
 
@@ -539,7 +539,21 @@ app.config(['$urlRouterProvider', '$stateProvider',
                         }, function (response) {
                             alert(response);
                         });
-                    }
+                    };
+
+                    $scope.updateGrade = function (grade) {
+                        grade.status = 'loading';
+                        //grade.status = 'failure';
+                        var res = GradingSystemServ.update({id: grade.id},grade).$promise;
+                        res.then(function(){
+                            grade.status = 'success';
+                            ToastService.success(grade.presentation + " updated");
+                        },function(){
+                            grade.status = 'failure';
+                            ToastService.error(grade.presentation + " update failed");
+                        });
+                    };
+
                 }],
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {

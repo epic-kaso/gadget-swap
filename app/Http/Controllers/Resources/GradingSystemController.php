@@ -71,7 +71,11 @@ class GradingSystemController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$item  = GradingSystem::find($id);
+        $item->weight  = \Input::get('weight',$item->weight);
+        $item->save();
+
+        return $item;
 	}
 
 	/**

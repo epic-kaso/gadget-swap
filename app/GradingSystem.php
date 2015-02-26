@@ -17,6 +17,7 @@ class GradingSystem extends Model {
             $temp = new \stdClass();
             $temp->weight = doubleval($item->weight);
             $temp->rating = '';
+            $temp->id = $item->id;
             $temp->presentation = Str::title(str_replace('_',' ',Str::snake($item->title)));
             $response[$item->title] = $temp;
         }

@@ -524,8 +524,8 @@ app.config(['$urlRouterProvider', '$stateProvider',
             {
                 url: '/config',
                 templateUrl: 'partials/ticket/config.html',
-                controller: ['$scope', 'TicketConfigServ','GradingSystem','GradingSystemServ',
-                    function ($scope, TicketConfigServ,GradingSystem,GradingSystemServ) {
+                controller: ['$scope', 'TicketConfigServ','GradingSystem','GradingSystemServ','ToastService',
+                    function ($scope, TicketConfigServ,GradingSystem,GradingSystemServ,ToastService) {
                     $scope.columns = [];
                     $scope.gradingSystem = GradingSystem;
 
@@ -539,7 +539,21 @@ app.config(['$urlRouterProvider', '$stateProvider',
                         }, function (response) {
                             alert(response);
                         });
-                    }
+                    };
+
+                    $scope.updateGrade = function (grade) {
+                        grade.status = 'loading';
+                        //grade.status = 'failure';
+                        var res = GradingSystemServ.update({id: grade.id},grade).$promise;
+                        res.then(function(){
+                            grade.status = 'success';
+                            ToastService.success(grade.presentation + " updated");
+                        },function(){
+                            grade.status = 'failure';
+                            ToastService.error(grade.presentation + " update failed");
+                        });
+                    };
+
                 }],
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
@@ -1022,7 +1036,7 @@ app.directive('backButton',function(){
 app.directive('toast',function($animate,$timeout){
     return {
         'restrict': 'EA',
-        'template': '<div class="toast alert alert-{{ type }}" ><ul><li ng-repeat="message in messages"> {{ message }}</li></ul></div>',
+        'template': '<div class="toast alert alert-{{ type }} text-center" ><ul><li ng-repeat="message in messages"> {{ message }}</li></ul></div>',
         scope: {
             type: '=type',
             messages: '=messages',
@@ -1051,6 +1065,56 @@ app.directive('toast',function($animate,$timeout){
     }
 });
 
+
+
+app.directive('formItemUpdate',function($timeout){
+    return {
+        'restrict': 'A',
+        'scope': {
+            'status': '='
+        },
+        'link': function link(scope, element, attrs) {
+            function showLoadingTick() {
+                //element.remove('.loader-item');
+                element.find('.input-form-item')
+                    .html('<span class="loader-item" style="margin-left: 20px"><span class="fa fa-spin fa-spinner"></span></span>');
+
+                $timeout(clear,3000);
+            }
+
+            function showErrorTick() {
+                //element.remove('.loader-item');
+                element.find('.input-form-item')
+                    .html('<span class="loader-item" style="margin-left: 20px;color: red;"><span class="fa fa-close"></span></span>');
+
+                $timeout(clear,3000);
+            }
+
+            function showGreenTick() {
+               // element.remove('.loader-item');
+                element.find('.input-form-item')
+                    .html('<span class="loader-item" style="margin-left: 20px;color: green;"><span class="fa fa-check"></span></span>')
+            }
+
+            function clear(){
+                element.find('.input-form-item')
+                    .html('');
+            }
+
+            scope.$watch('status',function(newV,oldV){
+                if(newV == 'success'){
+                    showGreenTick();
+                }else if(newV == 'failure'){
+                    showErrorTick();
+                }else if(newV == 'loading'){
+                    showLoadingTick();
+                }else{
+                    clear();
+                }
+            })
+        }
+    }
+});
 /**
  * Created by Ak on 2/19/2015.
  */
