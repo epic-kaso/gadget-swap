@@ -31,7 +31,7 @@ app.directive('webCamera',function(ScriptCam){
             '<div style="width: 320px;height: 300px;margin-right: auto;margin-left: auto">' +
             '<div>' +
                 '<div>' +
-                    '<div id="webcam"></div>' +
+                    '<div id="webcamFrame"><div id="webcam"></div></div>' +
                     '<div style="margin-bottom: 10px;text-align: center;">' +
                         '<button class="btn btn-default btn-capture">Capture</button>' +
                         '<button class="btn btn-default goto-cam"><span class="fa fa-chevron-left"></span></button>' +
@@ -48,6 +48,7 @@ app.directive('webCamera',function(ScriptCam){
         ,
         'link': function link(scope, element, attrs) {
             var webcam = element.find('#webcam');
+            var webcamFrame = element.find('#webcamFrame');
             var previewImg = element.find('img.preview-img');
             var gotoCameraBtn = element.find('.btn.goto-cam');
             var gotoImgBtn = element.find('.btn.goto-img');
@@ -79,7 +80,7 @@ app.directive('webCamera',function(ScriptCam){
 
             scope.$watch('showCamera',function(newV,oldV){
                if(newV == true){
-                   webcam.show();
+                   webcamFrame.show();
                    previewImg.hide();
 
                    captureImgBtn.show();
@@ -90,7 +91,7 @@ app.directive('webCamera',function(ScriptCam){
                    saveImgBtn.hide();
 
                }else{
-                   webcam.hide();
+                   webcamFrame.hide();
                    captureImgBtn.hide();
 
                    previewImg.show();
