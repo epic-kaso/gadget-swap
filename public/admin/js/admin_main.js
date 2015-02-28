@@ -720,6 +720,11 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 url: '/accept-terms/{id}',
                 templateUrl: 'partials/ticket/evaluation/terms.html',
                 controller: ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
+                    $scope.image = {
+                        src: '',
+                        encoded: ''
+                    };
+
                     if (typeof $stateParams.id == "undefined")
                         $state.go('ticket.add.stepOne');
 
@@ -1081,7 +1086,7 @@ app.directive('webCamera',function(ScriptCam){
             imageSrc: '=',
             imageEncoded: '='
         },
-        'template': '<div class="webcamera"><div id="webcam"></div><div style="margin-top: 10px"><button class="btn btn-default btn-capture">Capture</button></div></div>',
+        'template': '<div class="webcamera"><div id="webcam"></div><div style="margin-bottom: 10px;text-align: center;"><button class="btn btn-block btn-default btn-capture">Capture</button></div></div>',
         'link': function link(scope, element, attrs) {
             element.find('#webcam').scriptcam({
                 path: ScriptCam.path,
@@ -1092,7 +1097,7 @@ app.directive('webCamera',function(ScriptCam){
                 onPictureAsBase:captureImage
             });
 
-            element.find('btn-capture').on('click',function(){
+            element.find('.btn-capture').on('click',function(){
                 captureImage();
             });
 

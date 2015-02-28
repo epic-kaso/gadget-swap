@@ -2,8 +2,13 @@
 
     <div class="terms">
 
-        <div>
-            <web-camera image-src="image.src" image-encoded="image.encoded"></web-camera>
+        <div class="row">
+            <div class="col-sm-6">
+                <web-camera image-src="image.src" image-encoded="image.encoded"></web-camera>
+            </div>
+            <div class="col-sm-6">
+                <img ng-src="{{ image.src }}" class="img-responsive" alt=""/>
+            </div>
         </div>
         <p>
             Welcome to Google!
