@@ -24,9 +24,28 @@ app.directive('webCamera',function(ScriptCam){
         'restrict': 'EA',
         'scope': {
             imageSrc: '=',
-            imageEncoded: '='
+            imageEncoded: '=',
+            showCamera: true
         },
-        'template': '<div class="webcamera"><div id="webcam"></div><div style="margin-bottom: 10px;text-align: center;"><button class="btn btn-block btn-default btn-capture">Capture</button></div></div>',
+        'template':
+            '<div style="width: 320px;height: 300px;margin-right: auto;margin-left: auto">' +
+            '<div ng-show="showCamera">' +
+                '<div class="webcamera">' +
+                    '<div id="webcam"></div>' +
+                    '<div style="margin-bottom: 10px;text-align: center;">' +
+                        '<button class="btn btn-default btn-capture">Capture</button>' +
+                        '<button class="btn btn-default" ng-hide="showCamera" ng-click="showCamera = true;"><span class="fa fa-chevron-left"></span></button>' +
+                        '<button class="btn btn-default" ng-show="showCamera" ng-click="showCamera = false;"><span class="fa fa-chevron-right"></span></button>' +
+                        '<button class="btn btn-primary" ng-hide="showCamera"><span class="fa fa-save"></span></button>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+            '<div ng-hide="showCamera" class="preview">' +
+            '<img ng-src="{{ imageSrc }}" class="img-responsive" alt=""/>' +
+            '</div>' +
+            '<div>' +
+            '</div></div>'
+        ,
         'link': function link(scope, element, attrs) {
             element.find('#webcam').scriptcam({
                 path: ScriptCam.path,
@@ -44,6 +63,7 @@ app.directive('webCamera',function(ScriptCam){
             function captureImage(){
                 scope.imageSrc = base64_toimage();
                 scope.imageEncoded = base64_tofield();
+                scope.showCamera = false;
                 scope.$apply();
             }
 
