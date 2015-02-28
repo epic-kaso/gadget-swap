@@ -1113,6 +1113,7 @@ app.directive('webCamera',function(ScriptCam){
             var gotoCameraBtn = element.find('.btn.goto-cam');
             var gotoImgBtn = element.find('.btn.goto-img');
             var saveImgBtn = element.find('.btn.save-img');
+            var captureImgBtn =  element.find('.btn-capture');
 
             webcam.scriptcam({
                 path: ScriptCam.path,
@@ -1123,7 +1124,7 @@ app.directive('webCamera',function(ScriptCam){
                 onPictureAsBase:captureImage
             });
 
-            element.find('.btn-capture').on('click',function(){
+            captureImgBtn.on('click',function(){
                 captureImage();
             });
 
@@ -1142,6 +1143,7 @@ app.directive('webCamera',function(ScriptCam){
                    webcam.show();
                    previewImg.hide();
 
+                   captureImgBtn.show();
                    if(!angular.isDefined(scope.imageSrc) && scope.imageSrc != ''){
                        gotoImgBtn.show();
                    }
@@ -1150,8 +1152,9 @@ app.directive('webCamera',function(ScriptCam){
 
                }else{
                    webcam.hide();
-                   previewImg.show();
+                   captureImgBtn.hide();
 
+                   previewImg.show();
                    gotoImgBtn.hide();
                    gotoCameraBtn.show();
                    saveImgBtn.show();
