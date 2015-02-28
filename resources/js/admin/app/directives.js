@@ -17,6 +17,55 @@ app.directive('backButton',function(){
     }
 });
 
+
+app.directive('fileButton',function(){
+    return {
+        'restrict': 'EA',
+        'scope': {
+            'name': '@name',
+            'label': '@'
+        },
+        'template': '<div class="input-group"><div class="input-group-btn"><span class="btn btn-info btn-file">Browse.. <input type="file" name="{{ name }}"/> </span></div><input class="form-control file-select-label" value="{{ label }}" placeholder="Select a file" name="file-name" type="text"/></div>',
+        'link': function link(scope, element, attrs) {
+            var fileInput = element.find('.btn-file input[type=file]');
+            //var fileLabel = element.find('input[type=text].file-select-label');
+            element.find('.btn.btn-file').css({
+                position: 'relative',
+                overflow: 'hidden',
+                width: '70px',
+                height: '34px'
+            });
+
+            fileInput.css({
+                top: '0',
+                right: '0',
+                position: 'absolute',
+                'min-width': 'inherit',
+                'width': 'inherit',
+                'min-height': 'inherit',
+                'height': 'inherit',
+                'font-size': '100px',
+                'text-align': 'right',
+                'filter': 'alpha(opacity=0)',
+                'opacity': '0',
+                'outline': 'none',
+                'backgound': 'white',
+                'cursor': 'inherit',
+                'display': 'block'
+            });
+
+            fileInput.on('change',function(){
+                console.log("file input change event");
+                var input = $(this),numFiles = input.get(0).files ? input.get(0).files.length : 1;
+                scope.label = input.val().replace(/\\/g,'/').replace(/.*\//,'');
+                console.log(scope.label);
+                scope.$apply();
+            });
+        }
+    }
+});
+
+
 app.directive('toast',function($animate,$timeout){
     return {
         'restrict': 'EA',

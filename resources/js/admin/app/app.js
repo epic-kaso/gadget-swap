@@ -3,7 +3,7 @@
  */
 var app = angular.module("AdminApp",
     ['ui.select', 'ngSanitize','ngImgCrop',
-        'ui.bootstrap', 'ui.router',
+        'ui.bootstrap', 'ui.router','ngUpload',
         'ngAnimate', 'ngResource',
         'angular-loading-bar', 'adminApp.directives', 'adminApp.controllers',
         'adminApp.services', 'ngCookies']);
@@ -454,7 +454,8 @@ app.config(['$urlRouterProvider', '$stateProvider',
             {
                 url: '/menu',
                 templateUrl: 'partials/ticket/menu.html',
-                controller: ['$scope', 'Tickets', function ($scope, Tickets) {
+                controller: ['$scope', 'Tickets','ShowSettings', function ($scope, Tickets,ShowSettings) {
+                    $scope.showSettings = ShowSettings;
                     $scope.tickets = Tickets;
                 }],
                 resolve: {
@@ -463,6 +464,9 @@ app.config(['$urlRouterProvider', '$stateProvider',
                     }],
                     'Tickets': ['TicketServ', function (TicketServ) {
                         return TicketServ.query({limit: 6});
+                    }],
+                    'ShowSettings':['CurrentUser',function(CurrentUser){
+                        return CurrentUser.get().role  != 'adviser';
                     }]
                 }
             }
@@ -500,6 +504,26 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 templateUrl: 'partials/ticket/import.html',
                 controller: ['$scope', 'Tickets', 'TicketServ', function ($scope, Tickets, TicketServ) {
                     $scope.tickets = Tickets;
+                    $scope.upload = {
+                        working: false,
+                        response: {},
+                        complete: false
+                    };
+
+                    $scope.uploadedExcelDocument = function(content,isComplete){
+                        console.log(content);
+                        $scope.upload.working = true;
+                        if(isComplete){
+                            console.log('is complete');
+                            $scope.upload.working = false;
+                            $scope.upload.complete = true;
+                            $scope.upload.response = JSON.parse(content);
+                        }else{
+                            $scope.upload.working = true;
+                            $scope.upload.complete = false;
+                            console.log('is incomplete');
+                        }
+                    };
 
                     $scope.deleteItem = function (id) {
                         TicketServ.delete({id: id}, function (response) {

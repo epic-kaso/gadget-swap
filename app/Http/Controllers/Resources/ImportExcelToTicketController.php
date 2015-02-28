@@ -1,5 +1,6 @@
 <?php namespace SupergeeksGadgetSwap\Http\Controllers\Resources;
 
+use SupergeeksGadgetSwap\Commands\ImportTicketFromExcel;
 use SupergeeksGadgetSwap\Http\Requests;
 use SupergeeksGadgetSwap\Http\Controllers\Controller;
 
@@ -35,9 +36,8 @@ class ImportExcelToTicketController extends Controller {
 	 */
 	public function store(ImportExcelToTicket $excelToTicket)
 	{
-        // get the results
-        $results = $excelToTicket->get();
-        return $results;
+        $importTicket = new ImportTicketFromExcel($excelToTicket);
+        return $this->dispatch($importTicket);
 	}
 
 	/**

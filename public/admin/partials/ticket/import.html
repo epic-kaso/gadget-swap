@@ -1,11 +1,56 @@
-<div>
+<div class="row">
+    <h2 ng-hide="upload.working">Import Tickets From Excel File</h2>
 
-    <h2>Import Tickets From Excel File</h2>
+    <h2 ng-show="upload.working">Importing, Please Wait .....</h2>
+</div>
 
-    <form action="/resources/ticket-import" method="post" enctype="multipart/form-data">
-        <label>Select File:</label>
-        <input type="file" class="form-control" name="excelFile"/>
+<div ng-hide="upload.working"  style="margin-top: 30px">
+    <div class="row">
+       <div class="col-sm-6">
+           <form class="form-inline" action="/resources/ticket-import" ng-upload="uploadedExcelDocument">
+               <file-button name="excelFile"></file-button>
+               <input type="submit" value="Upload" class="btn btn-primary upload-submit"/>
+           </form>
+       </div>
+    </div>
+</div>
 
-        <input type="submit" value="Upload" class="btn btn-primary"/>
-    </form>
+<div ng-show="upload.working"  style="margin-top: 30px">
+    <div class="processing-ticket">
+
+        <div class="text-center">
+            <img src="/img/loader.gif" />
+        </div>
+    </div>
+</div>
+
+<div ng-show="upload.complete" style="margin-top: 30px">
+    <table style="background-color: #ffffff" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <td colspan="3"><h3><strong>Upload Result</strong></h3></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="color: #008000">
+                <td><h4>Successful imports</h4></td>
+                <td><h4>{{ upload.response.success.length }}</h4></td>
+                <td><h4><a href="#">view</a></h4></td>
+            </tr>
+
+            <tr style="color: #ff0000">
+                <td><h4>Failed imports</h4></td>
+                <td><h4>{{ upload.response.failed.length }}</h4></td>
+                <td><h4><a href="#">view</a></h4></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="alert alert-warning" style="margin-top: 30px;">
+    <h3>PS: Acceptable Excel Document Format</h3>
+    <p>The Excel file to upload must be in the acceptable format, else import will fail.</p>
+    <p>click below to download the accepted format</p>
+    <a class="btn btn-info" href="/admin/files/standard.xlsx">Download</a>
 </div>
