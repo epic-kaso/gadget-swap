@@ -1088,7 +1088,7 @@ app.directive('webCamera',function(ScriptCam){
                 showMicrophoneErrors:false,
                 onError:onError,
                 cornerColor:'eee',
-                uploadImage:'upload.gif',
+                uploadImage:ScriptCam.path+'upload.gif',
                 onPictureAsBase:captureImage
             });
 
