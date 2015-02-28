@@ -720,6 +720,11 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 url: '/accept-terms/{id}',
                 templateUrl: 'partials/ticket/evaluation/terms.html',
                 controller: ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
+                    $scope.image = {
+                        src: '',
+                        encoded: ''
+                    };
+
                     if (typeof $stateParams.id == "undefined")
                         $state.go('ticket.add.stepOne');
 
