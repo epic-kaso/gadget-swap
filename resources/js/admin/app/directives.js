@@ -18,6 +18,50 @@ app.directive('backButton',function(){
 });
 
 
+
+app.directive('webCamera',function(ScriptCam){
+    return {
+        'restrict': 'EA',
+        'scope': {
+            imageSrc: '=',
+            imageEncoded: '='
+        },
+        'template': '<div class="webcamera"><div id="webcam"></div><div style="margin-top: 10px"><button class="btn btn-default btn-capture">Capture</button></div></div>',
+        'link': function link(scope, element, attrs) {
+            element.find('#webcam').scriptcam({
+                path: ScriptCam.path,
+                showMicrophoneErrors:false,
+                onError:onError,
+                cornerColor:'eee',
+                uploadImage:'upload.gif',
+                onPictureAsBase:captureImage
+            });
+
+            element.find('btn-capture').on('click',function(){
+                captureImage();
+            });
+
+            function captureImage(){
+                scope.imageSrc = base64_toimage();
+                scope.imageEncoded = base64_tofield();
+                scope.$apply();
+            }
+
+            function base64_tofield() {
+                return $.scriptcam.getFrameAsBase64();
+            }
+
+            function base64_toimage() {
+                return "data:image/png;base64,"+$.scriptcam.getFrameAsBase64();
+            }
+
+            function onError(errorId,errorMsg) {
+                element.find('btn-capture').attr( "disabled", true );
+            }
+        }
+    }
+});
+
 app.directive('fileButton',function(){
     return {
         'restrict': 'EA',

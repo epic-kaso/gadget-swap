@@ -69,15 +69,23 @@
 <script src="{{ asset('app/libs/others_main.js')."?".time() }}" ></script>
 <script src="{{ asset('admin/js/admin_main.js')."?".time() }}"></script>
 <script>
-    angular.module("AdminApp").constant("CSRF_TOKEN", '<?php echo csrf_token(); ?>');
-    angular.module("AdminApp").factory("CurrentUser",function(){
+    var app = angular.module("AdminApp");
+    app.constant("CSRF_TOKEN", '<?php echo csrf_token(); ?>');
+    app.factory("CurrentUser",function(){
         return {
             get: function(){
                 return JSON.parse('<?php echo Auth::user()->toJson(); ?>');
             }
         }
-    })
-    angular.module("AdminApp").factory("PRELOAD_UI_LIST",function(){
+    });
+
+    app.factory("ScriptCam",function(){
+        return {
+            path: "/admin/webcam/"
+        }
+    });
+
+    app.factory("PRELOAD_UI_LIST",function(){
         return {
             'get': function(){
                 return [
