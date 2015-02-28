@@ -722,7 +722,8 @@ app.config(['$urlRouterProvider', '$stateProvider',
                 controller: ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
                     $scope.image = {
                         src: '',
-                        encoded: ''
+                        encoded: '',
+                        showCamera: true
                     };
 
                     if (typeof $stateParams.id == "undefined")

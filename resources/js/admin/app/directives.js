@@ -25,29 +25,35 @@ app.directive('webCamera',function(ScriptCam){
         'scope': {
             imageSrc: '=',
             imageEncoded: '=',
-            showCamera: true
+            showCamera: '='
         },
         'template':
             '<div style="width: 320px;height: 300px;margin-right: auto;margin-left: auto">' +
-            '<div ng-show="showCamera">' +
-                '<div class="webcamera">' +
+            '<div>' +
+                '<div>' +
                     '<div id="webcam"></div>' +
                     '<div style="margin-bottom: 10px;text-align: center;">' +
                         '<button class="btn btn-default btn-capture">Capture</button>' +
-                        '<button class="btn btn-default" ng-hide="showCamera" ng-click="showCamera = true;"><span class="fa fa-chevron-left"></span></button>' +
-                        '<button class="btn btn-default" ng-show="showCamera" ng-click="showCamera = false;"><span class="fa fa-chevron-right"></span></button>' +
-                        '<button class="btn btn-primary" ng-hide="showCamera"><span class="fa fa-save"></span></button>' +
+                        '<button class="btn btn-default goto-cam"><span class="fa fa-chevron-left"></span></button>' +
+                        '<button class="btn btn-default goto-img"><span class="fa fa-chevron-right"></span></button>' +
+                        '<button class="btn btn-primary save-img"><span class="fa fa-save"></span></button>' +
                     '</div>' +
                 '</div>' +
             '</div>' +
-            '<div ng-hide="showCamera" class="preview">' +
-            '<img ng-src="{{ imageSrc }}" class="img-responsive" alt=""/>' +
+            '<div class="preview">' +
+            '<img ng-src="{{ imageSrc }}" class="img-responsive preview-img" alt=""/>' +
             '</div>' +
             '<div>' +
             '</div></div>'
         ,
         'link': function link(scope, element, attrs) {
-            element.find('#webcam').scriptcam({
+            var webcam = element.find('#webcam');
+            var previewImg = element.find('img.preview-img');
+            var gotoCameraBtn = element.find('.btn.goto-cam');
+            var gotoImgBtn = element.find('.btn.goto-img');
+            var saveImgBtn = element.find('.btn.save-img');
+
+            webcam.scriptcam({
                 path: ScriptCam.path,
                 showMicrophoneErrors:false,
                 onError:onError,
@@ -58,6 +64,37 @@ app.directive('webCamera',function(ScriptCam){
 
             element.find('.btn-capture').on('click',function(){
                 captureImage();
+            });
+
+            gotoCameraBtn.click(function(){
+                scope.showCamera = true;
+                scope.$apply();
+            });
+
+            gotoImgBtn.click(function(){
+                scope.showCamera = false;
+                scope.$apply();
+            });
+
+            scope.$watch('showCamera',function(newV,oldV){
+               if(newV == true){
+                   webcam.show();
+                   previewImg.hide();
+
+                   if(!angular.isDefined(scope.imageSrc) && scope.imageSrc != ''){
+                       gotoImgBtn.show();
+                   }
+                   gotoCameraBtn.hide();
+                   saveImgBtn.hide();
+
+               }else{
+                   webcam.hide();
+                   previewImg.show();
+
+                   gotoImgBtn.hide();
+                   gotoCameraBtn.show();
+                   saveImgBtn.show();
+               }
             });
 
             function captureImage(){
