@@ -719,7 +719,8 @@ app.config(['$urlRouterProvider', '$stateProvider',
             {
                 url: '/accept-terms/{id}',
                 templateUrl: 'partials/ticket/evaluation/terms.html',
-                controller: ['$scope', '$stateParams', '$state', function ($scope, $stateParams, $state) {
+                controller: ['$scope', '$stateParams', '$state','TicketServ','ToastService',
+                    function ($scope, $stateParams, $state,TicketServ,ToastService) {
                     $scope.image = {
                         src: '',
                         encoded: '',
@@ -730,7 +731,11 @@ app.config(['$urlRouterProvider', '$stateProvider',
                         $state.go('ticket.add.stepOne');
 
                     $scope.next = function () {
-                        $state.go('ticket.review-ticket', {id: $stateParams.id});
+                        TicketServ.update({id: $stateParams.id},{image_url: $scope.image.src}).$promise.then(function(){
+                            $state.go('ticket.review-ticket', {id: $stateParams.id});
+                        },function(){
+                            ToastService.error("Could not save image");
+                        });
                     };
                 }],
                 resolve: {

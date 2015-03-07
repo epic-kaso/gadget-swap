@@ -731,7 +731,7 @@ app.config(['$urlRouterProvider', '$stateProvider',
                         $state.go('ticket.add.stepOne');
 
                     $scope.next = function () {
-                        TicketServ.update($stateParams.id,{image_url: $scope.image.src}).then(function(){
+                        TicketServ.update({id: $stateParams.id},{image_url: $scope.image.src}).$promise.then(function(){
                             $state.go('ticket.review-ticket', {id: $stateParams.id});
                         },function(){
                             ToastService.error("Could not save image");
