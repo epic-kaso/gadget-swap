@@ -121,7 +121,8 @@ class GadgetSwapTicketController extends Controller
             'size_id',
             'reward',
             'port_to_airtel',
-            'discount_voucher_code'
+            'discount_voucher_code',
+            'image_url'
         ];
         $data = Input::only(
             $keys
@@ -130,7 +131,9 @@ class GadgetSwapTicketController extends Controller
         $ticket = GadgetSwapTicket::find($id);
 
         foreach ($keys as $k) {
-            $ticket->{$k} = $data[$k];
+            if(isset($data[$k]) && !is_null($data[$k]) ) {
+                $ticket->{$k} = $data[$k];
+            }
         }
 
         $ticket->save();
