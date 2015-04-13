@@ -72,7 +72,6 @@ app.config(['$urlRouterProvider', '$stateProvider',
                     }]
                 },
                 controller: ['$scope', 'ImageFetcher', 'DeviceBrands', function ($scope, ImageFetcher, DeviceBrands) {
-
                     $scope.models = DeviceBrands;
 
                     $scope.sizes = [];
@@ -719,28 +718,34 @@ app.config(['$urlRouterProvider', '$stateProvider',
             {
                 url: '/accept-terms/{id}',
                 templateUrl: 'partials/ticket/evaluation/terms.html',
-                controller: ['$scope', '$stateParams', '$state','TicketServ','ToastService',
-                    function ($scope, $stateParams, $state,TicketServ,ToastService) {
-                    $scope.image = {
-                        src: '',
-                        encoded: '',
-                        showCamera: true
-                    };
+                controller: ['$scope', '$stateParams', '$state','TicketServ','ToastService','Ticket',
+                    function ($scope, $stateParams, $state,TicketServ,ToastService,Ticket) {
+                        $scope.ticket  = Ticket;
+                        console.log(Ticket);
 
-                    if (typeof $stateParams.id == "undefined")
-                        $state.go('ticket.add.stepOne');
+                        $scope.image = {
+                            src: '',
+                            encoded: '',
+                            showCamera: true
+                        };
 
-                    $scope.next = function () {
-                        TicketServ.update({id: $stateParams.id},{image_url: $scope.image.src}).$promise.then(function(){
-                            $state.go('ticket.review-ticket', {id: $stateParams.id});
-                        },function(){
-                            ToastService.error("Could not save image");
-                        });
-                    };
+                        if (typeof $stateParams.id == "undefined")
+                            $state.go('ticket.add.stepOne');
+
+                        $scope.next = function () {
+                            TicketServ.update({id: $stateParams.id},{image_url: $scope.image.src}).$promise.then(function(){
+                                $state.go('ticket.review-ticket', {id: $stateParams.id});
+                            },function(){
+                                ToastService.error("Could not save image");
+                            });
+                        };
                 }],
                 resolve: {
                     'hasHistory': ['$rootScope', function ($rootScope) {
                         $rootScope.hasHistory = true;
+                    }],
+                    'Ticket': ['TicketServ','$stateParams',function(TicketServ,$stateParams){
+                        return TicketServ.get({id: $stateParams.id});
                     }]
                 }
             }
