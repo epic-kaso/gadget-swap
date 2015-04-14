@@ -10,7 +10,7 @@
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     {{-- Laravel Based  --}}
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ asset('app/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('app/css/main.css') . '?' .time() }}">
     <script>
         window.gadget_swap = {};
         window.gadget_swap.data = {!! json_encode($objects) !!};
@@ -110,8 +110,8 @@
     </div>
 </div>
 
-<script src="{{ asset('app/libs/core.js') }}"></script>
-<script src="{{ asset('app/libs/others.js') }}"></script>
-<script src="{{ asset('app/js/main.js') }}"></script>
+<script src="{{ asset('app/libs/core.js') . '?' .time() }}"></script>
+<script src="{{ asset('app/libs/others.js') . '?' .time() }}"></script>
+<script src="{{ asset('app/js/main.js') . '?' .time() }}"></script>
 </body>
 </html>

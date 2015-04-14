@@ -166,7 +166,7 @@ app.controller('DeviceConditionController',
 
 app.controller('DeviceRewardController',
     function ($scope,$rootScope,$filter) {
-        $rootScope.big_heading = 'Fantastic,Thank you! Here\'s your Reward';
+        $rootScope.big_heading = 'Fantastic,Thank you! Estimated Value is';
 
         var reward = $scope.currentGadget.getReward();
         $scope.currentGadget.reward = reward;

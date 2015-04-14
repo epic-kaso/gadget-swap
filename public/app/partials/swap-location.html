@@ -10,21 +10,73 @@
         <a ui-sref="book-appointment({swap_center: 'Airtel Oniru Palms Shopping Mall Oniru' })" class="swap-location">
             <h3>Airtel Store</h3>
             <p>Palms Shopping Mall, Oniru</p>
+
         </a>
         <a ui-sref="nada" class="swap-location disabled">
             <!--book-appointment({swap_center: 'Airtel Store Ikeja Mall' })-->
             <h3>Airtel Store</h3>
             <p>Ikeja City Mall,Alausa</p>
+            <h3 class="coming-soon">Coming soon</h3>
         </a>
         <a ui-sref="nada" class="swap-location disabled">
             <!--book-appointment({swap_center: 'Airtel Xperience Center Sanusi Fafuwa VI' })-->
             <h3>Airtel Xperience Center</h3>
             <p>Sanusi Fafunwa, V.I</p>
+            <h3 class="coming-soon">Coming soon</h3>
         </a>
         <a ui-sref="nada" class="swap-location disabled">
             <!--book-appointment({swap_center: 'Supergeeks Xperience Center' })-->
             <h3>Supergeeks Xperience Center</h3>
             <p>1 victoria arobieke str, Admiralty Way. Lekki Phase 1</p>
+
+            <h3 class="coming-soon">Coming soon</h3>
         </a>
     </div>
 </div>
+
+
+<style class="ng-scope">
+    .swap-location.disabled h3,.swap-location.disabled p {
+        color: rgba(0,0,0,0.3);
+    }
+    .swap-location.disabled{
+        transition: all 0.2s;
+        position: relative;
+    }
+
+    .swap-location.disabled .coming-soon{
+        display: none;
+        position: fixed;
+    }
+
+    .swap-location.disabled:hover .coming-soon{
+        display: block;
+    }
+</style>
+
+<style>
+    .swap-location.disabled h3,.swap-location.disabled p {
+        color: rgba(0,0,0,0.3);
+    }
+    .swap-location.disabled{
+        transition: all 0.2s;
+        position: relative;
+    }
+
+    .swap-location.disabled .coming-soon{
+        display: none;
+        position: absolute;
+        padding-top: 20px;
+        top: 0;
+        left: 0;
+        color: black;
+        background-color: white;
+        width: 100%;
+        height: 80px;
+        text-align: center;
+    }
+
+    .swap-location.disabled:hover .coming-soon{
+        display: block;
+    }
+</style>

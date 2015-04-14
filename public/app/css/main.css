@@ -17,7 +17,7 @@ h1,h2,h3,h4{
 
 @media (min-width: 768px){
     h1{
-        font-size: 30px;
+        font-size: 25px;
     }
 }
 
@@ -149,8 +149,8 @@ input.btn.btn-info.btn-block {
 
 @media (min-width: 768px) {
     .big-heading {
-        margin-top: 20px !important;
-        margin-bottom: 60px !important;
+        /* margin-top: 20px !important; */
+        /* margin-bottom: 20px !important; */
     }
 }
 .big-heading {
@@ -585,7 +585,8 @@ a.swap-location p {
 .reward-box{
     color: orange;
     font-weight: 500;
-    font-size: 50px;
+    font-size: 40px;
+    margin-top: 0;
 }
 
 .reward-box .bonus-price{
