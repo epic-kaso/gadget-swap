@@ -237,6 +237,9 @@ app.factory('PreloadTemplates',function ($templateCache, $http,ViewBaseURL) {
     return {
         run: function(){
             templates.forEach(function(currentItem){
+                if($templateCache.get(currentItem)){
+                    $templateCache.remove(currentItem);
+                }
                 $http.get(currentItem, { cache: $templateCache });
             });
         }
