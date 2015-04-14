@@ -5,7 +5,7 @@
             <fieldset class="reward text-left">
                 <legend>Additional Bonus</legend>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 content">
                         <p ng-hide="currentGadget.network.name == 'Airtel Ng'">You are currently on <strong style="text-transform: uppercase;">{{ currentGadget.network.name }}</strong>, port to <strong style="text-transform: uppercase;">Airtel</strong> now to enjoy this additional bonus.</p>
                         <div>
                             <div>
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="col-sm-1"><span class="line"></span></div>
-                    <div class="col-5">
+                    <div class="col-sm-5 content">
                         <div  ng-if="currentGadget.network.name != 'Airtel Ng'">
                             <label>
                                 <checkbox ng-model="currentGadget.network.postToAirtel" ng-true-value="1" ng-false-value="0"></checkbox> I wish to Port to <strong>Airtel</strong>
@@ -50,12 +50,15 @@
     .terms p{
         font-size: 12px;
     }
+    fieldset.reward .content{
+        padding: 25px;
+    }
+
     fieldset.reward {
         border: 1px solid #d8d8d8;
         border-radius: 3px;
         width: 80%;
         margin: 20px auto 0;
-        padding: 25px 10px;
     }
 
     fieldset.reward legend {
@@ -74,7 +77,7 @@
     @media (min-width: 768px) {
         span.line {
             display: block;
-            height: 100px;
+            height: 200px;
             background-color: #d8d8d8;
             width: 1px;
             text-align: center;
