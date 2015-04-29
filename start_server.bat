@@ -1,1 +1,1 @@
-php artisan serve --host="www.app.dev"
+php artisan serve --host="localhost"

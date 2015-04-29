@@ -87,9 +87,9 @@ input.btn.btn-info.btn-block {
     }
     .navbar-header img.img-responsive
     {
-        width: 200px;
-        margin-right: auto;
-        margin-left: auto;
+        width: 100px;
+        margin-right: 0;
+        margin-left: 0;
 
     }
     .info-header{
@@ -598,4 +598,14 @@ a.swap-location p {
 .navbar-white{
     background-color: white;
     border: none;
+}
+
+@media (max-width: 768px){
+    .airtel-logo img.img-responsive {
+      width: 100px;
+      margin-right: 0;
+      margin-left: 0;
+      float: right;
+      margin-top: -50px;
+    }
 }

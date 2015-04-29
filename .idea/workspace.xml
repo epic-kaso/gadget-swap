@@ -1,0 +1,1292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="25b4418c-6254-4213-9cb3-14d52f245eb6" name="Default" comment="" />
+    <ignored path="SupergeeksGadgetSwap.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DatabaseView">
+    <option name="FLATTEN" value="false" />
+    <option name="GROUP_BY_TYPE" value="true" />
+    <option name="SORT_CHILDREN" value="false" />
+    <option name="SHOW_TABLE_CONSTRAINTS" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="SupergeeksGadgetSwap" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="Services.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/js/app/services/Services.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6497696" vertical-offset="3572" max-vertical-offset="4284">
+              <caret line="235" column="6" selection-start-line="235" selection-start-column="6" selection-end-line="235" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev-develop" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Resources/DeviceMakerController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Resources/DevicesController.php" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/evaluation/reward.html" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/add/base.html" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/add/step-two.html" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/add/step-three.html" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/add/step-four.html" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/add/step-one.html" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/TicketRequest.php" />
+        <option value="$PROJECT_DIR$/resources/js/libs/others/cropme.js" />
+        <option value="$PROJECT_DIR$/public/admin/partials/device_models/add.html" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_02_26_132916_create_grading_system_table.php" />
+        <option value="$PROJECT_DIR$/database/seeds/GradingSystemTableSeeder.php" />
+        <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/config.html" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Resources/NetworkController.php" />
+        <option value="$PROJECT_DIR$/resources/assets/less/admin.less" />
+        <option value="$PROJECT_DIR$/app/GradingSystem.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Resources/GradingSystemController.php" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/config/grading-system.html" />
+        <option value="$PROJECT_DIR$/config/app.php" />
+        <option value="$PROJECT_DIR$/config/excel.php" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/ImportExcelToTicket.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Resources/TicketDataConfigController.php" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/TicketDataConfigRequest.php" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/config/user-details.html" />
+        <option value="$PROJECT_DIR$/resources/js/admin/app/services.js" />
+        <option value="$PROJECT_DIR$/resources/js/admin/app/controllers.js" />
+        <option value="$PROJECT_DIR$/app/Http/Requests/ImportExcelToTicketHandler.php" />
+        <option value="$PROJECT_DIR$/app/Commands/ImportTicketFromExcel.php" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/menu.html" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/import.html" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Resources/ImportExcelToTicketController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/layout.blade.php" />
+        <option value="$PROJECT_DIR$/resources/js/admin/app/directives.js" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/database/migrations/2015_03_07_133621_add_image_url_column_to_tickets.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Resources/GadgetSwapTicketController.php" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/show.html" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/evaluation/review.html" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/done.html" />
+        <option value="$PROJECT_DIR$/resources/js/admin/app/app.js" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/evaluation/terms.html" />
+        <option value="$PROJECT_DIR$/public/admin/partials/ticket/add/final.html" />
+        <option value="$PROJECT_DIR$/resources/views/client/index.blade.php" />
+        <option value="$PROJECT_DIR$/public/app/partials/swap-location.html" />
+        <option value="$PROJECT_DIR$/public/app/css/main.css" />
+        <option value="$PROJECT_DIR$/resources/js/app/controllers/Controllers.js" />
+        <option value="$PROJECT_DIR$/public/app/partials/device-reward.html" />
+        <option value="$PROJECT_DIR$/resources/js/app/services/Services.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <gulpfiles>
+      <GulpfileState>
+        <gulpfile-path>$PROJECT_DIR$/gulpfile.js</gulpfile-path>
+        <tasks>
+          <GulpTaskState>
+            <task-name>default</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>tdd</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>watch</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>watch-assets</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>less</task-name>
+          </GulpTaskState>
+          <GulpTaskState>
+            <task-name>scripts</task-name>
+          </GulpTaskState>
+        </tasks>
+      </GulpfileState>
+    </gulpfiles>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-7" />
+    <option name="width" value="1378" />
+    <option name="height" value="735" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="partials" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SupergeeksGadgetSwap" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
+    <property name="SearchEverywhereHistoryKey" value="5b8a009e37e51f1f5475085e9935f25c&#9;FILE&#9;file://E:/PhpProjects/SupergeeksGadgetSwap/storage/framework/views/5b8a009e37e51f1f5475085e9935f25c&#10;menu.&#9;FILE&#9;file://E:/PhpProjects/SupergeeksGadgetSwap/public/admin/partials/ticket/menu.html&#10;Illuminate\Contracts\Bus\Dispatcher&#9;null&#9;null&#10;reward.&#9;FILE&#9;file://E:/PhpProjects/SupergeeksGadgetSwap/public/admin/partials/ticket/evaluation/reward.html&#10;terms.html&#9;FILE&#9;file://E:/PhpProjects/SupergeeksGadgetSwap/public/admin/partials/ticket/evaluation/terms.html&#10;Verify&#9;null&#9;null&#10;CreateTi&#9;null&#9;null&#10;Ticket&#9;null&#9;null&#10;Tick&#9;null&#9;null&#10;admin.js&#9;FILE&#9;file://E:/PhpProjects/SupergeeksGadgetSwap/public/admin/js/admin.js&#10;create_user&#9;FILE&#9;file://E:/PhpProjects/SupergeeksGadgetSwap/database/migrations/2014_10_12_000000_create_users_table.php&#10;dire&#9;FILE&#9;file://E:/PhpProjects/SupergeeksGadgetSwap/resources/js/admin/app/directives.js&#10;UserTa&#9;null&#9;null&#10;User&#9;null&#9;null&#10;1fd&#9;FILE&#9;file://E:/PhpProjects/SupergeeksGadgetSwap/storage/framework/views/1fd63a4be8971c4e92d26cc815ad63e3" />
+    <property name="js.buildTools.gulp.node_interpreter" value="C:\Program Files\nodejs\node.exe" />
+    <property name="js.buildTools.gulp.gulp_package_dir" value="C:\Users\Ak\AppData\Roaming\npm\node_modules\gulp" />
+    <property name="recentsLimit" value="5" />
+    <property name="LayoutCode.rearrangeEntriesJavaScript 1.5" value="false" />
+    <property name="options.lastSelected" value="http.proxy" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myApp" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\PhpProjects\SupergeeksGadgetSwap\public\admin\webcam" />
+      <recent name="E:\PhpProjects\SupergeeksGadgetSwap\public\admin\files" />
+      <recent name="E:\PhpProjects\SupergeeksGadgetSwap\resources\js\libs\others" />
+      <recent name="E:\PhpProjects\SupergeeksGadgetSwap\public\img" />
+      <recent name="E:\PhpProjects\SupergeeksGadgetSwap\public\admin\partials\ticket" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\PhpProjects\SupergeeksGadgetSwap\app\Http\Controllers\Resources" />
+      <recent name="E:\PhpProjects\SupergeeksGadgetSwap\public\admin\partials\ticket\evaluation" />
+      <recent name="E:\PhpProjects\SupergeeksGadgetSwap\public\admin\partials" />
+      <recent name="E:\PhpProjects\SupergeeksGadgetSwap\resources\js\libs\others" />
+      <recent name="E:\PhpProjects\SupergeeksGadgetSwap\resources\js\libs\core" />
+    </key>
+  </component>
+  <component name="RestClientSettings">
+    <option name="REQUEST_HISTORY">
+      <list>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost" />
+          <option name="urlPath" value="/8000" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+        <RestClientRequest>
+          <option name="httpMethod" value="GET" />
+          <option name="urlBase" value="http://localhost" />
+          <option name="urlPath" value="/" />
+          <option name="headers">
+            <list>
+              <KeyValuePair>
+                <option name="key" value="Accept" />
+                <option name="value" value="*/*" />
+              </KeyValuePair>
+              <KeyValuePair>
+                <option name="key" value="Cache-Control" />
+                <option name="value" value="no-cache" />
+              </KeyValuePair>
+            </list>
+          </option>
+          <option name="parametersEnabled" value="true" />
+          <option name="textToSend" value="" />
+          <option name="filesToSend" value="" />
+        </RestClientRequest>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Gulp.js.watch">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="watch" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
+      <tasks>
+        <task>watch</task>
+      </tasks>
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <RunnerSettings RunnerId="Js.BuildTools.Gulp" />
+      <ConfigurationWrapper RunnerId="Js.BuildTools.Gulp" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Gulp.js.watch" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="25b4418c-6254-4213-9cb3-14d52f245eb6" name="Default" comment="" />
+      <created>1424383254666</created>
+      <option name="number" value="Default" />
+      <updated>1424383254666</updated>
+    </task>
+    <task id="LOCAL-00100" summary="third five">
+      <created>1424857488424</created>
+      <option name="number" value="00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1424857488424</updated>
+    </task>
+    <task id="LOCAL-00101" summary="third five">
+      <created>1424857809683</created>
+      <option name="number" value="00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1424857809683</updated>
+    </task>
+    <task id="LOCAL-00102" summary="third five">
+      <created>1424868805192</created>
+      <option name="number" value="00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1424868805192</updated>
+    </task>
+    <task id="LOCAL-00103" summary="third five">
+      <created>1424869240546</created>
+      <option name="number" value="00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1424869240546</updated>
+    </task>
+    <task id="LOCAL-00104" summary="third five">
+      <created>1424869476460</created>
+      <option name="number" value="00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1424869476460</updated>
+    </task>
+    <task id="LOCAL-00105" summary="third five">
+      <created>1424870252213</created>
+      <option name="number" value="00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1424870252213</updated>
+    </task>
+    <task id="LOCAL-00106" summary="third five">
+      <created>1424870356589</created>
+      <option name="number" value="00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1424870356590</updated>
+    </task>
+    <task id="LOCAL-00107" summary="third five">
+      <created>1424870646353</created>
+      <option name="number" value="00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1424870646354</updated>
+    </task>
+    <task id="LOCAL-00108" summary="third five">
+      <created>1424900788481</created>
+      <option name="number" value="00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1424900788483</updated>
+    </task>
+    <task id="LOCAL-00109" summary="third five">
+      <created>1424901415037</created>
+      <option name="number" value="00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1424901415037</updated>
+    </task>
+    <task id="LOCAL-00110" summary="third five">
+      <created>1424901495052</created>
+      <option name="number" value="00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1424901495052</updated>
+    </task>
+    <task id="LOCAL-00111" summary="third five">
+      <created>1424901800573</created>
+      <option name="number" value="00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1424901800573</updated>
+    </task>
+    <task id="LOCAL-00112" summary="third five">
+      <created>1424905297195</created>
+      <option name="number" value="00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1424905297195</updated>
+    </task>
+    <task id="LOCAL-00113" summary="third five">
+      <created>1424906719808</created>
+      <option name="number" value="00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1424906719809</updated>
+    </task>
+    <task id="LOCAL-00114" summary="third five">
+      <created>1424962208354</created>
+      <option name="number" value="00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1424962208360</updated>
+    </task>
+    <task id="LOCAL-00115" summary="third five">
+      <created>1424962685040</created>
+      <option name="number" value="00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1424962685041</updated>
+    </task>
+    <task id="LOCAL-00116" summary="third five">
+      <created>1424972766454</created>
+      <option name="number" value="00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1424972766454</updated>
+    </task>
+    <task id="LOCAL-00117" summary="third six">
+      <created>1424972891097</created>
+      <option name="number" value="00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1424972891098</updated>
+    </task>
+    <task id="LOCAL-00118" summary="third six">
+      <created>1424973595299</created>
+      <option name="number" value="00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1424973595299</updated>
+    </task>
+    <task id="LOCAL-00119" summary="third six">
+      <created>1424983579426</created>
+      <option name="number" value="00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1424983579426</updated>
+    </task>
+    <task id="LOCAL-00120" summary="third six">
+      <created>1424983668262</created>
+      <option name="number" value="00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1424983668262</updated>
+    </task>
+    <task id="LOCAL-00121" summary="third six">
+      <created>1424984662641</created>
+      <option name="number" value="00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1424984662642</updated>
+    </task>
+    <task id="LOCAL-00122" summary="third six">
+      <created>1424985201485</created>
+      <option name="number" value="00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1424985201485</updated>
+    </task>
+    <task id="LOCAL-00123" summary="third six">
+      <created>1424986346714</created>
+      <option name="number" value="00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1424986346714</updated>
+    </task>
+    <task id="LOCAL-00124" summary="third six">
+      <created>1424987549792</created>
+      <option name="number" value="00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1424987549792</updated>
+    </task>
+    <task id="LOCAL-00125" summary="third six">
+      <created>1424987829545</created>
+      <option name="number" value="00125" />
+      <option name="project" value="LOCAL" />
+      <updated>1424987829545</updated>
+    </task>
+    <task id="LOCAL-00126" summary="third six">
+      <created>1424988023154</created>
+      <option name="number" value="00126" />
+      <option name="project" value="LOCAL" />
+      <updated>1424988023155</updated>
+    </task>
+    <task id="LOCAL-00127" summary="third six">
+      <created>1424988432239</created>
+      <option name="number" value="00127" />
+      <option name="project" value="LOCAL" />
+      <updated>1424988432239</updated>
+    </task>
+    <task id="LOCAL-00128" summary="third six">
+      <created>1424989036786</created>
+      <option name="number" value="00128" />
+      <option name="project" value="LOCAL" />
+      <updated>1424989036786</updated>
+    </task>
+    <task id="LOCAL-00129" summary="third six">
+      <created>1425117590640</created>
+      <option name="number" value="00129" />
+      <option name="project" value="LOCAL" />
+      <updated>1425117590640</updated>
+    </task>
+    <task id="LOCAL-00130" summary="third six">
+      <created>1425119282633</created>
+      <option name="number" value="00130" />
+      <option name="project" value="LOCAL" />
+      <updated>1425119282633</updated>
+    </task>
+    <task id="LOCAL-00131" summary="third six">
+      <created>1425119697400</created>
+      <option name="number" value="00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1425119697400</updated>
+    </task>
+    <task id="LOCAL-00132" summary="third six">
+      <created>1425119871129</created>
+      <option name="number" value="00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1425119871130</updated>
+    </task>
+    <task id="LOCAL-00133" summary="third six">
+      <created>1425120815573</created>
+      <option name="number" value="00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1425120815573</updated>
+    </task>
+    <task id="LOCAL-00134" summary="third six">
+      <created>1425122535791</created>
+      <option name="number" value="00134" />
+      <option name="project" value="LOCAL" />
+      <updated>1425122535791</updated>
+    </task>
+    <task id="LOCAL-00135" summary="third six">
+      <created>1425122849650</created>
+      <option name="number" value="00135" />
+      <option name="project" value="LOCAL" />
+      <updated>1425122849650</updated>
+    </task>
+    <task id="LOCAL-00136" summary="third six">
+      <created>1425124150664</created>
+      <option name="number" value="00136" />
+      <option name="project" value="LOCAL" />
+      <updated>1425124150665</updated>
+    </task>
+    <task id="LOCAL-00137" summary="third six">
+      <created>1425124430791</created>
+      <option name="number" value="00137" />
+      <option name="project" value="LOCAL" />
+      <updated>1425124430791</updated>
+    </task>
+    <task id="LOCAL-00138" summary="third six">
+      <created>1425124673182</created>
+      <option name="number" value="00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1425124673185</updated>
+    </task>
+    <task id="LOCAL-00139" summary="third six">
+      <created>1425736311233</created>
+      <option name="number" value="00139" />
+      <option name="project" value="LOCAL" />
+      <updated>1425736311236</updated>
+    </task>
+    <task id="LOCAL-00140" summary="webcam changes">
+      <created>1425737320839</created>
+      <option name="number" value="00140" />
+      <option name="project" value="LOCAL" />
+      <updated>1425737320839</updated>
+    </task>
+    <task id="LOCAL-00141" summary="webcam changes">
+      <created>1428941095062</created>
+      <option name="number" value="00141" />
+      <option name="project" value="LOCAL" />
+      <updated>1428941095064</updated>
+    </task>
+    <task id="LOCAL-00142" summary="webcam changes">
+      <created>1428941287123</created>
+      <option name="number" value="00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1428941287123</updated>
+    </task>
+    <task id="LOCAL-00143" summary="webcam changes">
+      <created>1428941671459</created>
+      <option name="number" value="00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1428941671460</updated>
+    </task>
+    <task id="LOCAL-00144" summary="webcam changes">
+      <created>1429016850498</created>
+      <option name="number" value="00144" />
+      <option name="project" value="LOCAL" />
+      <updated>1429016850498</updated>
+    </task>
+    <task id="LOCAL-00145" summary="webcam changes">
+      <created>1429017045119</created>
+      <option name="number" value="00145" />
+      <option name="project" value="LOCAL" />
+      <updated>1429017045120</updated>
+    </task>
+    <task id="LOCAL-00146" summary="webcam changes">
+      <created>1429023396874</created>
+      <option name="number" value="00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1429023396874</updated>
+    </task>
+    <task id="LOCAL-00147" summary="webcam changes">
+      <created>1429023909011</created>
+      <option name="number" value="00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1429023909012</updated>
+    </task>
+    <task id="LOCAL-00148" summary="webcam changes">
+      <created>1429041938484</created>
+      <option name="number" value="00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1429041938487</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="0" width="1378" height="735" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29135054" sideWeight="0.5058236" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962063" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30323055" sideWeight="0.49417636" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3217247" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42454395" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31946754" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+    <MESSAGE value="initial version" />
+    <MESSAGE value="second version, new UI" />
+    <MESSAGE value="third v" />
+    <MESSAGE value="third five" />
+    <MESSAGE value="third six" />
+    <MESSAGE value="webcam changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="webcam changes" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="5" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/resources/js/admin/app/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2043" max-vertical-offset="3060">
+          <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/maatwebsite/excel/src/Maatwebsite/Excel/Files/ImportHandler.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="289">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="10" selection-end-line="2" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Commands/Command.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="575">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Foundation/Bus/DispatchesCommands.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.26958105" vertical-offset="284" max-vertical-offset="833">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Contracts/Bus/Dispatcher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
+          <caret line="0" column="19" selection-start-line="0" selection-start-column="19" selection-end-line="0" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Pipeline/Hub.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1309">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.0346084" vertical-offset="1984" max-vertical-offset="2533">
+          <caret line="53" column="20" selection-start-line="53" selection-start-column="20" selection-end-line="53" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.3661203" vertical-offset="714" max-vertical-offset="6545">
+          <caret line="195" column="34" selection-start-line="195" selection-start-column="34" selection-end-line="195" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/helpers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.34790528" vertical-offset="2019" max-vertical-offset="13362">
+          <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Support/Collection.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56466305" vertical-offset="2750" max-vertical-offset="15368">
+          <caret line="188" column="22" selection-start-line="188" selection-start-column="22" selection-end-line="188" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334" vertical-offset="30145" max-vertical-offset="56831">
+          <caret line="1807" column="20" selection-start-line="1807" selection-start-column="20" selection-end-line="1807" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/libs/others/ng-upload.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="562">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/less/bootstrap/tables.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.91977614" vertical-offset="1530" max-vertical-offset="4080">
+          <caret line="119" column="15" selection-start-line="119" selection-start-column="15" selection-end-line="119" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/storage/framework/views/5b8a009e37e51f1f5475085e9935f25c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3024911" vertical-offset="1071" max-vertical-offset="2278">
+          <caret line="73" column="16" selection-start-line="73" selection-start-column="16" selection-end-line="73" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin/partials/ticket/menu.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="29" max-vertical-offset="731">
+          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin/partials/ticket/import.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="1054">
+          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin/webcam/scriptcam.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="571">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin/partials/ticket/config/user-details.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="476">
+          <caret line="5" column="91" selection-start-line="5" selection-start-column="91" selection-end-line="5" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Kernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="680">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_02_26_132916_create_grading_system_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.6923075" vertical-offset="30" max-vertical-offset="578">
+          <caret line="21" column="50" selection-start-line="21" selection-start-column="50" selection-end-line="21" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="935">
+          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_02_21_123615_create_gadget_swap_ticket.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="731">
+          <caret line="14" column="43" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2015_03_07_133621_add_image_url_column_to_tickets.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="663">
+          <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Resources/GadgetSwapTicketController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1885" max-vertical-offset="2669">
+          <caret line="124" column="20" selection-start-line="124" selection-start-column="20" selection-end-line="124" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/libs/core/loading-bar.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="521">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/dashboard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="884">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin/partials/ticket/evaluation/review.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1649">
+          <caret line="3" column="74" selection-start-line="3" selection-start-column="74" selection-end-line="3" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/layout.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="816" max-vertical-offset="2431">
+          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/admin/app/directives.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3185" max-vertical-offset="4420">
+          <caret line="204" column="0" selection-start-line="172" selection-start-column="0" selection-end-line="204" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/assets/less/admin.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="12068" max-vertical-offset="12563">
+          <caret line="733" column="0" selection-start-line="691" selection-start-column="0" selection-end-line="733" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/admin/app/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="3473" max-vertical-offset="4029">
+          <caret line="216" column="47" selection-start-line="216" selection-start-column="47" selection-end-line="216" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Resources/ImportExcelToTicketController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.1923075" vertical-offset="374" max-vertical-offset="1496">
+          <caret line="38" column="42" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Commands/ImportTicketFromExcel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.43589744" vertical-offset="323" max-vertical-offset="2006">
+          <caret line="41" column="21" selection-start-line="41" selection-start-column="21" selection-end-line="41" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin/partials/ticket/show.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7072" vertical-offset="289" max-vertical-offset="1428">
+          <caret line="43" column="57" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin/partials/ticket/done.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2176" vertical-offset="0" max-vertical-offset="625">
+          <caret line="8" column="46" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/admin/app/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29310346" vertical-offset="12121" max-vertical-offset="15028">
+          <caret line="724" column="24" selection-start-line="724" selection-start-column="24" selection-end-line="724" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin/partials/ticket/evaluation/terms.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7777778" vertical-offset="119" max-vertical-offset="731">
+          <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/admin/partials/ticket/add/final.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25" vertical-offset="221" max-vertical-offset="1683">
+          <caret line="22" column="41" selection-start-line="22" selection-start-column="41" selection-end-line="22" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/partials/book-appointment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.19444445" vertical-offset="119" max-vertical-offset="1088">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/GradingSystemTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/UserTableSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="651">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/seeds/DatabaseSeeder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.544" vertical-offset="0" max-vertical-offset="625">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/client/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.5" vertical-offset="0" max-vertical-offset="2006">
+          <caret line="95" column="30" selection-start-line="95" selection-start-column="30" selection-end-line="95" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/partials/swap-location.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3888889" vertical-offset="17" max-vertical-offset="1479">
+          <caret line="15" column="44" selection-start-line="15" selection-start-column="44" selection-end-line="15" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/app/controllers/Controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65360504" vertical-offset="2643" max-vertical-offset="3757">
+          <caret line="180" column="7" selection-start-line="180" selection-start-column="7" selection-end-line="180" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/css/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="9.408602" vertical-offset="3854" max-vertical-offset="10302">
+          <caret line="587" column="20" selection-start-line="587" selection-start-column="20" selection-end-line="587" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/app/partials/device-reward.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30555555" vertical-offset="51" max-vertical-offset="1564">
+          <caret line="14" column="30" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
+          <folding>
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1429041008000" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/app/start.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18652038" vertical-offset="187" max-vertical-offset="3621">
+          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+          <folding>
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="/** Created by kaso on 11/6/2014. ...*/" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="[...]" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: 'device-make'...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: 'device-model'...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: 'device-size'...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: 'device-network'...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: 'device-condition'...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: 'parentReward'...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: 'device-reward'...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: 'swapLocation'...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: 'book-appointment'...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: 'success'...}" />
+            <marker date="1424389546000" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/app/services/Services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6497696" vertical-offset="3572" max-vertical-offset="4284">
+          <caret line="235" column="6" selection-start-line="235" selection-start-column="6" selection-end-line="235" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

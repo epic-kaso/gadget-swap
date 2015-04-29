@@ -7,7 +7,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"> -->
+   <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     {{-- Laravel Based  --}}
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{{ asset('app/css/main.css') . '?' .time() }}">
@@ -23,10 +24,18 @@
         <div class="navbar-header">
             <img src="http://supergeeks.com.ng/img/supergeeks-logo-tagline.png" class="img-responsive"/>
         </div>
+        <div class="pull-right airtel-logo" style="display: inline-block;width: 200px;">
+                        <img src="{{ asset('img/airtel-logo.jpg') }}" class="img-responsive">
+            </div>
         <div class="info-header">
             <div class="tiny-heading text-muted"><h4 ng-bind-html="tiny_heading"></h4></div>
             <div class="big-heading"><h1 ng-bind="big_heading" style="color: #43bcf0"></h1></div>
-        </div>
+
+            
+
+
+    </div>
+
     </div>
 </div>
 
