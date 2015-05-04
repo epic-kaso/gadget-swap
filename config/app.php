@@ -137,6 +137,7 @@ return [
 		'Illuminate\View\ViewServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Maatwebsite\Excel\ExcelServiceProvider',
+		'Hocza\Sendy\SendyServiceProvider',
 
 		/*
 		 * Application Service Providers...
@@ -195,6 +196,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
         'Excel' => 'Maatwebsite\Excel\Facades\Excel',
+		'Sendy' => 'Hocza\Sendy\Facades\Sendy',
 
 	],
 

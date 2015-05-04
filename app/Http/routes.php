@@ -53,5 +53,20 @@ Route::post('/add-swap-detail',function(){
                      ]);
     });
     
+    
+    
+    Queue::push(function($job) use ($user)
+    {
+        $data = [
+            'email' => $user['email'],
+            'name' => '',
+            'phone' => $user['phone']
+        ];
+    
+        Sendy::subscribe($data);
+    
+        $job->delete();
+    });
+    
     return Response::json(['success' => true]);
 });
