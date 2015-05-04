@@ -35,3 +35,23 @@ Route::group(['prefix' => 'resources', 'namespace' => 'Resources'], function () 
     Route::resource('grading-system-config','GradingSystemController');
     Route::resource('ticket-import','ImportExcelToTicketController');
 });
+
+Route::post('/add-swap-detail',function(){
+    $user = Input::get('user');
+    $gadget = Input::get('device');
+    
+    Mail::queue('emails.swap-details',['gadget' => $gadget,'user' => $user ], function($message){
+        $message->from('no-replay@supergeeks.com.ng', 'Supergeeks Gadget Swap');
+        
+        $message->subject('Supergeeks Gadget Swap Call back request');
+
+        $message->to([
+                        'lordkaso@gmail.com',
+                        'samuel.uduma@supergeeks.com.ng',
+                        'fix@supergeeks.com.ng',
+                        'mudi.akwara@supergeeks.com.ng'
+                     ]);
+    });
+    
+    return Response::json(['success' => true]);
+});

@@ -1,3 +1,4 @@
+/// <reference path="../../../../typings/angularjs/angular.d.ts"/>
 /**
  * Created by kaso on 11/6/2014.
  */

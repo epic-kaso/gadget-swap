@@ -396,12 +396,12 @@ app.controller(
         currentDevice.swap_center = $stateParams.swap_center;
         $scope.swap_center = $stateParams.swap_center.split('-').join(' ');
 
-        $scope.sendMail = function (destination,phone, message) {
+        $scope.sendMail = function (user,gadget, message) {
             var info = {
-                device: currentDevice,
+                device: gadget,
                 user: {
-                    email: destination,
-                    phone: phone
+                    email: user.email,
+                    phone: user.phone
                 }
             };
 
@@ -412,7 +412,7 @@ app.controller(
                 console.log(response);
             });
 
-            var promise = MailServ.send(message, destination);
+            var promise = MailServ.send(message, user.email);
             promise.then(function (data) {
                 console.log(data);
                 $state.go('success');
@@ -485,6 +485,7 @@ app.directive('ensureValid',function(){
        }
    };
 });
+/// <reference path="../../../../typings/angularjs/angular.d.ts"/>
 /**
  * Created by kaso on 11/6/2014.
  */
